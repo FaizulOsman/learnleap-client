@@ -2,7 +2,7 @@ import AdminLayout from "@/components/layouts/AdminLayout";
 import { useState } from "react";
 
 const CreateTest = () => {
-  const [q, setQ] = useState([]);
+  const [ques, setQues] = useState([]);
 
   const handleAddQuestion = (e) => {
     e.preventDefault();
@@ -14,8 +14,8 @@ const CreateTest = () => {
     const option5 = e.target.option5.value;
     const subject = e.target.subject.value;
     const answer = e.target.answer.value;
-    setQ([
-      ...q,
+    setQues([
+      ...ques,
       {
         question,
         option1,
@@ -31,6 +31,26 @@ const CreateTest = () => {
 
   return (
     <div className="w-11/12 md:w-10/12 lg:w-8/12 mx-auto mt-5 border rounded-lg p-5">
+      <div>
+        {ques?.map((q, i) => (
+          <div key={i}>
+            <h4 className="text-xl font-semibold">
+              Question {i + 1}. {q?.question}
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+              <span>1. {q?.option1}</span>
+              <span>2. {q?.option2}</span>
+              <span>3. {q?.option3}</span>
+              <span>4. {q?.option4}</span>
+              <span>5. {q?.option5}</span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+              <span>Answer. {q?.answer}</span>
+              <span>Subject. {q?.subject}</span>
+            </div>
+          </div>
+        ))}
+      </div>
       <h3 className="text-3xl font-bold text-center my-5">Add A Question</h3>
       <div>
         <form onSubmit={(e) => handleAddQuestion(e)}>

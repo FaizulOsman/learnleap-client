@@ -140,7 +140,7 @@ const SideBar = ({ children }) => {
               damping: 10,
             },
           }}
-          className={`bg-[#00073d] text-white h-[100vh] overflow-y-auto`}
+          className={`bg-[#00073d] text-white min-h-[100vh] overflow-y-auto`}
         >
           <div className="flex items-center justify-between py-[15px] px-[10px]">
             <AnimatePresence>
