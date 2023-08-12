@@ -1,9 +1,12 @@
 import AdminLayout from "@/components/layouts/AdminLayout";
+import { useCreateTestMutation } from "@/redux/testSlice/testApi";
 import { useState } from "react";
 
 const CreateTest = () => {
   const [ques, setQues] = useState([]);
   const [time, setTime] = useState(0);
+  const [createTest, { data, isError, isLoading, isSuccess, error }] =
+    useCreateTestMutation();
 
   const handleAddQuestion = (e) => {
     e.preventDefault();
@@ -40,7 +43,7 @@ const CreateTest = () => {
       questions: ques,
       timeLimit: time,
     };
-    console.log(test);
+    createTest(test);
   };
 
   return (

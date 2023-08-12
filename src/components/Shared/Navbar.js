@@ -113,7 +113,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <Link href="/pc-builder" className="btn">
+          <Link href="/test" className="btn">
             PC Builder
           </Link>
           <div className="dropdown dropdown-end">

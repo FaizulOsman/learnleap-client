@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "@/redux/user/userSlice";
-import pcBuilderReducer from "@/redux/pcBuilderSlice/pcBuilderSlice";
+import pcBuilderReducer from "@/redux/testSlice/testSlice";
 import apiSlice from "./api/apiSlice";
 
 export const store = configureStore({
