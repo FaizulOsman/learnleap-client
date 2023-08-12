@@ -3,7 +3,7 @@ import apiSlice from "../api/apiSlice";
 const productApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createTest: builder.mutation({
-      query: (data) => ({
+      query: ({ data, headers }) => ({
         url: `/test/create-test`,
         method: "POST",
         body: data,

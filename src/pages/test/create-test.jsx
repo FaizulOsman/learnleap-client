@@ -1,5 +1,6 @@
 import AdminLayout from "@/components/layouts/AdminLayout";
 import { useCreateTestMutation } from "@/redux/testSlice/testApi";
+import { getFromLocalStorage } from "@/utils/localstorage";
 import { useState } from "react";
 
 const CreateTest = () => {
@@ -38,12 +39,19 @@ const CreateTest = () => {
     setTime(parseInt(e.target.setTime.value));
   };
 
+  const headers = {
+    Authorization: `${getFromLocalStorage(
+      "access-token",
+      data?.data?.accessToken
+    )}`,
+  };
+
   const handleCreateTest = () => {
-    const test = {
+    const data = {
       questions: ques,
       timeLimit: time,
     };
-    createTest(test);
+    createTest({ data, headers });
   };
 
   return (
