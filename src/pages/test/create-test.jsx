@@ -2,11 +2,14 @@ import AdminLayout from "@/components/layouts/AdminLayout";
 import { useCreateTestMutation } from "@/redux/testSlice/testApi";
 import { getFromLocalStorage } from "@/utils/localstorage";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 const CreateTest = () => {
   const [ques, setQues] = useState([]);
   const [time, setTime] = useState(0);
-  const [createTest, { data, isError, isLoading, isSuccess, error }] =
+  const [subject, setSubject] = useState("");
+  const [serial, setSerial] = useState(0);
+  const [createTest, { data, isError, isLoading, isSuccess, error, status }] =
     useCreateTestMutation();
 
   const handleAddQuestion = (e) => {
@@ -32,15 +35,28 @@ const CreateTest = () => {
         answer,
       },
     ]);
+    e.target.question.value = "";
+    e.target.option1.value = "";
+    e.target.option2.value = "";
+    e.target.option3.value = "";
+    e.target.option4.value = "";
+    e.target.option5.value = "";
+    e.target.subject.value = "";
+    e.target.answer.value = "";
   };
 
-  const handleSetTime = (e) => {
+  const handleSet = (e) => {
     e.preventDefault();
     setTime(parseInt(e.target.setTime.value));
+    setSubject(e.target.subject.value);
+    setSerial(parseInt(e.target.serial.value));
+    e.target.setTime.value = "";
+    e.target.subject.value = "";
+    e.target.serial.value = "";
   };
 
   const headers = {
-    Authorization: `${getFromLocalStorage(
+    authorization: `${getFromLocalStorage(
       "access-token",
       data?.data?.accessToken
     )}`,
@@ -50,8 +66,25 @@ const CreateTest = () => {
     const data = {
       questions: ques,
       timeLimit: time,
+      subject: subject,
+      serial: serial,
     };
-    createTest({ data, headers });
+
+    if (ques.length > 0 && subject.length > 1 && serial > 0) {
+      createTest({ data, headers });
+      if (isSuccess || status === "fulfilled") {
+        toast.success("Test Created Successfully!");
+        setQues([]);
+        setSubject("");
+        setSerial(0);
+        setTime(0);
+      }
+      if (isError || error) {
+        toast.error("Test Creation Failed!");
+      }
+    } else {
+      toast.error("Test Creation Failed!");
+    }
   };
 
   return (
@@ -143,9 +176,17 @@ const CreateTest = () => {
         </div>
       </div>
       <div className="w-11/12 md:w-10/12 lg:w-8/12 mx-auto mt-5 border rounded-lg p-5">
-        <h4 className="text-lg font-semibold">Time: {time}</h4>
+        <div className="flex justify-between flex-wrap">
+          {time > 0 && <h4 className="text-lg font-semibold">Time: {time}</h4>}
+          {subject.length > 1 && (
+            <h4 className="text-lg font-semibold">Subject: {subject}</h4>
+          )}
+          {serial > 0 && (
+            <h4 className="text-lg font-semibold">Serial: {serial}</h4>
+          )}
+        </div>
         <form
-          onSubmit={(e) => handleSetTime(e)}
+          onSubmit={(e) => handleSet(e)}
           className="grid grid-cols-1 md:grid-cols-2 justify-between gap-4 mt-4"
         >
           <input
@@ -155,8 +196,22 @@ const CreateTest = () => {
             className="input input-bordered input-primary input-sm w-full"
             required
           />
+          <input
+            type="text"
+            name="subject"
+            placeholder="Subject (Mandatory)"
+            className="input input-bordered input-primary input-sm w-full"
+            required
+          />
+          <input
+            type="number"
+            name="serial"
+            placeholder="Serial"
+            className="input input-bordered input-primary input-sm w-full"
+            required
+          />
           <button type="submit" className="btn btn-sm btn-primary">
-            Set Time
+            Set
           </button>
         </form>
       </div>

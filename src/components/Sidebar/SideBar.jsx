@@ -11,6 +11,7 @@ import SidebarMenu from "./SidebarMenu";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { removeFromLocalStorage } from "@/utils/localstorage";
 
 const routes = [
   {
@@ -128,6 +129,11 @@ const SideBar = ({ children }) => {
     },
   };
 
+  const handleLogOut = () => {
+    removeFromLocalStorage("user-info");
+    removeFromLocalStorage("access-token");
+  };
+
   return (
     <>
       <div className="flex">
@@ -224,6 +230,13 @@ const SideBar = ({ children }) => {
           <div className="flex items-center justify-end gap-5 px-10 bg-[#00073d] text-white h-12 border-l">
             <Link href="/" className="hover:underline hover:text-blue-500">
               Home
+            </Link>
+            <Link
+              onClick={() => handleLogOut()}
+              href="/login"
+              className="hover:underline hover:text-blue-500"
+            >
+              Logout
             </Link>
             <Image
               src="https://i.ibb.co/nrtwzQd/avatar-boy.webp"

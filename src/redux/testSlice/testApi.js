@@ -7,6 +7,7 @@ const productApi = apiSlice.injectEndpoints({
         url: `/test/create-test`,
         method: "POST",
         body: data,
+        headers: headers,
       }),
       invalidatesTags: ["test-yourself"],
     }),
