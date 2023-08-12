@@ -14,3 +14,7 @@ export default HomePage;
 HomePage.getLayout = function getLayout(page) {
   return <AdminLayout>{page}</AdminLayout>;
 };
+
+// HomePage.getLayout = function getLayout(page) {
+//   return <RootLayout>{page}</RootLayout>;
+// };

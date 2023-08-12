@@ -33,13 +33,13 @@ const routes = [
     icon: <BiAnalyse />,
   },
   {
-    path: "/file-manager",
-    name: "File Manager",
+    path: "/test",
+    name: "Test",
     icon: <AiTwotoneFileExclamation />,
     subRoutes: [
       {
-        path: "/settings/profile",
-        name: "Profile",
+        path: "/test/create-test",
+        name: "Create Test",
         icon: <FaUser />,
       },
       {
