@@ -26,7 +26,6 @@ const HomePage = () => {
     return test?.subject === category;
   });
 
-  console.log(filterBySubject);
   return (
     <div>
       <h1 className="text-3xl font-semibold text-center my-8">Categories</h1>

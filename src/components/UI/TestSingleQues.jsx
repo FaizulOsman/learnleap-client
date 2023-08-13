@@ -18,8 +18,6 @@ const TestSingleQues = ({ index, test, count, setCount }) => {
     setDisable(true);
   };
 
-  console.log(disable);
-
   return (
     <div>
       <div className="bg-base-100 border shadow-sm p-4 rounded-lg">

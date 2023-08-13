@@ -1,3 +1,4 @@
+import Stopwatch from "@/components/UI/Stopwatch";
 import TestSingleQues from "@/components/UI/TestSingleQues";
 import RootLayout from "@/components/layouts/RootLayout";
 import { useGetSingleTestQuery } from "@/redux/testSlice/testApi";
@@ -9,14 +10,28 @@ const SingleTest = () => {
   const { segments } = router.query;
   const { data: getSingleTest } = useGetSingleTestQuery(segments?.[1]);
   const [count, setCount] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+
+  if (router && getSingleTest?.data?.timeLimit > 0) {
+    if (isRunning === false) {
+      setIsRunning(true);
+    }
+  }
 
   return (
     <div>
       <>
         <div className="w-11/12 md:w-8/12 mx-auto my-14">
-          <h2 className="text-3xl font-semibold text-center mb-10">
+          <h2 className="text-3xl font-semibold text-center">
             {segments?.[0]} Test {getSingleTest?.data?.serial}
           </h2>
+          <div className="my-5">
+            <Stopwatch
+              isRunning={isRunning}
+              setIsRunning={setIsRunning}
+              timeLimit={getSingleTest?.data?.timeLimit}
+            />
+          </div>
           <div className="grid grid-cols-1 gap-4">
             {getSingleTest?.data?.questions?.map((test, index) => (
               <TestSingleQues
