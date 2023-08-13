@@ -1,7 +1,6 @@
 import { removeFromLocalStorage } from "@/utils/localstorage";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { toast } from "react-hot-toast";
 
 const Navbar = () => {
