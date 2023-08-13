@@ -1,10 +1,15 @@
-import { signOut, useSession } from "next-auth/react";
+import { removeFromLocalStorage } from "@/utils/localstorage";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { toast } from "react-hot-toast";
 
 const Navbar = () => {
-  const { data: session } = useSession();
+  const handleSignOut = () => {
+    removeFromLocalStorage("user-info");
+    removeFromLocalStorage("access-token");
+    toast.success("Successfully Signed Out!");
+  };
 
   return (
     <div className="w-11/12 max-w-[1200px] mx-auto">
@@ -38,29 +43,25 @@ const Navbar = () => {
                 <a>Categories</a>
                 <ul className="p-2">
                   <li>
-                    <Link href="/categories/CPU-Processor">CPU-Processor</Link>
+                    <Link href="/categories/bengali">Bengali</Link>
                   </li>
                   <li>
-                    <Link href="/categories/Motherboard">Motherboard</Link>
+                    <Link href="/categories/english">English</Link>
                   </li>
                   <li>
-                    <Link href="/categories/RAM">RAM</Link>
+                    <Link href="/categories/gk">GK</Link>
                   </li>
                   <li>
-                    <Link href="/categories/Power Supply Unit">
-                      Power Supply Unit
-                    </Link>
+                    <Link href="/categories/math">Math</Link>
                   </li>
                   <li>
-                    <Link href="/categories/Storage Device">
-                      Storage Device
-                    </Link>
+                    <Link href="/categories/physics">Physics</Link>
                   </li>
                   <li>
-                    <Link href="/categories/Monitor">Monitor</Link>
+                    <Link href="/categories/chemistry">Chemistry</Link>
                   </li>
                   <li>
-                    <Link href="/categories/Others">Others</Link>
+                    <Link href="/categories/others">Others</Link>
                   </li>
                 </ul>
               </li>
@@ -70,7 +71,7 @@ const Navbar = () => {
             href="/"
             className="hidden sm:flex btn btn-ghost normal-case text-xl"
           >
-            BuildMasterPC
+            TestYourself
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -83,29 +84,25 @@ const Navbar = () => {
                 <summary>Categories</summary>
                 <ul className="p-2 z-50">
                   <li>
-                    <Link href="/categories/CPU-Processor">CPU-Processor</Link>
+                    <Link href="/categories/bengali">Bengali</Link>
                   </li>
                   <li>
-                    <Link href="/categories/Motherboard">Motherboard</Link>
+                    <Link href="/categories/english">English</Link>
                   </li>
                   <li>
-                    <Link href="/categories/RAM">RAM</Link>
+                    <Link href="/categories/gk">GK</Link>
                   </li>
                   <li>
-                    <Link href="/categories/Power Supply Unit">
-                      Power Supply Unit
-                    </Link>
+                    <Link href="/categories/math">Math</Link>
                   </li>
                   <li>
-                    <Link href="/categories/Storage Device">
-                      Storage Device
-                    </Link>
+                    <Link href="/categories/physics">Physics</Link>
                   </li>
                   <li>
-                    <Link href="/categories/Monitor">Monitor</Link>
+                    <Link href="/categories/chemistry">Chemistry</Link>
                   </li>
                   <li>
-                    <Link href="/categories/Others">Others</Link>
+                    <Link href="/categories/others">Others</Link>
                   </li>
                 </ul>
               </details>
@@ -113,50 +110,47 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <Link href="/test" className="btn">
-            PC Builder
+          <Link href="/dashboard" className="btn">
+            Dashboard
           </Link>
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                {session?.user?.image ? (
+                {/* {session?.user?.image ? (
                   <Image
                     src={session?.user?.image}
                     alt="avatar"
                     width={20}
                     height={20}
                   />
-                ) : (
-                  <Image
-                    src="https://static.vecteezy.com/system/resources/previews/009/383/461/original/man-face-clipart-design-illustration-free-png.png"
-                    alt="avatar"
-                    width={20}
-                    height={20}
-                  />
-                )}
+                ) : ( */}
+                <Image
+                  src="https://static.vecteezy.com/system/resources/previews/009/383/461/original/man-face-clipart-design-illustration-free-png.png"
+                  alt="avatar"
+                  width={20}
+                  height={20}
+                />
+                {/* )} */}
               </div>
             </label>
             <ul
               tabIndex={0}
               className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
             >
-              {session?.user ? (
-                <>
-                  <li>
-                    <a>{session?.user?.name}</a>
-                  </li>
-                  <li>
-                    <a>{session?.user?.email}</a>
-                  </li>
-                  <li>
-                    <a onClick={() => signOut()}>Logout</a>
-                  </li>
-                </>
-              ) : (
+              <>
                 <li>
-                  <Link href="/login">Login</Link>
+                  <a>User Name</a>
                 </li>
-              )}
+                <li>
+                  <a>User Email</a>
+                </li>
+                <li>
+                  <a onClick={() => handleSignOut()}>Logout</a>
+                </li>
+              </>
+              <li>
+                <Link href="/login">Login</Link>
+              </li>
             </ul>
           </div>
         </div>

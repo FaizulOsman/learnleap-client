@@ -1,4 +1,5 @@
 import AdminLayout from "@/components/layouts/AdminLayout";
+import RootLayout from "@/components/layouts/RootLayout";
 import React from "react";
 
 const HomePage = () => {
@@ -11,10 +12,10 @@ const HomePage = () => {
 
 export default HomePage;
 
-HomePage.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
-};
-
 // HomePage.getLayout = function getLayout(page) {
-//   return <RootLayout>{page}</RootLayout>;
+//   return <AdminLayout>{page}</AdminLayout>;
 // };
+
+HomePage.getLayout = function getLayout(page) {
+  return <RootLayout>{page}</RootLayout>;
+};
