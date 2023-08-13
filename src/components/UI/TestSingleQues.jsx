@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { AiOutlineEye } from "react-icons/ai";
 
 const TestSingleQues = ({ index, test, count, setCount }) => {
+  const [disable, setDisable] = useState(false);
   const showCorrectAnswer = (correctAnswer) => {
     toast.success(`Correct Answer: ${correctAnswer}`);
   };
@@ -14,9 +15,10 @@ const TestSingleQues = ({ index, test, count, setCount }) => {
     } else {
       toast.error("Ans is Wrong!", { autoClose: 700 });
     }
+    setDisable(true);
   };
 
-  console.log(index);
+  console.log(disable);
 
   return (
     <div>
@@ -41,6 +43,7 @@ const TestSingleQues = ({ index, test, count, setCount }) => {
                 type="radio"
                 name={`radio-${test?.id}`}
                 className="radio radio-sm checked:bg-blue-500 mr-4"
+                disabled={disable && true}
               />
               <p className="label-text flex-1">{test?.option1}</p>
             </label>
@@ -52,6 +55,7 @@ const TestSingleQues = ({ index, test, count, setCount }) => {
                 type="radio"
                 name={`radio-${test?.id}`}
                 className="radio radio-sm checked:bg-blue-500 mr-4"
+                disabled={disable && true}
               />
               <span className="label-text flex-1">{test?.option2}</span>
             </label>
@@ -63,6 +67,7 @@ const TestSingleQues = ({ index, test, count, setCount }) => {
                 type="radio"
                 name={`radio-${test?.id}`}
                 className="radio radio-sm checked:bg-blue-500 mr-4"
+                disabled={disable && true}
               />
               <span className="label-text flex-1">{test?.option3}</span>
             </label>
@@ -74,6 +79,7 @@ const TestSingleQues = ({ index, test, count, setCount }) => {
                 type="radio"
                 name={`radio-${test?.id}`}
                 className="radio radio-sm checked:bg-blue-500 mr-4"
+                disabled={disable && true}
               />
               <span className="label-text flex-1">{test?.option4}</span>
             </label>
