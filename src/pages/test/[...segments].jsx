@@ -1,9 +1,12 @@
 import Stopwatch from "@/components/UI/Stopwatch";
 import TestSingleQues from "@/components/UI/TestSingleQues";
 import RootLayout from "@/components/layouts/RootLayout";
-import { useGetSingleTestQuery } from "@/redux/testSlice/testApi";
+import { useGetSingleTestQuery } from "@/redux/test/testApi";
+import { useCreateTestResultMutation } from "@/redux/testResult/testResultApi";
+import { useGetMyProfileQuery } from "@/redux/user/userApi";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 
 const SingleTest = () => {
   const router = useRouter();
@@ -12,11 +15,52 @@ const SingleTest = () => {
   const [count, setCount] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
 
+  const [accessToken, setAccessToken] = useState("");
+  const headers = {
+    authorization: accessToken,
+  };
+
+  const [
+    createTestResult,
+    { data, isError, isLoading, isSuccess, error, status },
+  ] = useCreateTestResultMutation();
+
+  useEffect(() => {
+    const storedAccessToken = localStorage.getItem("access-token");
+    if (storedAccessToken) {
+      setAccessToken(storedAccessToken);
+    }
+  }, []);
+  const { data: getMyProfile } = useGetMyProfileQuery({ headers });
+  const [myProfile, setMyProfile] = useState(getMyProfile);
+  useEffect(() => {
+    setMyProfile(getMyProfile);
+  }, [getMyProfile]);
+
   if (router && getSingleTest?.data?.timeLimit > 0) {
     if (isRunning === false) {
       setIsRunning(true);
     }
   }
+
+  const [ques, setQues] = useState([]);
+  const handleSubmitTest = () => {
+    const data = {
+      questions: ques,
+      totalQues: getSingleTest?.data?.questions?.length,
+      totalAttempted: ques?.length,
+      totalMarks: count,
+      correctAnswer: count,
+      wrongAnswer: ques?.length - count,
+      email: myProfile?.data?.email,
+      name: myProfile?.data?.name,
+      testId: getSingleTest?.data?.id,
+    };
+    createTestResult({ data, headers });
+    if (error) {
+      toast.error(error?.data?.message);
+    }
+  };
 
   return (
     <div>
@@ -40,6 +84,8 @@ const SingleTest = () => {
                 index={index}
                 count={count}
                 setCount={setCount}
+                ques={ques}
+                setQues={setQues}
               />
             ))}
           </div>
@@ -47,18 +93,27 @@ const SingleTest = () => {
             <label
               htmlFor="my-modal-4"
               className="btn btn-primary modal-button"
+              onClick={() => handleSubmitTest()}
             >
-              Show total marks
+              Submit Test
             </label>
-            <input type="checkbox" id="my-modal-4" className="modal-toggle" />
-            <label htmlFor="my-modal-4" className="modal cursor-pointer">
-              <label className="modal-box relative py-10" htmlFor="">
-                <h3 className="text-lg font-bold">
-                  Total Correct Answer: {count}
-                </h3>
-                <p className="py-4">Keep going!!!</p>
-              </label>
-            </label>
+            {isError && (
+              <>
+                <input
+                  type="checkbox"
+                  id="my-modal-4"
+                  className="modal-toggle"
+                />
+                <label htmlFor="my-modal-4" className="modal cursor-pointer">
+                  <label className="modal-box relative py-10" htmlFor="">
+                    <h3 className="text-lg font-bold">
+                      Total Correct Answer: {count}
+                    </h3>
+                    <p className="py-4">Keep going!!!</p>
+                  </label>
+                </label>
+              </>
+            )}
           </div>
         </div>
       </>

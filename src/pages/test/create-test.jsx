@@ -1,5 +1,5 @@
 import AdminLayout from "@/components/layouts/AdminLayout";
-import { useCreateTestMutation } from "@/redux/testSlice/testApi";
+import { useCreateTestMutation } from "@/redux/test/testApi";
 import { getFromLocalStorage } from "@/utils/localstorage";
 import { useState } from "react";
 import { toast } from "react-hot-toast";

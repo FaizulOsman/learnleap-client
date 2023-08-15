@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { AiOutlineEye } from "react-icons/ai";
 
-const TestSingleQues = ({ index, test, count, setCount }) => {
+const TestSingleQues = ({ index, test, count, setCount, ques, setQues }) => {
   const [disable, setDisable] = useState(false);
   const showCorrectAnswer = (correctAnswer) => {
     toast.success(`Correct Answer: ${correctAnswer}`);
@@ -16,6 +16,20 @@ const TestSingleQues = ({ index, test, count, setCount }) => {
       toast.error("Ans is Wrong!", { autoClose: 700 });
     }
     setDisable(true);
+    setQues([
+      ...ques,
+      {
+        question: test?.question,
+        option1: test?.option1,
+        option2: test?.option2,
+        option3: test?.option3,
+        option4: test?.option4,
+        option5: test?.option5,
+        subject: test?.subject,
+        selectedOption: option,
+        answer: test?.answer,
+      },
+    ]);
   };
 
   return (
@@ -58,30 +72,48 @@ const TestSingleQues = ({ index, test, count, setCount }) => {
               <span className="label-text flex-1">{test?.option2}</span>
             </label>
           </div>
-          <div className="flex items-center h-full">
-            <label className="label cursor-pointer w-full flex hover:bg-gray-200 rounded-lg">
-              <input
-                onClick={() => handleSelectedAnswer(test?.option3)}
-                type="radio"
-                name={`radio-${test?.id}`}
-                className="radio radio-sm checked:bg-blue-500 mr-4"
-                disabled={disable && true}
-              />
-              <span className="label-text flex-1">{test?.option3}</span>
-            </label>
-          </div>
-          <div className="flex items-center h-full">
-            <label className="label cursor-pointer w-full flex hover:bg-gray-200 rounded-lg">
-              <input
-                onClick={() => handleSelectedAnswer(test?.option4)}
-                type="radio"
-                name={`radio-${test?.id}`}
-                className="radio radio-sm checked:bg-blue-500 mr-4"
-                disabled={disable && true}
-              />
-              <span className="label-text flex-1">{test?.option4}</span>
-            </label>
-          </div>
+          {test?.option3 && (
+            <div className="flex items-center h-full">
+              <label className="label cursor-pointer w-full flex hover:bg-gray-200 rounded-lg">
+                <input
+                  onClick={() => handleSelectedAnswer(test?.option3)}
+                  type="radio"
+                  name={`radio-${test?.id}`}
+                  className="radio radio-sm checked:bg-blue-500 mr-4"
+                  disabled={disable && true}
+                />
+                <span className="label-text flex-1">{test?.option3}</span>
+              </label>
+            </div>
+          )}
+          {test?.option4 && (
+            <div className="flex items-center h-full">
+              <label className="label cursor-pointer w-full flex hover:bg-gray-200 rounded-lg">
+                <input
+                  onClick={() => handleSelectedAnswer(test?.option4)}
+                  type="radio"
+                  name={`radio-${test?.id}`}
+                  className="radio radio-sm checked:bg-blue-500 mr-4"
+                  disabled={disable && true}
+                />
+                <span className="label-text flex-1">{test?.option4}</span>
+              </label>
+            </div>
+          )}
+          {test?.option5 && (
+            <div className="flex items-center h-full">
+              <label className="label cursor-pointer w-full flex hover:bg-gray-200 rounded-lg">
+                <input
+                  onClick={() => handleSelectedAnswer(test?.option5)}
+                  type="radio"
+                  name={`radio-${test?.id}`}
+                  className="radio radio-sm checked:bg-blue-500 mr-4"
+                  disabled={disable && true}
+                />
+                <span className="label-text flex-1">{test?.option5}</span>
+              </label>
+            </div>
+          )}
         </div>
       </div>
     </div>

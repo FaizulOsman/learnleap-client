@@ -23,8 +23,25 @@ const userApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    getAllUsers: builder.query({
+      query: ({ headers }) => ({
+        url: `/users/`,
+        headers: headers,
+      }),
+    }),
+    getMyProfile: builder.query({
+      query: ({ headers }) => ({
+        url: `/users/my-profile`,
+        headers: headers,
+      }),
+    }),
   }),
 });
 
-export const { useSignUpMutation, useLoginMutation, useRefreshTokenMutation } =
-  userApi;
+export const {
+  useSignUpMutation,
+  useLoginMutation,
+  useRefreshTokenMutation,
+  useGetAllUsersQuery,
+  useGetMyProfileQuery,
+} = userApi;

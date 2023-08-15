@@ -1,5 +1,5 @@
 import RootLayout from "@/components/layouts/RootLayout";
-import { useGetAllTestQuery } from "@/redux/testSlice/testApi";
+import { useGetAllTestQuery } from "@/redux/test/testApi";
 import Link from "next/link";
 import { useState } from "react";
 
