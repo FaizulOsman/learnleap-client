@@ -4,6 +4,7 @@ import RootLayout from "@/components/layouts/RootLayout";
 import { useGetSingleTestQuery } from "@/redux/test/testApi";
 import { useCreateTestResultMutation } from "@/redux/testResult/testResultApi";
 import { useGetMyProfileQuery } from "@/redux/user/userApi";
+import { getFromLocalStorage } from "@/utils/localstorage";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -15,27 +16,18 @@ const SingleTest = () => {
   const [count, setCount] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
 
-  const [accessToken, setAccessToken] = useState("");
-  const headers = {
-    authorization: accessToken,
-  };
-
   const [
     createTestResult,
     { data, isError, isLoading, isSuccess, error, status },
   ] = useCreateTestResultMutation();
 
-  useEffect(() => {
-    const storedAccessToken = localStorage.getItem("access-token");
-    if (storedAccessToken) {
-      setAccessToken(storedAccessToken);
-    }
-  }, []);
+  const accessToken = getFromLocalStorage("access-token");
+
+  const headers = {
+    authorization: accessToken,
+  };
+
   const { data: getMyProfile } = useGetMyProfileQuery({ headers });
-  const [myProfile, setMyProfile] = useState(getMyProfile);
-  useEffect(() => {
-    setMyProfile(getMyProfile);
-  }, [getMyProfile]);
 
   if (router && getSingleTest?.data?.timeLimit > 0) {
     if (isRunning === false) {
@@ -52,15 +44,19 @@ const SingleTest = () => {
       totalMarks: count,
       correctAnswer: count,
       wrongAnswer: ques?.length - count,
-      email: myProfile?.data?.email,
-      name: myProfile?.data?.name,
+      email: getMyProfile?.data?.email,
+      name: getMyProfile?.data?.name,
       testId: getSingleTest?.data?.id,
     };
     createTestResult({ data, headers });
-    if (error) {
-      toast.error(error?.data?.message);
-    }
   };
+
+  if (isSuccess) {
+    toast.success("Successfully submitted the task!");
+  }
+  if (isError || error) {
+    toast.error(error?.data?.message);
+  }
 
   return (
     <div>
