@@ -2,6 +2,7 @@ import RootLayout from "@/components/layouts/RootLayout";
 import { useLoginMutation } from "@/redux/user/userApi";
 import { saveToLocalStorage } from "@/utils/localstorage";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
@@ -157,9 +158,12 @@ const Login = () => {
           </div>
           <p className="mt-8 text-xs font-light text-center text-gray-700">
             Dont have an account?{" "}
-            <a href="#" className="font-medium text-purple-600 hover:underline">
+            <Link
+              href="/signup"
+              className="font-medium text-purple-600 hover:underline"
+            >
               Sign up
-            </a>
+            </Link>
           </p>
         </div>
       </div>

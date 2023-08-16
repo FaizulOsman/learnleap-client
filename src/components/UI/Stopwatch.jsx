@@ -7,7 +7,7 @@ const Stopwatch = ({ isRunning, setIsRunning, timeLimit }) => {
 
   useEffect(() => {
     if (parseInt(timeLimit) > 0) {
-      setMinute(parseInt(timeLimit) - 1);
+      setMinute(parseInt(timeLimit));
     }
     let interval = null;
     if (isRunning) {
@@ -42,7 +42,9 @@ const Stopwatch = ({ isRunning, setIsRunning, timeLimit }) => {
       <div>
         <h1 className="font-semibold text-lg">
           Time:{" "}
-          {`${formatTime(hour)}:${formatTime(minute)}:${formatTime(second)}`}
+          {`${formatTime(hour)}:${formatTime(minute) - 1}:${formatTime(
+            second
+          )}`}
         </h1>
       </div>
     </div>

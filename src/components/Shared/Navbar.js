@@ -1,10 +1,20 @@
 import { removeFromLocalStorage } from "@/utils/localstorage";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { toast } from "react-hot-toast";
 
 const Navbar = () => {
+  const router = useRouter();
+  const state = router.query.state;
+
   const handleSignOut = () => {
+    if (state?.path) {
+      router.push(state?.path);
+    } else {
+      router.push("/login");
+    }
+
     removeFromLocalStorage("user-info");
     removeFromLocalStorage("access-token");
     toast.success("Successfully Signed Out!");
