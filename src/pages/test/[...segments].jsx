@@ -2,7 +2,10 @@ import Stopwatch from "@/components/UI/Stopwatch";
 import TestSingleQues from "@/components/UI/TestSingleQues";
 import RootLayout from "@/components/layouts/RootLayout";
 import { useGetSingleTestQuery } from "@/redux/test/testApi";
-import { useCreateTestResultMutation } from "@/redux/testResult/testResultApi";
+import {
+  useCreateTestResultMutation,
+  useGetSingleTestResultQuery,
+} from "@/redux/testResult/testResultApi";
 import { useGetMyProfileQuery } from "@/redux/user/userApi";
 import { getFromLocalStorage } from "@/utils/localstorage";
 import { useRouter } from "next/router";
@@ -15,6 +18,7 @@ const SingleTest = () => {
   const { data: getSingleTest } = useGetSingleTestQuery(segments?.[1]);
   const [count, setCount] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
+  const [eyeShow, setEyeShow] = useState(false);
 
   const [
     createTestResult,
@@ -26,6 +30,11 @@ const SingleTest = () => {
   const headers = {
     authorization: accessToken,
   };
+
+  const { data: getSingleTestResult } = useGetSingleTestResultQuery({
+    id: segments?.[1],
+    headers,
+  });
 
   const { data: getMyProfile } = useGetMyProfileQuery({ headers });
 
@@ -66,7 +75,11 @@ const SingleTest = () => {
     if (isSuccess) {
       toast.success("Successfully submitted the task!");
     }
-  }, [isLoading, isSuccess, isError, error]);
+
+    if (getSingleTestResult?.data) {
+      setEyeShow(true);
+    }
+  }, [isLoading, isSuccess, isError, error, getSingleTestResult]);
 
   return (
     <div>
@@ -92,6 +105,7 @@ const SingleTest = () => {
                 setCount={setCount}
                 ques={ques}
                 setQues={setQues}
+                eyeShow={eyeShow}
               />
             ))}
           </div>

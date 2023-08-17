@@ -1,3 +1,4 @@
+import FindTestBySubject from "@/components/UI/FindTestBySubject";
 import RootLayout from "@/components/layouts/RootLayout";
 import { useGetAllTestQuery } from "@/redux/test/testApi";
 import Link from "next/link";
@@ -42,21 +43,7 @@ const HomePage = () => {
       </div>
       <div className="mt-10 flex flex-col gap-5">
         {filterBySubject?.map((test, index) => (
-          <div
-            key={index}
-            className="flex justify-between items-center bg-gray-200 p-2 rounded-md"
-          >
-            <div>
-              <h4 className="text-md font-semibold">
-                {test?.subject} {test?.serial}
-              </h4>
-              <p>Question: {test?.questions?.length}</p>
-              <p>Time: {test?.timeLimit} min</p>
-            </div>
-            <Link href={`/test/${test?.subject}/${test?.id}`}>
-              <button className="btn btn-sm btn-primary">Start Test</button>
-            </Link>
-          </div>
+          <FindTestBySubject key={index} test={test} />
         ))}
       </div>
     </div>

@@ -2,12 +2,20 @@ import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { AiOutlineEye } from "react-icons/ai";
 
-const TestSingleQues = ({ index, test, count, setCount, ques, setQues }) => {
+const TestSingleQues = ({
+  index,
+  test,
+  count,
+  setCount,
+  ques,
+  setQues,
+  eyeShow,
+}) => {
   const [disable, setDisable] = useState(false);
   const showCorrectAnswer = (correctAnswer) => {
     toast.success(`Correct Answer: ${correctAnswer}`);
   };
-
+  console.log(eyeShow);
   const handleSelectedAnswer = (option) => {
     if (option === test?.answer) {
       toast.success("Answer is correct!", { autoClose: 700 });
@@ -43,6 +51,7 @@ const TestSingleQues = ({ index, test, count, setCount, ques, setQues }) => {
             onClick={() => showCorrectAnswer(test?.answer)}
             className="btn bg-base-100 border-none"
             title="See correct answer"
+            disabled={!eyeShow && true}
           >
             <AiOutlineEye />
           </button>
