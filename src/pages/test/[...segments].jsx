@@ -20,6 +20,7 @@ const SingleTest = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [eyeShow, setEyeShow] = useState(false);
   const [timeOver, setTimeOver] = useState(false);
+  const [submittedByTimeOver, setSubmittedByTimeOver] = useState(false);
 
   const [
     createTestResult,
@@ -80,7 +81,20 @@ const SingleTest = () => {
     if (getSingleTestResult?.data) {
       setEyeShow(true);
     }
-  }, [isLoading, isSuccess, isError, error, getSingleTestResult]);
+
+    if (timeOver && !submittedByTimeOver) {
+      handleSubmitTest();
+      setSubmittedByTimeOver(true);
+    }
+  }, [
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+    getSingleTestResult,
+    timeOver,
+    submittedByTimeOver,
+  ]);
 
   return (
     <div>
