@@ -1,12 +1,17 @@
-import { removeFromLocalStorage } from "@/utils/localstorage";
+import {
+  getFromLocalStorage,
+  removeFromLocalStorage,
+} from "@/utils/localstorage";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 const Navbar = () => {
   const router = useRouter();
   const state = router.query.state;
+  const [myProfile, setMyProfile] = useState({});
 
   const handleSignOut = () => {
     if (state?.path) {
@@ -19,6 +24,31 @@ const Navbar = () => {
     removeFromLocalStorage("access-token");
     toast.success("Successfully Signed Out!");
   };
+
+  useEffect(() => {
+    const accessToken = getFromLocalStorage("access-token");
+    const headers = {
+      authorization: accessToken,
+    };
+
+    const url = "http://localhost:5000/api/v1/users/my-profile";
+    const options = {
+      method: "GET",
+      headers: headers,
+    };
+
+    async function fetchData() {
+      try {
+        const res = await fetch(url, options);
+        const data = await res.json();
+        setMyProfile(data?.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   return (
     <div className="w-11/12 max-w-[1200px] mx-auto">
@@ -147,19 +177,26 @@ const Navbar = () => {
               className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
             >
               <>
-                <li>
-                  <a>User Name</a>
-                </li>
-                <li>
-                  <a>User Email</a>
-                </li>
-                <li>
-                  <a onClick={() => handleSignOut()}>Logout</a>
-                </li>
+                {myProfile?.name && (
+                  <li>
+                    <a>{myProfile?.name}</a>
+                  </li>
+                )}
+                {myProfile?.email && (
+                  <li>
+                    <a>{myProfile?.email}</a>
+                  </li>
+                )}
+                {myProfile ? (
+                  <li>
+                    <a onClick={() => handleSignOut()}>Logout</a>
+                  </li>
+                ) : (
+                  <li>
+                    <Link href="/login">Login</Link>
+                  </li>
+                )}
               </>
-              <li>
-                <Link href="/login">Login</Link>
-              </li>
             </ul>
           </div>
         </div>
