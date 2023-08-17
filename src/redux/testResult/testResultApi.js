@@ -15,9 +15,17 @@ const testResult = apiSlice.injectEndpoints({
       query: () => `/test-result`,
       providesTags: ["test-yourself"],
     }),
-    getSingleTest: builder.query({
-      query: (id) => `/test/${id}`,
-      providesTags: ["test-yourself"],
+    getSingleTestResult: builder.query({
+      query: ({ id, headers }) => ({
+        url: `/test-result/${id}`,
+        headers: headers,
+      }),
+    }),
+    getMySubmittedResults: builder.query({
+      query: ({ headers }) => ({
+        url: `/test-result/my-submitted-results`,
+        headers: headers,
+      }),
     }),
   }),
 });
@@ -25,5 +33,6 @@ const testResult = apiSlice.injectEndpoints({
 export const {
   useCreateTestResultMutation,
   useGetAllTestResultQuery,
-  useGetSingleTestQuery,
+  useGetSingleTestResultQuery,
+  useGetMySubmittedResultsQuery,
 } = testResult;
