@@ -19,6 +19,7 @@ const SingleTest = () => {
   const [count, setCount] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [eyeShow, setEyeShow] = useState(false);
+  const [timeOver, setTimeOver] = useState(false);
 
   const [
     createTestResult,
@@ -93,6 +94,7 @@ const SingleTest = () => {
               isRunning={isRunning}
               setIsRunning={setIsRunning}
               timeLimit={getSingleTest?.data?.timeLimit}
+              setTimeOver={setTimeOver}
             />
           </div>
           <div className="grid grid-cols-1 gap-4">
