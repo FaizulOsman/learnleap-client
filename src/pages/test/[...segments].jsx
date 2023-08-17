@@ -51,12 +51,17 @@ const SingleTest = () => {
     createTestResult({ data, headers });
   };
 
-  if (isSuccess) {
-    toast.success("Successfully submitted the task!");
-  }
-  if (isError || error) {
-    toast.error(error?.data?.message);
-  }
+  useEffect(() => {
+    if (isError) {
+      toast.error(
+        `${error?.data?.message}` || "You have already submitted the test!"
+      );
+    }
+
+    if (isSuccess) {
+      toast.success("Successfully submitted the task!");
+    }
+  }, [isLoading, isSuccess, isError, error]);
 
   return (
     <div>
