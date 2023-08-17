@@ -36,14 +36,19 @@ const SingleTest = () => {
   }
 
   const [ques, setQues] = useState([]);
+  const wrong = ques?.length - count;
+
+  const mark = count - wrong * 0.25;
+  const totalMark = mark > 0 ? mark : 0;
+
   const handleSubmitTest = () => {
     const data = {
       questions: ques,
       totalQues: getSingleTest?.data?.questions?.length,
       totalAttempted: ques?.length,
-      totalMarks: count,
+      totalMarks: totalMark,
       correctAnswer: count,
-      wrongAnswer: ques?.length - count,
+      wrongAnswer: wrong,
       email: getMyProfile?.data?.email,
       name: getMyProfile?.data?.name,
       testId: getSingleTest?.data?.id,
@@ -98,23 +103,23 @@ const SingleTest = () => {
             >
               Submit Test
             </label>
-            {isError && (
-              <>
-                <input
-                  type="checkbox"
-                  id="my-modal-4"
-                  className="modal-toggle"
-                />
-                <label htmlFor="my-modal-4" className="modal cursor-pointer">
-                  <label className="modal-box relative py-10" htmlFor="">
-                    <h3 className="text-lg font-bold">
-                      Total Correct Answer: {count}
-                    </h3>
-                    <p className="py-4">Keep going!!!</p>
-                  </label>
+            <>
+              <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+              <label htmlFor="my-modal-4" className="modal cursor-pointer">
+                <label className="modal-box relative py-10" htmlFor="">
+                  <h3 className="text-lg font-bold text-green-500">
+                    Total Correct Answer: {count}
+                  </h3>
+                  <h3 className="text-lg font-bold text-red-500">
+                    Total Wrong Answer: {wrong}
+                  </h3>
+                  <h3 className="text-xl font-bold text-green-500 pt-2">
+                    You Got: {totalMark}
+                  </h3>
+                  <p className="pt-3">Keep going...!!!</p>
                 </label>
-              </>
-            )}
+              </label>
+            </>
           </div>
         </div>
       </>
