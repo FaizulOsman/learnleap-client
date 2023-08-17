@@ -1,7 +1,7 @@
 import AdminLayout from "@/components/layouts/AdminLayout";
 import { useCreateTestMutation } from "@/redux/test/testApi";
 import { getFromLocalStorage } from "@/utils/localstorage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 const CreateTest = () => {
@@ -72,40 +72,40 @@ const CreateTest = () => {
 
     if (ques.length > 0 && subject.length > 1 && serial > 0) {
       createTest({ data, headers });
-      if (isSuccess || status === "fulfilled") {
-        toast.success("Test Created Successfully!");
-        setQues([]);
-        setSubject("");
-        setSerial(0);
-        setTime(0);
-      }
-      if (isError || error) {
-        toast.error("Test Creation Failed!");
-      }
     } else {
       toast.error("Test Creation Failed!");
     }
   };
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(`${error?.data?.message}` || "Test Creation Failed!");
+    }
+
+    if (isSuccess) {
+      toast.success("Test Created Successfully!");
+    }
+  }, [isLoading, isSuccess, isError, error]);
 
   return (
     <div className="my-5">
       <div className="w-11/12 md:w-10/12 lg:w-8/12 mx-auto border rounded-lg p-5">
         <div>
           {ques?.map((q, i) => (
-            <div key={i}>
+            <div key={i} className="mb-5">
               <h4 className="text-xl font-semibold">
                 Question {i + 1}. {q?.question}
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
                 <span>1. {q?.option1}</span>
                 <span>2. {q?.option2}</span>
-                <span>3. {q?.option3}</span>
-                <span>4. {q?.option4}</span>
-                <span>5. {q?.option5}</span>
+                {q?.option3 && <span>3. {q?.option3}</span>}
+                {q?.option4 && <span>4. {q?.option4}</span>}
+                {q?.option5 && <span>5. {q?.option5}</span>}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
-                <span>Answer. {q?.answer}</span>
-                <span>Subject. {q?.subject}</span>
+                <span className="font-semibold">Answer. {q?.answer}</span>
+                <span className="font-semibold">Subject. {q?.subject}</span>
               </div>
             </div>
           ))}
