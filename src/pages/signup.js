@@ -1,14 +1,15 @@
 import { useSignUpMutation } from "@/redux/user/userApi";
+import { saveToLocalStorage } from "@/utils/localstorage";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 const SignUp = () => {
   const [signUp, { data, isError, isLoading, isSuccess, error }] =
     useSignUpMutation();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (e.target.password.value !== e.target.confirmPassword.value) {
@@ -21,8 +22,14 @@ const SignUp = () => {
         role: "user",
         phone: e.target.phone.value,
       };
-      signUp(newData);
-      console.log(newData);
+
+      try {
+        await signUp(newData);
+        saveToLocalStorage("access-token", data?.data?.accessToken);
+        saveToLocalStorage("user-info", JSON.stringify(data?.data?.userData));
+      } catch (error) {
+        toast.error(`${error?.data?.message}` || "Something went wrong");
+      }
     }
   };
 
@@ -35,20 +42,16 @@ const SignUp = () => {
       } else {
         router.push("/");
       }
-      toast.success("You have logged in successfully.");
-      saveToLocalStorage("access-token", data?.data?.accessToken);
-      saveToLocalStorage("user-info", JSON.stringify(data?.data?.userData));
     }
-    if (isError === true && error) {
-      if ("data" in error) {
-        toast.error(`${error?.data.message}`);
-      }
+
+    if (isError) {
+      toast.error(`${error?.data?.message}` || "Something went wrong");
+    }
+
+    if (isSuccess) {
+      toast.success("Successfully Registered!");
     }
   }, [isLoading, router, state, isSuccess, error, isError, data]);
-
-  if (isSuccess) {
-    toast.success("Successfully Registered!");
-  }
 
   return (
     <div className="py-5 relative flex flex-col justify-center min-h-screen overflow-hidden">
