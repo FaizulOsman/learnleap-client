@@ -13,7 +13,6 @@ const FindTestBySubject = ({ test }) => {
     id: test?.id,
     headers,
   });
-  console.log(getSingleTestResult?.data?.totalMarks);
 
   return (
     <div className="flex justify-between items-center bg-gray-200 p-2 rounded-md">
@@ -28,13 +27,27 @@ const FindTestBySubject = ({ test }) => {
           <p>Mark: {getSingleTestResult?.data?.totalMarks}</p>
         )}
       </div>
-      <Link href={`/test/${test?.subject}/${test?.id}`}>
-        {getSingleTestResult ? (
-          <button className="btn btn-sm btn-primary">Start Test Again</button>
+      <>
+        {getSingleTestResult?.data ? (
+          <div className="flex flex-col gap-2">
+            <Link href={`/test/${test?.subject}/${test?.id}`}>
+              <button className="btn btn-sm btn-primary">
+                Start Test Again
+              </button>
+            </Link>
+            <Link
+              href={`/test-result/${test?.subject}/${test?.id}`}
+              className="flex justify-end"
+            >
+              <button className="btn btn-sm btn-primary">See Result</button>
+            </Link>
+          </div>
         ) : (
-          <button className="btn btn-sm btn-primary">Start Test</button>
+          <Link href={`/test/${test?.subject}/${test?.id}`}>
+            <button className="btn btn-sm btn-primary">Start Test</button>
+          </Link>
         )}
-      </Link>
+      </>
     </div>
   );
 };

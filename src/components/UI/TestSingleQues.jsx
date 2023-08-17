@@ -15,7 +15,7 @@ const TestSingleQues = ({
   const showCorrectAnswer = (correctAnswer) => {
     toast.success(`Correct Answer: ${correctAnswer}`);
   };
-  console.log(eyeShow);
+
   const handleSelectedAnswer = (option) => {
     if (option === test?.answer) {
       toast.success("Answer is correct!", { autoClose: 700 });
