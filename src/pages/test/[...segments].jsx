@@ -9,7 +9,7 @@ import {
 import { useGetMyProfileQuery } from "@/redux/user/userApi";
 import { getFromLocalStorage } from "@/utils/localstorage";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 
 const SingleTest = () => {
@@ -21,6 +21,7 @@ const SingleTest = () => {
   const [eyeShow, setEyeShow] = useState(false);
   const [timeOver, setTimeOver] = useState(false);
   const [submittedByTimeOver, setSubmittedByTimeOver] = useState(false);
+  const submitButtonRef = useRef(null);
 
   const [
     createTestResult,
@@ -83,7 +84,7 @@ const SingleTest = () => {
     }
 
     if (timeOver && !submittedByTimeOver) {
-      handleSubmitTest();
+      submitButtonRef.current.click();
       setSubmittedByTimeOver(true);
     }
   }, [
@@ -130,6 +131,7 @@ const SingleTest = () => {
               htmlFor="my-modal-4"
               className="btn btn-primary modal-button"
               onClick={() => handleSubmitTest()}
+              ref={submitButtonRef}
             >
               Submit Test
             </label>
