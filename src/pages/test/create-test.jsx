@@ -55,11 +55,10 @@ const CreateTest = () => {
     e.target.serial.value = "";
   };
 
+  const accessToken = getFromLocalStorage("access-token");
+
   const headers = {
-    authorization: `${getFromLocalStorage(
-      "access-token",
-      data?.data?.accessToken
-    )}`,
+    authorization: accessToken,
   };
 
   const handleCreateTest = () => {
@@ -72,6 +71,11 @@ const CreateTest = () => {
 
     if (ques.length > 0 && subject.length > 1 && serial > 0) {
       createTest({ data, headers });
+      // Clear all data after creating the test
+      setQues([]);
+      setTime(0);
+      setSubject("");
+      setSerial(0);
     } else {
       toast.error("Test Creation Failed!");
     }
