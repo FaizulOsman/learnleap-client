@@ -44,12 +44,13 @@ const TestSingleQues = ({
     <div>
       <div className="bg-base-100 border shadow-sm p-4 rounded-lg">
         <div className="flex justify-between items-center mb-2">
-          <h2 className="card-title text-center">
-            Quiz {index + 1}: {test?.question}
+          <h2 className="">
+            <span className="text-lg font-bold">{index + 1}:</span>{" "}
+            {test?.question}
           </h2>
           <button
             onClick={() => showCorrectAnswer(test?.answer)}
-            className="btn bg-base-100 border-none"
+            className="btn bg-base-100 btn-sm border-none"
             title="See correct answer"
             disabled={!eyeShow && true}
           >
