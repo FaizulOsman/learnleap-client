@@ -31,24 +31,25 @@ const Navbar = () => {
       authorization: accessToken,
     };
 
-    const url = "http://localhost:5000/api/v1/users/my-profile";
-    // const url = "https://test-yourself-server.vercel.app/api/v1/users/my-profile";
-    const options = {
-      method: "GET",
-      headers: headers,
-    };
+    if (headers.authorization) {
+      const url = "http://localhost:5000/api/v1/users/my-profile";
+      // const url = "https://test-yourself-server.vercel.app/api/v1/users/my-profile";
+      const options = {
+        method: "GET",
+        headers: headers,
+      };
 
-    async function fetchData() {
-      try {
-        const res = await fetch(url, options);
-        const data = await res.json();
-        setMyProfile(data?.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+      async function fetchData() {
+        try {
+          const res = await fetch(url, options);
+          const data = await res.json();
+          setMyProfile(data?.data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
       }
+      fetchData();
     }
-
-    fetchData();
   }, []);
 
   return (
