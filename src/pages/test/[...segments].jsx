@@ -1,7 +1,10 @@
 import Stopwatch from "@/components/UI/Stopwatch";
 import TestSingleQues from "@/components/UI/TestSingleQues";
 import RootLayout from "@/components/layouts/RootLayout";
-import { useGetSingleTestQuery } from "@/redux/test/testApi";
+import {
+  useAddResultMutation,
+  useGetSingleTestQuery,
+} from "@/redux/test/testApi";
 import {
   useCreateTestResultMutation,
   useGetSingleTestResultQuery,
@@ -33,6 +36,8 @@ const SingleTest = () => {
   const headers = {
     authorization: accessToken,
   };
+
+  const [addResult, { isSuccess: isAddResultSuccess }] = useAddResultMutation();
 
   const { data: getSingleTestResult } = useGetSingleTestResultQuery({
     id: segments?.[1],
@@ -66,6 +71,16 @@ const SingleTest = () => {
       testId: getSingleTest?.data?.id,
     };
     createTestResult({ data, headers });
+
+    const options = {
+      id: getSingleTest?.data?.id,
+      data: {
+        name: getMyProfile?.data?.name,
+        email: getMyProfile?.data?.email,
+        marks: totalMark,
+      },
+    };
+    addResult(options);
   };
 
   useEffect(() => {
