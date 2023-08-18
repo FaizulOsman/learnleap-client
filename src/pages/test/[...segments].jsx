@@ -80,7 +80,7 @@ const SingleTest = () => {
         marks: totalMark,
       },
     };
-    addResult(options);
+    addResult({ options, headers });
   };
 
   useEffect(() => {

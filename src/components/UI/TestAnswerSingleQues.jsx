@@ -32,7 +32,7 @@ const TestAnswerSingleQues = ({ index, test, eyeShow, result }) => {
             <label className="label cursor-pointer w-full flex">
               <input
                 type="radio"
-                name="radio-1"
+                name={`radio-${test?.id}${index}`}
                 className="radio radio-primary radio-sm mr-4"
                 checked={sss?.selectedOption === test?.option1 ? true : false}
                 disabled={sss?.selectedOption === test?.option1 ? false : true}
@@ -45,7 +45,7 @@ const TestAnswerSingleQues = ({ index, test, eyeShow, result }) => {
             <label className="label cursor-pointer w-full flex">
               <input
                 type="radio"
-                name="radio-2"
+                name={`radio-${test?.id}${index}`}
                 className="radio radio-primary radio-sm mr-4"
                 checked={sss?.selectedOption === test?.option2 ? true : false}
                 disabled={sss?.selectedOption === test?.option2 ? false : true}
@@ -59,7 +59,7 @@ const TestAnswerSingleQues = ({ index, test, eyeShow, result }) => {
               <label className="label cursor-pointer w-full flex">
                 <input
                   type="radio"
-                  name="radio-3"
+                  name={`radio-${test?.id}${index}`}
                   className="radio radio-primary radio-sm mr-4"
                   checked={sss?.selectedOption === test?.option3 ? true : false}
                   disabled={
@@ -76,7 +76,7 @@ const TestAnswerSingleQues = ({ index, test, eyeShow, result }) => {
               <label className="label cursor-pointer w-full flex">
                 <input
                   type="radio"
-                  name="radio-4"
+                  name={`radio-${test?.id}${index}`}
                   className="radio radio-primary radio-sm mr-4"
                   checked={sss?.selectedOption === test?.option4 ? true : false}
                   disabled={
@@ -93,7 +93,7 @@ const TestAnswerSingleQues = ({ index, test, eyeShow, result }) => {
               <label className="label cursor-pointer w-full flex">
                 <input
                   type="radio"
-                  name="radio-5"
+                  name={`radio-${test?.id}${index}`}
                   className="radio radio-primary radio-sm mr-4"
                   checked={sss?.selectedOption === test?.option5 ? true : false}
                   disabled={
