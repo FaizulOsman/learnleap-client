@@ -16,7 +16,7 @@ const FindTestBySubject = ({ test }) => {
       authorization: accessToken,
     };
 
-    if (headers.authorization) {
+    if (headers.authorization && test?.id) {
       const url = `http://localhost:5000/api/v1/test-result/${test?.id}`;
       // const url = `https://test-yourself-server.vercel.app/api/v1/test-result/${test?.id}`;
       const options = {
@@ -35,7 +35,7 @@ const FindTestBySubject = ({ test }) => {
       }
       fetchData();
     }
-  }, [headers.authorization, test]);
+  }, [headers.authorization, test?.id]);
 
   return (
     <div className="flex justify-between items-center bg-gray-200 p-2 rounded-md">
