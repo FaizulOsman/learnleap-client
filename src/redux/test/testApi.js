@@ -26,7 +26,7 @@ const productApi = apiSlice.injectEndpoints({
         body: options.data,
         headers: headers,
       }),
-      invalidatesTags: ["books"],
+      invalidatesTags: ["test-yourself"],
     }),
   }),
 });
