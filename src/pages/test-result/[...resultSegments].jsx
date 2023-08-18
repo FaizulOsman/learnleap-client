@@ -82,6 +82,18 @@ const SingleTest = () => {
               Return Home
             </Link>
           </div>
+          <div className="mt-16">
+            <h3 className="text-xl font-bold text-center mb-4">All Results</h3>
+            <div className="flex flex-col gap-4 ">
+              {getSingleTest?.data?.results?.map((result, index) => (
+                <div key={index} className="border rounded-md p-2 shadow-md">
+                  <h4 className="text-lg font-semibold">Name: {result.name}</h4>
+                  <h4 className="text-lg">Marks: {result.marks}</h4>
+                  {/* <h4 className="text-lg">Ranking: {index + 1}</h4> */}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </>
     </div>
