@@ -31,7 +31,12 @@ const SingleTest = () => {
     { data, isError, isLoading, isSuccess, error, status },
   ] = useCreateTestResultMutation();
 
-  const accessToken = getFromLocalStorage("access-token");
+  const [accessToken, setAccessToken] = useState("");
+
+  useEffect(() => {
+    const acc = localStorage.getItem("access-token");
+    setAccessToken(acc);
+  }, []);
 
   const headers = {
     authorization: accessToken,

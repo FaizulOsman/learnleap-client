@@ -1,6 +1,5 @@
 import AdminLayout from "@/components/layouts/AdminLayout";
 import { useCreateTestMutation } from "@/redux/test/testApi";
-import { getFromLocalStorage } from "@/utils/localstorage";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
@@ -55,7 +54,12 @@ const CreateTest = () => {
     e.target.serial.value = "";
   };
 
-  const accessToken = getFromLocalStorage("access-token");
+  const [accessToken, setAccessToken] = useState("");
+
+  useEffect(() => {
+    const acc = localStorage.getItem("access-token");
+    setAccessToken(acc);
+  }, []);
 
   const headers = {
     authorization: accessToken,

@@ -2,7 +2,6 @@ import TestAnswerSingleQues from "@/components/UI/TestAnswerSingleQues";
 import RootLayout from "@/components/layouts/RootLayout";
 import { useGetSingleTestQuery } from "@/redux/test/testApi";
 import { useGetSingleTestResultQuery } from "@/redux/testResult/testResultApi";
-import { getFromLocalStorage } from "@/utils/localstorage";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -14,8 +13,12 @@ const SingleTest = () => {
   const [count, setCount] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [eyeShow, setEyeShow] = useState(false);
+  const [accessToken, setAccessToken] = useState("");
 
-  const accessToken = getFromLocalStorage("access-token");
+  useEffect(() => {
+    const acc = localStorage.getItem("access-token");
+    setAccessToken(acc);
+  }, []);
 
   const headers = {
     authorization: accessToken,
