@@ -18,10 +18,10 @@ const TestSingleQues = ({
 
   const handleSelectedAnswer = (option) => {
     if (option === test?.answer) {
-      toast.success("Answer is correct!", { autoClose: 700 });
+      // toast.success("Answer is correct!", { autoClose: 700 });
       setCount(count + 1);
     } else {
-      toast.error("Ans is Wrong!", { autoClose: 700 });
+      // toast.error("Ans is Wrong!", { autoClose: 700 });
     }
     setDisable(true);
     setQues([

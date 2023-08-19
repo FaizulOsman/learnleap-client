@@ -1,16 +1,8 @@
 import Stopwatch from "@/components/UI/Stopwatch";
 import TestSingleQues from "@/components/UI/TestSingleQues";
 import RootLayout from "@/components/layouts/RootLayout";
-import {
-  useAddResultMutation,
-  useGetSingleExamQuery,
-} from "@/redux/exam/examApi";
-import {
-  useCreateExamResultMutation,
-  useGetSingleExamResultQuery,
-} from "@/redux/examResult/examResultApi";
-import { useGetMyProfileQuery } from "@/redux/user/userApi";
-import { getFromLocalStorage } from "@/utils/localstorage";
+import { useGetSingleExamQuery } from "@/redux/exam/examApi";
+import { useGetSingleExamResultQuery } from "@/redux/examResult/examResultApi";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -26,11 +18,6 @@ const SingleTest = () => {
   const [submittedByTimeOver, setSubmittedByTimeOver] = useState(false);
   const submitButtonRef = useRef(null);
 
-  const [
-    createTestResult,
-    { data, isError, isLoading, isSuccess, error, status },
-  ] = useCreateExamResultMutation();
-
   const [accessToken, setAccessToken] = useState("");
 
   useEffect(() => {
@@ -42,14 +29,10 @@ const SingleTest = () => {
     authorization: accessToken,
   };
 
-  const [addResult, { isSuccess: isAddResultSuccess }] = useAddResultMutation();
-
   const { data: getSingleTestResult } = useGetSingleExamResultQuery({
     id: segments?.[1],
     headers,
   });
-
-  const { data: getMyProfile } = useGetMyProfileQuery({ headers });
 
   if (router && getSingleTest?.data?.timeLimit > 0) {
     if (isRunning === false) {
@@ -63,42 +46,7 @@ const SingleTest = () => {
   const mark = count - wrong * 0.25;
   const totalMark = mark > 0 ? mark : 0;
 
-  const handleSubmitTest = () => {
-    const data = {
-      questions: ques,
-      totalQues: getSingleTest?.data?.questions?.length,
-      totalAttempted: ques?.length,
-      totalMarks: totalMark,
-      correctAnswer: count,
-      wrongAnswer: wrong,
-      email: getMyProfile?.data?.email,
-      name: getMyProfile?.data?.name,
-      testId: getSingleTest?.data?.id,
-    };
-    createTestResult({ data, headers });
-
-    const options = {
-      id: getSingleTest?.data?.id,
-      data: {
-        name: getMyProfile?.data?.name,
-        email: getMyProfile?.data?.email,
-        marks: totalMark,
-      },
-    };
-    addResult({ options, headers });
-  };
-
   useEffect(() => {
-    if (isError) {
-      toast.error(
-        `${error?.data?.message}` || "You have already submitted the test!"
-      );
-    }
-
-    if (isSuccess) {
-      toast.success("Successfully submitted the task!");
-    }
-
     if (getSingleTestResult?.data) {
       setEyeShow(true);
     }
@@ -106,16 +54,9 @@ const SingleTest = () => {
     if (timeOver && !submittedByTimeOver) {
       submitButtonRef.current.click();
       setSubmittedByTimeOver(true);
+      toast.error("Time over");
     }
-  }, [
-    isLoading,
-    isSuccess,
-    isError,
-    error,
-    getSingleTestResult,
-    timeOver,
-    submittedByTimeOver,
-  ]);
+  }, [getSingleTestResult, timeOver, submittedByTimeOver]);
 
   return (
     <div>
@@ -150,10 +91,10 @@ const SingleTest = () => {
             <label
               htmlFor="my-modal-4"
               className="btn btn-primary modal-button"
-              onClick={() => handleSubmitTest()}
+              // onClick={() => handleSubmitTest()}
               ref={submitButtonRef}
             >
-              Submit Test
+              Result
             </label>
             <>
               <input type="checkbox" id="my-modal-4" className="modal-toggle" />
