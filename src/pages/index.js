@@ -2,25 +2,42 @@ import FindExamBySubject from "@/components/UI/FindExamBySubject";
 import FindTestBySubject from "@/components/UI/FindTestBySubject";
 import RootLayout from "@/components/layouts/RootLayout";
 import { useGetAllExamQuery } from "@/redux/exam/examApi";
+import { useGetAllTestQuery } from "@/redux/test/testApi";
 import { useState } from "react";
 
 const HomePage = () => {
-  const { data: allExam } = useGetAllExamQuery();
   const [examCategory, setExamCategory] = useState("English");
   const [testCategory, setTestCategory] = useState("English");
+  const { data: allExam } = useGetAllExamQuery();
+  const { data: allTest } = useGetAllTestQuery();
 
-  const uniqueSubjects = [];
+  const examUniqueSubjects = [];
   allExam?.data?.map((exam) => {
-    if (uniqueSubjects?.length > 0) {
-      const isSubjectExist = uniqueSubjects?.find(
+    if (examUniqueSubjects?.length > 0) {
+      const isSubjectExist = examUniqueSubjects?.find(
         (item) => item?.subject === exam?.subject
       );
 
       if (!isSubjectExist) {
-        uniqueSubjects.push(exam);
+        examUniqueSubjects.push(exam);
       }
     } else {
-      uniqueSubjects.push(exam);
+      examUniqueSubjects.push(exam);
+    }
+  });
+
+  const testUniqueSubjects = [];
+  allTest?.data?.map((test) => {
+    if (testUniqueSubjects?.length > 0) {
+      const isSubjectExist = testUniqueSubjects?.find(
+        (item) => item?.subject === test?.subject
+      );
+
+      if (!isSubjectExist) {
+        testUniqueSubjects.push(test);
+      }
+    } else {
+      testUniqueSubjects.push(test);
     }
   });
 
@@ -37,7 +54,7 @@ const HomePage = () => {
       <div>
         <h1 className="text-3xl font-semibold text-center my-8">Exams</h1>
         <div className="w-10/12 md:w-8/12 mx-auto flex justify-between">
-          {uniqueSubjects?.map((exam, index) => (
+          {examUniqueSubjects?.map((exam, index) => (
             <div
               key={index}
               onClick={() => setExamCategory(exam?.subject)}
@@ -56,7 +73,7 @@ const HomePage = () => {
       <div className="my-20">
         <h1 className="text-3xl font-semibold text-center my-8">Tests</h1>
         <div className="w-10/12 md:w-8/12 mx-auto flex justify-between">
-          {uniqueSubjects?.map((test, index) => (
+          {testUniqueSubjects?.map((test, index) => (
             <div
               key={index}
               onClick={() => setTestCategory(test?.subject)}
