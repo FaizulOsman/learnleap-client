@@ -36,7 +36,7 @@ const Stopwatch = ({ isRunning, setIsRunning, timeLimit, setTimeOver }) => {
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [hour, minute, second, isRunning, timeLimit]);
+  }, [setIsRunning, hour, minute, second, isRunning, timeLimit]);
 
   const formatTime = (time) => {
     return time < 10 ? `0${time}` : time;
