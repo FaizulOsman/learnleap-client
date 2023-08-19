@@ -1,27 +1,27 @@
 import apiSlice from "../api/apiSlice";
 
-const testApi = apiSlice.injectEndpoints({
+const examApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    createTest: builder.mutation({
+    createExam: builder.mutation({
       query: ({ data, headers }) => ({
-        url: `/test/create-test`,
+        url: `/exam/create-exam`,
         method: "POST",
         body: data,
         headers: headers,
       }),
       invalidatesTags: ["test-yourself"],
     }),
-    getAllTest: builder.query({
-      query: () => `/test`,
+    getAllExam: builder.query({
+      query: () => `/exam`,
       providesTags: ["test-yourself"],
     }),
-    getSingleTest: builder.query({
-      query: (id) => `/test/${id}`,
+    getSingleExam: builder.query({
+      query: (id) => `/exam/${id}`,
       providesTags: ["test-yourself"],
     }),
     addResult: builder.mutation({
       query: ({ options, headers }) => ({
-        url: `/test/add-result/${options.id}`,
+        url: `/exam/add-result/${options.id}`,
         method: "PATCH",
         body: options.data,
         headers: headers,
@@ -32,8 +32,8 @@ const testApi = apiSlice.injectEndpoints({
 });
 
 export const {
-  useCreateTestMutation,
-  useGetAllTestQuery,
-  useGetSingleTestQuery,
+  useCreateExamMutation,
+  useGetAllExamQuery,
+  useGetSingleExamQuery,
   useAddResultMutation,
-} = testApi;
+} = examApi;
