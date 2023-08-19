@@ -6,10 +6,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
-const SingleTest = () => {
+const SingleExam = () => {
   const router = useRouter();
   const { resultSegments } = router.query;
-  const { data: getSingleTest } = useGetSingleExamQuery(resultSegments?.[1]);
+  const { data: getSingleExam } = useGetSingleExamQuery(resultSegments?.[1]);
   const [count, setCount] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [eyeShow, setEyeShow] = useState(false);
@@ -24,12 +24,12 @@ const SingleTest = () => {
     authorization: accessToken,
   };
 
-  const { data: getSingleTestResult } = useGetSingleExamResultQuery({
+  const { data: getSingleExamResult } = useGetSingleExamResultQuery({
     id: resultSegments?.[1],
     headers,
   });
 
-  if (router && getSingleTest?.data?.timeLimit > 0) {
+  if (router && getSingleExam?.data?.timeLimit > 0) {
     if (isRunning === false) {
       setIsRunning(true);
     }
@@ -38,45 +38,45 @@ const SingleTest = () => {
   const [ques, setQues] = useState([]);
 
   useEffect(() => {
-    if (getSingleTestResult?.data) {
+    if (getSingleExamResult?.data) {
       setEyeShow(true);
     }
-  }, [getSingleTestResult]);
+  }, [getSingleExamResult]);
 
   return (
     <div>
       <>
         <div className="w-11/12 md:w-8/12 mx-auto my-14">
           <h2 className="text-3xl font-semibold text-center mb-5">
-            {resultSegments?.[0]} Test {getSingleTest?.data?.serial}
+            {resultSegments?.[0]} Exam {getSingleExam?.data?.serial}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 mb-5 font-semibold">
             <div className="text-center sm:text-start">
-              <p>Total Question: {getSingleTest?.data?.questions?.length}</p>
+              <p>Total Question: {getSingleExam?.data?.questions?.length}</p>
               <p>
-                Total Attempted: {getSingleTestResult?.data?.totalAttempted}
+                Total Attempted: {getSingleExamResult?.data?.totalAttempted}
               </p>
               <p className="text-green-500">
-                Total Marks: {getSingleTestResult?.data?.totalMarks}
+                Total Marks: {getSingleExamResult?.data?.totalMarks}
               </p>
             </div>
             <div className="text-center sm:text-end">
-              <p>Correct Answer: {getSingleTestResult?.data?.correctAnswer}</p>
-              <p>Wrong Answer: {getSingleTestResult?.data?.wrongAnswer}</p>
+              <p>Correct Answer: {getSingleExamResult?.data?.correctAnswer}</p>
+              <p>Wrong Answer: {getSingleExamResult?.data?.wrongAnswer}</p>
             </div>
           </div>
           <div className="grid grid-cols-1 gap-4">
-            {getSingleTest?.data?.questions?.map((test, index) => (
+            {getSingleExam?.data?.questions?.map((exam, index) => (
               <ExamAnswerSingleQues
                 key={index}
-                test={test}
+                exam={exam}
                 index={index}
                 count={count}
                 setCount={setCount}
                 ques={ques}
                 setQues={setQues}
                 eyeShow={eyeShow}
-                result={getSingleTestResult}
+                result={getSingleExamResult}
               />
             ))}
           </div>
@@ -88,7 +88,7 @@ const SingleTest = () => {
           <div className="mt-16">
             <h3 className="text-xl font-bold text-center mb-4">All Results</h3>
             <div className="flex flex-col gap-4 ">
-              {getSingleTest?.data?.results?.map((result, index) => (
+              {getSingleExam?.data?.results?.map((result, index) => (
                 <div key={index} className="border rounded-md p-2 shadow-md">
                   <h4 className="text-lg font-semibold">Name: {result.name}</h4>
                   <h4 className="text-lg">Marks: {result.marks}</h4>
@@ -103,8 +103,8 @@ const SingleTest = () => {
   );
 };
 
-export default SingleTest;
+export default SingleExam;
 
-SingleTest.getLayout = function getLayout(page) {
+SingleExam.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };

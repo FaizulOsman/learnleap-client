@@ -53,7 +53,7 @@ const HomePage = () => {
           ))}
         </div>
       </div>
-      <div className="mt-20">
+      <div className="my-20">
         <h1 className="text-3xl font-semibold text-center my-8">Tests</h1>
         <div className="w-10/12 md:w-8/12 mx-auto flex justify-between">
           {uniqueSubjects?.map((test, index) => (
