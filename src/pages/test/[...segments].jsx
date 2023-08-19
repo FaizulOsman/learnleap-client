@@ -1,8 +1,7 @@
 import Stopwatch from "@/components/UI/Stopwatch";
 import TestSingleQues from "@/components/UI/TestSingleQues";
 import RootLayout from "@/components/layouts/RootLayout";
-import { useGetSingleExamQuery } from "@/redux/exam/examApi";
-import { useGetSingleExamResultQuery } from "@/redux/examResult/examResultApi";
+import { useGetSingleTestQuery } from "@/redux/test/testApi";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -10,29 +9,13 @@ import { toast } from "react-hot-toast";
 const SingleTest = () => {
   const router = useRouter();
   const { segments } = router.query;
-  const { data: getSingleTest } = useGetSingleExamQuery(segments?.[1]);
+  const { data: getSingleTest } = useGetSingleTestQuery(segments?.[1]);
   const [count, setCount] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
-  const [eyeShow, setEyeShow] = useState(false);
+  const [eyeShow, setEyeShow] = useState(true);
   const [timeOver, setTimeOver] = useState(false);
   const [submittedByTimeOver, setSubmittedByTimeOver] = useState(false);
   const submitButtonRef = useRef(null);
-
-  const [accessToken, setAccessToken] = useState("");
-
-  useEffect(() => {
-    const acc = localStorage.getItem("access-token");
-    setAccessToken(acc);
-  }, []);
-
-  const headers = {
-    authorization: accessToken,
-  };
-
-  const { data: getSingleTestResult } = useGetSingleExamResultQuery({
-    id: segments?.[1],
-    headers,
-  });
 
   if (router && getSingleTest?.data?.timeLimit > 0) {
     if (isRunning === false) {
@@ -47,16 +30,12 @@ const SingleTest = () => {
   const totalMark = mark > 0 ? mark : 0;
 
   useEffect(() => {
-    if (getSingleTestResult?.data) {
-      setEyeShow(true);
-    }
-
     if (timeOver && !submittedByTimeOver) {
       submitButtonRef.current.click();
       setSubmittedByTimeOver(true);
       toast.error("Time over");
     }
-  }, [getSingleTestResult, timeOver, submittedByTimeOver]);
+  }, [timeOver, submittedByTimeOver]);
 
   return (
     <div>
@@ -91,7 +70,6 @@ const SingleTest = () => {
             <label
               htmlFor="my-modal-4"
               className="btn btn-primary modal-button"
-              // onClick={() => handleSubmitTest()}
               ref={submitButtonRef}
             >
               Result

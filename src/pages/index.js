@@ -45,7 +45,7 @@ const HomePage = () => {
     return exam?.subject === examCategory;
   });
 
-  const filterByTestSubject = allExam?.data?.filter((exam) => {
+  const filterByTestSubject = allTest?.data?.filter((exam) => {
     return exam?.subject === testCategory;
   });
 
