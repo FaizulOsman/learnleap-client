@@ -3,8 +3,8 @@ import TestSingleQues from "@/components/UI/TestSingleQues";
 import RootLayout from "@/components/layouts/RootLayout";
 import {
   useAddResultMutation,
-  useGetSingleTestQuery,
-} from "@/redux/test/testApi";
+  useGetSingleExamQuery,
+} from "@/redux/exam/examApi";
 import {
   useCreateTestResultMutation,
   useGetSingleTestResultQuery,
@@ -18,7 +18,7 @@ import { toast } from "react-hot-toast";
 const SingleTest = () => {
   const router = useRouter();
   const { segments } = router.query;
-  const { data: getSingleTest } = useGetSingleTestQuery(segments?.[1]);
+  const { data: getSingleTest } = useGetSingleExamQuery(segments?.[1]);
   const [count, setCount] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [eyeShow, setEyeShow] = useState(false);

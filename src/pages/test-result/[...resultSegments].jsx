@@ -1,6 +1,6 @@
 import TestAnswerSingleQues from "@/components/UI/TestAnswerSingleQues";
 import RootLayout from "@/components/layouts/RootLayout";
-import { useGetSingleTestQuery } from "@/redux/test/testApi";
+import { useGetSingleExamQuery } from "@/redux/exam/examApi";
 import { useGetSingleTestResultQuery } from "@/redux/testResult/testResultApi";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 const SingleTest = () => {
   const router = useRouter();
   const { resultSegments } = router.query;
-  const { data: getSingleTest } = useGetSingleTestQuery(resultSegments?.[1]);
+  const { data: getSingleTest } = useGetSingleExamQuery(resultSegments?.[1]);
   const [count, setCount] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [eyeShow, setEyeShow] = useState(false);

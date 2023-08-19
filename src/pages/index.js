@@ -1,11 +1,11 @@
 import FindTestBySubject from "@/components/UI/FindTestBySubject";
 import RootLayout from "@/components/layouts/RootLayout";
-import { useGetAllTestQuery } from "@/redux/test/testApi";
+import { useGetAllExamQuery } from "@/redux/exam/examApi";
 import Link from "next/link";
 import { useState } from "react";
 
 const HomePage = () => {
-  const { data: allTest } = useGetAllTestQuery();
+  const { data: allTest } = useGetAllExamQuery();
   const [category, setCategory] = useState("English");
 
   const uniqueSubjects = [];

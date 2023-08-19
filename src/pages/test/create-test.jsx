@@ -1,5 +1,5 @@
 import AdminLayout from "@/components/layouts/AdminLayout";
-import { useCreateTestMutation } from "@/redux/test/testApi";
+import { useCreateExamMutation } from "@/redux/exam/examApi";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
@@ -9,7 +9,7 @@ const CreateTest = () => {
   const [subject, setSubject] = useState("");
   const [serial, setSerial] = useState(0);
   const [createTest, { data, isError, isLoading, isSuccess, error, status }] =
-    useCreateTestMutation();
+    useCreateExamMutation();
 
   const handleAddQuestion = (e) => {
     e.preventDefault();
