@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import Loader from "./Loader";
 import { useGetSingleExamResultQuery } from "@/redux/examResult/examResultApi";
 
 const FindExamBySubject = ({ exam }) => {
@@ -30,10 +29,6 @@ const FindExamBySubject = ({ exam }) => {
       setGetSingleExamResult({});
     }
   }, [aaa, isLoading, isSuccess, isError]);
-
-  if (isLoading) {
-    return <Loader />;
-  }
 
   return (
     <div className="flex justify-between items-center bg-gray-200 p-2 rounded-md">
