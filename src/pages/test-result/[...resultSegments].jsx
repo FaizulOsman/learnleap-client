@@ -1,7 +1,7 @@
-import TestAnswerSingleQues from "@/components/UI/TestAnswerSingleQues";
+import ExamAnswerSingleQues from "@/components/UI/ExamAnswerSingleQues";
 import RootLayout from "@/components/layouts/RootLayout";
 import { useGetSingleExamQuery } from "@/redux/exam/examApi";
-import { useGetSingleTestResultQuery } from "@/redux/testResult/testResultApi";
+import { useGetSingleExamResultQuery } from "@/redux/examResult/examResultApi";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -24,7 +24,7 @@ const SingleTest = () => {
     authorization: accessToken,
   };
 
-  const { data: getSingleTestResult } = useGetSingleTestResultQuery({
+  const { data: getSingleTestResult } = useGetSingleExamResultQuery({
     id: resultSegments?.[1],
     headers,
   });
@@ -67,7 +67,7 @@ const SingleTest = () => {
           </div>
           <div className="grid grid-cols-1 gap-4">
             {getSingleTest?.data?.questions?.map((test, index) => (
-              <TestAnswerSingleQues
+              <ExamAnswerSingleQues
                 key={index}
                 test={test}
                 index={index}

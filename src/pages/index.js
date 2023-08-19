@@ -1,49 +1,48 @@
-import FindTestBySubject from "@/components/UI/FindTestBySubject";
+import FindExamBySubject from "@/components/UI/FindExamBySubject";
 import RootLayout from "@/components/layouts/RootLayout";
 import { useGetAllExamQuery } from "@/redux/exam/examApi";
-import Link from "next/link";
 import { useState } from "react";
 
 const HomePage = () => {
-  const { data: allTest } = useGetAllExamQuery();
+  const { data: allExam } = useGetAllExamQuery();
   const [category, setCategory] = useState("English");
 
   const uniqueSubjects = [];
-  allTest?.data?.map((test) => {
+  allExam?.data?.map((exam) => {
     if (uniqueSubjects?.length > 0) {
       const isSubjectExist = uniqueSubjects?.find(
-        (item) => item?.subject === test?.subject
+        (item) => item?.subject === exam?.subject
       );
 
       if (!isSubjectExist) {
-        uniqueSubjects.push(test);
+        uniqueSubjects.push(exam);
       }
     } else {
-      uniqueSubjects.push(test);
+      uniqueSubjects.push(exam);
     }
   });
 
-  const filterBySubject = allTest?.data?.filter((test) => {
-    return test?.subject === category;
+  const filterBySubject = allExam?.data?.filter((exam) => {
+    return exam?.subject === category;
   });
 
   return (
     <div>
-      <h1 className="text-3xl font-semibold text-center my-8">Categories</h1>
+      <h1 className="text-3xl font-semibold text-center my-8">Exams</h1>
       <div className="w-10/12 md:w-8/12 mx-auto flex justify-between">
-        {uniqueSubjects?.map((test, index) => (
+        {uniqueSubjects?.map((exam, index) => (
           <div
             key={index}
-            onClick={() => setCategory(test?.subject)}
+            onClick={() => setCategory(exam?.subject)}
             className="bg-gray-200 px-2 py-1 rounded-md cursor-pointer hover:bg-gray-300 hover:text-white font-semibold"
           >
-            {test?.subject}
+            {exam?.subject}
           </div>
         ))}
       </div>
       <div className="mt-10 flex flex-col gap-5">
-        {filterBySubject?.map((test, index) => (
-          <FindTestBySubject key={index} test={test} />
+        {filterBySubject?.map((exam, index) => (
+          <FindExamBySubject key={index} exam={exam} />
         ))}
       </div>
     </div>

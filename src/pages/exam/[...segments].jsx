@@ -1,5 +1,5 @@
+import ExamSingleQues from "@/components/UI/ExamSingleQues";
 import Stopwatch from "@/components/UI/Stopwatch";
-import TestSingleQues from "@/components/UI/TestSingleQues";
 import RootLayout from "@/components/layouts/RootLayout";
 import {
   useAddResultMutation,
@@ -15,10 +15,10 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 
-const SingleTest = () => {
+const SingleExam = () => {
   const router = useRouter();
   const { segments } = router.query;
-  const { data: getSingleTest } = useGetSingleExamQuery(segments?.[1]);
+  const { data: getSingleExam } = useGetSingleExamQuery(segments?.[1]);
   const [count, setCount] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [eyeShow, setEyeShow] = useState(false);
@@ -27,7 +27,7 @@ const SingleTest = () => {
   const submitButtonRef = useRef(null);
 
   const [
-    createTestResult,
+    createExamResult,
     { data, isError, isLoading, isSuccess, error, status },
   ] = useCreateExamResultMutation();
 
@@ -44,14 +44,14 @@ const SingleTest = () => {
 
   const [addResult, { isSuccess: isAddResultSuccess }] = useAddResultMutation();
 
-  const { data: getSingleTestResult } = useGetSingleExamResultQuery({
+  const { data: getSingleExamResult } = useGetSingleExamResultQuery({
     id: segments?.[1],
     headers,
   });
 
   const { data: getMyProfile } = useGetMyProfileQuery({ headers });
 
-  if (router && getSingleTest?.data?.timeLimit > 0) {
+  if (router && getSingleExam?.data?.timeLimit > 0) {
     if (isRunning === false) {
       setIsRunning(true);
     }
@@ -63,22 +63,22 @@ const SingleTest = () => {
   const mark = count - wrong * 0.25;
   const totalMark = mark > 0 ? mark : 0;
 
-  const handleSubmitTest = () => {
+  const handleSubmitExam = () => {
     const data = {
       questions: ques,
-      totalQues: getSingleTest?.data?.questions?.length,
+      totalQues: getSingleExam?.data?.questions?.length,
       totalAttempted: ques?.length,
       totalMarks: totalMark,
       correctAnswer: count,
       wrongAnswer: wrong,
       email: getMyProfile?.data?.email,
       name: getMyProfile?.data?.name,
-      testId: getSingleTest?.data?.id,
+      examId: getSingleExam?.data?.id,
     };
-    createTestResult({ data, headers });
+    createExamResult({ data, headers });
 
     const options = {
-      id: getSingleTest?.data?.id,
+      id: getSingleExam?.data?.id,
       data: {
         name: getMyProfile?.data?.name,
         email: getMyProfile?.data?.email,
@@ -91,7 +91,7 @@ const SingleTest = () => {
   useEffect(() => {
     if (isError) {
       toast.error(
-        `${error?.data?.message}` || "You have already submitted the test!"
+        `${error?.data?.message}` || "You have already submitted the exam!"
       );
     }
 
@@ -99,7 +99,7 @@ const SingleTest = () => {
       toast.success("Successfully submitted the task!");
     }
 
-    if (getSingleTestResult?.data) {
+    if (getSingleExamResult?.data) {
       setEyeShow(true);
     }
 
@@ -112,7 +112,7 @@ const SingleTest = () => {
     isSuccess,
     isError,
     error,
-    getSingleTestResult,
+    getSingleExamResult,
     timeOver,
     submittedByTimeOver,
   ]);
@@ -122,21 +122,21 @@ const SingleTest = () => {
       <>
         <div className="w-11/12 md:w-8/12 mx-auto my-14">
           <h2 className="text-3xl font-semibold text-center">
-            {segments?.[0]} Test {getSingleTest?.data?.serial}
+            {segments?.[0]} Exam {getSingleExam?.data?.serial}
           </h2>
           <div className="my-5">
             <Stopwatch
               isRunning={isRunning}
               setIsRunning={setIsRunning}
-              timeLimit={getSingleTest?.data?.timeLimit}
+              timeLimit={getSingleExam?.data?.timeLimit}
               setTimeOver={setTimeOver}
             />
           </div>
           <div className="grid grid-cols-1 gap-4">
-            {getSingleTest?.data?.questions?.map((test, index) => (
-              <TestSingleQues
+            {getSingleExam?.data?.questions?.map((exam, index) => (
+              <ExamSingleQues
                 key={index}
-                test={test}
+                exam={exam}
                 index={index}
                 count={count}
                 setCount={setCount}
@@ -150,10 +150,10 @@ const SingleTest = () => {
             <label
               htmlFor="my-modal-4"
               className="btn btn-primary modal-button"
-              onClick={() => handleSubmitTest()}
+              onClick={() => handleSubmitExam()}
               ref={submitButtonRef}
             >
-              Submit Test
+              Submit Exam
             </label>
             <>
               <input type="checkbox" id="my-modal-4" className="modal-toggle" />
@@ -179,8 +179,8 @@ const SingleTest = () => {
   );
 };
 
-export default SingleTest;
+export default SingleExam;
 
-SingleTest.getLayout = function getLayout(page) {
+SingleExam.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };

@@ -2,13 +2,13 @@ import React from "react";
 import { toast } from "react-hot-toast";
 import { AiOutlineEye } from "react-icons/ai";
 
-const TestAnswerSingleQues = ({ index, test, eyeShow, result }) => {
+const ExamAnswerSingleQues = ({ index, exam, eyeShow, result }) => {
   const showCorrectAnswer = (correctAnswer) => {
     toast.success(`Correct Answer: ${correctAnswer}`);
   };
 
   const sss = result?.data?.questions?.find(
-    (q) => q?.question === test?.question
+    (q) => q?.question === exam?.question
   );
 
   return (
@@ -16,10 +16,10 @@ const TestAnswerSingleQues = ({ index, test, eyeShow, result }) => {
       <div className="bg-base-100 border shadow-sm p-4 rounded-lg">
         <div className="flex justify-between mb-2">
           <h2 className="font-semibold text-lg">
-            <span>{index + 1}:</span> {test?.question}
+            <span>{index + 1}:</span> {exam?.question}
           </h2>
           <button
-            onClick={() => showCorrectAnswer(test?.answer)}
+            onClick={() => showCorrectAnswer(exam?.answer)}
             className="btn bg-base-100 btn-sm border-none"
             title="See correct answer"
             disabled={!eyeShow && true}
@@ -32,83 +32,83 @@ const TestAnswerSingleQues = ({ index, test, eyeShow, result }) => {
             <label className="label cursor-pointer w-full flex">
               <input
                 type="radio"
-                name={`radio-${test?.id}${index}`}
+                name={`radio-${exam?.id}${index}`}
                 className="radio radio-primary radio-sm mr-4"
-                checked={sss?.selectedOption === test?.option1 ? true : false}
-                disabled={sss?.selectedOption === test?.option1 ? false : true}
+                checked={sss?.selectedOption === exam?.option1 ? true : false}
+                disabled={sss?.selectedOption === exam?.option1 ? false : true}
                 readOnly
               />
-              <p className="label-text flex-1">{test?.option1}</p>
+              <p className="label-text flex-1">{exam?.option1}</p>
             </label>
           </div>
           <div className="flex items-center h-full">
             <label className="label cursor-pointer w-full flex">
               <input
                 type="radio"
-                name={`radio-${test?.id}${index}`}
+                name={`radio-${exam?.id}${index}`}
                 className="radio radio-primary radio-sm mr-4"
-                checked={sss?.selectedOption === test?.option2 ? true : false}
-                disabled={sss?.selectedOption === test?.option2 ? false : true}
+                checked={sss?.selectedOption === exam?.option2 ? true : false}
+                disabled={sss?.selectedOption === exam?.option2 ? false : true}
                 readOnly
               />
-              <span className="label-text flex-1">{test?.option2}</span>
+              <span className="label-text flex-1">{exam?.option2}</span>
             </label>
           </div>
-          {test?.option3 && (
+          {exam?.option3 && (
             <div className="flex items-center h-full">
               <label className="label cursor-pointer w-full flex">
                 <input
                   type="radio"
-                  name={`radio-${test?.id}${index}`}
+                  name={`radio-${exam?.id}${index}`}
                   className="radio radio-primary radio-sm mr-4"
-                  checked={sss?.selectedOption === test?.option3 ? true : false}
+                  checked={sss?.selectedOption === exam?.option3 ? true : false}
                   disabled={
-                    sss?.selectedOption === test?.option3 ? false : true
+                    sss?.selectedOption === exam?.option3 ? false : true
                   }
                   readOnly
                 />
-                <span className="label-text flex-1">{test?.option3}</span>
+                <span className="label-text flex-1">{exam?.option3}</span>
               </label>
             </div>
           )}
-          {test?.option4 && (
+          {exam?.option4 && (
             <div className="flex items-center h-full">
               <label className="label cursor-pointer w-full flex">
                 <input
                   type="radio"
-                  name={`radio-${test?.id}${index}`}
+                  name={`radio-${exam?.id}${index}`}
                   className="radio radio-primary radio-sm mr-4"
-                  checked={sss?.selectedOption === test?.option4 ? true : false}
+                  checked={sss?.selectedOption === exam?.option4 ? true : false}
                   disabled={
-                    sss?.selectedOption === test?.option4 ? false : true
+                    sss?.selectedOption === exam?.option4 ? false : true
                   }
                   readOnly
                 />
-                <span className="label-text flex-1">{test?.option4}</span>
+                <span className="label-text flex-1">{exam?.option4}</span>
               </label>
             </div>
           )}
-          {test?.option5 && (
+          {exam?.option5 && (
             <div className="flex items-center h-full">
               <label className="label cursor-pointer w-full flex">
                 <input
                   type="radio"
-                  name={`radio-${test?.id}${index}`}
+                  name={`radio-${exam?.id}${index}`}
                   className="radio radio-primary radio-sm mr-4"
-                  checked={sss?.selectedOption === test?.option5 ? true : false}
+                  checked={sss?.selectedOption === exam?.option5 ? true : false}
                   disabled={
-                    sss?.selectedOption === test?.option5 ? false : true
+                    sss?.selectedOption === exam?.option5 ? false : true
                   }
                   readOnly
                 />
-                <span className="label-text flex-1">{test?.option5}</span>
+                <span className="label-text flex-1">{exam?.option5}</span>
               </label>
             </div>
           )}
         </div>
         <div className="mt-2">
           <h2 className="text-lg font-semibold">
-            {sss?.selectedOption === test?.answer ? (
+            {sss?.selectedOption === exam?.answer ? (
               <span className="text-green-500">Your answer is correct.</span>
             ) : (
               <>
@@ -126,4 +126,4 @@ const TestAnswerSingleQues = ({ index, test, eyeShow, result }) => {
   );
 };
 
-export default TestAnswerSingleQues;
+export default ExamAnswerSingleQues;

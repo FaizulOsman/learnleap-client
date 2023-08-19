@@ -1,29 +1,29 @@
 import apiSlice from "../api/apiSlice";
 
-const testResult = apiSlice.injectEndpoints({
+const examResult = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    createTestResult: builder.mutation({
+    createExamResult: builder.mutation({
       query: ({ data, headers }) => ({
-        url: `/test-result/create-test-result`,
+        url: `/exam-result/create-exam-result`,
         method: "POST",
         body: data,
         headers: headers,
       }),
       invalidatesTags: ["test-yourself"],
     }),
-    getAllTestResult: builder.query({
-      query: () => `/test-result`,
+    getAllExamResult: builder.query({
+      query: () => `/exam-result`,
       providesTags: ["test-yourself"],
     }),
-    getSingleTestResult: builder.query({
+    getSingleExamResult: builder.query({
       query: ({ id, headers }) => ({
-        url: `/test-result/${id}`,
+        url: `/exam-result/${id}`,
         headers: headers,
       }),
     }),
     getMySubmittedResults: builder.query({
       query: ({ headers }) => ({
-        url: `/test-result/my-submitted-results`,
+        url: `/exam-result/my-submitted-results`,
         headers: headers,
       }),
     }),
@@ -31,8 +31,8 @@ const testResult = apiSlice.injectEndpoints({
 });
 
 export const {
-  useCreateTestResultMutation,
-  useGetAllTestResultQuery,
-  useGetSingleTestResultQuery,
+  useCreateExamResultMutation,
+  useGetAllExamResultQuery,
+  useGetSingleExamResultQuery,
   useGetMySubmittedResultsQuery,
-} = testResult;
+} = examResult;

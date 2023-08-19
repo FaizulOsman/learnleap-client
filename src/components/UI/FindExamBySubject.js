@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import Loader from "./Loader";
 import { useGetSingleExamResultQuery } from "@/redux/examResult/examResultApi";
 
-const FindTestBySubject = ({ test }) => {
-  const [getSingleTestResult, setGetSingleTestResult] = useState({});
+const FindExamBySubject = ({ exam }) => {
+  const [getSingleExamResult, setGetSingleExamResult] = useState({});
   const [accessToken, setAccessToken] = useState("");
 
   useEffect(() => {
@@ -21,13 +21,13 @@ const FindTestBySubject = ({ test }) => {
     isLoading,
     isSuccess,
     isError,
-  } = useGetSingleExamResultQuery({ id: test?.id, headers });
+  } = useGetSingleExamResultQuery({ id: exam?.id, headers });
 
   useEffect(() => {
-    setGetSingleTestResult(aaa);
+    setGetSingleExamResult(aaa);
 
     if (isError) {
-      setGetSingleTestResult({});
+      setGetSingleExamResult({});
     }
   }, [aaa, isLoading, isSuccess, isError]);
 
@@ -39,35 +39,35 @@ const FindTestBySubject = ({ test }) => {
     <div className="flex justify-between items-center bg-gray-200 p-2 rounded-md">
       <div>
         <h4 className="text-md font-semibold">
-          {test?.subject} {test?.serial}
+          {exam?.subject} {exam?.serial}
           {isSuccess &&
-            getSingleTestResult?.data &&
+            getSingleExamResult?.data &&
             " (You already have submitted)"}
         </h4>
-        <p>Question: {test?.questions?.length}</p>
-        <p>Time: {test?.timeLimit} min</p>
-        {isSuccess && getSingleTestResult?.data && (
-          <p>Mark: {getSingleTestResult?.data?.totalMarks}</p>
+        <p>Question: {exam?.questions?.length}</p>
+        <p>Time: {exam?.timeLimit} min</p>
+        {isSuccess && getSingleExamResult?.data && (
+          <p>Mark: {getSingleExamResult?.data?.totalMarks}</p>
         )}
       </div>
       <>
-        {isSuccess && getSingleTestResult?.data ? (
+        {isSuccess && getSingleExamResult?.data ? (
           <div className="flex flex-col gap-2">
-            <Link href={`/test/${test?.subject}/${test?.id}`}>
+            <Link href={`/exam/${exam?.subject}/${exam?.id}`}>
               <button className="btn btn-sm btn-primary">
-                Start Test Again
+                Start Exam Again
               </button>
             </Link>
             <Link
-              href={`/test-result/${test?.subject}/${test?.id}`}
+              href={`/exam-result/${exam?.subject}/${exam?.id}`}
               className="flex justify-end"
             >
               <button className="btn btn-sm btn-primary">See Result</button>
             </Link>
           </div>
         ) : (
-          <Link href={`/test/${test?.subject}/${test?.id}`}>
-            <button className="btn btn-sm btn-primary">Start Test</button>
+          <Link href={`/exam/${exam?.subject}/${exam?.id}`}>
+            <button className="btn btn-sm btn-primary">Start Exam</button>
           </Link>
         )}
       </>
@@ -75,4 +75,4 @@ const FindTestBySubject = ({ test }) => {
   );
 };
 
-export default FindTestBySubject;
+export default FindExamBySubject;

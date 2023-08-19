@@ -57,9 +57,26 @@ const routes = [
     ],
   },
   {
-    path: "/order",
-    name: "Order",
-    icon: <BsCartCheck />,
+    path: "/exam",
+    name: "Exam",
+    icon: <AiTwotoneFileExclamation />,
+    subRoutes: [
+      {
+        path: "/exam/create-exam",
+        name: "Create Exam",
+        icon: <FaUser />,
+      },
+      {
+        path: "/settings/2fa",
+        name: "2FA",
+        icon: <FaLock />,
+      },
+      {
+        path: "/settings/billing",
+        name: "Billing",
+        icon: <FaMoneyBill />,
+      },
+    ],
   },
   {
     path: "/settings",
