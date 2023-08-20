@@ -112,6 +112,22 @@ const UpdateTest = () => {
     }
   }, [isLoading, isSuccess, isError, error]);
 
+  const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(null);
+  const [questionForm, setQuestionForm] = useState({
+    question: "",
+    option1: "",
+    option2: "",
+    option3: "",
+    option4: "",
+    option5: "",
+    subject: "",
+    answer: "",
+  });
+  const handleSetQues = (q, index) => {
+    setSelectedQuestionIndex(index);
+    setQuestionForm({ ...q });
+  };
+
   return (
     <div>
       <div className="w-11/12 md:w-8/12 mx-auto my-14">
@@ -129,7 +145,10 @@ const UpdateTest = () => {
                   <h4 className="text-xl font-semibold">
                     Question {i + 1}. {q?.question}
                   </h4>
-                  <button className="text-lg border-none text-primary hover:text-blue-600">
+                  <button
+                    onClick={() => handleSetQues(q, i)}
+                    className="text-lg border-none text-primary hover:text-blue-600"
+                  >
                     <FaRegEdit />
                   </button>
                 </div>
@@ -148,15 +167,16 @@ const UpdateTest = () => {
             ))}
           </div>
           <h3 className="text-3xl font-bold text-center my-5">
-            Add A Question
+            Update A Question
           </h3>
           <div>
-            <form onSubmit={(e) => handleAddQuestion(e)}>
+            <form className="updateForm" onSubmit={(e) => handleAddQuestion(e)}>
               <input
                 type="text"
                 name="question"
                 placeholder="Type your question here"
                 className="input input-bordered w-full"
+                value={questionForm?.question}
                 required
               />
               <div className="grid grid-cols-1 md:grid-cols-2 justify-between gap-4 mt-4">
@@ -165,6 +185,7 @@ const UpdateTest = () => {
                   name="option1"
                   placeholder="Option 1"
                   className="input input-bordered input-sm w-full"
+                  value={questionForm?.option1}
                   required
                 />
                 <input
@@ -172,6 +193,7 @@ const UpdateTest = () => {
                   name="option2"
                   placeholder="Option 2"
                   className="input input-bordered input-sm w-full"
+                  value={questionForm?.option2}
                   required
                 />
                 <input
@@ -179,6 +201,7 @@ const UpdateTest = () => {
                   name="option3"
                   placeholder="Option 3"
                   className="input input-bordered input-sm w-full"
+                  value={questionForm?.option3}
                   required
                 />
                 <input
@@ -186,6 +209,7 @@ const UpdateTest = () => {
                   name="option4"
                   placeholder="Option 4"
                   className="input input-bordered input-sm w-full"
+                  value={questionForm?.option4}
                   required
                 />
                 <input
@@ -193,22 +217,25 @@ const UpdateTest = () => {
                   name="option5"
                   placeholder="Option 5 (Optional)"
                   className="input input-bordered input-sm w-full"
+                  value={questionForm?.option5}
                 />
                 <input
                   type="text"
                   name="subject"
                   placeholder="Subject (Optional)"
                   className="input input-bordered input-sm w-full"
+                  value={questionForm?.subject}
                 />
                 <input
                   type="text"
                   name="answer"
                   placeholder="Answer"
                   className="input input-bordered input-primary input-sm w-full"
+                  value={questionForm?.answer}
                   required
                 />
                 <button type="submit" className="btn btn-sm w-full btn-primary">
-                  Add A Question
+                  Update Question
                 </button>
               </div>
             </form>
@@ -230,27 +257,57 @@ const UpdateTest = () => {
             onSubmit={(e) => handleSet(e)}
             className="grid grid-cols-1 md:grid-cols-2 justify-between gap-4 mt-4"
           >
-            <input
-              type="number"
-              name="setTime"
-              placeholder="Set Time In Minute"
-              className="input input-bordered input-primary input-sm w-full"
-              required
-            />
-            <input
-              type="text"
-              name="subject"
-              placeholder="Subject (Mandatory)"
-              className="input input-bordered input-primary input-sm w-full"
-              required
-            />
-            <input
-              type="number"
-              name="serial"
-              placeholder="Serial"
-              className="input input-bordered input-primary input-sm w-full"
-              required
-            />
+            <div class="relative">
+              <input
+                type="number"
+                id="setTime"
+                name="setTime"
+                class="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
+                autocomplete="off"
+                value={getSingleTest?.data?.timeLimit}
+                required
+              />
+              <label
+                for="setTime"
+                class="absolute text-sm left-6 -top-3 bg-white px-1 text-primary transition-all duration-300"
+              >
+                Set Time (Minute)
+              </label>
+            </div>
+            <div class="relative">
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                class="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
+                autocomplete="off"
+                value={getSingleTest?.data?.subject}
+                required
+              />
+              <label
+                for="subject"
+                class="absolute text-sm left-6 -top-3 bg-white px-1 text-primary transition-all duration-300"
+              >
+                Subject (Mandatory)
+              </label>
+            </div>
+            <div class="relative">
+              <input
+                type="number"
+                id="serial"
+                name="serial"
+                class="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
+                autocomplete="off"
+                value={getSingleTest?.data?.serial}
+                required
+              />
+              <label
+                for="serial"
+                class="absolute text-sm left-6 -top-3 bg-white px-1 text-primary transition-all duration-300"
+              >
+                Serial
+              </label>
+            </div>
             <button type="submit" className="btn btn-sm btn-primary">
               Set
             </button>
@@ -261,7 +318,7 @@ const UpdateTest = () => {
             onClick={() => handleCreateTest()}
             className="btn btn-sm w-full btn-primary mt-5"
           >
-            Create Test
+            Update Test
           </button>
         </div>
       </div>

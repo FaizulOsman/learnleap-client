@@ -63,3 +63,8 @@ a {
     transform: rotate(360deg);
   }
 }
+
+.custom-form input[type="number"]:focus-within + input::placeholder,
+.custom-form input[type="text"]:focus-within + input::placeholder {
+  border-color: var(--primary-color); /* Change this to your desired color */
+}
