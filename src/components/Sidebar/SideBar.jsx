@@ -67,9 +67,9 @@ const routes = [
         icon: <FaUser />,
       },
       {
-        path: "/settings/2fa",
-        name: "2FA",
-        icon: <FaLock />,
+        path: "/exam/all-exam",
+        name: "All Exam",
+        icon: <AiTwotoneFileExclamation />,
       },
       {
         path: "/settings/billing",
