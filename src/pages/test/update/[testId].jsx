@@ -1,5 +1,8 @@
 import AdminLayout from "@/components/layouts/AdminLayout";
-import { useGetSingleTestQuery } from "@/redux/test/testApi";
+import {
+  useGetSingleTestQuery,
+  useUpdateTestMutation,
+} from "@/redux/test/testApi";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { useCreateTestMutation } from "@/redux/test/testApi";
@@ -11,16 +14,20 @@ const UpdateTest = () => {
   const id = router.query.testId;
   const { data: getSingleTest } = useGetSingleTestQuery(id);
 
-  // const [ques, setQues] = useState([]);
-
-  // ###############################################
   const [ques, setQues] = useState([]);
   const [time, setTime] = useState(0);
   const [subject, setSubject] = useState("");
   const [serial, setSerial] = useState(0);
   const [newQuesId, setNewQuesId] = useState("");
-  const [createTest, { data, isError, isLoading, isSuccess, error, status }] =
-    useCreateTestMutation();
+  // State for every Question
+  const [initialQuestion, setInitialQuestion] = useState("");
+  const [initialOption1, setInitialOption1] = useState("");
+  const [initialOption2, setInitialOption2] = useState("");
+  const [initialOption3, setInitialOption3] = useState("");
+  const [initialOption4, setInitialOption4] = useState("");
+  const [initialOption5, setInitialOption5] = useState("");
+  const [initialSubject, setInitialSubject] = useState("");
+  const [initialAnswer, setInitialAnswer] = useState("");
 
   const filterQues = ques?.filter((q) => q.id !== newQuesId);
 
@@ -84,6 +91,9 @@ const UpdateTest = () => {
     authorization: accessToken,
   };
 
+  const [updateTest, { isLoading, isSuccess, isError, error }] =
+    useUpdateTestMutation();
+
   const handleUpdateTest = () => {
     const data = {
       questions: ques,
@@ -91,6 +101,7 @@ const UpdateTest = () => {
       subject: subject,
       serial: serial,
     };
+    updateTest({ id, data, headers });
     console.log(data);
     // if (ques.length > 0 && subject.length > 1 && serial > 0) {
     //   createTest({ data, headers });
@@ -104,16 +115,6 @@ const UpdateTest = () => {
     // }
   };
 
-  const [initialQuestion, setInitialQuestion] = useState("");
-  const [initialOption1, setInitialOption1] = useState("");
-  const [initialOption2, setInitialOption2] = useState("");
-  const [initialOption3, setInitialOption3] = useState("");
-  const [initialOption4, setInitialOption4] = useState("");
-  const [initialOption5, setInitialOption5] = useState("");
-  const [initialSubject, setInitialSubject] = useState("");
-  const [initialAnswer, setInitialAnswer] = useState("");
-
-  const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(null);
   const [questionForm, setQuestionForm] = useState({
     question: "",
     option1: "",
@@ -125,9 +126,9 @@ const UpdateTest = () => {
     answer: "",
   });
   const handleSetQues = (q, index) => {
-    setSelectedQuestionIndex(index);
     setQuestionForm({ ...q });
     setNewQuesId(q?.id);
+    toast.success(`Selected Question: ${index + 1}`);
   };
 
   useEffect(() => {
@@ -136,7 +137,7 @@ const UpdateTest = () => {
     }
 
     if (isSuccess) {
-      toast.success("Test Created Successfully!");
+      toast.success("Test Updated Successfully!");
     }
 
     setTime(getSingleTest?.data?.timeLimit);
@@ -159,7 +160,6 @@ const UpdateTest = () => {
           Update Test {getSingleTest?.data?.serial}
         </h2>
       </div>
-      {/* ############################## */}
       <div className="my-5">
         <div className="w-11/12 md:w-10/12 lg:w-8/12 mx-auto border rounded-lg p-5">
           <div>
@@ -185,13 +185,15 @@ const UpdateTest = () => {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
                   <span className="font-semibold">Answer. {q?.answer}</span>
-                  <span className="font-semibold">Subject. {q?.subject}</span>
+                  {q?.subject && (
+                    <span className="font-semibold">Subject. {q?.subject}</span>
+                  )}
                 </div>
               </div>
             ))}
           </div>
-          <h3 className="text-3xl font-bold text-center my-5">
-            Update A Question
+          <h3 className="text-2xl font-bold text-center mb-5 mt-10">
+            Add or Update A Question
           </h3>
           <div>
             <form className="updateForm" onSubmit={(e) => handleAddQuestion(e)}>
@@ -230,7 +232,6 @@ const UpdateTest = () => {
                   className="input input-bordered input-sm w-full"
                   value={initialOption3}
                   onChange={(e) => setInitialOption3(e.target.value)}
-                  required
                 />
                 <input
                   type="text"
@@ -239,7 +240,6 @@ const UpdateTest = () => {
                   className="input input-bordered input-sm w-full"
                   value={initialOption4}
                   onChange={(e) => setInitialOption4(e.target.value)}
-                  required
                 />
                 <input
                   type="text"
@@ -297,6 +297,7 @@ const UpdateTest = () => {
                 className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
                 autoComplete="off"
                 defaultValue={getSingleTest?.data?.timeLimit}
+                required
               />
               <label
                 htmlFor="setTime"
@@ -313,6 +314,7 @@ const UpdateTest = () => {
                 className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
                 autoComplete="off"
                 defaultValue={getSingleTest?.data?.subject}
+                required
               />
               <label
                 htmlFor="subject"
@@ -329,6 +331,7 @@ const UpdateTest = () => {
                 className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
                 autoComplete="off"
                 defaultValue={getSingleTest?.data?.serial}
+                required
               />
               <label
                 htmlFor="serial"

@@ -27,6 +27,15 @@ const testApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["test-yourself"],
     }),
+    updateTest: builder.mutation({
+      query: ({ id, data, headers }) => ({
+        url: `/test/${id}`,
+        method: "PATCH",
+        body: data,
+        headers: headers,
+      }),
+      invalidatesTags: ["test-yourself"],
+    }),
     addResult: builder.mutation({
       query: ({ options, headers }) => ({
         url: `/test/add-result/${options.id}`,
@@ -44,5 +53,6 @@ export const {
   useGetAllTestQuery,
   useGetSingleTestQuery,
   useDeleteTestMutation,
+  useUpdateTestMutation,
   useAddResultMutation,
 } = testApi;
