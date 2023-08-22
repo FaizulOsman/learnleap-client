@@ -257,53 +257,53 @@ const UpdateTest = () => {
             onSubmit={(e) => handleSet(e)}
             className="grid grid-cols-1 md:grid-cols-2 justify-between gap-4 mt-4"
           >
-            <div class="relative">
+            <div className="relative">
               <input
                 type="number"
                 id="setTime"
                 name="setTime"
-                class="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
-                autocomplete="off"
+                className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
+                autoComplete="off"
                 value={getSingleTest?.data?.timeLimit}
                 required
               />
               <label
-                for="setTime"
-                class="absolute text-sm left-6 -top-3 bg-white px-1 text-primary transition-all duration-300"
+                htmlFor="setTime"
+                className="absolute text-sm left-6 -top-3 bg-white px-1 text-primary transition-all duration-300"
               >
                 Set Time (Minute)
               </label>
             </div>
-            <div class="relative">
+            <div className="relative">
               <input
                 type="text"
                 id="subject"
                 name="subject"
-                class="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
-                autocomplete="off"
+                className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
+                autoComplete="off"
                 value={getSingleTest?.data?.subject}
                 required
               />
               <label
-                for="subject"
-                class="absolute text-sm left-6 -top-3 bg-white px-1 text-primary transition-all duration-300"
+                htmlFor="subject"
+                className="absolute text-sm left-6 -top-3 bg-white px-1 text-primary transition-all duration-300"
               >
                 Subject (Mandatory)
               </label>
             </div>
-            <div class="relative">
+            <div className="relative">
               <input
                 type="number"
                 id="serial"
                 name="serial"
-                class="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
-                autocomplete="off"
+                className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
+                autoComplete="off"
                 value={getSingleTest?.data?.serial}
                 required
               />
               <label
-                for="serial"
-                class="absolute text-sm left-6 -top-3 bg-white px-1 text-primary transition-all duration-300"
+                htmlFor="serial"
+                className="absolute text-sm left-6 -top-3 bg-white px-1 text-primary transition-all duration-300"
               >
                 Serial
               </label>
