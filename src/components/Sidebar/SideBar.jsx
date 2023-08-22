@@ -244,24 +244,30 @@ const SideBar = ({ children }) => {
         </motion.div>
 
         <main className="flex-1">
-          <div className="flex items-center justify-end gap-5 px-10 bg-[#00073d] text-white h-12 border-l">
-            <Link href="/" className="hover:underline hover:text-blue-500">
-              Home
-            </Link>
-            <Link
-              onClick={() => handleLogOut()}
-              href="/login"
-              className="hover:underline hover:text-blue-500"
-            >
-              Logout
-            </Link>
-            <Image
-              src="https://i.ibb.co/nrtwzQd/avatar-boy.webp"
-              alt="Avatar"
-              className="rounded-full border-2 p-[2px] cursor-pointer hover:border-blue-500"
-              width={35}
-              height={35}
-            />
+          <div className="flex items-center justify-between px-10 bg-[#00073d] text-white h-12 border-l">
+            <div className="w-[30px] cursor-pointer">
+              <FaBars onClick={toggle} />
+            </div>
+            <div className="flex items-center justify-end gap-5">
+              <Link href="/" className="hover:underline hover:text-blue-500">
+                Home
+              </Link>
+
+              <Link
+                onClick={() => handleLogOut()}
+                href="/login"
+                className="hover:underline hover:text-blue-500"
+              >
+                Logout
+              </Link>
+              <Image
+                src="https://i.ibb.co/nrtwzQd/avatar-boy.webp"
+                alt="Avatar"
+                className="rounded-full border-2 p-[2px] cursor-pointer hover:border-blue-500"
+                width={35}
+                height={35}
+              />
+            </div>
           </div>
           {children}
         </main>
