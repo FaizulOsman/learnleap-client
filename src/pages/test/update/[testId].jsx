@@ -272,7 +272,6 @@ const UpdateTest = () => {
                 className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
                 autoComplete="off"
                 defaultValue={getSingleTest?.data?.timeLimit}
-                required
               />
               <label
                 htmlFor="setTime"
@@ -289,7 +288,6 @@ const UpdateTest = () => {
                 className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
                 autoComplete="off"
                 defaultValue={getSingleTest?.data?.subject}
-                required
               />
               <label
                 htmlFor="subject"
@@ -306,7 +304,6 @@ const UpdateTest = () => {
                 className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
                 autoComplete="off"
                 defaultValue={getSingleTest?.data?.serial}
-                required
               />
               <label
                 htmlFor="serial"
