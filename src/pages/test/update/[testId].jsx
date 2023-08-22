@@ -84,39 +84,34 @@ const UpdateTest = () => {
     authorization: accessToken,
   };
 
-  const handleCreateTest = () => {
+  const handleUpdateTest = () => {
     const data = {
       questions: ques,
       timeLimit: time,
       subject: subject,
       serial: serial,
     };
-
-    if (ques.length > 0 && subject.length > 1 && serial > 0) {
-      createTest({ data, headers });
-      // Clear all data after creating the test
-      setQues([]);
-      setTime(0);
-      setSubject("");
-      setSerial(0);
-    } else {
-      toast.error("Test Creation Failed!");
-    }
+    console.log(data);
+    // if (ques.length > 0 && subject.length > 1 && serial > 0) {
+    //   createTest({ data, headers });
+    //   // Clear all data after creating the test
+    //   setQues([]);
+    //   setTime(0);
+    //   setSubject("");
+    //   setSerial(0);
+    // } else {
+    //   toast.error("Test Creation Failed!");
+    // }
   };
 
-  useEffect(() => {
-    if (isError) {
-      toast.error(`${error?.data?.message}` || "Test Creation Failed!");
-    }
-
-    if (isSuccess) {
-      toast.success("Test Created Successfully!");
-    }
-
-    setTime(getSingleTest?.data?.timeLimit);
-    setSubject(getSingleTest?.data?.subject);
-    setSerial(getSingleTest?.data?.serial);
-  }, [isLoading, isSuccess, isError, error, getSingleTest?.data]);
+  const [initialQuestion, setInitialQuestion] = useState("");
+  const [initialOption1, setInitialOption1] = useState("");
+  const [initialOption2, setInitialOption2] = useState("");
+  const [initialOption3, setInitialOption3] = useState("");
+  const [initialOption4, setInitialOption4] = useState("");
+  const [initialOption5, setInitialOption5] = useState("");
+  const [initialSubject, setInitialSubject] = useState("");
+  const [initialAnswer, setInitialAnswer] = useState("");
 
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(null);
   const [questionForm, setQuestionForm] = useState({
@@ -134,6 +129,28 @@ const UpdateTest = () => {
     setQuestionForm({ ...q });
     setNewQuesId(q?.id);
   };
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(`${error?.data?.message}` || "Test Creation Failed!");
+    }
+
+    if (isSuccess) {
+      toast.success("Test Created Successfully!");
+    }
+
+    setTime(getSingleTest?.data?.timeLimit);
+    setSubject(getSingleTest?.data?.subject);
+    setSerial(getSingleTest?.data?.serial);
+    setInitialQuestion(questionForm?.question);
+    setInitialOption1(questionForm?.option1);
+    setInitialOption2(questionForm?.option2);
+    setInitialOption3(questionForm?.option3);
+    setInitialOption4(questionForm?.option4);
+    setInitialOption5(questionForm?.option5);
+    setInitialSubject(questionForm?.subject);
+    setInitialAnswer(questionForm?.answer);
+  }, [isLoading, isSuccess, isError, error, getSingleTest?.data, questionForm]);
 
   return (
     <div>
@@ -183,7 +200,8 @@ const UpdateTest = () => {
                 name="question"
                 placeholder="Type your question here"
                 className="input input-bordered w-full"
-                defaultValue={questionForm?.question}
+                value={initialQuestion}
+                onChange={(e) => setInitialQuestion(e.target.value)}
                 required
               />
               <div className="grid grid-cols-1 md:grid-cols-2 justify-between gap-4 mt-4">
@@ -192,7 +210,8 @@ const UpdateTest = () => {
                   name="option1"
                   placeholder="Option 1"
                   className="input input-bordered input-sm w-full"
-                  defaultValue={questionForm?.option1}
+                  value={initialOption1}
+                  onChange={(e) => setInitialOption1(e.target.value)}
                   required
                 />
                 <input
@@ -200,7 +219,8 @@ const UpdateTest = () => {
                   name="option2"
                   placeholder="Option 2"
                   className="input input-bordered input-sm w-full"
-                  defaultValue={questionForm?.option2}
+                  value={initialOption2}
+                  onChange={(e) => setInitialOption2(e.target.value)}
                   required
                 />
                 <input
@@ -208,7 +228,8 @@ const UpdateTest = () => {
                   name="option3"
                   placeholder="Option 3"
                   className="input input-bordered input-sm w-full"
-                  defaultValue={questionForm?.option3}
+                  value={initialOption3}
+                  onChange={(e) => setInitialOption3(e.target.value)}
                   required
                 />
                 <input
@@ -216,7 +237,8 @@ const UpdateTest = () => {
                   name="option4"
                   placeholder="Option 4"
                   className="input input-bordered input-sm w-full"
-                  defaultValue={questionForm?.option4}
+                  value={initialOption4}
+                  onChange={(e) => setInitialOption4(e.target.value)}
                   required
                 />
                 <input
@@ -224,21 +246,24 @@ const UpdateTest = () => {
                   name="option5"
                   placeholder="Option 5 (Optional)"
                   className="input input-bordered input-sm w-full"
-                  defaultValue={questionForm?.option5}
+                  value={initialOption5}
+                  onChange={(e) => setInitialOption5(e.target.value)}
                 />
                 <input
                   type="text"
                   name="subject"
                   placeholder="Subject (Optional)"
                   className="input input-bordered input-sm w-full"
-                  defaultValue={questionForm?.subject}
+                  value={initialSubject}
+                  onChange={(e) => setInitialSubject(e.target.value)}
                 />
                 <input
                   type="text"
                   name="answer"
                   placeholder="Answer"
                   className="input input-bordered input-primary input-sm w-full"
-                  defaultValue={questionForm?.answer}
+                  value={initialAnswer}
+                  onChange={(e) => setInitialAnswer(e.target.value)}
                   required
                 />
                 <button type="submit" className="btn btn-sm w-full btn-primary">
@@ -319,7 +344,7 @@ const UpdateTest = () => {
         </div>
         <div className="w-96 mx-auto">
           <button
-            onClick={() => handleCreateTest()}
+            onClick={() => handleUpdateTest()}
             className="btn btn-sm w-full btn-primary mt-5"
           >
             Update Test
