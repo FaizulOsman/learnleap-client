@@ -1,4 +1,3 @@
-import TestSingleQues from "@/components/UI/TestSingleQues";
 import AdminLayout from "@/components/layouts/AdminLayout";
 import { useGetSingleTestQuery } from "@/redux/test/testApi";
 import { useRouter } from "next/router";
@@ -11,8 +10,6 @@ const UpdateTest = () => {
   const router = useRouter();
   const id = router.query.testId;
   const { data: getSingleTest } = useGetSingleTestQuery(id);
-  const [count, setCount] = useState(0);
-  const [eyeShow, setEyeShow] = useState(true);
 
   // const [ques, setQues] = useState([]);
 
@@ -21,8 +18,11 @@ const UpdateTest = () => {
   const [time, setTime] = useState(0);
   const [subject, setSubject] = useState("");
   const [serial, setSerial] = useState(0);
+  const [newQuesId, setNewQuesId] = useState("");
   const [createTest, { data, isError, isLoading, isSuccess, error, status }] =
     useCreateTestMutation();
+
+  const filterQues = ques?.filter((q) => q.id !== newQuesId);
 
   const handleAddQuestion = (e) => {
     e.preventDefault();
@@ -34,8 +34,9 @@ const UpdateTest = () => {
     const option5 = e.target.option5.value;
     const subject = e.target.subject.value;
     const answer = e.target.answer.value;
+
     setQues([
-      ...ques,
+      ...filterQues,
       {
         question,
         option1,
@@ -47,6 +48,7 @@ const UpdateTest = () => {
         answer,
       },
     ]);
+
     e.target.question.value = "";
     e.target.option1.value = "";
     e.target.option2.value = "";
@@ -126,6 +128,7 @@ const UpdateTest = () => {
   const handleSetQues = (q, index) => {
     setSelectedQuestionIndex(index);
     setQuestionForm({ ...q });
+    setNewQuesId(q?.id);
   };
 
   return (
@@ -176,7 +179,7 @@ const UpdateTest = () => {
                 name="question"
                 placeholder="Type your question here"
                 className="input input-bordered w-full"
-                value={questionForm?.question}
+                defaultValue={questionForm?.question}
                 required
               />
               <div className="grid grid-cols-1 md:grid-cols-2 justify-between gap-4 mt-4">
@@ -185,7 +188,7 @@ const UpdateTest = () => {
                   name="option1"
                   placeholder="Option 1"
                   className="input input-bordered input-sm w-full"
-                  value={questionForm?.option1}
+                  defaultValue={questionForm?.option1}
                   required
                 />
                 <input
@@ -193,7 +196,7 @@ const UpdateTest = () => {
                   name="option2"
                   placeholder="Option 2"
                   className="input input-bordered input-sm w-full"
-                  value={questionForm?.option2}
+                  defaultValue={questionForm?.option2}
                   required
                 />
                 <input
@@ -201,7 +204,7 @@ const UpdateTest = () => {
                   name="option3"
                   placeholder="Option 3"
                   className="input input-bordered input-sm w-full"
-                  value={questionForm?.option3}
+                  defaultValue={questionForm?.option3}
                   required
                 />
                 <input
@@ -209,7 +212,7 @@ const UpdateTest = () => {
                   name="option4"
                   placeholder="Option 4"
                   className="input input-bordered input-sm w-full"
-                  value={questionForm?.option4}
+                  defaultValue={questionForm?.option4}
                   required
                 />
                 <input
@@ -217,21 +220,21 @@ const UpdateTest = () => {
                   name="option5"
                   placeholder="Option 5 (Optional)"
                   className="input input-bordered input-sm w-full"
-                  value={questionForm?.option5}
+                  defaultValue={questionForm?.option5}
                 />
                 <input
                   type="text"
                   name="subject"
                   placeholder="Subject (Optional)"
                   className="input input-bordered input-sm w-full"
-                  value={questionForm?.subject}
+                  defaultValue={questionForm?.subject}
                 />
                 <input
                   type="text"
                   name="answer"
                   placeholder="Answer"
                   className="input input-bordered input-primary input-sm w-full"
-                  value={questionForm?.answer}
+                  defaultValue={questionForm?.answer}
                   required
                 />
                 <button type="submit" className="btn btn-sm w-full btn-primary">
