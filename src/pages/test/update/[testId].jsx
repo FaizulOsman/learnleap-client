@@ -112,7 +112,11 @@ const UpdateTest = () => {
     if (isSuccess) {
       toast.success("Test Created Successfully!");
     }
-  }, [isLoading, isSuccess, isError, error]);
+
+    setTime(getSingleTest?.data?.timeLimit);
+    setSubject(getSingleTest?.data?.subject);
+    setSerial(getSingleTest?.data?.serial);
+  }, [isLoading, isSuccess, isError, error, getSingleTest?.data]);
 
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(null);
   const [questionForm, setQuestionForm] = useState({
@@ -249,7 +253,7 @@ const UpdateTest = () => {
             {time > 0 && (
               <h4 className="text-lg font-semibold">Time: {time}</h4>
             )}
-            {subject.length > 1 && (
+            {subject?.length > 1 && (
               <h4 className="text-lg font-semibold">Subject: {subject}</h4>
             )}
             {serial > 0 && (
@@ -267,7 +271,7 @@ const UpdateTest = () => {
                 name="setTime"
                 className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
                 autoComplete="off"
-                value={getSingleTest?.data?.timeLimit}
+                defaultValue={getSingleTest?.data?.timeLimit}
                 required
               />
               <label
@@ -284,7 +288,7 @@ const UpdateTest = () => {
                 name="subject"
                 className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
                 autoComplete="off"
-                value={getSingleTest?.data?.subject}
+                defaultValue={getSingleTest?.data?.subject}
                 required
               />
               <label
@@ -301,7 +305,7 @@ const UpdateTest = () => {
                 name="serial"
                 className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
                 autoComplete="off"
-                value={getSingleTest?.data?.serial}
+                defaultValue={getSingleTest?.data?.serial}
                 required
               />
               <label
