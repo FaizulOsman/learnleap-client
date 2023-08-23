@@ -55,12 +55,12 @@ const HomePage = () => {
         <h1 className="text-3xl font-semibold text-center mb-8 mt-20 md:mt-28">
           Exams
         </h1>
-        <div className="w-10/12 md:w-8/12 mx-auto flex justify-between">
+        <div className="w-10/12 md:w-8/12 mx-auto flex flex-wrap justify-around gap-3">
           {examUniqueSubjects?.map((exam, index) => (
             <div
               key={index}
               onClick={() => setExamCategory(exam?.subject)}
-              className="bg-gray-200 px-2 py-1 rounded-md cursor-pointer hover:bg-gray-300 hover:text-white font-semibold"
+              className="min-w-[96px] text-center bg-gray-200 px-2 py-1 rounded-md cursor-pointer hover:bg-gray-300 hover:text-white font-semibold"
             >
               {exam?.subject}
             </div>
@@ -74,12 +74,12 @@ const HomePage = () => {
       </div>
       <div className="my-20">
         <h1 className="text-3xl font-semibold text-center my-8">Tests</h1>
-        <div className="w-10/12 md:w-8/12 mx-auto flex justify-between">
+        <div className="w-10/12 md:w-8/12 mx-auto flex flex-wrap justify-around gap-3">
           {testUniqueSubjects?.map((test, index) => (
             <div
               key={index}
               onClick={() => setTestCategory(test?.subject)}
-              className="bg-gray-200 px-2 py-1 rounded-md cursor-pointer hover:bg-gray-300 hover:text-white font-semibold"
+              className="min-w-[96px] text-center bg-gray-200 px-2 py-1 rounded-md cursor-pointer hover:bg-gray-300 hover:text-white font-semibold"
             >
               {test?.subject}
             </div>
