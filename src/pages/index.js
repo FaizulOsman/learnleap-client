@@ -60,7 +60,7 @@ const HomePage = () => {
             <div
               key={index}
               onClick={() => setExamCategory(exam?.subject)}
-              className={`relative min-w-[96px] text-center hover:bg-green-500 px-2 py-1 rounded-md cursor-pointer hover:text-white font-semibold ${
+              className={`relative mb-2 min-w-[96px] text-center hover:bg-green-500 px-2 py-1 rounded-md cursor-pointer hover:text-white font-semibold ${
                 examCategory === exam?.subject
                   ? "bg-green-500 text-white"
                   : " bg-gray-200"
@@ -88,7 +88,7 @@ const HomePage = () => {
             <div
               key={index}
               onClick={() => setTestCategory(test?.subject)}
-              className={`relative min-w-[96px] text-center hover:bg-blue-500 px-2 py-1 rounded-md cursor-pointer hover:text-white font-semibold ${
+              className={`relative mb-2 min-w-[96px] text-center hover:bg-blue-500 px-2 py-1 rounded-md cursor-pointer hover:text-white font-semibold ${
                 testCategory === test?.subject
                   ? "bg-blue-500 text-white"
                   : "bg-gray-200"

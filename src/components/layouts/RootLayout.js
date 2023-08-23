@@ -1,3 +1,4 @@
+import Footer from "../Shared/Footer";
 import Navbar from "../Shared/Navbar";
 
 const RootLayout = ({ children }) => {
@@ -5,6 +6,7 @@ const RootLayout = ({ children }) => {
     <>
       <Navbar />
       <div className="w-11/12 max-w-[1200px] mx-auto">{children}</div>
+      <Footer />
     </>
   );
 };
