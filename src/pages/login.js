@@ -39,7 +39,7 @@ const Login = () => {
 
   return (
     <>
-      <div className="py-5 relative flex flex-col justify-center min-h-screen overflow-hidden">
+      <div className="py-5 relative flex flex-col justify-center min-h-screen overflow-hidden mt-16">
         <div className="p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring-2 ring-purple-600 min-w-sm lg:w-[40vw]">
           <h1 className="text-3xl font-semibold text-center text-purple-700 underline">
             Sign in

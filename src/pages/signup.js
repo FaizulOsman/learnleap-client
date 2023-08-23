@@ -1,3 +1,4 @@
+import RootLayout from "@/components/layouts/RootLayout";
 import { useSignUpMutation } from "@/redux/user/userApi";
 import { saveToLocalStorage } from "@/utils/localstorage";
 import Link from "next/link";
@@ -54,7 +55,7 @@ const SignUp = () => {
   }, [isLoading, router, state, isSuccess, error, isError, data]);
 
   return (
-    <div className="py-5 relative flex flex-col justify-center min-h-screen overflow-hidden">
+    <div className="py-5 relative flex flex-col justify-center min-h-screen overflow-hidden mt-16">
       <div className="p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring-2 ring-purple-600 min-w-sm lg:w-[50vw]">
         <h1 className="text-3xl font-semibold text-center text-purple-700 underline">
           Sign Up
@@ -197,3 +198,7 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+SignUp.getLayout = function getLayout(page) {
+  return <RootLayout>{page}</RootLayout>;
+};
