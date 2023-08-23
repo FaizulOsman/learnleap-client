@@ -68,3 +68,19 @@ a {
 .custom-form input[type="text"]:focus-within + input::placeholder {
   border-color: var(--primary-color); /* Change this to your desired color */
 }
+
+/* ################### Scroll Bar ################### */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #b0c1f5;
+}
+::-webkit-scrollbar-thumb {
+  background: #4d71d0;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #08ac17;
+}
