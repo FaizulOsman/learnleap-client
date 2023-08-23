@@ -84,3 +84,34 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: #08ac17;
 }
+
+.turkishIceCreamBtn {
+  border-radius: 4px;
+  user-select: none;
+  transform-style: preserve-3d;
+}
+
+.turkishIceCreamBtn:before,
+.turkishIceCreamBtn:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  border-radius: 4px;
+  background-color: #02ac40;
+  transform: translateZ(-5px);
+}
+
+.turkishIceCreamBtn:after {
+  background-color: #017c2e;
+  transform: translateZ(-10px);
+}
+
+.turkishIceCreamBtnWrapper {
+  position: relative;
+  perspective: 400px;
+  align-self: flex-start;
+}
