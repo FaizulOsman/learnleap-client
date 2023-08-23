@@ -10,7 +10,6 @@ import {
   useGetSingleExamResultQuery,
 } from "@/redux/examResult/examResultApi";
 import { useGetMyProfileQuery } from "@/redux/user/userApi";
-import { getFromLocalStorage } from "@/utils/localstorage";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";

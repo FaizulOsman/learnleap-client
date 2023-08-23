@@ -67,7 +67,7 @@ const HomePage = () => {
               }`}
             >
               {examCategory === exam?.subject && (
-                <div class="absolute top-full left-[45%] triangle_down border-l-[7px] border-r-[7px] border-t-[10px] border-t-green-500 border-transparent"></div>
+                <div className="absolute top-full left-[45%] triangle_down border-l-[7px] border-r-[7px] border-t-[10px] border-t-green-500 border-transparent"></div>
               )}
               {exam?.subject}
             </div>
@@ -95,7 +95,7 @@ const HomePage = () => {
               }`}
             >
               {testCategory === test?.subject && (
-                <div class="absolute top-full left-[45%] triangle_down border-l-[7px] border-r-[7px] border-t-[10px] border-t-blue-500 border-transparent"></div>
+                <div className="absolute top-full left-[45%] triangle_down border-l-[7px] border-r-[7px] border-t-[10px] border-t-blue-500 border-transparent"></div>
               )}
               {test?.subject}
             </div>

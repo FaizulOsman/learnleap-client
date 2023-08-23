@@ -10,69 +10,52 @@ import { useRouter } from "next/router";
 import { toast } from "react-hot-toast";
 
 const Navbar = () => {
-  const [stickyNav, setStickyNav] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
-  const state = router.query.state;
+  const [stickyNav, setStickyNav] = useState(false);
   const [myProfile, setMyProfile] = useState({});
+  const router = useRouter();
+  const statePath = router.query.state?.path;
 
   const handleSignOut = () => {
-    if (state?.path) {
-      router.push(state?.path);
-    } else {
-      router.push("/login");
-    }
+    const path = statePath || "/login";
+    router.push(path);
 
     removeFromLocalStorage("user-info");
     removeFromLocalStorage("access-token");
     toast.success("Successfully Signed Out!");
+    setMyProfile({});
+  };
+
+  const fetchMyProfile = async () => {
+    const accessToken = getFromLocalStorage("access-token");
+    if (accessToken) {
+      try {
+        const url =
+          "https://test-yourself-server.vercel.app/api/v1/users/my-profile";
+        const options = {
+          headers: {
+            authorization: accessToken,
+          },
+        };
+        const res = await fetch(url, options);
+        const data = await res.json();
+        setMyProfile(data?.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+
+  const handleScroll = () => {
+    setStickyNav(window.pageYOffset > 5);
   };
 
   useEffect(() => {
-    const accessToken = getFromLocalStorage("access-token");
-    const headers = {
-      authorization: accessToken,
-    };
-
-    if (headers.authorization) {
-      // const url = "http://localhost:5000/api/v1/users/my-profile";
-      const url =
-        "https://test-yourself-server.vercel.app/api/v1/users/my-profile";
-      const options = {
-        method: "GET",
-        headers: headers,
-      };
-
-      async function fetchData() {
-        try {
-          const res = await fetch(url, options);
-          const data = await res.json();
-          setMyProfile(data?.data);
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        }
-      }
-      fetchData();
-    }
-
-    const stickyNavbar = () => {
-      if (typeof window !== "undefined") {
-        if (window.pageYOffset > 5) {
-          setStickyNav(true);
-        } else {
-          setStickyNav(false);
-        }
-      }
-    };
-
-    if (typeof window !== "undefined") {
-      window.addEventListener("scroll", stickyNavbar);
-    }
+    fetchMyProfile();
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      if (typeof window !== "undefined") {
-        window.removeEventListener("scroll", stickyNavbar);
-      }
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
