@@ -13,7 +13,9 @@ const FindTestBySubject = ({ test }) => {
       </div>
       <>
         <Link href={`/test/${test?.subject}/${test?.id}`}>
-          <button className="btn btn-sm btn-primary">Start Test</button>
+          <button className="btn btn-sm bg-blue-500 hover:bg-blue-600 text-white">
+            Start Test
+          </button>
         </Link>
       </>
     </div>

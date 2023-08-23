@@ -62,7 +62,9 @@ const FindExamBySubject = ({ exam }) => {
           </div>
         ) : (
           <Link href={`/exam/${exam?.subject}/${exam?.id}`}>
-            <button className="btn btn-sm btn-primary">Start Exam</button>
+            <button className="btn btn-sm bg-green-500 hover:bg-green-600 text-white">
+              Start Exam
+            </button>
           </Link>
         )}
       </>
