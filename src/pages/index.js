@@ -52,7 +52,9 @@ const HomePage = () => {
   return (
     <>
       <div>
-        <h1 className="text-3xl font-semibold text-center my-8">Exams</h1>
+        <h1 className="text-3xl font-semibold text-center mb-8 mt-20 md:mt-28">
+          Exams
+        </h1>
         <div className="w-10/12 md:w-8/12 mx-auto flex justify-between">
           {examUniqueSubjects?.map((exam, index) => (
             <div

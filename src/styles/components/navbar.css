@@ -17,8 +17,6 @@
   color: black !important;
 }
 .navbar-wrapper__body {
-  display: flex;
-  background: linear-gradient(60.24deg, #08ac17 -21.65%, #4d71d0 93.65%);
   box-sizing: border-box;
   flex-direction: row;
   display: flex;
@@ -132,7 +130,6 @@
   fill: currentcolor;
   flex-shrink: 0;
   transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  margin-right: 18px;
   font-size: 24px;
 }
 

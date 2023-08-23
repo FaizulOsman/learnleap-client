@@ -1,11 +1,9 @@
-import Nav from "../Shared/Nav";
 import Navbar from "../Shared/Navbar";
 
 const RootLayout = ({ children }) => {
   return (
     <>
       <Navbar />
-      <Nav />
       <div className="w-11/12 max-w-[1200px] mx-auto">{children}</div>
     </>
   );
