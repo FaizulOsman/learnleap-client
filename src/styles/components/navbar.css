@@ -53,7 +53,6 @@
 }
 .sticky-menu {
   background-color: transparent !important;
-  border: 1px solid rgb(212, 223, 255) !important;
 }
 .right-menus__menu {
   height: 32px;
@@ -119,9 +118,8 @@
 }
 .btn-text {
   margin: 0px;
-  color: white;
   font-weight: 500;
-  font-size: 1.25rem;
+  font-size: 1rem;
   line-height: 1.6;
   letter-spacing: 0.0075em;
   text-transform: none;

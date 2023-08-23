@@ -70,50 +70,43 @@ const Navbar = () => {
             </Link>
           </li>
           <li className={`left-menus__menu ${stickyNav ? "sticky-menu" : ""}`}>
-            <Link href="https://pos.gromoinsure.in/">Insurance-POS</Link>
+            <Link href="/exam">Exam</Link>
           </li>
           <li className={`left-menus__menu ${stickyNav ? "sticky-menu" : ""}`}>
-            <Link href="/careers">Careers</Link>
-          </li>
-          <li className={`left-menus__menu ${stickyNav ? "sticky-menu" : ""}`}>
-            <Link href="/about-us">About us</Link>
-          </li>
-          <li className={`left-menus__menu ${stickyNav ? "sticky-menu" : ""}`}>
-            <Link href="/blog">Blogs</Link>
+            <Link href="/test">Test</Link>
           </li>
         </div>
         {/* right side menu for large devices  */}
         <div className="body__right-menus hidden md:flex md:items-center">
-          <li className="download">Download</li>
-          <li className={`right-menus__menu ${stickyNav ? "sticky-menu" : ""}`}>
-            <Link href="https://xjw5l.app.link/DGOMw5xOpab">
-              {/* <img
-                alt="appStoreIcon"
-                className="appStoreIcon"
-                src="https://www.gromo.in/_next/static/media/PlayStoreIconOnly.0c229579.svg"
-                decoding="async"
-                data-nimg="1"
-                loading="lazy"
-              /> */}
-              PS
+          <li className="download flex items-center  rounded-lg bg-blue-700">
+            <Link href="/login">
+              <h6 className="btn-text text-white px-2">Login/SignUp</h6>
+            </Link>
+          </li>
+          <li className="download flex items-center border-2 rounded-lg">
+            <Link className="btn-link" href="/dashboard">
+              <h6
+                className={`btn-text px-2 ${
+                  stickyNav ? "text-black" : "text-white"
+                }`}
+              >
+                Dashboard
+              </h6>
             </Link>
           </li>
         </div>
         {/* left side menu for large devices  */}
-        <div className="md:hidden flex items-center">
-          <button
-            className="small-device__download-btn"
-            tabindex="0"
-            type="button"
-          >
-            <Link
-              className="btn-link"
-              href="https://xjw5l.app.link/DGOMw5xOpab"
-            >
-              <h6 className="btn-text">Download</h6>
+        <div className="md:hidden flex items-center gap-4">
+          <li className="flex items-center  rounded-lg bg-blue-700 px-3 py-[2px]">
+            <Link href="/login">
+              <h6 className="btn-text text-white">Login/SignUp</h6>
             </Link>
-            <span className="MuiTouchRipple-root css-w0pj6f"></span>
-          </button>
+          </li>
+          <li className="flex items-center  rounded-lg bg-blue-700 px-3 py-[2px]">
+            <Link href="/dashboard">
+              <h6 className="btn-text text-white">Dashboard</h6>
+            </Link>
+          </li>
           <svg
             onClick={() => setIsOpen(true)}
             className="small-device__sidebar-toggle"
