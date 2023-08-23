@@ -60,8 +60,15 @@ const HomePage = () => {
             <div
               key={index}
               onClick={() => setExamCategory(exam?.subject)}
-              className="min-w-[96px] text-center bg-gray-200 px-2 py-1 rounded-md cursor-pointer hover:bg-gray-300 hover:text-white font-semibold"
+              className={`relative min-w-[96px] text-center hover:bg-green-500 px-2 py-1 rounded-md cursor-pointer hover:text-white font-semibold ${
+                examCategory === exam?.subject
+                  ? "bg-green-500 text-white"
+                  : " bg-gray-200"
+              }`}
             >
+              {examCategory === exam?.subject && (
+                <div class="absolute top-full left-[45%] triangle_down border-l-[7px] border-r-[7px] border-t-[10px] border-t-green-500 border-transparent"></div>
+              )}
               {exam?.subject}
             </div>
           ))}
@@ -81,8 +88,15 @@ const HomePage = () => {
             <div
               key={index}
               onClick={() => setTestCategory(test?.subject)}
-              className="min-w-[96px] text-center bg-gray-200 px-2 py-1 rounded-md cursor-pointer hover:bg-gray-300 hover:text-white font-semibold"
+              className={`relative min-w-[96px] text-center hover:bg-blue-500 px-2 py-1 rounded-md cursor-pointer hover:text-white font-semibold ${
+                testCategory === test?.subject
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200"
+              }`}
             >
+              {testCategory === test?.subject && (
+                <div class="absolute top-full left-[45%] triangle_down border-l-[7px] border-r-[7px] border-t-[10px] border-t-blue-500 border-transparent"></div>
+              )}
               {test?.subject}
             </div>
           ))}
