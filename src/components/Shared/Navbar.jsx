@@ -78,9 +78,9 @@ const Navbar = () => {
 
   return (
     <div
-      className={`border-b-1 border-solid border-blue-200 z-999 fixed w-full top-0 ${
+      className={`aaa border-b-1 border-solid border-blue-200 z-999 fixed w-full top-0 ${
         stickyNav
-          ? "sticky shadow-md border-b-0"
+          ? "sticky shadow-md border-b-0 sticky__body"
           : "bg-gradient-to-r from-green-500 to-blue-500"
       }`}
     >

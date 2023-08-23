@@ -12,8 +12,8 @@
   top: 0;
 }
 .sticky__body {
-  background: rgb(255, 253, 253) !important;
-  transition: background 1s ease 0s;
+  /* background: rgb(255, 253, 253) !important; */
+  transition: all 1s ease-in-out 0s;
   color: black !important;
 }
 .navbar-wrapper__body {
@@ -26,7 +26,7 @@
   align-items: center;
   height: 100%;
   color: white;
-  transition: background 1s ease 0s;
+  transition: all 1s ease-in-out 0s;
 }
 .sticky-menu a {
   color: black !important;

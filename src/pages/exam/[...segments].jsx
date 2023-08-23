@@ -120,7 +120,7 @@ const SingleExam = () => {
   return (
     <div>
       <>
-        <div className="w-11/12 md:w-8/12 mx-auto my-14">
+        <div className="w-11/12 md:w-8/12 mx-auto mb-14 mt-20 md:mt-28">
           <h2 className="text-3xl font-semibold text-center">
             {segments?.[0]} Exam {getSingleExam?.data?.serial}
           </h2>

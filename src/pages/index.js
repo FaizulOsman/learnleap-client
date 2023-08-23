@@ -52,7 +52,7 @@ const HomePage = () => {
   return (
     <>
       <div>
-        <h1 className="text-3xl font-semibold text-center mb-8 mt-20 md:mt-28">
+        <h1 className="text-3xl font-bold text-center mb-8 mt-20 md:mt-28 text-green-600">
           Exams
         </h1>
         <div className="w-10/12 md:w-8/12 mx-auto flex flex-wrap justify-around gap-3">
@@ -73,7 +73,9 @@ const HomePage = () => {
         </div>
       </div>
       <div className="my-20">
-        <h1 className="text-3xl font-semibold text-center my-8">Tests</h1>
+        <h1 className="text-3xl font-bold text-center my-8 text-blue-600">
+          Tests
+        </h1>
         <div className="w-10/12 md:w-8/12 mx-auto flex flex-wrap justify-around gap-3">
           {testUniqueSubjects?.map((test, index) => (
             <div
