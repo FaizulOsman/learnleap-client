@@ -52,13 +52,13 @@ const TurkishIceCreamButton = () => {
     <div className="flex justify-center items-center">
       <div className="turkishIceCreamBtnWrapper">
         <button
-          className="turkishIceCreamBtn bg-green-500 text-white px-2 py-[2px] block border-0"
+          className="turkishIceCreamBtn bg-green-500 text-white px-4 py-[4px] block border-0"
           ref={buttonRef}
           style={buttonStyles}
           onKeyDown={handleButtonKeyDown}
           onMouseMove={handleMouseMove}
         >
-          Start Exam
+          Submit Exam
         </button>
       </div>
     </div>

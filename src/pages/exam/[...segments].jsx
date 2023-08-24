@@ -148,7 +148,7 @@ const SingleExam = () => {
           <div className="text-center mt-4">
             <label
               htmlFor="my-modal-4"
-              className="btn btn-primary modal-button"
+              className="btn bg-green-500 text-white hover:bg-green-600 modal-button"
               onClick={() => handleSubmitExam()}
               ref={submitButtonRef}
             >
