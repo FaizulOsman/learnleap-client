@@ -1,4 +1,4 @@
-import AdminLayout from "@/components/layouts/AdminLayout";
+import AdminLayout from "@/layouts/AdminLayout";
 
 const Analytics = () => {
   return <div className="title"> Analytics</div>;

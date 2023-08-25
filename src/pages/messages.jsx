@@ -1,4 +1,4 @@
-import AdminLayout from "@/components/layouts/AdminLayout";
+import AdminLayout from "@/layouts/AdminLayout";
 
 const Messages = () => {
   return <div className="title">Messages</div>;

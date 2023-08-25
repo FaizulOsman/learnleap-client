@@ -1,4 +1,4 @@
-import AdminLayout from "@/components/layouts/AdminLayout";
+import AdminLayout from "@/layouts/AdminLayout";
 import { useCreateTestMutation } from "@/redux/test/testApi";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";

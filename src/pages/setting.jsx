@@ -1,4 +1,4 @@
-import AdminLayout from "@/components/layouts/AdminLayout";
+import AdminLayout from "@/layouts/AdminLayout";
 
 const Setting = () => {
   return <div className="title">Setting</div>;

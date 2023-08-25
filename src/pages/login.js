@@ -1,4 +1,4 @@
-import RootLayout from "@/components/layouts/RootLayout";
+import RootLayout from "@/layouts/RootLayout";
 import { useLoginMutation } from "@/redux/user/userApi";
 import { saveToLocalStorage } from "@/utils/localstorage";
 import { signIn } from "next-auth/react";

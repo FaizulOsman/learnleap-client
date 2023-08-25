@@ -1,7 +1,7 @@
 import Loader from "@/components/UI/Loader";
 import Stopwatch from "@/components/UI/Stopwatch";
 import TestSingleQues from "@/components/UI/TestSingleQues";
-import RootLayout from "@/components/layouts/RootLayout";
+import RootLayout from "@/layouts/RootLayout";
 import { useGetSingleTestQuery } from "@/redux/test/testApi";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";

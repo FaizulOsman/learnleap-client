@@ -1,5 +1,5 @@
 import ExamAnswerSingleQues from "@/components/UI/ExamAnswerSingleQues";
-import RootLayout from "@/components/layouts/RootLayout";
+import RootLayout from "@/layouts/RootLayout";
 import { useGetSingleExamQuery } from "@/redux/exam/examApi";
 import { useGetSingleExamResultQuery } from "@/redux/examResult/examResultApi";
 import { useGetMyProfileQuery } from "@/redux/user/userApi";

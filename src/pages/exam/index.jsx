@@ -1,6 +1,6 @@
 import FindExamBySubject from "@/components/UI/FindExamBySubject";
 import Loader from "@/components/UI/Loader";
-import RootLayout from "@/components/layouts/RootLayout";
+import RootLayout from "@/layouts/RootLayout";
 import { useGetAllExamQuery } from "@/redux/exam/examApi";
 import React, { useState } from "react";
 

@@ -1,6 +1,6 @@
 /* eslint-disable react/no-children-prop */
 import React from "react";
-import SideBar from "../Sidebar/SideBar";
+import SideBar from "../components/Sidebar/SideBar";
 
 const AdminLayout = ({ children }) => {
   return (

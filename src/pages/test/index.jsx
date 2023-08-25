@@ -1,6 +1,6 @@
 import FindTestBySubject from "@/components/UI/FindTestBySubject";
 import Loader from "@/components/UI/Loader";
-import RootLayout from "@/components/layouts/RootLayout";
+import RootLayout from "@/layouts/RootLayout";
 import { useGetAllTestQuery } from "@/redux/test/testApi";
 import React, { useState } from "react";
 

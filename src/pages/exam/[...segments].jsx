@@ -1,7 +1,7 @@
 import ExamSingleQues from "@/components/UI/ExamSingleQues";
 import Loader from "@/components/UI/Loader";
 import Stopwatch from "@/components/UI/Stopwatch";
-import RootLayout from "@/components/layouts/RootLayout";
+import RootLayout from "@/layouts/RootLayout";
 import {
   useAddResultMutation,
   useGetSingleExamQuery,
