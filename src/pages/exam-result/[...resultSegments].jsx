@@ -2,6 +2,7 @@ import ExamAnswerSingleQues from "@/components/UI/ExamAnswerSingleQues";
 import RootLayout from "@/components/layouts/RootLayout";
 import { useGetSingleExamQuery } from "@/redux/exam/examApi";
 import { useGetSingleExamResultQuery } from "@/redux/examResult/examResultApi";
+import { useGetMyProfileQuery } from "@/redux/user/userApi";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -30,27 +31,19 @@ const SingleExam = () => {
     headers,
   });
 
+  const { data: getMyProfile } = useGetMyProfileQuery({ headers });
+
   if (router && getSingleExam?.data?.timeLimit > 0) {
     if (isRunning === false) {
       setIsRunning(true);
     }
   }
 
-  // const [results, setResults] = useState([]);
   const allResults = getSingleExam?.data?.results;
   let results = [];
   if (allResults) {
     results = [...allResults].sort((a, b) => b.marks - a.marks);
-    // const serial =
-    //   sortedResults.findIndex((item) => item === allResults[0]) + 1;
-
-    // const newArr = sortedResults.map((item, index) => ({
-    //   ...item,
-    //   serial: index === 0 ? serial : index + 1,
-    // }));
-    //   setResults(newArr);
   }
-  console.log(results);
 
   useEffect(() => {
     if (getSingleExamResult?.data) {
@@ -104,7 +97,12 @@ const SingleExam = () => {
             <h3 className="text-xl font-bold text-center mb-4">All Results</h3>
             <div className="flex flex-col gap-4 ">
               {results?.map((result, index) => (
-                <div key={index} className="border rounded-md p-2 shadow-md">
+                <div
+                  key={index}
+                  className={` border rounded-md p-2 shadow-md ${
+                    getMyProfile?.data?.email === result.email && "bg-gray-100"
+                  }`}
+                >
                   <h4
                     className={`text-lg font-semibold ${
                       index < 3 ? "text-green-500" : ""
