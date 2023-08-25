@@ -14,6 +14,7 @@ const SingleExam = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [eyeShow, setEyeShow] = useState(false);
   const [accessToken, setAccessToken] = useState("");
+  const [ques, setQues] = useState([]);
 
   useEffect(() => {
     const acc = localStorage.getItem("access-token");
@@ -35,7 +36,21 @@ const SingleExam = () => {
     }
   }
 
-  const [ques, setQues] = useState([]);
+  // const [results, setResults] = useState([]);
+  const allResults = getSingleExam?.data?.results;
+  let results = [];
+  if (allResults) {
+    results = [...allResults].sort((a, b) => b.marks - a.marks);
+    // const serial =
+    //   sortedResults.findIndex((item) => item === allResults[0]) + 1;
+
+    // const newArr = sortedResults.map((item, index) => ({
+    //   ...item,
+    //   serial: index === 0 ? serial : index + 1,
+    // }));
+    //   setResults(newArr);
+  }
+  console.log(results);
 
   useEffect(() => {
     if (getSingleExamResult?.data) {
@@ -88,11 +103,25 @@ const SingleExam = () => {
           <div className="mt-16">
             <h3 className="text-xl font-bold text-center mb-4">All Results</h3>
             <div className="flex flex-col gap-4 ">
-              {getSingleExam?.data?.results?.map((result, index) => (
+              {results?.map((result, index) => (
                 <div key={index} className="border rounded-md p-2 shadow-md">
-                  <h4 className="text-lg font-semibold">Name: {result.name}</h4>
-                  <h4 className="text-lg">Marks: {result.marks}</h4>
-                  {/* <h4 className="text-lg">Ranking: {index + 1}</h4> */}
+                  <h4
+                    className={`text-lg font-semibold ${
+                      index < 3 ? "text-green-500" : ""
+                    }`}
+                  >
+                    Name: {result.name}
+                  </h4>
+                  <h4
+                    className={`text-lg ${index < 3 ? "text-green-500" : ""}`}
+                  >
+                    Marks: {result.marks}
+                  </h4>
+                  <h4
+                    className={`text-lg ${index < 3 ? "text-green-500" : ""}`}
+                  >
+                    Ranking: {index + 1}
+                  </h4>
                 </div>
               ))}
             </div>
