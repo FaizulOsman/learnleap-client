@@ -8,8 +8,8 @@ const Footer = () => {
         <div>
           <Image
             alt="Logo"
-            className="w-10 rounded-lg"
-            src="https://i.ibb.co/cwK91tg/logo-bg.png"
+            className="w-14 rounded-lg"
+            src="https://i.ibb.co/5MHLgQW/images-removebg-preview.png"
             decoding="async"
             loading="lazy"
             width={300}
