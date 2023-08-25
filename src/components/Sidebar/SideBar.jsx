@@ -1,110 +1,136 @@
 // import { NavLink } from "react-router-dom";
-import { FaBars, FaHome, FaLock, FaMoneyBill, FaUser } from "react-icons/fa";
+import {
+  FaBars,
+  FaHome,
+  FaLock,
+  FaMoneyBill,
+  FaUser,
+  FaUsers,
+  FaChartLine,
+} from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
 import { BiAnalyse, BiSearch } from "react-icons/bi";
 import { BiCog } from "react-icons/bi";
 import { AiFillHeart, AiTwotoneFileExclamation } from "react-icons/ai";
-import { BsCartCheck } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { removeFromLocalStorage } from "@/utils/localstorage";
+import {
+  getFromLocalStorage,
+  removeFromLocalStorage,
+} from "@/utils/localstorage";
 
 const routes = [
   {
-    path: "/",
+    path: "/dashboard",
     name: "Dashboard",
     icon: <FaHome />,
+    permission1: "user",
+    permission2: "admin",
   },
   {
-    path: "/users",
+    path: "/dashboard/users",
     name: "Users",
+    icon: <FaUsers />,
+    permission1: "",
+    permission2: "admin",
+  },
+  {
+    path: "/dashboard/profile",
+    name: "Profile",
     icon: <FaUser />,
+    permission1: "user",
+    permission2: "admin",
   },
   {
-    path: "/messages",
-    name: "Messages",
-    icon: <MdMessage />,
+    path: "/dashboard/results",
+    name: "Results",
+    icon: <FaChartLine />,
+    permission1: "user",
+    permission2: "",
   },
   {
-    path: "/analytics",
-    name: "Analytics",
-    icon: <BiAnalyse />,
-  },
-  {
-    path: "/test",
+    path: "/dashboard/test",
     name: "Test",
     icon: <AiTwotoneFileExclamation />,
+    permission1: "",
+    permission2: "admin",
     subRoutes: [
       {
-        path: "/test/create-test",
+        path: "/dashboard/test/create-test",
         name: "Create Test",
         icon: <FaUser />,
       },
       {
-        path: "/test/all-test",
+        path: "/dashboard/test/all-test",
         name: "All Test",
         icon: <AiTwotoneFileExclamation />,
       },
       {
-        path: "/settings/billing",
+        path: "/dashboard/settings/billing",
         name: "Billing",
         icon: <FaMoneyBill />,
       },
     ],
   },
   {
-    path: "/exam",
+    path: "/dashboard/exam",
     name: "Exam",
     icon: <AiTwotoneFileExclamation />,
+    permission1: "",
+    permission2: "admin",
     subRoutes: [
       {
-        path: "/exam/create-exam",
+        path: "/dashboard/exam/create-exam",
         name: "Create Exam",
         icon: <FaUser />,
       },
       {
-        path: "/exam/all-exam",
+        path: "/dashboard/exam/all-exam",
         name: "All Exam",
         icon: <AiTwotoneFileExclamation />,
       },
       {
-        path: "/settings/billing",
+        path: "/dashboard/settings/billing",
         name: "Billing",
         icon: <FaMoneyBill />,
       },
     ],
   },
   {
-    path: "/settings",
+    path: "/dashboard/settings",
     name: "Settings",
     icon: <BiCog />,
     exact: true,
+    permission1: "",
+    permission2: "admin",
     subRoutes: [
       {
-        path: "/settings/profile",
+        path: "/dashboard/settings/profile",
         name: "Profile ",
         icon: <FaUser />,
       },
       {
-        path: "/settings/2fa",
+        path: "/dashboard/settings/2fa",
         name: "2FA",
         icon: <FaLock />,
       },
       {
-        path: "/settings/billing",
+        path: "/dashboard/settings/billing",
         name: "Billing",
         icon: <FaMoneyBill />,
       },
     ],
   },
   {
-    path: "/saved",
+    path: "/dashboard/saved",
     name: "Saved",
     icon: <AiFillHeart />,
+    permission1: "user",
+    permission2: "admin",
   },
 ];
 
@@ -151,6 +177,33 @@ const SideBar = ({ children }) => {
     removeFromLocalStorage("access-token");
   };
 
+  const [myProfile, setMyProfile] = useState({});
+  const fetchMyProfile = async () => {
+    const accessToken = getFromLocalStorage("access-token");
+    if (accessToken) {
+      try {
+        const url =
+          "https://test-yourself-server.vercel.app/api/v1/users/my-profile";
+        const options = {
+          headers: {
+            authorization: accessToken,
+          },
+        };
+        const res = await fetch(url, options);
+        const data = await res.json();
+        setMyProfile(data?.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchMyProfile();
+  }, []);
+
+  console.log(myProfile);
+
   return (
     <>
       <div className="flex">
@@ -165,7 +218,7 @@ const SideBar = ({ children }) => {
           }}
           className={`bg-[#00073d] text-white min-h-[100vh] overflow-y-auto`}
         >
-          <div className="flex items-center justify-between py-[15px] px-[10px]">
+          <div className="flex items-center justify-between py-2">
             <AnimatePresence>
               {isOpen && (
                 <motion.h1
@@ -173,18 +226,25 @@ const SideBar = ({ children }) => {
                   initial="hidden"
                   animate="show"
                   exit="hidden"
-                  className="text-lg leading-[0px]"
+                  className="text-lg leading-[0px] pl-2"
                 >
-                  DoSomeCoding
+                  QuizWizPro
                 </motion.h1>
               )}
             </AnimatePresence>
-
-            <div className="w-[30px] cursor-pointer">
-              <FaBars onClick={toggle} />
+            <div className="cursor-pointer">
+              <Image
+                alt="Logo"
+                className="w-12"
+                src="https://i.ibb.co/5MHLgQW/images-removebg-preview.png"
+                decoding="async"
+                loading="lazy"
+                width={300}
+                height={300}
+              />
             </div>
           </div>
-          <div className="flex items-center my-[10px] mx-0 h-7 p-2">
+          <div className="flex items-center my-[10px] mx-0 h-4 p-2">
             <div className="search_icon">
               <BiSearch />
             </div>
@@ -205,38 +265,43 @@ const SideBar = ({ children }) => {
           <section className="mt-4 flex flex-col gap-[5px]">
             {routes.map((route, index) => (
               <div key={index}>
-                {route.subRoutes ? (
-                  <SidebarMenu
-                    setIsOpen={setIsOpen}
-                    route={route}
-                    showAnimation={showAnimation}
-                    isOpen={isOpen}
-                  />
-                ) : (
-                  <Link href={route.path} passHref>
-                    <div
-                      className={`flex items-center text-white gap-[10px] p-2 border-r-4 border-transparent border-solid transition duration-200 ease-in-out cubic-bezier(0.6, -0.28, 0.735, 0.045) hover:bg-[#2d3359] hover:border-r-4 hover:border-white hover:transition-[0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045)] ${
-                        route.path === router?.asPath
-                          ? "border-r-4 border-white bg-[#2d3359]"
-                          : ""
-                      }`}
-                    >
-                      <div className="icon">{route.icon}</div>
-                      <AnimatePresence>
-                        {isOpen && (
-                          <motion.div
-                            variants={showAnimation}
-                            initial="hidden"
-                            animate="show"
-                            exit="hidden"
-                            className="whitespace-nowrap text-[15px]"
-                          >
-                            {route.name}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  </Link>
+                {(route?.permission1 === myProfile?.role ||
+                  route?.permission2 === myProfile?.role) && (
+                  <>
+                    {route.subRoutes ? (
+                      <SidebarMenu
+                        setIsOpen={setIsOpen}
+                        route={route}
+                        showAnimation={showAnimation}
+                        isOpen={isOpen}
+                      />
+                    ) : (
+                      <Link href={route.path} passHref>
+                        <div
+                          className={`flex items-center text-white gap-[10px] p-2 border-r-4 border-transparent border-solid transition duration-200 ease-in-out cubic-bezier(0.6, -0.28, 0.735, 0.045) hover:bg-[#2d3359] hover:border-r-4 hover:border-white hover:transition-[0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045)] ${
+                            route.path === router?.asPath
+                              ? "border-r-4 border-white bg-[#2d3359]"
+                              : ""
+                          }`}
+                        >
+                          <div className="icon">{route.icon}</div>
+                          <AnimatePresence>
+                            {isOpen && (
+                              <motion.div
+                                variants={showAnimation}
+                                initial="hidden"
+                                animate="show"
+                                exit="hidden"
+                                className="whitespace-nowrap text-[15px]"
+                              >
+                                {route.name}
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      </Link>
+                    )}
+                  </>
                 )}
               </div>
             ))}
@@ -244,7 +309,7 @@ const SideBar = ({ children }) => {
         </motion.div>
 
         <main className="flex-1">
-          <div className="flex items-center justify-between px-10 bg-[#00073d] text-white h-12 border-l">
+          <div className="flex items-center justify-between px-6 bg-[#00073d] text-white h-12 border-l">
             <div className="w-[30px] cursor-pointer">
               <FaBars onClick={toggle} />
             </div>
@@ -260,13 +325,6 @@ const SideBar = ({ children }) => {
               >
                 Logout
               </Link>
-              <Image
-                src="https://i.ibb.co/nrtwzQd/avatar-boy.webp"
-                alt="Avatar"
-                className="rounded-full border-2 p-[2px] cursor-pointer hover:border-blue-500"
-                width={35}
-                height={35}
-              />
             </div>
           </div>
           {children}
