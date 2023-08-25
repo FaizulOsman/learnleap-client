@@ -8,6 +8,7 @@ import {
   FaUsers,
   FaChartLine,
 } from "react-icons/fa";
+import { HiOutlineHome, HiOutlineLogout } from "react-icons/hi";
 import { MdMessage } from "react-icons/md";
 import { BiAnalyse, BiSearch } from "react-icons/bi";
 import { BiCog } from "react-icons/bi";
@@ -313,23 +314,31 @@ const SideBar = ({ children }) => {
             <div className="w-[30px] cursor-pointer">
               <FaBars onClick={toggle} />
             </div>
-            <div className="flex items-center justify-end gap-5">
-              <Link href="/" className="hover:underline hover:text-blue-500">
-                Home
+            <div className="flex items-center justify-end">
+              <Link
+                href="/"
+                className="hover:underline hover:text-blue-500 px-3 flex items-center gap-1"
+              >
+                <HiOutlineHome /> Home
               </Link>
 
               <Link
                 onClick={() => handleLogOut()}
                 href="/login"
-                className="hover:underline hover:text-blue-500"
+                className="hover:underline hover:text-blue-500 flex items-center gap-1 border-l pl-3"
               >
-                Logout
+                <HiOutlineLogout /> Logout
               </Link>
             </div>
           </div>
           {children}
         </main>
       </div>
+      <footer className="footer footer-center p-4 bg-[#00073d] text-white">
+        <div>
+          <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+        </div>
+      </footer>
     </>
   );
 };
