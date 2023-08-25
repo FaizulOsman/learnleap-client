@@ -336,7 +336,7 @@ const SideBar = ({ children }) => {
       </div>
       <footer className="footer footer-center p-4 bg-[#00073d] text-white">
         <div>
-          <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+          <p>Copyright © 2023 - All right reserved by QuizWizPro Ltd.</p>
         </div>
       </footer>
     </>
