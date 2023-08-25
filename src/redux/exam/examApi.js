@@ -27,6 +27,15 @@ const examApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["test-yourself"],
     }),
+    updateExam: builder.mutation({
+      query: ({ id, data, headers }) => ({
+        url: `/exam/${id}`,
+        method: "PATCH",
+        body: data,
+        headers: headers,
+      }),
+      invalidatesTags: ["test-yourself"],
+    }),
     addResult: builder.mutation({
       query: ({ options, headers }) => ({
         url: `/exam/add-result/${options.id}`,
@@ -44,5 +53,6 @@ export const {
   useGetAllExamQuery,
   useGetSingleExamQuery,
   useDeleteExamMutation,
+  useUpdateExamMutation,
   useAddResultMutation,
 } = examApi;

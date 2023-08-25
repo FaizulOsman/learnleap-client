@@ -1,17 +1,17 @@
 import AdminLayout from "@/components/layouts/AdminLayout";
 import {
-  useGetSingleTestQuery,
-  useUpdateTestMutation,
-} from "@/redux/test/testApi";
+  useGetSingleExamQuery,
+  useUpdateExamMutation,
+} from "@/redux/exam/examApi";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { FaRegEdit } from "react-icons/fa";
 
-const UpdateTest = () => {
+const UpdateExam = () => {
   const router = useRouter();
-  const id = router.query.testId;
-  const { data: getSingleTest } = useGetSingleTestQuery(id);
+  const id = router.query.examId;
+  const { data: getSingleExam } = useGetSingleExamQuery(id);
 
   const [ques, setQues] = useState([]);
   const [time, setTime] = useState(0);
@@ -81,36 +81,36 @@ const UpdateTest = () => {
     const acc = localStorage.getItem("access-token");
     setAccessToken(acc);
 
-    if (getSingleTest?.data?.questions) {
-      setQues(getSingleTest?.data?.questions);
+    if (getSingleExam?.data?.questions) {
+      setQues(getSingleExam?.data?.questions);
     }
-  }, [getSingleTest?.data?.questions]);
+  }, [getSingleExam?.data?.questions]);
 
   const headers = {
     authorization: accessToken,
   };
 
-  const [updateTest, { isLoading, isSuccess, isError, error }] =
-    useUpdateTestMutation();
+  const [updateExam, { isLoading, isSuccess, isError, error }] =
+    useUpdateExamMutation();
 
-  const handleUpdateTest = () => {
+  const handleUpdateExam = () => {
     const data = {
       questions: ques,
       timeLimit: time,
       subject: subject,
       serial: serial,
     };
-    updateTest({ id, data, headers });
+    updateExam({ id, data, headers });
     console.log(data);
     // if (ques.length > 0 && subject.length > 1 && serial > 0) {
-    //   createTest({ data, headers });
-    //   // Clear all data after creating the test
+    //   createExam({ data, headers });
+    //   // Clear all data after creating the exam
     //   setQues([]);
     //   setTime(0);
     //   setSubject("");
     //   setSerial(0);
     // } else {
-    //   toast.error("Test Creation Failed!");
+    //   toast.error("Exam Creation Failed!");
     // }
   };
 
@@ -132,16 +132,16 @@ const UpdateTest = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error(`${error?.data?.message}` || "Test Creation Failed!");
+      toast.error(`${error?.data?.message}` || "Exam Creation Failed!");
     }
 
     if (isSuccess) {
-      toast.success("Test Updated Successfully!");
+      toast.success("Exam Updated Successfully!");
     }
 
-    setTime(getSingleTest?.data?.timeLimit);
-    setSubject(getSingleTest?.data?.subject);
-    setSerial(getSingleTest?.data?.serial);
+    setTime(getSingleExam?.data?.timeLimit);
+    setSubject(getSingleExam?.data?.subject);
+    setSerial(getSingleExam?.data?.serial);
     setInitialQuestion(questionForm?.question);
     setInitialOption1(questionForm?.option1);
     setInitialOption2(questionForm?.option2);
@@ -150,13 +150,13 @@ const UpdateTest = () => {
     setInitialOption5(questionForm?.option5);
     setInitialSubject(questionForm?.subject);
     setInitialAnswer(questionForm?.answer);
-  }, [isLoading, isSuccess, isError, error, getSingleTest?.data, questionForm]);
+  }, [isLoading, isSuccess, isError, error, getSingleExam?.data, questionForm]);
 
   return (
     <div>
       <div className="w-11/12 md:w-8/12 mx-auto my-14">
         <h2 className="text-3xl font-semibold text-center">
-          Update Test {getSingleTest?.data?.serial}
+          Update Exam {getSingleExam?.data?.serial}
         </h2>
       </div>
       <div className="my-5">
@@ -295,7 +295,7 @@ const UpdateTest = () => {
                 name="setTime"
                 className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
                 autoComplete="off"
-                defaultValue={getSingleTest?.data?.timeLimit}
+                defaultValue={getSingleExam?.data?.timeLimit}
                 required
               />
               <label
@@ -312,7 +312,7 @@ const UpdateTest = () => {
                 name="subject"
                 className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
                 autoComplete="off"
-                defaultValue={getSingleTest?.data?.subject}
+                defaultValue={getSingleExam?.data?.subject}
                 required
               />
               <label
@@ -329,7 +329,7 @@ const UpdateTest = () => {
                 name="serial"
                 className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
                 autoComplete="off"
-                defaultValue={getSingleTest?.data?.serial}
+                defaultValue={getSingleExam?.data?.serial}
                 required
               />
               <label
@@ -346,10 +346,10 @@ const UpdateTest = () => {
         </div>
         <div className="w-96 mx-auto">
           <button
-            onClick={() => handleUpdateTest()}
+            onClick={() => handleUpdateExam()}
             className="btn btn-sm w-full btn-primary mt-5"
           >
-            Update Test
+            Update Exam
           </button>
         </div>
       </div>
@@ -357,8 +357,8 @@ const UpdateTest = () => {
   );
 };
 
-export default UpdateTest;
+export default UpdateExam;
 
-UpdateTest.getLayout = function getLayout(page) {
+UpdateExam.getLayout = function getLayout(page) {
   return <AdminLayout>{page}</AdminLayout>;
 };
