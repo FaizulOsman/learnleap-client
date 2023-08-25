@@ -34,18 +34,36 @@
 .left-menus__menu {
   padding: 5px;
   min-width: fit-content;
-  margin: 0 8px;
   list-style: none;
   font-size: 16px;
-}
-.left-menus__menu a {
   color: white;
+}
+.left-menus__menu {
+  display: inline-block;
+  position: relative;
+}
+
+.left-menus__menu::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #0087ca;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.left-menus__menu:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 
 .download {
   padding: 5px;
   min-width: fit-content;
-  margin: 0 8px;
   list-style: none;
   font-size: 16px;
 }

@@ -15,7 +15,7 @@ const Navbar = () => {
   const [myProfile, setMyProfile] = useState({});
   const router = useRouter();
   const statePath = router.query.state?.path;
-
+  console.log(myProfile);
   const handleSignOut = () => {
     const path = statePath || "/login";
     router.push(path);
@@ -86,8 +86,8 @@ const Navbar = () => {
               />
             </Link>
           </div>
-          <div className="hidden md:flex md:items-center md:w-fit">
-            <li className="left-menus__menu">
+          <div className="hidden md:flex md:items-center md:w-fit gap-4">
+            <li className="">
               <Link href="/">
                 <Image
                   alt="Logo"
@@ -101,14 +101,14 @@ const Navbar = () => {
               </Link>
             </li>
             <li
-              className={`left-menus__menu font-semibold ${
+              className={`left-menus__menu font-semibold hover:text-blue-600 ${
                 stickyNav ? "sticky-menu" : ""
               }`}
             >
               <Link href="/exam">Exam</Link>
             </li>
             <li
-              className={`left-menus__menu font-semibold ${
+              className={`left-menus__menu font-semibold hover:text-blue-600 ${
                 stickyNav ? "sticky-menu" : ""
               }`}
             >
@@ -116,29 +116,19 @@ const Navbar = () => {
             </li>
           </div>
           {/* right side menu for large devices  */}
-          <div className="body__right-menus hidden md:flex md:items-center">
+          <div className="body__right-menus hidden md:flex md:items-center gap-4">
             {myProfile?.email ? (
               <>
-                <li className="">
+                <li
+                  className={`px-2 flex items-center border-2 rounded-lg hover:bg-green-500 duration-300  `}
+                >
                   <Link
-                    className="btn-link"
-                    href="#"
-                    onClick={() => handleSignOut()}
+                    className="btn-link hover:no-underline"
+                    href="/dashboard"
                   >
                     <h6
-                      className={`btn-text px-2 ${
-                        stickyNav ? "text-black" : "text-white"
-                      }`}
-                    >
-                      Logout
-                    </h6>
-                  </Link>
-                </li>
-                <li className="download flex items-center border-2 rounded-lg">
-                  <Link className="btn-link" href="/dashboard">
-                    <h6
-                      className={`btn-text px-2 ${
-                        stickyNav ? "text-black" : "text-white"
+                      className={`btn-text ${
+                        stickyNav ? "text-black hover:text-white" : "text-white"
                       }`}
                     >
                       Dashboard
@@ -153,11 +143,21 @@ const Navbar = () => {
                 </Link>
               </li>
             )}
+            <svg
+              onClick={() => setIsOpen(true)}
+              className="small-device__sidebar-toggle w-52 h-52 cursor-pointer"
+              focusable="false"
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              data-testid="MenuIcon"
+            >
+              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+            </svg>
           </div>
           {/* left side menu for large devices  */}
           <div className="md:hidden flex items-center gap-4">
             {myProfile?.email ? (
-              <li className="flex items-center  rounded-lg bg-blue-700 px-3 py-[2px]">
+              <li className="flex items-center  rounded-lg bg-blue-700 hover:bg-green-500 duration-300 px-3 py-[2px]">
                 <Link href="/dashboard">
                   <h6 className="btn-text text-white">Dashboard</h6>
                 </Link>
@@ -171,7 +171,7 @@ const Navbar = () => {
             )}
             <svg
               onClick={() => setIsOpen(true)}
-              className="small-device__sidebar-toggle"
+              className="small-device__sidebar-toggle cursor-pointer"
               focusable="false"
               aria-hidden="true"
               viewBox="0 0 24 24"
