@@ -5,7 +5,9 @@ const RootLayout = ({ children }) => {
   return (
     <>
       <Navbar />
-      <div className="w-11/12 max-w-[1200px] mx-auto">{children}</div>
+      <div className="w-11/12 max-w-[1200px] mx-auto mt-20 md:mt-28">
+        {children}
+      </div>
       <Footer />
     </>
   );

@@ -53,7 +53,7 @@ const HomePage = () => {
   return (
     <>
       <div>
-        <h1 className="text-3xl font-bold text-center mb-8 mt-20 md:mt-28 text-green-600">
+        <h1 className="text-3xl font-bold text-center mb-8 text-green-600">
           Exams
         </h1>
         {examUniqueSubjects && examUniqueSubjects.length > 0 ? (
