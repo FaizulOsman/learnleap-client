@@ -191,48 +191,61 @@ const Users = () => {
                     </button>
                   </div>
                 </div>
-                {allUsers?.length > 0 ? (
-                  <table className="w-full text-left">
-                    <thead>
-                      <tr className="font-normal border-b border-gray-800">
-                        <th className="sm:px-3 pt-0 pb-3">Image</th>
-                        <th className="sm:px-3 pt-0 pb-3 hidden sm:table-cell">
-                          Name
-                        </th>
-                        <th className="sm:px-3 pt-0 pb-3">Email</th>
-                        <th className="sm:px-3 pt-0 pb-3">Delete</th>
-                        <th className="sm:px-3 pt-0 pb-3">Update</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {allUsers?.map((user, index) => (
-                        <tr key={index} className="border-b border-gray-800">
-                          <td className="sm:p-3 py-2">
-                            <Image
-                              src="https://i.ibb.co/D70zkJV/avatar-girl-full.jpg"
-                              alt="profile"
-                              className="w-7 h-7 mr-2.5 border border-gray-800 rounded-full"
-                              width={50}
-                              height={50}
-                            />
-                          </td>
-                          <td className="sm:p-3 py-2 hidden sm:table-cell">
-                            {user.name}
-                          </td>
-                          <td className="sm:p-3 py-2">{user.email}</td>
-                          <td className="sm:p-3 py-2 text-red-500">
-                            <MdDeleteOutline
-                              onClick={() => handleDeleteUser(user)}
-                              className="w-5 h-5 cursor-pointer"
-                            />
-                          </td>
-                          <td className="sm:p-3 py-2 text-green-500">
-                            <FaRegEdit className="w-4 h-4 cursor-pointer" />
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                {allUsers ? (
+                  <>
+                    {allUsers?.length > 0 ? (
+                      <table className="w-full text-left">
+                        <thead>
+                          <tr className="font-normal border-b border-gray-800">
+                            <th className="sm:px-3 pt-0 pb-3">Image</th>
+                            <th className="sm:px-3 pt-0 pb-3 hidden sm:table-cell">
+                              Name
+                            </th>
+                            <th className="sm:px-3 pt-0 pb-3">Email</th>
+                            <th className="sm:px-3 pt-0 pb-3">Delete</th>
+                            <th className="sm:px-3 pt-0 pb-3">Update</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {allUsers?.map((user, index) => (
+                            <tr
+                              key={index}
+                              className="border-b border-gray-800"
+                            >
+                              <td className="sm:p-3 py-2">
+                                <Image
+                                  src="https://i.ibb.co/D70zkJV/avatar-girl-full.jpg"
+                                  alt="profile"
+                                  className="w-7 h-7 mr-2.5 border border-gray-800 rounded-full"
+                                  width={50}
+                                  height={50}
+                                />
+                              </td>
+                              <td className="sm:p-3 py-2 hidden sm:table-cell">
+                                {user.name}
+                              </td>
+                              <td className="sm:p-3 py-2">{user.email}</td>
+                              <td className="sm:p-3 py-2 text-red-500">
+                                <MdDeleteOutline
+                                  onClick={() => handleDeleteUser(user)}
+                                  className="w-5 h-5 cursor-pointer"
+                                />
+                              </td>
+                              <td className="sm:p-3 py-2 text-green-500">
+                                <FaRegEdit className="w-4 h-4 cursor-pointer" />
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    ) : (
+                      <div className="min-h-[30vh] flex items-center justify-center">
+                        <h2 className="text-md sm:text-xl md:text-2xl text-red-500">
+                          No data found
+                        </h2>
+                      </div>
+                    )}
+                  </>
                 ) : (
                   <div className="min-h-[30vh] flex items-center">
                     <Loader />
