@@ -2,7 +2,7 @@ import Loader from "@/components/UI/Loader";
 import AdminLayout from "@/layouts/AdminLayout";
 import {
   useDeleteUserMutation,
-  useGetAllUsersQuery,
+  useGetAllUsersByQueryQuery,
 } from "@/redux/user/userApi";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -23,11 +23,11 @@ const Users = () => {
     authorization: accessToken,
   };
 
-  const { data: getAssUsers } = useGetAllUsersQuery({
+  const { data: getAssUsers } = useGetAllUsersByQueryQuery({
+    headers,
     limit,
     page,
     sortOrder,
-    headers,
   });
 
   const totalPage = Math.ceil(parseInt(meta?.total) / parseInt(meta?.limit));
@@ -78,7 +78,7 @@ const Users = () => {
 
   return (
     <div>
-      <div className="bg-gray-100 dark:text-white  h-screen flex overflow-hidden text-sm">
+      <div className="bg-gray-100 dark:text-white flex overflow-hidden text-sm">
         <div className="flex-grow overflow-hidden h-full flex flex-col">
           <div className="flex-grow flex overflow-x-hidden">
             <div className="flex-grow bg-[#080925] overflow-y-auto">

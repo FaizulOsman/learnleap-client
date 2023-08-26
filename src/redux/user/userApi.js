@@ -24,7 +24,13 @@ const userApi = apiSlice.injectEndpoints({
       }),
     }),
     getAllUsers: builder.query({
-      query: ({ limit, page, sortOrder, headers }) => ({
+      query: ({ headers }) => ({
+        url: `/users`,
+        headers: headers,
+      }),
+    }),
+    getAllUsersByQuery: builder.query({
+      query: ({ headers, limit, page, sortOrder }) => ({
         url: `/users?limit=${limit}&page=${page}&sortOrder=${sortOrder}`,
         headers: headers,
       }),
@@ -58,6 +64,7 @@ export const {
   useLoginMutation,
   useRefreshTokenMutation,
   useGetAllUsersQuery,
+  useGetAllUsersByQueryQuery,
   useDeleteUserMutation,
   useGetMyProfileQuery,
   useUpdateMyProfileMutation,
