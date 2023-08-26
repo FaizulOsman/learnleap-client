@@ -118,7 +118,9 @@ const CreateExam = () => {
             </div>
           ))}
         </div>
-        <h3 className="text-3xl font-bold text-center my-5">Add A Question</h3>
+        <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-center my-5">
+          Add A Question
+        </h3>
         <div>
           <form onSubmit={(e) => handleAddQuestion(e)}>
             <input
@@ -223,7 +225,7 @@ const CreateExam = () => {
           </button>
         </form>
       </div>
-      <div className="w-96 mx-auto">
+      <div className="w-11/12 md:w-10/12 lg:w-8/12 mx-auto">
         <button
           onClick={() => handleCreateExam()}
           className="btn btn-sm w-full btn-primary mt-5"
