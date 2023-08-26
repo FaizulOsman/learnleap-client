@@ -101,17 +101,6 @@ const UpdateTest = () => {
       serial: serial,
     };
     updateTest({ id, data, headers });
-    console.log(data);
-    // if (ques.length > 0 && subject.length > 1 && serial > 0) {
-    //   createTest({ data, headers });
-    //   // Clear all data after creating the test
-    //   setQues([]);
-    //   setTime(0);
-    //   setSubject("");
-    //   setSerial(0);
-    // } else {
-    //   toast.error("Test Creation Failed!");
-    // }
   };
 
   const [questionForm, setQuestionForm] = useState({
@@ -192,7 +181,7 @@ const UpdateTest = () => {
             ))}
           </div>
           <h3 className="text-2xl font-bold text-center mb-5 mt-10">
-            Add or Update A Question
+            Add/Update A Question
           </h3>
           <div>
             <form className="updateForm" onSubmit={(e) => handleAddQuestion(e)}>
@@ -200,7 +189,7 @@ const UpdateTest = () => {
                 type="text"
                 name="question"
                 placeholder="Type your question here"
-                className="input input-bordered w-full"
+                className="input input-bordered w-full bg-[#1d1836]"
                 value={initialQuestion}
                 onChange={(e) => setInitialQuestion(e.target.value)}
                 required
@@ -210,7 +199,7 @@ const UpdateTest = () => {
                   type="text"
                   name="option1"
                   placeholder="Option 1"
-                  className="input input-bordered input-sm w-full"
+                  className="input input-bordered input-sm w-full bg-[#1d1836]"
                   value={initialOption1}
                   onChange={(e) => setInitialOption1(e.target.value)}
                   required
@@ -219,7 +208,7 @@ const UpdateTest = () => {
                   type="text"
                   name="option2"
                   placeholder="Option 2"
-                  className="input input-bordered input-sm w-full"
+                  className="input input-bordered input-sm w-full bg-[#1d1836]"
                   value={initialOption2}
                   onChange={(e) => setInitialOption2(e.target.value)}
                   required
@@ -228,7 +217,7 @@ const UpdateTest = () => {
                   type="text"
                   name="option3"
                   placeholder="Option 3"
-                  className="input input-bordered input-sm w-full"
+                  className="input input-bordered input-sm w-full bg-[#1d1836]"
                   value={initialOption3}
                   onChange={(e) => setInitialOption3(e.target.value)}
                 />
@@ -236,7 +225,7 @@ const UpdateTest = () => {
                   type="text"
                   name="option4"
                   placeholder="Option 4"
-                  className="input input-bordered input-sm w-full"
+                  className="input input-bordered input-sm w-full bg-[#1d1836]"
                   value={initialOption4}
                   onChange={(e) => setInitialOption4(e.target.value)}
                 />
@@ -244,7 +233,7 @@ const UpdateTest = () => {
                   type="text"
                   name="option5"
                   placeholder="Option 5 (Optional)"
-                  className="input input-bordered input-sm w-full"
+                  className="input input-bordered input-sm w-full bg-[#1d1836]"
                   value={initialOption5}
                   onChange={(e) => setInitialOption5(e.target.value)}
                 />
@@ -252,7 +241,7 @@ const UpdateTest = () => {
                   type="text"
                   name="subject"
                   placeholder="Subject (Optional)"
-                  className="input input-bordered input-sm w-full"
+                  className="input input-bordered input-sm w-full bg-[#1d1836]"
                   value={initialSubject}
                   onChange={(e) => setInitialSubject(e.target.value)}
                 />
@@ -260,7 +249,7 @@ const UpdateTest = () => {
                   type="text"
                   name="answer"
                   placeholder="Answer"
-                  className="input input-bordered input-primary input-sm w-full"
+                  className="input input-bordered input-primary input-sm w-full bg-[#1d1836]"
                   value={initialAnswer}
                   onChange={(e) => setInitialAnswer(e.target.value)}
                   required
@@ -293,14 +282,14 @@ const UpdateTest = () => {
                 type="number"
                 id="setTime"
                 name="setTime"
-                className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
+                className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500 bg-[#1d1836]"
                 autoComplete="off"
                 defaultValue={getSingleTest?.data?.timeLimit}
                 required
               />
               <label
                 htmlFor="setTime"
-                className="absolute text-sm left-6 -top-3 bg-white px-1 text-primary transition-all duration-300"
+                className="absolute text-sm left-6 -top-3 bg-[#1d1836] rounded-lg px-2 text-primary transition-all duration-300"
               >
                 Set Time (Minute)
               </label>
@@ -310,14 +299,14 @@ const UpdateTest = () => {
                 type="text"
                 id="subject"
                 name="subject"
-                className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
+                className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500 bg-[#1d1836]"
                 autoComplete="off"
                 defaultValue={getSingleTest?.data?.subject}
                 required
               />
               <label
                 htmlFor="subject"
-                className="absolute text-sm left-6 -top-3 bg-white px-1 text-primary transition-all duration-300"
+                className="absolute text-sm left-6 -top-3 bg-[#1d1836] rounded-lg px-2  text-primary transition-all duration-300"
               >
                 Subject (Mandatory)
               </label>
@@ -327,14 +316,14 @@ const UpdateTest = () => {
                 type="number"
                 id="serial"
                 name="serial"
-                className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500"
+                className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500 bg-[#1d1836]"
                 autoComplete="off"
                 defaultValue={getSingleTest?.data?.serial}
                 required
               />
               <label
                 htmlFor="serial"
-                className="absolute text-sm left-6 -top-3 bg-white px-1 text-primary transition-all duration-300"
+                className="absolute text-sm left-6 -top-3 bg-[#1d1836] rounded-lg px-2 text-primary transition-all duration-300"
               >
                 Serial
               </label>

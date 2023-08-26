@@ -40,8 +40,8 @@ const routes = [
     permission2: "admin",
   },
   {
-    path: "/dashboard/profile",
-    name: "Profile",
+    path: "/dashboard/my-profile",
+    name: "My Profile",
     icon: <FaUser />,
     permission1: "user",
     permission2: "admin",
@@ -205,7 +205,7 @@ const SideBar = ({ children }) => {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex bg-[#080925] text-white">
         <motion.div
           animate={{
             width: isOpen ? "200px" : "45px",

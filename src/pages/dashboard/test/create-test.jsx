@@ -97,7 +97,7 @@ const CreateTest = () => {
 
   return (
     <div className="my-5">
-      <div className="w-11/12 md:w-10/12 lg:w-8/12 mx-auto border rounded-lg p-5">
+      <div className="w-11/12 md:w-10/12 lg:w-8/12 mx-auto border rounded-lg border-blue-500 p-5">
         <div>
           {ques?.map((q, i) => (
             <div key={i} className="mb-5">
@@ -125,7 +125,7 @@ const CreateTest = () => {
               type="text"
               name="question"
               placeholder="Type your question here"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full bg-[#1d1836]"
               required
             />
             <div className="grid grid-cols-1 md:grid-cols-2 justify-between gap-4 mt-4">
@@ -133,47 +133,47 @@ const CreateTest = () => {
                 type="text"
                 name="option1"
                 placeholder="Option 1"
-                className="input input-bordered input-sm w-full"
+                className="input input-bordered input-sm w-full bg-[#1d1836]"
                 required
               />
               <input
                 type="text"
                 name="option2"
                 placeholder="Option 2"
-                className="input input-bordered input-sm w-full"
+                className="input input-bordered input-sm w-full bg-[#1d1836]"
                 required
               />
               <input
                 type="text"
                 name="option3"
                 placeholder="Option 3"
-                className="input input-bordered input-sm w-full"
+                className="input input-bordered input-sm w-full bg-[#1d1836]"
                 required
               />
               <input
                 type="text"
                 name="option4"
                 placeholder="Option 4"
-                className="input input-bordered input-sm w-full"
+                className="input input-bordered input-sm w-full bg-[#1d1836]"
                 required
               />
               <input
                 type="text"
                 name="option5"
                 placeholder="Option 5 (Optional)"
-                className="input input-bordered input-sm w-full"
+                className="input input-bordered input-sm w-full bg-[#1d1836]"
               />
               <input
                 type="text"
                 name="subject"
                 placeholder="Subject (Optional)"
-                className="input input-bordered input-sm w-full"
+                className="input input-bordered input-sm w-full bg-[#1d1836]"
               />
               <input
                 type="text"
                 name="answer"
                 placeholder="Answer"
-                className="input input-bordered input-primary input-sm w-full"
+                className="input input-bordered input-primary input-sm w-full bg-[#1d1836]"
                 required
               />
               <button type="submit" className="btn btn-sm w-full btn-primary">
@@ -183,7 +183,7 @@ const CreateTest = () => {
           </form>
         </div>
       </div>
-      <div className="w-11/12 md:w-10/12 lg:w-8/12 mx-auto mt-5 border rounded-lg p-5">
+      <div className="w-11/12 md:w-10/12 lg:w-8/12 mx-auto mt-5 border rounded-lg border-blue-500 p-5">
         <div className="flex justify-between flex-wrap">
           {time > 0 && <h4 className="text-lg font-semibold">Time: {time}</h4>}
           {subject.length > 1 && (
@@ -201,21 +201,21 @@ const CreateTest = () => {
             type="number"
             name="setTime"
             placeholder="Set Time In Minute"
-            className="input input-bordered input-primary input-sm w-full"
+            className="input input-bordered input-primary input-sm w-full bg-[#1d1836]"
             required
           />
           <input
             type="text"
             name="subject"
             placeholder="Subject (Mandatory)"
-            className="input input-bordered input-primary input-sm w-full"
+            className="input input-bordered input-primary input-sm w-full bg-[#1d1836]"
             required
           />
           <input
             type="number"
             name="serial"
             placeholder="Serial"
-            className="input input-bordered input-primary input-sm w-full"
+            className="input input-bordered input-primary input-sm w-full bg-[#1d1836]"
             required
           />
           <button type="submit" className="btn btn-sm btn-primary">
