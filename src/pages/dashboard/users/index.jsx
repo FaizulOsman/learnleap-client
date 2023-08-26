@@ -12,12 +12,26 @@ const Users = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(3);
   const [meta, setMeta] = useState({});
-  console.log(meta);
+  const [sortOrder, setSortOrder] = useState("desc");
+
   const headers = {
     authorization: accessToken,
   };
 
-  const { data: getAssUsers } = useGetAllUsersQuery({ limit, page, headers });
+  const { data: getAssUsers } = useGetAllUsersQuery({
+    limit,
+    page,
+    sortOrder,
+    headers,
+  });
+
+  const totalPage = Math.ceil(parseInt(meta?.total) / parseInt(meta?.limit));
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPage) {
+      setPage(newPage);
+    }
+  };
 
   useEffect(() => {
     const acc = localStorage.getItem("access-token");
@@ -32,7 +46,7 @@ const Users = () => {
         <div className="flex-grow overflow-hidden h-full flex flex-col">
           <div className="flex-grow flex overflow-x-hidden">
             <div className="flex-grow bg-[#080925] overflow-y-auto">
-              <div className="sm:px-7 sm:pt-7 px-4 pt-4 flex flex-col w-full border-b border-gray-800  sticky top-0">
+              <div className="z-50 bg-[#080925] sm:px-7 sm:pt-7 px-4 pt-4 flex flex-col w-full border-b border-gray-800  sticky top-0">
                 <div className="flex w-full items-center">
                   <div className="flex items-center text-lg sm:text-2xl  dark:text-white mb-5 border-l-4 pl-3">
                     All Users
@@ -41,7 +55,7 @@ const Users = () => {
               </div>
               <div className="sm:p-7 p-4">
                 <div className="flex w-full items-center mb-7">
-                  <button className="inline-flex mr-3 items-center h-8 pl-2.5 pr-2 rounded-md shadow   dark:border-gray-800 border border-gray-200 leading-none py-0">
+                  <button className="hidden sm:inline-flex mr-3 items-center h-8 pl-2.5 pr-2 rounded-md shadow   dark:border-gray-800 border border-gray-200 leading-none py-0">
                     <svg
                       viewBox="0 0 24 24"
                       className="w-4 mr-2  "
@@ -76,8 +90,13 @@ const Users = () => {
                       <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                   </button>
-                  <button className="inline-flex items-center h-8 pl-2.5 pr-2 rounded-md shadow   dark:border-gray-800 border border-gray-200 leading-none py-0">
-                    Filter by
+                  <button
+                    onClick={() =>
+                      setSortOrder(sortOrder === "asc" ? "desc" : "asc")
+                    }
+                    className="inline-flex items-center h-8 pl-2.5 pr-2 rounded-md shadow dark:border-gray-800 border border-gray-200 leading-none py-0"
+                  >
+                    {sortOrder === "asc" ? "desc" : "asc"}
                     <svg
                       viewBox="0 0 24 24"
                       className="w-4 ml-1.5  "
@@ -90,9 +109,17 @@ const Users = () => {
                       <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                   </button>
-                  <div className="ml-auto  text-xs sm:inline-flex hidden items-center">
-                    <span className="mr-3">Page 2 of 4</span>
-                    <button className="inline-flex mr-2 items-center h-8 w-8 justify-center  rounded-md shadow border border-gray-800 leading-none py-0">
+                  <div className="ml-auto text-xs inline-flex items-center">
+                    <span className="mr-3">Limit {limit}</span>
+                    <button
+                      onClick={() => setLimit(limit - 1)}
+                      className={`mr-3 inline-flex items-center h-8 w-8 justify-center rounded-md shadow border ${
+                        limit === 1
+                          ? "opacity-50 cursor-not-allowed"
+                          : "border-gray-800"
+                      } leading-none`}
+                      disabled={limit === 1}
+                    >
                       <svg
                         className="w-4"
                         viewBox="0 0 24 24"
@@ -105,7 +132,15 @@ const Users = () => {
                         <polyline points="15 18 9 12 15 6"></polyline>
                       </svg>
                     </button>
-                    <button className="inline-flex items-center h-8 w-8 justify-center  rounded-md shadow border border-gray-800 leading-none py-0">
+                    <button
+                      onClick={() => setLimit(limit + 1)}
+                      className={`inline-flex items-center h-8 w-8 justify-center rounded-md shadow border ${
+                        page === totalPage
+                          ? "opacity-50 cursor-not-allowed"
+                          : "border-gray-800"
+                      } leading-none`}
+                      disabled={limit === parseInt(meta?.total)}
+                    >
                       <svg
                         className="w-4"
                         viewBox="0 0 24 24"
@@ -125,10 +160,10 @@ const Users = () => {
                     <thead>
                       <tr className="font-normal border-b border-gray-800">
                         <th className="sm:px-3 pt-0 pb-3">Image</th>
-                        <th className="sm:px-3 pt-0 pb-3">Name</th>
                         <th className="sm:px-3 pt-0 pb-3 hidden sm:table-cell">
-                          Email
+                          Name
                         </th>
+                        <th className="sm:px-3 pt-0 pb-3">Email</th>
                         <th className="sm:px-3 pt-0 pb-3">Delete</th>
                         <th className="sm:px-3 pt-0 pb-3">Update</th>
                       </tr>
@@ -145,10 +180,10 @@ const Users = () => {
                               height={50}
                             />
                           </td>
-                          <td className="sm:p-3 py-2">{user.name}</td>
                           <td className="sm:p-3 py-2 hidden sm:table-cell">
-                            {user.email}
+                            {user.name}
                           </td>
+                          <td className="sm:p-3 py-2">{user.email}</td>
                           <td className="sm:p-3 py-2 text-red-500">
                             <MdDeleteOutline className="w-5 h-5 cursor-pointer" />
                           </td>
@@ -165,7 +200,15 @@ const Users = () => {
                   </div>
                 )}
                 <div className="flex w-full mt-5 space-x-2 justify-end">
-                  <button className="inline-flex items-center h-8 w-8 justify-center  rounded-md shadow border border-gray-800 leading-none">
+                  <button
+                    onClick={() => handlePageChange(page - 1)}
+                    className={`inline-flex items-center h-8 w-8 justify-center rounded-md shadow border ${
+                      page === 1
+                        ? "opacity-50 cursor-not-allowed"
+                        : "border-gray-800"
+                    } leading-none`}
+                    disabled={page === 1}
+                  >
                     <svg
                       className="w-4"
                       viewBox="0 0 24 24"
@@ -178,31 +221,28 @@ const Users = () => {
                       <polyline points="15 18 9 12 15 6"></polyline>
                     </svg>
                   </button>
+                  {Array.from({ length: totalPage }, (_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handlePageChange(index + 1)}
+                      className={`inline-flex items-center h-8 w-8 justify-center rounded-md shadow border ${
+                        page === index + 1
+                          ? "bg-gray-800 border-gray-800"
+                          : "border-gray-800"
+                      } leading-none`}
+                    >
+                      {index + 1}
+                    </button>
+                  ))}
                   <button
-                    onClick={() => setPage(1)}
-                    className="inline-flex items-center h-8 w-8 justify-center  rounded-md shadow border border-gray-800 leading-none"
+                    onClick={() => handlePageChange(page + 1)}
+                    className={`inline-flex items-center h-8 w-8 justify-center rounded-md shadow border ${
+                      page === totalPage
+                        ? "opacity-50 cursor-not-allowed"
+                        : "border-gray-800"
+                    } leading-none`}
+                    disabled={page === totalPage}
                   >
-                    1
-                  </button>
-                  <button
-                    onClick={() => setPage(2)}
-                    className="inline-flex items-center h-8 w-8 justify-center  rounded-md shadow border border-gray-800 bg-gray-800  leading-none"
-                  >
-                    2
-                  </button>
-                  <button
-                    onClick={() => setPage(3)}
-                    className="inline-flex items-center h-8 w-8 justify-center  rounded-md shadow border border-gray-800 leading-none"
-                  >
-                    3
-                  </button>
-                  <button
-                    onClick={() => setPage(4)}
-                    className="inline-flex items-center h-8 w-8 justify-center  rounded-md shadow border border-gray-800 leading-none"
-                  >
-                    4
-                  </button>
-                  <button className="inline-flex items-center h-8 w-8 justify-center  rounded-md shadow border border-gray-800 leading-none">
                     <svg
                       className="w-4"
                       viewBox="0 0 24 24"
