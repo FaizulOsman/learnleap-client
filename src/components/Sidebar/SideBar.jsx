@@ -297,7 +297,8 @@ const SideBar = ({ children }) => {
                 href="/"
                 className="hover:underline hover:text-blue-500 px-3 flex items-center gap-1"
               >
-                <HiOutlineHome /> Home
+                <HiOutlineHome />
+                <span className="hidden sm:inline-block"> Home</span>
               </Link>
 
               <Link
@@ -305,7 +306,8 @@ const SideBar = ({ children }) => {
                 href="/login"
                 className="hover:underline hover:text-blue-500 flex items-center gap-1 border-l pl-3"
               >
-                <HiOutlineLogout /> Logout
+                <HiOutlineLogout />
+                <span className="hidden sm:inline-block"> Logout</span>
               </Link>
             </div>
           </div>
