@@ -24,8 +24,8 @@ const userApi = apiSlice.injectEndpoints({
       }),
     }),
     getAllUsers: builder.query({
-      query: ({ headers }) => ({
-        url: `/users/`,
+      query: ({ limit, page, headers }) => ({
+        url: `/users?limit=${limit}&page=${page}`,
         headers: headers,
       }),
     }),

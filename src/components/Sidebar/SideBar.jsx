@@ -203,8 +203,6 @@ const SideBar = ({ children }) => {
     fetchMyProfile();
   }, []);
 
-  console.log(myProfile);
-
   return (
     <>
       <div className="flex">
