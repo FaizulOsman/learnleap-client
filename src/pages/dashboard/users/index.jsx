@@ -23,7 +23,7 @@ const Users = () => {
     authorization: accessToken,
   };
 
-  const { data: getAssUsers } = useGetAllUsersByQueryQuery({
+  const { data: getAllUsers } = useGetAllUsersByQueryQuery({
     headers,
     limit,
     page,
@@ -57,20 +57,20 @@ const Users = () => {
   useEffect(() => {
     const acc = localStorage.getItem("access-token");
     setAccessToken(acc);
-    setAllUsers(getAssUsers?.data);
-    setMeta(getAssUsers?.meta);
+    setAllUsers(getAllUsers?.data);
+    setMeta(getAllUsers?.meta);
 
     if (isDeleteSuccess) {
       toast.success("Successfully deleted user.");
-      setAllUsers(getAssUsers?.data);
+      setAllUsers(getAllUsers?.data);
     }
 
     if (isDeleteError) {
       toast.error(deleteErrMessage.message || "Something went wrong");
     }
   }, [
-    getAssUsers,
-    getAssUsers?.data,
+    getAllUsers,
+    getAllUsers?.data,
     isDeleteSuccess,
     isDeleteError,
     deleteErrMessage,

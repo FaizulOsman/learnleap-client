@@ -15,7 +15,7 @@ const Navbar = () => {
   const [myProfile, setMyProfile] = useState({});
   const router = useRouter();
   const statePath = router.query.state?.path;
-  console.log(myProfile);
+
   const handleSignOut = () => {
     const path = statePath || "/login";
     router.push(path);

@@ -66,6 +66,8 @@ const SingleExam = () => {
   const handleSubmitExam = () => {
     const data = {
       questions: ques,
+      subject: getSingleExam?.data?.subject,
+      serial: getSingleExam?.data?.serial,
       totalQues: getSingleExam?.data?.questions?.length,
       totalAttempted: ques?.length,
       totalMarks: totalMark,
