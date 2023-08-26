@@ -93,7 +93,7 @@ const AllExam = () => {
                 <p>Time: {exam?.timeLimit} min</p>
               </div>
               <div className="flex flex-col items-center justify-between gap-4">
-                <Link href={`/exam/update/${exam?.id}`}>
+                <Link href={`/dashboard/exam/update/${exam?.id}`}>
                   <button className="text-lg border-none text-primary hover:text-blue-600">
                     <FaRegEdit />
                   </button>
