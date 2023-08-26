@@ -1,3 +1,4 @@
+import Loader from "@/components/UI/Loader";
 import AdminLayout from "@/layouts/AdminLayout";
 import {
   useDeleteExamMutation,
@@ -56,22 +57,33 @@ const AllExam = () => {
     <div>
       <div className="my-20 w-11/12 md:w-10/12 mx-auto">
         <h1 className="text-3xl font-semibold text-center my-8">Exams</h1>
-        <div className="w-10/12 md:w-8/12 mx-auto flex justify-between">
-          {examUniqueSubjects?.map((exam, index) => (
-            <div
-              key={index}
-              onClick={() => setExamCategory(exam?.subject)}
-              className="bg-gray-200 px-2 py-1 rounded-md cursor-pointer hover:bg-gray-300 hover:text-white font-semibold"
-            >
-              {exam?.subject}
-            </div>
-          ))}
-        </div>
+        {examUniqueSubjects && examUniqueSubjects.length > 0 ? (
+          <div className="w-10/12 md:w-8/12 mx-auto flex flex-wrap justify-around gap-3">
+            {examUniqueSubjects?.map((exam, index) => (
+              <div
+                key={index}
+                onClick={() => setExamCategory(exam?.subject)}
+                className={`relative mb-2 min-w-[96px] text-center hover:bg-green-500 px-2 py-1 rounded-md cursor-pointer hover:text-white font-semibold ${
+                  examCategory === exam?.subject
+                    ? "bg-green-500"
+                    : " bg-[#1d1836]"
+                }`}
+              >
+                {examCategory === exam?.subject && (
+                  <div className="absolute top-full left-[45%] triangle_down border-l-[7px] border-r-[7px] border-t-[10px] border-t-green-500 border-transparent"></div>
+                )}
+                {exam?.subject}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <Loader />
+        )}
         <div className="mt-10 flex flex-col gap-5">
           {filterByExamSubject?.map((exam, index) => (
             <div
               key={index}
-              className="flex justify-between items-center bg-gray-200 p-2 rounded-md"
+              className="flex justify-between items-center bg-[#1d1836] p-2 rounded-md"
             >
               <div>
                 <h4 className="text-md font-semibold">
