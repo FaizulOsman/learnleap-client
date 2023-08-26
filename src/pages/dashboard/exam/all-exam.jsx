@@ -93,17 +93,28 @@ const AllExam = () => {
                 <p>Time: {exam?.timeLimit} min</p>
               </div>
               <div className="flex flex-col items-center justify-between gap-4">
-                <Link href={`/dashboard/exam/update/${exam?.id}`}>
-                  <button className="text-lg border-none text-primary hover:text-blue-600">
-                    <FaRegEdit />
+                <div className="flex items-center justify-between gap-4">
+                  <button
+                    onClick={() => handleDeleteExam(exam)}
+                    className="text-2xl border-none  text-red-500 hover:text-red-600"
+                  >
+                    <MdDeleteOutline />
                   </button>
-                </Link>
-                <button
-                  onClick={() => handleDeleteExam(exam)}
-                  className="text-2xl border-none  text-red-500 hover:text-red-600"
+                  <Link
+                    href={`/dashboard/exam/update/${exam?.id}`}
+                    className="flex items-center"
+                  >
+                    <button className="text-lg border-none text-primary hover:text-blue-600">
+                      <FaRegEdit />
+                    </button>
+                  </Link>
+                </div>
+                <Link
+                  href={`/dashboard/exam-result/${exam?.id}`}
+                  className="border-2 border-blue-500 rounded-md px-2 text-blue-500 hover:bg-blue-500 hover:text-white"
                 >
-                  <MdDeleteOutline />
-                </button>
+                  Results
+                </Link>
               </div>
             </div>
           ))}
