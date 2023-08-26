@@ -29,6 +29,13 @@ const userApi = apiSlice.injectEndpoints({
         headers: headers,
       }),
     }),
+    deleteUser: builder.mutation({
+      query: ({ id, headers }) => ({
+        url: `/users/${id}`,
+        method: "DELETE",
+        headers: headers,
+      }),
+    }),
     getMyProfile: builder.query({
       query: ({ headers }) => ({
         url: `/users/my-profile`,
@@ -43,5 +50,6 @@ export const {
   useLoginMutation,
   useRefreshTokenMutation,
   useGetAllUsersQuery,
+  useDeleteUserMutation,
   useGetMyProfileQuery,
 } = userApi;

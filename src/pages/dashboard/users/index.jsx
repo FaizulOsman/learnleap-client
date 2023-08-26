@@ -1,8 +1,12 @@
 import Loader from "@/components/UI/Loader";
 import AdminLayout from "@/layouts/AdminLayout";
-import { useGetAllUsersQuery } from "@/redux/user/userApi";
+import {
+  useDeleteUserMutation,
+  useGetAllUsersQuery,
+} from "@/redux/user/userApi";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 
@@ -13,6 +17,7 @@ const Users = () => {
   const [limit, setLimit] = useState(3);
   const [meta, setMeta] = useState({});
   const [sortOrder, setSortOrder] = useState("desc");
+  const [id, setId] = useState("");
 
   const headers = {
     authorization: accessToken,
@@ -33,12 +38,43 @@ const Users = () => {
     }
   };
 
+  const [
+    deleteUser,
+    {
+      isSuccess: isDeleteSuccess,
+      isError: isDeleteError,
+      error: deleteErrMessage,
+    },
+  ] = useDeleteUserMutation();
+  const handleDeleteUser = (user) => {
+    setId(user?.id);
+    const isConfirmed = window.confirm(`Do you want to delete ${user?.email}`);
+    if (isConfirmed) {
+      deleteUser({ id: user?.id, headers });
+    }
+  };
+
   useEffect(() => {
     const acc = localStorage.getItem("access-token");
     setAccessToken(acc);
     setAllUsers(getAssUsers?.data);
     setMeta(getAssUsers?.meta);
-  }, [getAssUsers, getAssUsers?.data]);
+
+    if (isDeleteSuccess) {
+      toast.success("Successfully deleted user.");
+      setAllUsers(getAssUsers?.data);
+    }
+
+    if (isDeleteError) {
+      toast.error(deleteErrMessage.message || "Something went wrong");
+    }
+  }, [
+    getAssUsers,
+    getAssUsers?.data,
+    isDeleteSuccess,
+    isDeleteError,
+    deleteErrMessage,
+  ]);
 
   return (
     <div>
@@ -185,7 +221,10 @@ const Users = () => {
                           </td>
                           <td className="sm:p-3 py-2">{user.email}</td>
                           <td className="sm:p-3 py-2 text-red-500">
-                            <MdDeleteOutline className="w-5 h-5 cursor-pointer" />
+                            <MdDeleteOutline
+                              onClick={() => handleDeleteUser(user)}
+                              className="w-5 h-5 cursor-pointer"
+                            />
                           </td>
                           <td className="sm:p-3 py-2 text-green-500">
                             <FaRegEdit className="w-4 h-4 cursor-pointer" />
