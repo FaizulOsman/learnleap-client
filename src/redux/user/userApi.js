@@ -42,6 +42,14 @@ const userApi = apiSlice.injectEndpoints({
         headers: headers,
       }),
     }),
+    updateMyProfile: builder.mutation({
+      query: ({ data, headers }) => ({
+        url: `/users/my-profile`,
+        method: "PATCH",
+        body: data,
+        headers: headers,
+      }),
+    }),
   }),
 });
 
@@ -52,4 +60,5 @@ export const {
   useGetAllUsersQuery,
   useDeleteUserMutation,
   useGetMyProfileQuery,
+  useUpdateMyProfileMutation,
 } = userApi;
