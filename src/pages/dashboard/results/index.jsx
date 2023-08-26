@@ -152,47 +152,60 @@ const MyResults = () => {
                     </button>
                   </div>
                 </div>
-                {myResults?.length > 0 ? (
-                  <table className="w-full text-left">
-                    <thead>
-                      <tr className="font-normal border-b border-gray-800">
-                        <th className="sm:px-3 pt-0 pb-3 hidden sm:table-cell">
-                          Subject
-                        </th>
-                        <th className="sm:px-3 pt-0 pb-3">Total Q.</th>
-                        <th className="sm:px-3 pt-0 pb-3">T. Attempt.</th>
-                        <th className="sm:px-3 pt-0 pb-3">C. Ans</th>
-                        <th className="sm:px-3 pt-0 pb-3">W. Ans</th>
-                        <th className="sm:px-3 pt-0 pb-3">T. Marks</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {myResults?.map((result, index) => (
-                        <tr key={index} className="border-b border-gray-800">
-                          <td className="sm:p-3 py-2 hidden sm:table-cell">
-                            {result?.subject} {result?.serial}
-                          </td>
-                          <td className="sm:p-3 py-2 hidden sm:table-cell">
-                            {result?.totalQues}
-                          </td>
-                          <td className="sm:p-3 py-2 hidden sm:table-cell">
-                            {result?.totalAttempted}
-                          </td>
-                          <td className="sm:p-3 py-2 hidden sm:table-cell">
-                            {result?.correctAnswer}
-                          </td>
-                          <td className="sm:p-3 py-2 hidden sm:table-cell">
-                            {result?.wrongAnswer}
-                          </td>
-                          <td className="sm:p-3 py-2 hidden sm:table-cell">
-                            {result?.totalMarks}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                {myResults ? (
+                  <>
+                    {myResults?.length > 0 ? (
+                      <table className="w-full text-left">
+                        <thead>
+                          <tr className="font-normal border-b border-gray-800">
+                            <th className="sm:px-3 pt-0 pb-3 hidden sm:table-cell">
+                              Subject
+                            </th>
+                            <th className="sm:px-3 pt-0 pb-3">Total Q.</th>
+                            <th className="sm:px-3 pt-0 pb-3">T. Attempt.</th>
+                            <th className="sm:px-3 pt-0 pb-3">C. Ans</th>
+                            <th className="sm:px-3 pt-0 pb-3">W. Ans</th>
+                            <th className="sm:px-3 pt-0 pb-3">T. Marks</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {myResults?.map((result, index) => (
+                            <tr
+                              key={index}
+                              className="border-b border-gray-800"
+                            >
+                              <td className="sm:p-3 py-2 hidden sm:table-cell">
+                                {result?.subject} {result?.serial}
+                              </td>
+                              <td className="sm:p-3 py-2 hidden sm:table-cell">
+                                {result?.totalQues}
+                              </td>
+                              <td className="sm:p-3 py-2 hidden sm:table-cell">
+                                {result?.totalAttempted}
+                              </td>
+                              <td className="sm:p-3 py-2 hidden sm:table-cell">
+                                {result?.correctAnswer}
+                              </td>
+                              <td className="sm:p-3 py-2 hidden sm:table-cell">
+                                {result?.wrongAnswer}
+                              </td>
+                              <td className="sm:p-3 py-2 hidden sm:table-cell">
+                                {result?.totalMarks}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    ) : (
+                      <div className="min-h-[30vh] flex items-center justify-center">
+                        <h2 className="text-md sm:text-xl md:text-2xl text-red-500">
+                          No data found
+                        </h2>
+                      </div>
+                    )}
+                  </>
                 ) : (
-                  <div className="min-h-[30vh] flex items-center">
+                  <div className="min-h-[30vh] flex items-center justify-center">
                     <Loader />
                   </div>
                 )}
