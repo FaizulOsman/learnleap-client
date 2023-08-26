@@ -70,11 +70,6 @@ const routes = [
         name: "All Test",
         icon: <AiTwotoneFileExclamation />,
       },
-      {
-        path: "/dashboard/settings/billing",
-        name: "Billing",
-        icon: <FaMoneyBill />,
-      },
     ],
   },
   {
@@ -94,11 +89,6 @@ const routes = [
         name: "All Exam",
         icon: <AiTwotoneFileExclamation />,
       },
-      {
-        path: "/dashboard/settings/billing",
-        name: "Billing",
-        icon: <FaMoneyBill />,
-      },
     ],
   },
   {
@@ -110,19 +100,9 @@ const routes = [
     permission2: "admin",
     subRoutes: [
       {
-        path: "/dashboard/settings/profile",
+        path: "/dashboard/my-profile",
         name: "Profile ",
         icon: <FaUser />,
-      },
-      {
-        path: "/dashboard/settings/2fa",
-        name: "2FA",
-        icon: <FaLock />,
-      },
-      {
-        path: "/dashboard/settings/billing",
-        name: "Billing",
-        icon: <FaMoneyBill />,
       },
     ],
   },
