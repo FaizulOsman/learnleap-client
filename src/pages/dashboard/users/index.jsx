@@ -26,7 +26,7 @@ const Users = () => {
   };
 
   const { data: getMyProfile } = useGetMyProfileQuery({ headers });
-  console.log(getMyProfile?.data?.email);
+
   const { data: getAllUsers } = useGetAllUsersByQueryQuery({
     headers,
     limit,
@@ -74,6 +74,10 @@ const Users = () => {
       const data = { role: "user" };
       updateUser({ id: user?.id, data, headers });
     }
+
+    setTimeout(() => {
+      window.location.reload();
+    }, [3000]);
   };
 
   useEffect(() => {
@@ -94,7 +98,6 @@ const Users = () => {
       toast.success("Successfully Updated Role.");
       setAllUsers(getAllUsers?.data);
     }
-
     if (isUpdateUserError) {
       toast.error(updateUserError?.message || "Something went wrong");
     }
@@ -263,7 +266,7 @@ const Users = () => {
                                 <input
                                   type="checkbox"
                                   className="toggle toggle-sm toggle-primary"
-                                  defaultChecked={
+                                  checked={
                                     user?.role === "admin" ? true : false
                                   }
                                   onClick={(e) => handleSetRole({ user, e })}
