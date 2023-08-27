@@ -3,6 +3,7 @@ import AdminLayout from "@/layouts/AdminLayout";
 import {
   useDeleteUserMutation,
   useGetAllUsersByQueryQuery,
+  useGetMyProfileQuery,
   useUpdateUserMutation,
 } from "@/redux/user/userApi";
 import Image from "next/image";
@@ -24,6 +25,8 @@ const Users = () => {
     authorization: accessToken,
   };
 
+  const { data: getMyProfile } = useGetMyProfileQuery({ headers });
+  console.log(getMyProfile?.data?.email);
   const { data: getAllUsers } = useGetAllUsersByQueryQuery({
     headers,
     limit,
@@ -264,16 +267,47 @@ const Users = () => {
                                     user?.role === "admin" ? true : false
                                   }
                                   onClick={(e) => handleSetRole({ user, e })}
+                                  disabled={
+                                    user?.email === getMyProfile?.data?.email
+                                      ? true
+                                      : false
+                                  }
                                 />
                               </td>
-                              <td className="sm:p-3 py-2 text-red-500">
-                                <MdDeleteOutline
-                                  onClick={() => handleDeleteUser(user)}
-                                  className="w-5 h-5 cursor-pointer"
-                                />
+                              <td className="sm:p-3 py-2">
+                                <button
+                                  disabled={
+                                    user?.email === getMyProfile?.data?.email
+                                      ? true
+                                      : false
+                                  }
+                                  className={`${
+                                    user?.email === getMyProfile?.data?.email
+                                      ? "cursor-not-allowed text-red-400"
+                                      : "cursor-pointer text-red-600"
+                                  }`}
+                                >
+                                  <MdDeleteOutline
+                                    onClick={() => handleDeleteUser(user)}
+                                    className={`w-5 h-5`}
+                                  />
+                                </button>
                               </td>
-                              <td className="sm:p-3 py-2 text-green-500">
-                                <FaRegEdit className="w-4 h-4 cursor-pointer" />
+                              <td className="sm:p-3 py-2">
+                                <button
+                                  disabled={
+                                    user?.email === getMyProfile?.data?.email
+                                      ? true
+                                      : false
+                                  }
+                                  className={`${
+                                    user?.email === getMyProfile?.data?.email
+                                      ? "cursor-not-allowed text-green-400"
+                                      : "cursor-pointer text-green-600"
+                                  }`}
+                                >
+                                  <FaRegEdit className="w-4 h-4" />
+                                </button>
                               </td>
                             </tr>
                           ))}
