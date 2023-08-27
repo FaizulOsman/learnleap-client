@@ -35,6 +35,14 @@ const userApi = apiSlice.injectEndpoints({
         headers: headers,
       }),
     }),
+    updateUser: builder.mutation({
+      query: ({ id, data, headers }) => ({
+        url: `/users/${id}`,
+        method: "PATCH",
+        body: data,
+        headers: headers,
+      }),
+    }),
     deleteUser: builder.mutation({
       query: ({ id, headers }) => ({
         url: `/users/${id}`,
@@ -65,6 +73,7 @@ export const {
   useRefreshTokenMutation,
   useGetAllUsersQuery,
   useGetAllUsersByQueryQuery,
+  useUpdateUserMutation,
   useDeleteUserMutation,
   useGetMyProfileQuery,
   useUpdateMyProfileMutation,

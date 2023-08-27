@@ -21,7 +21,7 @@ const MyResults = () => {
     limit,
     sortOrder,
   });
-  console.log(getMySubmittedResults);
+
   const totalPage = Math.ceil(parseInt(meta?.total) / parseInt(meta?.limit));
 
   const handlePageChange = (newPage) => {

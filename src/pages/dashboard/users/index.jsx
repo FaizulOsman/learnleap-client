@@ -3,6 +3,7 @@ import AdminLayout from "@/layouts/AdminLayout";
 import {
   useDeleteUserMutation,
   useGetAllUsersByQueryQuery,
+  useUpdateUserMutation,
 } from "@/redux/user/userApi";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -29,6 +30,14 @@ const Users = () => {
     page,
     sortOrder,
   });
+  const [
+    updateUser,
+    {
+      isSuccess: isUpdateUserSuccess,
+      isError: isUpdateUserError,
+      error: updateUserError,
+    },
+  ] = useUpdateUserMutation();
 
   const totalPage = Math.ceil(parseInt(meta?.total) / parseInt(meta?.limit));
 
@@ -54,6 +63,16 @@ const Users = () => {
     }
   };
 
+  const handleSetRole = ({ user, e }) => {
+    if (e.target.checked) {
+      const data = { role: "admin" };
+      updateUser({ id: user?.id, data, headers });
+    } else {
+      const data = { role: "user" };
+      updateUser({ id: user?.id, data, headers });
+    }
+  };
+
   useEffect(() => {
     const acc = localStorage.getItem("access-token");
     setAccessToken(acc);
@@ -64,9 +83,17 @@ const Users = () => {
       toast.success("Successfully deleted user.");
       setAllUsers(getAllUsers?.data);
     }
-
     if (isDeleteError) {
-      toast.error(deleteErrMessage.message || "Something went wrong");
+      toast.error(deleteErrMessage?.message || "Something went wrong");
+    }
+
+    if (isUpdateUserSuccess) {
+      toast.success("Successfully Updated Role.");
+      setAllUsers(getAllUsers?.data);
+    }
+
+    if (isUpdateUserError) {
+      toast.error(updateUserError?.message || "Something went wrong");
     }
   }, [
     getAllUsers,
@@ -74,6 +101,9 @@ const Users = () => {
     isDeleteSuccess,
     isDeleteError,
     deleteErrMessage,
+    isUpdateUserSuccess,
+    isUpdateUserError,
+    updateUserError,
   ]);
 
   return (
@@ -202,6 +232,7 @@ const Users = () => {
                               Name
                             </th>
                             <th className="sm:px-3 pt-0 pb-3">Email</th>
+                            <th className="sm:px-3 pt-0 pb-3">isAdmin</th>
                             <th className="sm:px-3 pt-0 pb-3">Delete</th>
                             <th className="sm:px-3 pt-0 pb-3">Update</th>
                           </tr>
@@ -225,6 +256,16 @@ const Users = () => {
                                 {user.name}
                               </td>
                               <td className="sm:p-3 py-2">{user.email}</td>
+                              <td className="sm:p-3 py-2">
+                                <input
+                                  type="checkbox"
+                                  className="toggle toggle-sm toggle-primary"
+                                  defaultChecked={
+                                    user?.role === "admin" ? true : false
+                                  }
+                                  onClick={(e) => handleSetRole({ user, e })}
+                                />
+                              </td>
                               <td className="sm:p-3 py-2 text-red-500">
                                 <MdDeleteOutline
                                   onClick={() => handleDeleteUser(user)}
