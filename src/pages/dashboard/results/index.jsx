@@ -106,7 +106,7 @@ const MyResults = () => {
                       <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                   </button>
-                  <div className="ml-auto text-xs inline-flex items-center">
+                  <div className="ml-auto text-xs items-center hidden sm:inline-flex">
                     <span className="mr-3">Limit {limit}</span>
                     <button
                       onClick={() => setLimit(limit - 1)}

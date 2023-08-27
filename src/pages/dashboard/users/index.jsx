@@ -182,7 +182,9 @@ const Users = () => {
                     </svg>
                   </button>
                   <div className="ml-auto text-xs inline-flex items-center">
-                    <span className="mr-3">Limit {limit}</span>
+                    <span className="mr-3 hidden sm:inline-block">
+                      Limit {limit}
+                    </span>
                     <button
                       onClick={() => setLimit(limit - 1)}
                       className={`mr-3 inline-flex items-center h-8 w-8 justify-center rounded-md shadow border ${
@@ -233,14 +235,18 @@ const Users = () => {
                       <table className="w-full text-left">
                         <thead>
                           <tr className="font-normal border-b border-gray-800">
-                            <th className="sm:px-3 pt-0 pb-3">Image</th>
-                            <th className="sm:px-3 pt-0 pb-3 hidden sm:table-cell">
-                              Name
+                            <th className="sm:px-3 pt-0 pb-3 hidden md:table-cell">
+                              Image
                             </th>
-                            <th className="sm:px-3 pt-0 pb-3">Email</th>
+                            <th className="sm:px-3 pt-0 pb-3">Name</th>
+                            <th className="sm:px-3 pt-0 pb-3 hidden sm:table-cell">
+                              Email
+                            </th>
                             <th className="sm:px-3 pt-0 pb-3">isAdmin</th>
                             <th className="sm:px-3 pt-0 pb-3">Delete</th>
-                            <th className="sm:px-3 pt-0 pb-3">Update</th>
+                            <th className="sm:px-3 pt-0 pb-3 hidden sm:table-cell">
+                              Update
+                            </th>
                           </tr>
                         </thead>
                         <tbody>
@@ -249,7 +255,7 @@ const Users = () => {
                               key={index}
                               className="border-b border-gray-800"
                             >
-                              <td className="sm:p-3 py-2">
+                              <td className="sm:p-3 py-2 hidden md:table-cell">
                                 <Image
                                   src="https://i.ibb.co/D70zkJV/avatar-girl-full.jpg"
                                   alt="profile"
@@ -258,10 +264,10 @@ const Users = () => {
                                   height={50}
                                 />
                               </td>
+                              <td className="sm:p-3 py-2">{user.name}</td>
                               <td className="sm:p-3 py-2 hidden sm:table-cell">
-                                {user.name}
+                                {user.email}
                               </td>
-                              <td className="sm:p-3 py-2">{user.email}</td>
                               <td className="sm:p-3 py-2">
                                 <input
                                   type="checkbox"
@@ -296,7 +302,7 @@ const Users = () => {
                                   />
                                 </button>
                               </td>
-                              <td className="sm:p-3 py-2">
+                              <td className="sm:p-3 py-2 hidden sm:table-cell">
                                 <button
                                   disabled={
                                     user?.email === getMyProfile?.data?.email
@@ -329,7 +335,7 @@ const Users = () => {
                     <Loader />
                   </div>
                 )}
-                <div className="flex w-full mt-5 space-x-2 justify-end">
+                <div className="flex flex-wrap w-full mt-5 gap-2 justify-end">
                   <button
                     onClick={() => handlePageChange(page - 1)}
                     className={`inline-flex items-center h-8 w-8 justify-center rounded-md shadow border ${

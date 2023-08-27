@@ -154,15 +154,14 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          {getMyProfile?.data && getMyProfile?.data?.role === "admin" ? (
+          {getMyProfile?.data && getMyProfile?.data?.role === "admin" && (
             <div className="m-4 border-2 border-blue-900 rounded-sm">
               <Users />
             </div>
-          ) : (
-            <div className="m-4 border-2 border-blue-900 rounded-sm">
-              <MyResults />
-            </div>
           )}
+          <div className="m-4 border-2 border-blue-900 rounded-sm">
+            <MyResults />
+          </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4">
             {getMyProfile?.data && getMyProfile?.data?.role === "admin" && (
               <div className="border-2 border-blue-900 rounded-sm">
