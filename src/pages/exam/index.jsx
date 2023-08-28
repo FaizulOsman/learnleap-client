@@ -56,7 +56,9 @@ const AllExams = () => {
       )}
       <div className="mt-10 flex flex-col gap-5">
         {filterByExamSubject?.map((exam, index) => (
-          <FindExamBySubject key={index} exam={exam} />
+          <div key={index}>
+            {exam?.isPublished && <FindExamBySubject exam={exam} />}
+          </div>
         ))}
       </div>
     </div>

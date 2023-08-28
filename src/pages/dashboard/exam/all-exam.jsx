@@ -3,9 +3,11 @@ import AdminLayout from "@/layouts/AdminLayout";
 import {
   useDeleteExamMutation,
   useGetAllExamQuery,
+  useUpdateExamMutation,
 } from "@/redux/exam/examApi";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 
@@ -41,8 +43,14 @@ const AllExam = () => {
     return exam?.subject === examCategory;
   });
 
-  const [deleteExam, { isError, isLoading, isSuccess, error }] =
-    useDeleteExamMutation();
+  const [
+    deleteExam,
+    {
+      isError: deleteExamIsError,
+      isSuccess: deleteExamIs,
+      error: deleteExamError,
+    },
+  ] = useDeleteExamMutation();
 
   const handleDeleteExam = (exam) => {
     const isConfirm = window.confirm(
@@ -52,6 +60,38 @@ const AllExam = () => {
       deleteExam({ id: exam?.id, headers });
     }
   };
+
+  const [
+    updateExam,
+    {
+      success,
+      isSuccess: updateExamIsSuccess,
+      isError: updateExamIsError,
+      error: updateExamError,
+    },
+  ] = useUpdateExamMutation();
+
+  const handlePublish = (exam, value) => {
+    const data = {
+      isPublished: value,
+    };
+    updateExam({ id: exam?.id, data, headers });
+  };
+
+  useEffect(() => {
+    if (updateExamIsError) {
+      toast.error(`${error?.data?.message}` || "Exam Update Failed!");
+    }
+
+    if (updateExamIsSuccess) {
+      toast.success(success?.message || "Exam Updated Successfully!");
+    }
+  }, [
+    updateExamIsSuccess,
+    updateExamIsError,
+    updateExamError,
+    success?.message,
+  ]);
 
   return (
     <div>
@@ -115,6 +155,21 @@ const AllExam = () => {
                 >
                   Results
                 </Link>
+                {exam?.isPublished ? (
+                  <button
+                    onClick={() => handlePublish(exam, false)}
+                    className="btn-xs border-2 border-blue-500 rounded-md px-2 text-blue-500 hover:bg-blue-500 hover:text-white"
+                  >
+                    Remove Publish
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => handlePublish(exam, true)}
+                    className="btn-xs border-2 border-blue-500 rounded-md px-2 text-blue-500 hover:bg-blue-500 hover:text-white"
+                  >
+                    Make Publish
+                  </button>
+                )}
               </div>
             </div>
           ))}
