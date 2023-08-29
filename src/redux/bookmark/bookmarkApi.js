@@ -26,9 +26,10 @@ const bookmarkApi = apiSlice.injectEndpoints({
       providesTags: ["test-yourself"],
     }),
     deleteBookmark: builder.mutation({
-      query: ({ id, headers }) => ({
-        url: `/bookmarks/${id}`,
+      query: ({ data, headers }) => ({
+        url: `/bookmarks/delete-bookmark`,
         method: "DELETE",
+        body: data,
         headers: headers,
       }),
       invalidatesTags: ["test-yourself"],

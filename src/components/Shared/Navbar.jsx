@@ -114,6 +114,13 @@ const Navbar = () => {
             >
               <Link href="/test">Test</Link>
             </li>
+            <li
+              className={`left-menus__menu font-semibold hover:text-blue-600 ${
+                stickyNav ? "sticky-menu" : ""
+              }`}
+            >
+              <Link href="/bookmark">Bookmark</Link>
+            </li>
           </div>
           {/* right side menu for large devices  */}
           <div className="body__right-menus hidden md:flex md:items-center gap-4">

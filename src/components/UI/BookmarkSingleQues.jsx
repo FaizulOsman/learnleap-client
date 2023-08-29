@@ -8,16 +8,13 @@ import { toast } from "react-hot-toast";
 import { AiOutlineEye } from "react-icons/ai";
 import { BsBookmarkPlus, BsFillBookmarkDashFill } from "react-icons/bs";
 
-const ExamSingleQues = ({
+const BookmarkSingleQues = ({
   index,
-  exam,
+  bookmark,
   count,
   setCount,
   ques,
   setQues,
-  eyeShow,
-  getMyProfile,
-  subject,
 }) => {
   const [disable, setDisable] = useState(false);
   const [accessToken, setAccessToken] = useState("");
@@ -26,59 +23,14 @@ const ExamSingleQues = ({
     toast.success(`Correct Answer: ${correctAnswer}`);
   };
 
-  const handleSelectedAnswer = (option) => {
-    if (option === exam?.answer) {
-      // toast.success("Answer is correct!", { autoClose: 700 });
-      setCount(count + 1);
-    } else {
-      // toast.error("Ans is Wrong!", { autoClose: 700 });
-    }
-    setDisable(true);
-    setQues([
-      ...ques,
-      {
-        question: exam?.question,
-        option1: exam?.option1,
-        option2: exam?.option2,
-        option3: exam?.option3,
-        option4: exam?.option4,
-        option5: exam?.option5,
-        subject: exam?.subject,
-        selectedOption: option,
-        answer: exam?.answer,
-      },
-    ]);
-  };
-
   const headers = {
     authorization: accessToken,
   };
 
-  // Create
-  const [
-    createBookmark,
-    {
-      isSuccess: createBookmarkIsSuccess,
-      isError: createBookmarkIsError,
-      error: createBookmarkError,
-    },
-  ] = useCreateBookmarkMutation();
-
-  const handleAddToBookmark = (q) => {
-    const data = {
-      question: q?.question,
-      option1: q?.option1,
-      option2: q?.option2,
-      option3: q?.option3,
-      option4: q?.option4,
-      option5: q?.option5,
-      answer: q?.answer,
-      subject: subject,
-      email: getMyProfile?.data?.email,
-      questionId: exam?.id,
-    };
-    createBookmark({ data, headers });
-  };
+  const { data: getSingleBookmark } = useGetSingleBookmarkQuery({
+    questionId: bookmark?.questionId,
+    headers,
+  });
 
   // Delete
   const [
@@ -98,21 +50,31 @@ const ExamSingleQues = ({
     deleteBookmark({ data, headers });
   };
 
-  const { data: getSingleBookmark } = useGetSingleBookmarkQuery({
-    questionId: exam?.id,
-    headers,
-  });
+  const handleSelectedAnswer = (option) => {
+    if (option === bookmark?.answer) {
+      setCount(count + 1);
+    } else {
+    }
+    setDisable(true);
+    setQues([
+      ...ques,
+      {
+        question: bookmark?.question,
+        option1: bookmark?.option1,
+        option2: bookmark?.option2,
+        option3: bookmark?.option3,
+        option4: bookmark?.option4,
+        option5: bookmark?.option5,
+        subject: bookmark?.subject,
+        selectedOption: option,
+        answer: bookmark?.answer,
+      },
+    ]);
+  };
 
   useEffect(() => {
     const acc = localStorage.getItem("access-token");
     setAccessToken(acc);
-
-    if (createBookmarkIsSuccess) {
-      toast.success("Question added to bookmark");
-    }
-    if (createBookmarkIsError) {
-      toast.error(createBookmarkError?.data?.message || "Something went wrong");
-    }
 
     if (deleteBookmarkIsSuccess) {
       toast.success("Question deleted from bookmark");
@@ -120,14 +82,7 @@ const ExamSingleQues = ({
     if (deleteBookmarkIsError) {
       toast.error(deleteBookmarkError?.data?.message || "Something went wrong");
     }
-  }, [
-    createBookmarkIsSuccess,
-    createBookmarkIsError,
-    createBookmarkError,
-    deleteBookmarkIsSuccess,
-    deleteBookmarkIsError,
-    deleteBookmarkError,
-  ]);
+  }, [deleteBookmarkIsSuccess, deleteBookmarkIsError, deleteBookmarkError]);
 
   return (
     <div>
@@ -135,12 +90,12 @@ const ExamSingleQues = ({
         <div className="flex justify-between items-center mb-2">
           <h2 className="">
             <span className="text-lg font-bold">{index + 1}:</span>{" "}
-            {exam?.question}
+            {bookmark?.question}
           </h2>
-          <div>
-            {getSingleBookmark?.data?.question === exam?.question ? (
+          <div className="flex gap-1">
+            {getSingleBookmark?.data?.question === bookmark?.question ? (
               <button
-                onClick={() => handleDeleteFromBookmark(exam)}
+                onClick={() => handleDeleteFromBookmark(bookmark)}
                 className="btn-sm border-none"
                 title="See correct answer"
               >
@@ -148,89 +103,86 @@ const ExamSingleQues = ({
               </button>
             ) : (
               <button
-                onClick={() => handleAddToBookmark(exam)}
+                onClick={() => handleAddToBookmark(bookmark)}
                 className="btn-sm border-none"
                 title="See correct answer"
               >
                 <BsBookmarkPlus className="w-4 h-4" />
               </button>
             )}
-            {eyeShow && (
-              <button
-                onClick={() => showCorrectAnswer(exam?.answer)}
-                className="btn bg-base-100 btn-sm border-none"
-                title="See correct answer"
-                disabled={!eyeShow && true}
-              >
-                <AiOutlineEye />
-              </button>
-            )}
+            <button
+              onClick={() => showCorrectAnswer(bookmark?.answer)}
+              className="btn bg-base-100 btn-sm border-none"
+              title="See correct answer"
+            >
+              <AiOutlineEye />
+            </button>
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <div className="flex items-center h-full">
             <label className="label cursor-pointer w-full flex hover:bg-gray-200 rounded-lg">
               <input
-                onClick={() => handleSelectedAnswer(exam?.option1)}
+                onClick={() => handleSelectedAnswer(bookmark?.option1)}
                 type="radio"
-                name={`radio-${exam?.id}`}
+                name={`radio-${bookmark?.id}`}
                 className="radio radio-sm checked:bg-blue-500 mr-4"
                 disabled={disable && true}
               />
-              <p className="label-text flex-1">{exam?.option1}</p>
+              <p className="label-text flex-1">{bookmark?.option1}</p>
             </label>
           </div>
           <div className="flex items-center h-full">
             <label className="label cursor-pointer w-full flex hover:bg-gray-200 rounded-lg">
               <input
-                onClick={() => handleSelectedAnswer(exam?.option2)}
+                onClick={() => handleSelectedAnswer(bookmark?.option2)}
                 type="radio"
-                name={`radio-${exam?.id}`}
+                name={`radio-${bookmark?.id}`}
                 className="radio radio-sm checked:bg-blue-500 mr-4"
                 disabled={disable && true}
               />
-              <span className="label-text flex-1">{exam?.option2}</span>
+              <span className="label-text flex-1">{bookmark?.option2}</span>
             </label>
           </div>
-          {exam?.option3 && (
+          {bookmark?.option3 && (
             <div className="flex items-center h-full">
               <label className="label cursor-pointer w-full flex hover:bg-gray-200 rounded-lg">
                 <input
-                  onClick={() => handleSelectedAnswer(exam?.option3)}
+                  onClick={() => handleSelectedAnswer(bookmark?.option3)}
                   type="radio"
-                  name={`radio-${exam?.id}`}
+                  name={`radio-${bookmark?.id}`}
                   className="radio radio-sm checked:bg-blue-500 mr-4"
                   disabled={disable && true}
                 />
-                <span className="label-text flex-1">{exam?.option3}</span>
+                <span className="label-text flex-1">{bookmark?.option3}</span>
               </label>
             </div>
           )}
-          {exam?.option4 && (
+          {bookmark?.option4 && (
             <div className="flex items-center h-full">
               <label className="label cursor-pointer w-full flex hover:bg-gray-200 rounded-lg">
                 <input
-                  onClick={() => handleSelectedAnswer(exam?.option4)}
+                  onClick={() => handleSelectedAnswer(bookmark?.option4)}
                   type="radio"
-                  name={`radio-${exam?.id}`}
+                  name={`radio-${bookmark?.id}`}
                   className="radio radio-sm checked:bg-blue-500 mr-4"
                   disabled={disable && true}
                 />
-                <span className="label-text flex-1">{exam?.option4}</span>
+                <span className="label-text flex-1">{bookmark?.option4}</span>
               </label>
             </div>
           )}
-          {exam?.option5 && (
+          {bookmark?.option5 && (
             <div className="flex items-center h-full">
               <label className="label cursor-pointer w-full flex hover:bg-gray-200 rounded-lg">
                 <input
-                  onClick={() => handleSelectedAnswer(exam?.option5)}
+                  onClick={() => handleSelectedAnswer(bookmark?.option5)}
                   type="radio"
-                  name={`radio-${exam?.id}`}
+                  name={`radio-${bookmark?.id}`}
                   className="radio radio-sm checked:bg-blue-500 mr-4"
                   disabled={disable && true}
                 />
-                <span className="label-text flex-1">{exam?.option5}</span>
+                <span className="label-text flex-1">{bookmark?.option5}</span>
               </label>
             </div>
           )}
@@ -240,4 +192,4 @@ const ExamSingleQues = ({
   );
 };
 
-export default ExamSingleQues;
+export default BookmarkSingleQues;
