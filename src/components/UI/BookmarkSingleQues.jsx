@@ -92,23 +92,13 @@ const BookmarkSingleQues = ({
             {bookmark?.question}
           </h2>
           <div className="flex gap-1">
-            {getSingleBookmark?.data?.question === bookmark?.question ? (
-              <button
-                onClick={() => handleDeleteFromBookmark(bookmark)}
-                className="btn-sm border-none"
-                title="See correct answer"
-              >
-                <BsFillBookmarkDashFill className="w-4 h-4" />
-              </button>
-            ) : (
-              <button
-                onClick={() => handleAddToBookmark(bookmark)}
-                className="btn-sm border-none"
-                title="See correct answer"
-              >
-                <BsBookmarkPlus className="w-4 h-4" />
-              </button>
-            )}
+            <button
+              onClick={() => handleDeleteFromBookmark(bookmark)}
+              className="btn-sm border-none"
+              title="See correct answer"
+            >
+              <BsFillBookmarkDashFill className="w-4 h-4" />
+            </button>
             <button
               onClick={() => showCorrectAnswer(bookmark?.answer)}
               className="btn bg-base-100 btn-sm border-none"

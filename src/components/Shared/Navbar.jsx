@@ -119,7 +119,7 @@ const Navbar = () => {
                 stickyNav ? "sticky-menu" : ""
               }`}
             >
-              <Link href="/bookmark">Bookmark</Link>
+              <Link href="/bookmarks">Bookmarks</Link>
             </li>
           </div>
           {/* right side menu for large devices  */}
