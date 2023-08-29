@@ -149,6 +149,7 @@ const SingleExam = () => {
                     setQues={setQues}
                     eyeShow={eyeShow}
                     getMyProfile={getMyProfile}
+                    subject={getSingleExam?.data?.subject}
                   />
                 ))}
               </div>

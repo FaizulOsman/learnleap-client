@@ -1,6 +1,5 @@
 import {
   useCreateBookmarkMutation,
-  useGetAllBookmarkQuery,
   useGetSingleBookmarkQuery,
 } from "@/redux/bookmark/bookmarkApi";
 import React, { useEffect, useState } from "react";
@@ -17,6 +16,7 @@ const ExamSingleQues = ({
   setQues,
   eyeShow,
   getMyProfile,
+  subject,
 }) => {
   const [disable, setDisable] = useState(false);
   const [accessToken, setAccessToken] = useState("");
@@ -71,14 +71,14 @@ const ExamSingleQues = ({
       option4: q?.option4,
       option5: q?.option5,
       answer: q?.answer,
-      subject: "English",
+      subject: subject,
       email: getMyProfile?.data?.email,
       questionId: exam?.id,
     };
     createBookmark({ data, headers });
   };
 
-  const { data: getAllBookmark } = useGetSingleBookmarkQuery({
+  const { data: getSingleBookmark } = useGetSingleBookmarkQuery({
     questionId: exam?.id,
     headers,
   });
@@ -104,7 +104,7 @@ const ExamSingleQues = ({
             {exam?.question}
           </h2>
           <div>
-            {getAllBookmark?.data?.question === exam?.question ? (
+            {getSingleBookmark?.data?.question === exam?.question ? (
               <button
                 onClick={() => handleAddToBookmark(exam)}
                 className="btn-sm border-none"
