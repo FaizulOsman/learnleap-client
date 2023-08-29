@@ -1,6 +1,12 @@
-import React, { useState } from "react";
+import {
+  useCreateBookmarkMutation,
+  useGetAllBookmarkQuery,
+  useGetSingleBookmarkQuery,
+} from "@/redux/bookmark/bookmarkApi";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { AiOutlineEye } from "react-icons/ai";
+import { BsBookmarkPlus, BsFillBookmarkCheckFill } from "react-icons/bs";
 
 const ExamSingleQues = ({
   index,
@@ -10,8 +16,11 @@ const ExamSingleQues = ({
   ques,
   setQues,
   eyeShow,
+  getMyProfile,
 }) => {
   const [disable, setDisable] = useState(false);
+  const [accessToken, setAccessToken] = useState("");
+
   const showCorrectAnswer = (correctAnswer) => {
     toast.success(`Correct Answer: ${correctAnswer}`);
   };
@@ -40,6 +49,52 @@ const ExamSingleQues = ({
     ]);
   };
 
+  const headers = {
+    authorization: accessToken,
+  };
+
+  const [
+    createBookmark,
+    {
+      isSuccess: createBookmarkIsSuccess,
+      isError: createBookmarkIsError,
+      error: createBookmarkError,
+    },
+  ] = useCreateBookmarkMutation();
+
+  const handleAddToBookmark = (q) => {
+    const data = {
+      question: q?.question,
+      option1: q?.option1,
+      option2: q?.option2,
+      option3: q?.option3,
+      option4: q?.option4,
+      option5: q?.option5,
+      answer: q?.answer,
+      subject: "English",
+      email: getMyProfile?.data?.email,
+      questionId: exam?.id,
+    };
+    createBookmark({ data, headers });
+  };
+
+  const { data: getAllBookmark } = useGetSingleBookmarkQuery({
+    questionId: exam?.id,
+    headers,
+  });
+
+  useEffect(() => {
+    const acc = localStorage.getItem("access-token");
+    setAccessToken(acc);
+
+    if (createBookmarkIsSuccess) {
+      toast.success("Question added to bookmark");
+    }
+    if (createBookmarkIsError) {
+      toast.error(createBookmarkError?.data?.message || "Something went wrong");
+    }
+  }, [createBookmarkIsSuccess, createBookmarkIsError, createBookmarkError]);
+
   return (
     <div>
       <div className="bg-base-100 border shadow-sm p-4 rounded-lg">
@@ -48,14 +103,35 @@ const ExamSingleQues = ({
             <span className="text-lg font-bold">{index + 1}:</span>{" "}
             {exam?.question}
           </h2>
-          <button
-            onClick={() => showCorrectAnswer(exam?.answer)}
-            className="btn bg-base-100 btn-sm border-none"
-            title="See correct answer"
-            disabled={!eyeShow && true}
-          >
-            <AiOutlineEye />
-          </button>
+          <div>
+            {getAllBookmark?.data?.question === exam?.question ? (
+              <button
+                onClick={() => handleAddToBookmark(exam)}
+                className="btn-sm border-none"
+                title="See correct answer"
+              >
+                <BsFillBookmarkCheckFill className="w-4 h-4" />
+              </button>
+            ) : (
+              <button
+                onClick={() => handleAddToBookmark(exam)}
+                className="btn-sm border-none"
+                title="See correct answer"
+              >
+                <BsBookmarkPlus className="w-4 h-4" />
+              </button>
+            )}
+            {eyeShow && (
+              <button
+                onClick={() => showCorrectAnswer(exam?.answer)}
+                className="btn bg-base-100 btn-sm border-none"
+                title="See correct answer"
+                disabled={!eyeShow && true}
+              >
+                <AiOutlineEye />
+              </button>
+            )}
+          </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <div className="flex items-center h-full">

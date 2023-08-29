@@ -148,6 +148,7 @@ const SingleExam = () => {
                     ques={ques}
                     setQues={setQues}
                     eyeShow={eyeShow}
+                    getMyProfile={getMyProfile}
                   />
                 ))}
               </div>
