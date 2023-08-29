@@ -135,7 +135,7 @@ const ExamSingleQues = ({
             <span className="text-lg font-bold">{index + 1}:</span>{" "}
             {exam?.question}
           </h2>
-          <div>
+          <div className="flex gap-1">
             {getSingleBookmark?.data?.question === exam?.question ? (
               <button
                 onClick={() => handleDeleteFromBookmark(exam)}

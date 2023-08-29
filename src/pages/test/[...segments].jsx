@@ -67,6 +67,7 @@ const SingleTest = () => {
                     ques={ques}
                     setQues={setQues}
                     eyeShow={eyeShow}
+                    subject={getSingleTest?.data?.subject}
                   />
                 ))}
               </div>

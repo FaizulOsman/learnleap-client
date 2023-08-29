@@ -1,6 +1,13 @@
-import React, { useState } from "react";
+import {
+  useCreateBookmarkMutation,
+  useDeleteBookmarkMutation,
+  useGetSingleBookmarkQuery,
+} from "@/redux/bookmark/bookmarkApi";
+import { useGetMyProfileQuery } from "@/redux/user/userApi";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { AiOutlineEye } from "react-icons/ai";
+import { BsBookmarkPlus, BsFillBookmarkDashFill } from "react-icons/bs";
 
 const TestSingleQues = ({
   index,
@@ -10,10 +17,68 @@ const TestSingleQues = ({
   ques,
   setQues,
   eyeShow,
+  subject,
 }) => {
   const [disable, setDisable] = useState(false);
+  const [accessToken, setAccessToken] = useState("");
+
   const showCorrectAnswer = (correctAnswer) => {
     toast.success(`Correct Answer: ${correctAnswer}`);
+  };
+
+  const headers = {
+    authorization: accessToken,
+  };
+
+  const { data: getMyProfile } = useGetMyProfileQuery({ headers });
+
+  const { data: getSingleBookmark } = useGetSingleBookmarkQuery({
+    questionId: test?.id,
+    headers,
+  });
+
+  // Create
+  const [
+    createBookmark,
+    {
+      isSuccess: createBookmarkIsSuccess,
+      isError: createBookmarkIsError,
+      error: createBookmarkError,
+    },
+  ] = useCreateBookmarkMutation();
+
+  const handleAddToBookmark = (q) => {
+    const data = {
+      question: q?.question,
+      option1: q?.option1,
+      option2: q?.option2,
+      option3: q?.option3,
+      option4: q?.option4,
+      option5: q?.option5,
+      answer: q?.answer,
+      subject: subject,
+      email: getMyProfile?.data?.email,
+      questionId: test?.id,
+    };
+    createBookmark({ data, headers });
+  };
+
+  // Delete
+  const [
+    deleteBookmark,
+    {
+      isSuccess: deleteBookmarkIsSuccess,
+      isError: deleteBookmarkIsError,
+      error: deleteBookmarkError,
+    },
+  ] = useDeleteBookmarkMutation();
+
+  const handleDeleteFromBookmark = (q) => {
+    const data = {
+      question: q?.question,
+    };
+
+    deleteBookmark({ data, headers });
   };
 
   const handleSelectedAnswer = (option) => {
@@ -40,6 +105,32 @@ const TestSingleQues = ({
     ]);
   };
 
+  useEffect(() => {
+    const acc = localStorage.getItem("access-token");
+    setAccessToken(acc);
+
+    if (createBookmarkIsSuccess) {
+      toast.success("Question added to bookmark");
+    }
+    if (createBookmarkIsError) {
+      toast.error(createBookmarkError?.data?.message || "Something went wrong");
+    }
+
+    if (deleteBookmarkIsSuccess) {
+      toast.success("Question deleted from bookmark");
+    }
+    if (deleteBookmarkIsError) {
+      toast.error(deleteBookmarkError?.data?.message || "Something went wrong");
+    }
+  }, [
+    createBookmarkIsSuccess,
+    createBookmarkIsError,
+    createBookmarkError,
+    deleteBookmarkIsSuccess,
+    deleteBookmarkIsError,
+    deleteBookmarkError,
+  ]);
+
   return (
     <div>
       <div className="bg-base-100 border shadow-sm p-4 rounded-lg">
@@ -48,14 +139,33 @@ const TestSingleQues = ({
             <span className="text-lg font-bold">{index + 1}:</span>{" "}
             {test?.question}
           </h2>
-          <button
-            onClick={() => showCorrectAnswer(test?.answer)}
-            className="btn bg-base-100 btn-sm border-none"
-            title="See correct answer"
-            disabled={!eyeShow && true}
-          >
-            <AiOutlineEye />
-          </button>
+          <div className="">
+            {getSingleBookmark?.data?.question === test?.question ? (
+              <button
+                onClick={() => handleDeleteFromBookmark(test)}
+                className="btn-sm border-none"
+                title="See correct answer"
+              >
+                <BsFillBookmarkDashFill className="w-4 h-4" />
+              </button>
+            ) : (
+              <button
+                onClick={() => handleAddToBookmark(test)}
+                className="btn-sm border-none"
+                title="See correct answer"
+              >
+                <BsBookmarkPlus className="w-4 h-4" />
+              </button>
+            )}
+            <button
+              onClick={() => showCorrectAnswer(test?.answer)}
+              className="btn bg-base-100 btn-sm border-none"
+              title="See correct answer"
+              disabled={!eyeShow && true}
+            >
+              <AiOutlineEye />
+            </button>
+          </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <div className="flex items-center h-full">
