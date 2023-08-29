@@ -1,6 +1,8 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useGetSingleExamResultQuery } from "@/redux/examResult/examResultApi";
+import { useGetMyProfileQuery } from "@/redux/user/userApi";
+import { toast } from "react-hot-toast";
 
 const FindExamBySubject = ({ exam }) => {
   const [getSingleExamResult, setGetSingleExamResult] = useState({});
@@ -16,19 +18,22 @@ const FindExamBySubject = ({ exam }) => {
   };
 
   const {
-    data: aaa,
+    data: singleExamResult,
     isLoading,
     isSuccess,
     isError,
   } = useGetSingleExamResultQuery({ id: exam?.id, headers });
 
+  const { data: getMyProfile } = useGetMyProfileQuery({ headers });
+  console.log(getMyProfile?.data?.isPremium);
+
   useEffect(() => {
-    setGetSingleExamResult(aaa);
+    setGetSingleExamResult(singleExamResult);
 
     if (isError) {
       setGetSingleExamResult({});
     }
-  }, [aaa, isLoading, isSuccess, isError]);
+  }, [singleExamResult, isLoading, isSuccess, isError]);
 
   return (
     <div className="flex justify-between items-center bg-gray-200 p-2 rounded-md">
@@ -61,11 +66,23 @@ const FindExamBySubject = ({ exam }) => {
             </Link>
           </div>
         ) : (
-          <Link href={`/exam/${exam?.subject}/${exam?.id}`}>
-            <button className="btn btn-sm bg-green-500 hover:bg-green-600 text-white">
-              Start Exam
-            </button>
-          </Link>
+          <>
+            {" "}
+            {getMyProfile?.data?.isPremium ? (
+              <Link href={`/exam/${exam?.subject}/${exam?.id}`}>
+                <button className="btn btn-sm bg-green-500 hover:bg-green-600 text-white">
+                  Start Exam
+                </button>
+              </Link>
+            ) : (
+              <button
+                onClick={() => toast.error("Be a premium user first")}
+                className="btn btn-sm bg-green-500 hover:bg-green-600 text-white cursor-not-allowed"
+              >
+                Start Exam
+              </button>
+            )}
+          </>
         )}
       </>
     </div>

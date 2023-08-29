@@ -120,6 +120,16 @@ const Navbar = () => {
             {myProfile?.email ? (
               <>
                 <li
+                  className={`px-2 flex items-center border-2 rounded-lg bg-green-500 hover:bg-green-600 text-white duration-300  `}
+                >
+                  <Link
+                    className="btn-link hover:no-underline"
+                    href="/be-a-premium-user"
+                  >
+                    <h6 className={`btn-text text-white`}>Be a premium user</h6>
+                  </Link>
+                </li>
+                <li
                   className={`px-2 flex items-center border-2 rounded-lg hover:bg-green-500 duration-300  `}
                 >
                   <Link
@@ -210,6 +220,9 @@ const Navbar = () => {
                 </li>
                 <li className="body__menu">
                   <Link href="/test">Test</Link>
+                </li>
+                <li className="body__menu">
+                  <Link href="/be-a-premium-user">Be a premium user</Link>
                 </li>
                 <li className="body__menu">
                   <Link href="/about-us">About us</Link>
