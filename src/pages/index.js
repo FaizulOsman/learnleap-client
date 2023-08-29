@@ -1,8 +1,15 @@
 import RootLayout from "@/layouts/RootLayout";
 import AllExams from "./exam";
 import AllTests from "./test";
+import { useRouter } from "next/router";
 
 const HomePage = () => {
+  const router = useRouter();
+  const login = router?.components?.["/login"];
+
+  if (login) {
+    window.location.reload();
+  }
   return (
     <>
       <AllExams />

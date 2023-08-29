@@ -25,7 +25,6 @@ const FindExamBySubject = ({ exam }) => {
   } = useGetSingleExamResultQuery({ id: exam?.id, headers });
 
   const { data: getMyProfile } = useGetMyProfileQuery({ headers });
-  console.log(getMyProfile?.data?.isPremium);
 
   useEffect(() => {
     setGetSingleExamResult(singleExamResult);

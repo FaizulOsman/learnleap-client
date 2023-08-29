@@ -215,32 +215,59 @@ const Navbar = () => {
                 </div>
               </div>
               <div className="sidebar__body">
-                <li className="body__menu">
-                  <Link href="/exam">Exam</Link>
+                <li onClick={() => setIsOpen(false)} className="body__menu">
+                  <Link
+                    href="/exam"
+                    className="w-full block hover:bg-gray-200 px-2 p-1 rounded-md"
+                  >
+                    Exam
+                  </Link>
                 </li>
-                <li className="body__menu">
-                  <Link href="/test">Test</Link>
+                <li onClick={() => setIsOpen(false)} className="body__menu">
+                  <Link
+                    href="/test"
+                    className="w-full block hover:bg-gray-200 px-2 p-1 rounded-md"
+                  >
+                    Test
+                  </Link>
                 </li>
-                <li className="body__menu">
-                  <Link href="/be-a-premium-user">Be a premium user</Link>
+                <li onClick={() => setIsOpen(false)} className="body__menu">
+                  <Link
+                    href="/be-a-premium-user"
+                    className="w-full block hover:bg-gray-200 px-2 p-1 rounded-md"
+                  >
+                    Be a premium user
+                  </Link>
                 </li>
-                <li className="body__menu">
-                  <Link href="/about-us">About us</Link>
+                <li onClick={() => setIsOpen(false)} className="body__menu">
+                  <Link
+                    href="/about-us"
+                    className="w-full block hover:bg-gray-200 px-2 p-1 rounded-md"
+                  >
+                    About us
+                  </Link>
                 </li>
                 {myProfile?.email ? (
-                  <li className="body__menu">
-                    <Link href="#" onClick={() => handleSignOut()}>
+                  <li onClick={() => setIsOpen(false)} className="body__menu">
+                    <Link
+                      href="#"
+                      onClick={() => handleSignOut()}
+                      className="w-full block hover:bg-gray-200 px-2 p-1 rounded-md"
+                    >
                       Logout
                     </Link>
                   </li>
                 ) : (
-                  <li className="body__menu">
+                  <li onClick={() => setIsOpen(false)} className="body__menu">
                     <Link href="/login">Login</Link>
                   </li>
                 )}
               </div>
             </div>
-            <div className="sidebar__backdrop"></div>
+            <div
+              className="sidebar__backdrop"
+              onClick={() => setIsOpen(false)}
+            ></div>
           </div>
         </div>
       </div>
