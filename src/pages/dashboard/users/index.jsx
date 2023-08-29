@@ -80,6 +80,15 @@ const Users = () => {
     }, [3000]);
   };
 
+  const handlePremium = (user, value) => {
+    const data = { isPremium: value };
+    updateUser({ id: user?.id, data, headers });
+
+    setTimeout(() => {
+      window.location.reload();
+    }, [3000]);
+  };
+
   useEffect(() => {
     const acc = localStorage.getItem("access-token");
     setAccessToken(acc);
@@ -95,7 +104,7 @@ const Users = () => {
     }
 
     if (isUpdateUserSuccess) {
-      toast.success("Successfully Updated Role.");
+      toast.success("Successfully Updated User.");
       setAllUsers(getAllUsers?.data);
     }
     if (isUpdateUserError) {
@@ -243,6 +252,7 @@ const Users = () => {
                               Email
                             </th>
                             <th className="sm:px-3 pt-0 pb-3">isAdmin</th>
+                            <th className="sm:px-3 pt-0 pb-3">isPremium</th>
                             <th className="sm:px-3 pt-0 pb-3">Delete</th>
                             <th className="sm:px-3 pt-0 pb-3 hidden sm:table-cell">
                               Update
@@ -282,6 +292,23 @@ const Users = () => {
                                       : false
                                   }
                                 />
+                              </td>
+                              <td className="sm:p-3 py-2">
+                                {user?.isPremium ? (
+                                  <span
+                                    onClick={() => handlePremium(user, false)}
+                                    className="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100 cursor-pointer"
+                                  >
+                                    Yes
+                                  </span>
+                                ) : (
+                                  <span
+                                    onClick={() => handlePremium(user, true)}
+                                    className="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700 cursor-pointer"
+                                  >
+                                    No
+                                  </span>
+                                )}
                               </td>
                               <td className="sm:p-3 py-2">
                                 <button
