@@ -1,5 +1,4 @@
 import {
-  useCreateBookmarkMutation,
   useDeleteBookmarkMutation,
   useGetSingleBookmarkQuery,
 } from "@/redux/bookmark/bookmarkApi";
