@@ -311,7 +311,7 @@ const SideBar = ({ children }) => {
               </Link>
             </div>
           </div>
-          {children}
+          <div className="">{children}</div>
         </main>
       </div>
       <footer className="footer footer-center p-4 bg-[#00073d] text-white">
