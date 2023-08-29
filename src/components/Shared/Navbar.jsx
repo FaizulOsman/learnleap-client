@@ -119,16 +119,20 @@ const Navbar = () => {
           <div className="body__right-menus hidden md:flex md:items-center gap-4">
             {myProfile?.email ? (
               <>
-                <li
-                  className={`px-2 flex items-center border-2 rounded-lg bg-green-500 hover:bg-green-600 text-white duration-300  `}
-                >
-                  <Link
-                    className="btn-link hover:no-underline"
-                    href="/be-a-premium-user"
+                {myProfile?.isPremium || (
+                  <li
+                    className={`px-2 flex items-center border-2 rounded-lg bg-green-500 hover:bg-green-600 text-white duration-300  `}
                   >
-                    <h6 className={`btn-text text-white`}>Be a premium user</h6>
-                  </Link>
-                </li>
+                    <Link
+                      className="btn-link hover:no-underline"
+                      href="/be-a-premium-user"
+                    >
+                      <h6 className={`btn-text text-white`}>
+                        Be a premium user
+                      </h6>
+                    </Link>
+                  </li>
+                )}
                 <li
                   className={`px-2 flex items-center border-2 rounded-lg hover:bg-green-500 duration-300  `}
                 >
