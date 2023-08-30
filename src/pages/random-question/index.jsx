@@ -79,7 +79,11 @@ const RandomQuestions = () => {
             type="number"
             name="limit"
             onChange={(e) => setQuesLimit(parseInt(e.target.value))}
-            placeholder={`Limit (Max ${getTestBySubject?.meta?.total})`}
+            placeholder={`Limit ${
+              getTestBySubject?.meta?.total
+                ? `(Max ${getTestBySubject?.meta?.total})`
+                : ""
+            }`}
             className="border px-3 py-1 border-gray-500 rounded-md w-[40%]"
             max={getTestBySubject?.meta?.total}
           />
