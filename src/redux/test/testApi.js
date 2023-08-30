@@ -15,6 +15,10 @@ const testApi = apiSlice.injectEndpoints({
       query: () => `/test`,
       providesTags: ["test-yourself"],
     }),
+    getTestBySubject: builder.query({
+      query: (subject) => `/test/get-test-by-subject/${subject}`,
+      providesTags: ["test-yourself"],
+    }),
     getSingleTest: builder.query({
       query: (id) => `/test/${id}`,
       providesTags: ["test-yourself"],
@@ -51,6 +55,7 @@ const testApi = apiSlice.injectEndpoints({
 export const {
   useCreateTestMutation,
   useGetAllTestQuery,
+  useGetTestBySubjectQuery,
   useGetSingleTestQuery,
   useDeleteTestMutation,
   useUpdateTestMutation,
