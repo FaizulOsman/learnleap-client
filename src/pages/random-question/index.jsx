@@ -66,7 +66,7 @@ const RandomQuestions = () => {
           <select
             onChange={(e) => setIncludes(e.target.value)}
             name="subject"
-            className="select select-bordered max-w-xs w-[40%]"
+            className="select select-bordered max-w-xs w-[40%] border-gray-500"
           >
             <option value="all" selected>
               Subject (All)
@@ -111,28 +111,30 @@ const RandomQuestions = () => {
           />
         ))}
       </div>
-      <div className="text-center mt-4">
-        <label htmlFor="my-modal-4" className="btn btn-primary modal-button">
-          Result
-        </label>
-        <>
-          <input type="checkbox" id="my-modal-4" className="modal-toggle" />
-          <label htmlFor="my-modal-4" className="modal cursor-pointer">
-            <label className="modal-box relative py-10" htmlFor="">
-              <h3 className="text-lg font-bold text-green-500">
-                Total Correct Answer: {count}
-              </h3>
-              <h3 className="text-lg font-bold text-red-500">
-                Total Wrong Answer: {wrong}
-              </h3>
-              <h3 className="text-xl font-bold text-green-500 pt-2">
-                You Got: {totalMark}
-              </h3>
-              <p className="pt-3">Keep going...!!!</p>
-            </label>
+      {questions && questions?.length > 0 && (
+        <div className="text-center mt-4">
+          <label htmlFor="my-modal-4" className="btn btn-primary modal-button">
+            Result
           </label>
-        </>
-      </div>
+          <>
+            <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+            <label htmlFor="my-modal-4" className="modal cursor-pointer">
+              <label className="modal-box relative py-10" htmlFor="">
+                <h3 className="text-lg font-bold text-green-500">
+                  Total Correct Answer: {count}
+                </h3>
+                <h3 className="text-lg font-bold text-red-500">
+                  Total Wrong Answer: {wrong}
+                </h3>
+                <h3 className="text-xl font-bold text-green-500 pt-2">
+                  You Got: {totalMark}
+                </h3>
+                <p className="pt-3">Keep going...!!!</p>
+              </label>
+            </label>
+          </>
+        </div>
+      )}
     </div>
   );
 };
