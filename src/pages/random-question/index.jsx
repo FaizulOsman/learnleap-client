@@ -78,7 +78,12 @@ const RandomQuestions = () => {
           <input
             type="number"
             name="limit"
-            onChange={(e) => setQuesLimit(parseInt(e.target.value))}
+            onChange={(e) => {
+              const enteredValue = parseInt(e.target.value);
+              const maxValue = getTestBySubject?.meta?.total || 0; // Default to 0 if total is undefined
+              const newValue = Math.min(enteredValue, maxValue);
+              setQuesLimit(newValue);
+            }}
             placeholder={`Limit ${
               getTestBySubject?.meta?.total
                 ? `(Max ${getTestBySubject?.meta?.total})`
@@ -87,6 +92,7 @@ const RandomQuestions = () => {
             className="border px-3 py-1 border-gray-500 rounded-md w-[40%]"
             max={getTestBySubject?.meta?.total}
           />
+
           <button
             type="submit"
             className="px-3 py-2 w-[20%] font-bold text-white bg-green-500 rounded-md"
