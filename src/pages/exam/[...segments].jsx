@@ -1,6 +1,7 @@
 import ExamSingleQues from "@/components/UI/ExamSingleQues";
 import Loader from "@/components/UI/Loader";
 import Stopwatch from "@/components/UI/Stopwatch";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 import RootLayout from "@/layouts/RootLayout";
 import {
   useAddResultMutation,
@@ -50,6 +51,9 @@ const SingleExam = () => {
   });
 
   const { data: getMyProfile } = useGetMyProfileQuery({ headers });
+
+  // Protect Route
+  useProtectedRoute(getMyProfile?.data?.role);
 
   if (router && getSingleExam?.data?.timeLimit > 0) {
     if (isRunning === false) {

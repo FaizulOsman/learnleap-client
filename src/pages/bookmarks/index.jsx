@@ -1,7 +1,9 @@
 import BookmarkSingleQues from "@/components/UI/BookmarkSingleQues";
 import Loader from "@/components/UI/Loader";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 import RootLayout from "@/layouts/RootLayout";
 import { useGetAllBookmarkQuery } from "@/redux/bookmark/bookmarkApi";
+import { useGetMyProfileQuery } from "@/redux/user/userApi";
 import React, { useEffect, useRef, useState } from "react";
 
 const Bookmarks = () => {
@@ -23,6 +25,11 @@ const Bookmarks = () => {
   const getAllBookmarkBySubject = getAllBookmark?.data?.filter((bookmark) => {
     return bookmark?.subject === testCategory;
   });
+
+  const { data: getMyProfile } = useGetMyProfileQuery({ headers });
+
+  // Protect Route
+  useProtectedRoute(getMyProfile?.data?.role);
 
   const bookmarkSubjects = getAllBookmark?.data?.map(
     (bookmark) => bookmark?.subject

@@ -1,9 +1,11 @@
 import TestSingleQues from "@/components/UI/TestSingleQues";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 import RootLayout from "@/layouts/RootLayout";
 import {
   useGetAllTestQuery,
   useGetTestBySubjectQuery,
 } from "@/redux/test/testApi";
+import { useGetMyProfileQuery } from "@/redux/user/userApi";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 
@@ -13,6 +15,7 @@ const RandomQuestions = () => {
   const [questions, setQuestions] = useState([]);
   const [count, setCount] = useState(0);
   const [eyeShow, setEyeShow] = useState(true);
+  const [accessToken, setAccessToken] = useState("");
 
   const [ques, setQues] = useState([]);
   const wrong = ques?.length - count;
@@ -31,7 +34,19 @@ const RandomQuestions = () => {
     setQuesLimit(parseInt(e.target.limit.value));
   };
 
+  const headers = {
+    authorization: accessToken,
+  };
+
+  const { data: getMyProfile } = useGetMyProfileQuery({ headers });
+
+  // Protect Route
+  useProtectedRoute(getMyProfile?.data?.role);
+
   useEffect(() => {
+    const acc = localStorage.getItem("access-token");
+    setAccessToken(acc);
+
     if (getTestBySubject?.data) {
       const uniqueQuestions = [];
       while (uniqueQuestions.length < quesLimit) {
@@ -54,7 +69,6 @@ const RandomQuestions = () => {
       toast.error(`Question limit ${getTestBySubject?.meta?.total}`);
     }
   }, [getTestBySubject, quesLimit]);
-  console.log(questions);
 
   return (
     <div className="w-11/12 md:w-8/12 mx-auto">
