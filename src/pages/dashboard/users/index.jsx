@@ -1,4 +1,5 @@
 import Loader from "@/components/UI/Loader";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 import AdminLayout from "@/layouts/AdminLayout";
 import {
   useDeleteUserMutation,
@@ -120,6 +121,9 @@ const Users = () => {
     isUpdateUserError,
     updateUserError,
   ]);
+
+  // Protect Route
+  useProtectedRoute(getMyProfile?.data?.role);
 
   return (
     <div>

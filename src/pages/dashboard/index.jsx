@@ -35,7 +35,7 @@ const Dashboard = () => {
       <div x-data="setup()">
         <div className="min-h-screen  flex flex-col flex-auto flex-shrink-0 antialiased">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
-            {getMyProfile?.data && getMyProfile?.data?.role === "admin" ? (
+            {getMyProfile?.data && getMyProfile?.data?.role === "admin" && (
               <div className="bg-[#1d1836] shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-900 font-medium group">
                 <div className="flex justify-center items-center w-14 h-14 bg-blue-900 rounded-full transition-all duration-300 transform group-hover:rotate-12">
                   <svg
@@ -59,7 +59,8 @@ const Dashboard = () => {
                   <p>Users</p>
                 </div>
               </div>
-            ) : (
+            )}
+            {getMyProfile?.data && (
               <div className="bg-[#1d1836] shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-900 font-medium group">
                 <div className="flex justify-center items-center w-14 h-14 bg-blue-900 rounded-full transition-all duration-300 transform group-hover:rotate-12">
                   <svg
@@ -159,9 +160,11 @@ const Dashboard = () => {
               <Users />
             </div>
           )}
-          <div className="m-4 border-2 border-blue-900 rounded-sm">
-            <MyResults />
-          </div>
+          {getMyProfile?.data && (
+            <div className="m-4 border-2 border-blue-900 rounded-sm">
+              <MyResults />
+            </div>
+          )}
           <div className="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4">
             {getMyProfile?.data && getMyProfile?.data?.role === "admin" && (
               <div className="border-2 border-blue-900 rounded-sm">
