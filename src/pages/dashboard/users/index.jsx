@@ -13,14 +13,22 @@ import { toast } from "react-hot-toast";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 
+const jwt = require("jsonwebtoken");
+
 const Users = () => {
   const [allUsers, setAllUsers] = useState([]);
-  const [accessToken, setAccessToken] = useState("");
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(3);
   const [meta, setMeta] = useState({});
   const [sortOrder, setSortOrder] = useState("desc");
   const [id, setId] = useState("");
+
+  const accessToken =
+    typeof window !== "undefined" ? localStorage.getItem("access-token") : null;
+  const decodedToken = jwt.decode(accessToken);
+
+  // Protect Route
+  useProtectedRoute(decodedToken?.role || "guest");
 
   const headers = {
     authorization: accessToken,
@@ -91,8 +99,6 @@ const Users = () => {
   };
 
   useEffect(() => {
-    const acc = localStorage.getItem("access-token");
-    setAccessToken(acc);
     setAllUsers(getAllUsers?.data);
     setMeta(getAllUsers?.meta);
 
@@ -121,9 +127,6 @@ const Users = () => {
     isUpdateUserError,
     updateUserError,
   ]);
-
-  // Protect Route
-  useProtectedRoute(getMyProfile?.data?.role);
 
   return (
     <div>

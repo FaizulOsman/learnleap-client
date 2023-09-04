@@ -35,7 +35,7 @@ const useProtectedRoute = (role) => {
     "/dashboard/exam/all-exam",
     "/dashboard/results",
   ];
-  const notUserPages = ["/"];
+  const guestPages = ["/"];
 
   // Define a function that redirects the user to the home page if they are not authorized
   const redirect = () => {
@@ -51,9 +51,9 @@ const useProtectedRoute = (role) => {
     } else if (role === "admin" && !adminPages.includes(path)) {
       // If not, redirect them to the home page
       redirect();
-    } else if (role === undefined && !notUserPages.includes(path)) {
+    } else if (role === "guest" && !guestPages.includes(path)) {
       // If not, redirect them to the home page
-      redirect();
+      router.push("/login");
     }
     // Add the role and path as dependencies for the useEffect hook
   }, [role, path]);

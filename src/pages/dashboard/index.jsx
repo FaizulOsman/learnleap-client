@@ -1,5 +1,4 @@
 import AdminLayout from "@/layouts/AdminLayout";
-import { useEffect, useState } from "react";
 import {
   useGetAllUsersQuery,
   useGetMyProfileQuery,
@@ -11,9 +10,17 @@ import MyResults from "./results";
 import AllTest from "./test/all-test";
 import AllExam from "./exam/all-exam";
 import Users from "./users";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
+
+const jwt = require("jsonwebtoken");
 
 const Dashboard = () => {
-  const [accessToken, setAccessToken] = useState("");
+  const accessToken =
+    typeof window !== "undefined" ? localStorage.getItem("access-token") : null;
+  const decodedToken = jwt.decode(accessToken);
+
+  // Protect Route
+  useProtectedRoute(decodedToken?.role || "guest");
 
   const headers = {
     authorization: accessToken,
@@ -24,11 +31,6 @@ const Dashboard = () => {
   const { data: getAllExam } = useGetAllExamQuery({});
   const { data: getAllExamResult } = useGetAllExamResultQuery({});
   const { data: getMyProfile } = useGetMyProfileQuery({ headers });
-
-  useEffect(() => {
-    const acc = localStorage.getItem("access-token");
-    setAccessToken(acc);
-  }, []);
 
   return (
     <div className="title">
