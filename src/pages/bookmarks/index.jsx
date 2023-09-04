@@ -3,33 +3,35 @@ import Loader from "@/components/UI/Loader";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import RootLayout from "@/layouts/RootLayout";
 import { useGetAllBookmarkQuery } from "@/redux/bookmark/bookmarkApi";
-import { useGetMyProfileQuery } from "@/redux/user/userApi";
 import React, { useEffect, useRef, useState } from "react";
+
+const jwt = require("jsonwebtoken");
 
 const Bookmarks = () => {
   const [testCategory, setTestCategory] = useState("English");
   const [count, setCount] = useState(0);
   const [ques, setQues] = useState([]);
-  const [accessToken, setAccessToken] = useState("");
   const submitButtonRef = useRef(null);
 
-  const wrong = ques?.length - count;
-  const mark = count - wrong * 0.25;
-  const totalMark = mark > 0 ? mark : 0;
+  const accessToken =
+    typeof window !== "undefined" ? localStorage.getItem("access-token") : null;
+  const decodedToken = jwt.decode(accessToken);
+
+  // Protect Route
+  useProtectedRoute(decodedToken?.role || "guest");
 
   const headers = {
     authorization: accessToken,
   };
 
+  const wrong = ques?.length - count;
+  const mark = count - wrong * 0.25;
+  const totalMark = mark > 0 ? mark : 0;
+
   const { data: getAllBookmark } = useGetAllBookmarkQuery({ headers });
   const getAllBookmarkBySubject = getAllBookmark?.data?.filter((bookmark) => {
     return bookmark?.subject === testCategory;
   });
-
-  const { data: getMyProfile } = useGetMyProfileQuery({ headers });
-
-  // Protect Route
-  useProtectedRoute(getMyProfile?.data?.role);
 
   const bookmarkSubjects = getAllBookmark?.data?.map(
     (bookmark) => bookmark?.subject
@@ -38,8 +40,6 @@ const Bookmarks = () => {
 
   useEffect(() => {
     submitButtonRef.current.click();
-    const acc = localStorage.getItem("access-token");
-    setAccessToken(acc);
   }, []);
 
   return (
