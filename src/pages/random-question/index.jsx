@@ -5,9 +5,10 @@ import {
   useGetAllTestQuery,
   useGetTestBySubjectQuery,
 } from "@/redux/test/testApi";
-import { useGetMyProfileQuery } from "@/redux/user/userApi";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+
+const jwt = require("jsonwebtoken");
 
 const RandomQuestions = () => {
   const [quesLimit, setQuesLimit] = useState(0);
@@ -15,7 +16,13 @@ const RandomQuestions = () => {
   const [questions, setQuestions] = useState([]);
   const [count, setCount] = useState(0);
   const [eyeShow, setEyeShow] = useState(true);
-  const [accessToken, setAccessToken] = useState("");
+
+  const accessToken =
+    typeof window !== "undefined" ? localStorage.getItem("access-token") : null;
+  const decodedToken = jwt.decode(accessToken);
+
+  // Protect Route
+  useProtectedRoute(decodedToken?.role || "guest");
 
   const [ques, setQues] = useState([]);
   const wrong = ques?.length - count;
@@ -34,19 +41,7 @@ const RandomQuestions = () => {
     setQuesLimit(parseInt(e.target.limit.value));
   };
 
-  const headers = {
-    authorization: accessToken,
-  };
-
-  const { data: getMyProfile } = useGetMyProfileQuery({ headers });
-
-  // Protect Route
-  useProtectedRoute(getMyProfile?.data?.role);
-
   useEffect(() => {
-    const acc = localStorage.getItem("access-token");
-    setAccessToken(acc);
-
     if (getTestBySubject?.data) {
       const uniqueQuestions = [];
       while (uniqueQuestions.length < quesLimit) {
