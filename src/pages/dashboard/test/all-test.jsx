@@ -1,4 +1,5 @@
 import Loader from "@/components/UI/Loader";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 import AdminLayout from "@/layouts/AdminLayout";
 import {
   useDeleteTestMutation,
@@ -9,15 +10,19 @@ import React, { useEffect, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 
+const jwt = require("jsonwebtoken");
+
 const AllTest = () => {
   const [testCategory, setTestCategory] = useState("English");
   const { data: allTest } = useGetAllTestQuery();
 
-  const [accessToken, setAccessToken] = useState("");
-  useEffect(() => {
-    const acc = localStorage.getItem("access-token");
-    setAccessToken(acc);
-  }, []);
+  const accessToken =
+    typeof window !== "undefined" ? localStorage.getItem("access-token") : null;
+  const decodedToken = jwt.decode(accessToken);
+
+  // Protect Route
+  useProtectedRoute(decodedToken?.role || "guest");
+
   const headers = {
     authorization: accessToken,
   };
