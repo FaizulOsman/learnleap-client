@@ -1,4 +1,5 @@
 import ExamAnswerSingleQues from "@/components/UI/ExamAnswerSingleQues";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 import RootLayout from "@/layouts/RootLayout";
 import { useGetSingleExamQuery } from "@/redux/exam/examApi";
 import { useGetSingleExamResultQuery } from "@/redux/examResult/examResultApi";
@@ -7,6 +8,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
+const jwt = require("jsonwebtoken");
+
 const SingleExam = () => {
   const router = useRouter();
   const { resultSegments } = router.query;
@@ -14,13 +17,14 @@ const SingleExam = () => {
   const [count, setCount] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [eyeShow, setEyeShow] = useState(false);
-  const [accessToken, setAccessToken] = useState("");
   const [ques, setQues] = useState([]);
 
-  useEffect(() => {
-    const acc = localStorage.getItem("access-token");
-    setAccessToken(acc);
-  }, []);
+  const accessToken =
+    typeof window !== "undefined" ? localStorage.getItem("access-token") : null;
+  const decodedToken = jwt.decode(accessToken);
+
+  // Protect Route
+  useProtectedRoute(decodedToken?.role || "guest");
 
   const headers = {
     authorization: accessToken,
