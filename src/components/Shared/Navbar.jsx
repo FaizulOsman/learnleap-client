@@ -126,7 +126,7 @@ const Navbar = () => {
                 stickyNav ? "sticky-menu" : ""
               }`}
             >
-              <Link href="/random-question">Filter</Link>
+              <Link href="/random-question">Random Question</Link>
             </li>
           </div>
           {/* right side menu for large devices  */}
@@ -259,6 +259,14 @@ const Navbar = () => {
                 </li>
                 <li onClick={() => setIsOpen(false)} className="body__menu">
                   <Link
+                    href="/random-question"
+                    className="w-full block hover:bg-gray-200 px-2 p-1 rounded-md"
+                  >
+                    Random Question
+                  </Link>
+                </li>
+                <li onClick={() => setIsOpen(false)} className="body__menu">
+                  <Link
                     href="/about-us"
                     className="w-full block hover:bg-gray-200 px-2 p-1 rounded-md"
                   >
@@ -276,8 +284,16 @@ const Navbar = () => {
                     </Link>
                   </li>
                 ) : (
-                  <li onClick={() => setIsOpen(false)} className="body__menu">
-                    <Link href="/login">Login</Link>
+                  <li
+                    onClick={() => setIsOpen(false)}
+                    className="mx-4 text-white text-center"
+                  >
+                    <Link
+                      href="/login"
+                      className="w-full block bg-green-500 hover:bg-green-600 text-white px-2 p-1 rounded-md"
+                    >
+                      Login
+                    </Link>
                   </li>
                 )}
               </div>

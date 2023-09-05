@@ -13,6 +13,7 @@ const useProtectedRoute = (role) => {
   const userPages = [
     "/bookmarks",
     "/random-question",
+    "/be-a-premium-user",
     "/exam/[...segments]",
     "/exam-result/[...resultSegments]",
     "/dashboard",
@@ -23,6 +24,7 @@ const useProtectedRoute = (role) => {
   const adminPages = [
     "/bookmarks",
     "/random-question",
+    "/be-a-premium-user",
     "/exam/[...segments]",
     "/exam-result/[...resultSegments]",
     "/dashboard",
