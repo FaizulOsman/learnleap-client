@@ -1,15 +1,24 @@
 import Loader from "@/components/UI/Loader";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 import AdminLayout from "@/layouts/AdminLayout";
 import { useGetMySubmittedResultsQuery } from "@/redux/examResult/examResultApi";
 import React, { useEffect, useState } from "react";
 
+const jwt = require("jsonwebtoken");
+
 const MyResults = () => {
-  const [accessToken, setAccessToken] = useState("");
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(3);
   const [meta, setMeta] = useState({});
   const [sortOrder, setSortOrder] = useState("desc");
   const [myResults, setMyResults] = useState([]);
+
+  const accessToken =
+    typeof window !== "undefined" ? localStorage.getItem("access-token") : null;
+  const decodedToken = jwt.decode(accessToken);
+
+  // Protect Route
+  useProtectedRoute(decodedToken?.role || "guest");
 
   const headers = {
     authorization: accessToken,
@@ -31,8 +40,6 @@ const MyResults = () => {
   };
 
   useEffect(() => {
-    const acc = localStorage.getItem("access-token");
-    setAccessToken(acc);
     setMyResults(getMySubmittedResults?.data);
     setMeta(getMySubmittedResults?.meta);
   }, [getMySubmittedResults, getMySubmittedResults?.data]);
