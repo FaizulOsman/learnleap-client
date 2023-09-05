@@ -16,6 +16,8 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 
+const jwt = require("jsonwebtoken");
+
 const SingleExam = () => {
   const router = useRouter();
   const { segments } = router.query;
@@ -32,12 +34,12 @@ const SingleExam = () => {
     { data, isError, isLoading, isSuccess, error, status },
   ] = useCreateExamResultMutation();
 
-  const [accessToken, setAccessToken] = useState("");
+  const accessToken =
+    typeof window !== "undefined" ? localStorage.getItem("access-token") : null;
+  const decodedToken = jwt.decode(accessToken);
 
-  useEffect(() => {
-    const acc = localStorage.getItem("access-token");
-    setAccessToken(acc);
-  }, []);
+  // Protect Route
+  useProtectedRoute(decodedToken?.role || "guest");
 
   const headers = {
     authorization: accessToken,
@@ -51,9 +53,6 @@ const SingleExam = () => {
   });
 
   const { data: getMyProfile } = useGetMyProfileQuery({ headers });
-
-  // Protect Route
-  useProtectedRoute(getMyProfile?.data?.role);
 
   if (router && getSingleExam?.data?.timeLimit > 0) {
     if (isRunning === false) {
