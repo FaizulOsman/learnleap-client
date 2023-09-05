@@ -1,3 +1,4 @@
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 import AdminLayout from "@/layouts/AdminLayout";
 import {
   useGetMyProfileQuery,
@@ -6,9 +7,17 @@ import {
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
+const jwt = require("jsonwebtoken");
+
 const MyProfile = () => {
   const [MyProfile, setMyProfile] = useState([]);
-  const [accessToken, setAccessToken] = useState("");
+
+  const accessToken =
+    typeof window !== "undefined" ? localStorage.getItem("access-token") : null;
+  const decodedToken = jwt.decode(accessToken);
+
+  // Protect Route
+  useProtectedRoute(decodedToken?.role || "guest");
 
   const headers = {
     authorization: accessToken,
@@ -36,8 +45,6 @@ const MyProfile = () => {
   };
 
   useEffect(() => {
-    const acc = localStorage.getItem("access-token");
-    setAccessToken(acc);
     setMyProfile(getMyProfile?.data);
 
     if (updateProfileIsSuccess) {
