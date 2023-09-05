@@ -1,7 +1,10 @@
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 import AdminLayout from "@/layouts/AdminLayout";
 import { useCreateTestMutation } from "@/redux/test/testApi";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+
+const jwt = require("jsonwebtoken");
 
 const CreateTest = () => {
   const [ques, setQues] = useState([]);
@@ -54,12 +57,12 @@ const CreateTest = () => {
     e.target.serial.value = "";
   };
 
-  const [accessToken, setAccessToken] = useState("");
+  const accessToken =
+    typeof window !== "undefined" ? localStorage.getItem("access-token") : null;
+  const decodedToken = jwt.decode(accessToken);
 
-  useEffect(() => {
-    const acc = localStorage.getItem("access-token");
-    setAccessToken(acc);
-  }, []);
+  // Protect Route
+  useProtectedRoute(decodedToken?.role || "guest");
 
   const headers = {
     authorization: accessToken,
