@@ -59,7 +59,6 @@ const useProtectedRoute = (role) => {
       // If not, redirect them to the home page
       router.push("/login");
     }
-    // Add the role and path as dependencies for the useEffect hook
   }, [role, path]);
 };
 
