@@ -2,7 +2,7 @@ import RootLayout from "@/layouts/RootLayout";
 import AllExams from "./exam";
 import AllTests from "./test";
 import { useRouter } from "next/router";
-import Discuss from "./discuss";
+import Discussion from "./discussion";
 
 const HomePage = () => {
   const router = useRouter();
@@ -15,7 +15,7 @@ const HomePage = () => {
     <>
       <AllExams />
       <AllTests />
-      <Discuss />
+      <Discussion />
     </>
   );
 };

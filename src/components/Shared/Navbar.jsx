@@ -128,6 +128,13 @@ const Navbar = () => {
             >
               <Link href="/random-question">Random Question</Link>
             </li>
+            <li
+              className={`left-menus__menu font-semibold hover:text-blue-600 ${
+                stickyNav ? "sticky-menu" : ""
+              }`}
+            >
+              <Link href="/discussion">Discuss</Link>
+            </li>
           </div>
           {/* right side menu for large devices  */}
           <div className="body__right-menus hidden md:flex md:items-center gap-4">
@@ -263,6 +270,14 @@ const Navbar = () => {
                     className="w-full block hover:bg-gray-200 px-2 p-1 rounded-md"
                   >
                     Random Question
+                  </Link>
+                </li>
+                <li onClick={() => setIsOpen(false)} className="body__menu">
+                  <Link
+                    href="/discussion"
+                    className="w-full block hover:bg-gray-200 px-2 p-1 rounded-md"
+                  >
+                    Discuss
                   </Link>
                 </li>
                 <li onClick={() => setIsOpen(false)} className="body__menu">

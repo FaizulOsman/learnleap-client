@@ -1,3 +1,4 @@
+import RootLayout from "@/layouts/RootLayout";
 import {
   useCreateDiscussMutation,
   useDeleteDiscussMutation,
@@ -10,7 +11,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineDelete } from "react-icons/ai";
 
-const Discuss = () => {
+const Discussion = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(5);
   const [meta, setMeta] = useState({});
@@ -139,7 +140,7 @@ const Discuss = () => {
       </h1>
       <div>
         <div className="flex justify-between border-b-2 pb-4">
-          <h2 className="hidden sm:inline-block text-xl font-bold">
+          <h2 className="hidden sm:inline-block text-xl text-blue-500 font-bold">
             {getAllDiscuss?.meta?.total} Comments
           </h2>
           <div className="sm:ml-auto mr-5 flex items-center gap-4">
@@ -363,7 +364,7 @@ const Discuss = () => {
         <button
           onClick={() => handlePageChange(page - 1)}
           className={`inline-flex items-center h-6 w-6 justify-center rounded-md shadow border ${
-            page === 1 ? "opacity-50 cursor-not-allowed" : "border-gray-800"
+            page === 1 ? "opacity-50 cursor-not-allowed" : "border-blue-800"
           } leading-none`}
           disabled={page === 1}
         >
@@ -385,8 +386,8 @@ const Discuss = () => {
             onClick={() => handlePageChange(index + 1)}
             className={`inline-flex items-center h-6 w-6 justify-center rounded-md shadow border ${
               page === index + 1
-                ? "bg-gray-300 border-gray-800"
-                : "border-gray-800"
+                ? "bg-blue-500 border-blue-800 text-white"
+                : "border-blue-800"
             } leading-none`}
           >
             {index + 1}
@@ -397,7 +398,7 @@ const Discuss = () => {
           className={`inline-flex items-center h-6 w-6 justify-center rounded-md shadow border ${
             page === totalPage
               ? "opacity-50 cursor-not-allowed"
-              : "border-gray-800"
+              : "border-blue-800"
           } leading-none`}
           disabled={page === totalPage}
         >
@@ -418,4 +419,8 @@ const Discuss = () => {
   );
 };
 
-export default Discuss;
+export default Discussion;
+
+Discussion.getLayout = function getLayout(page) {
+  return <RootLayout>{page}</RootLayout>;
+};
