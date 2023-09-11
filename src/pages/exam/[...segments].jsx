@@ -28,6 +28,7 @@ const SingleExam = () => {
   const [timeOver, setTimeOver] = useState(false);
   const [submittedByTimeOver, setSubmittedByTimeOver] = useState(false);
   const submitButtonRef = useRef(null);
+  const [showResult, setShowResult] = useState(false);
 
   const [
     createExamResult,
@@ -67,6 +68,7 @@ const SingleExam = () => {
   const totalMark = mark > 0 ? mark : 0;
 
   const handleSubmitExam = () => {
+    setShowResult(true);
     const data = {
       questions: ques,
       subject: getSingleExam?.data?.subject,
@@ -153,6 +155,7 @@ const SingleExam = () => {
                     eyeShow={eyeShow}
                     getMyProfile={getMyProfile}
                     subject={getSingleExam?.data?.subject}
+                    showResult={showResult}
                   />
                 ))}
               </div>
