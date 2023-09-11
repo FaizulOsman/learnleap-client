@@ -1,5 +1,6 @@
 import {
   useCreateDiscussMutation,
+  useDeleteDiscussMutation,
   useGetAllDiscussQuery,
   useUpdateDiscussMutation,
 } from "@/redux/discuss/discussApi";
@@ -19,10 +20,13 @@ const Discuss = () => {
   };
 
   const { data: getMyProfile } = useGetMyProfileQuery({ headers });
-  const [createDiscuss, { isSuccess: createDiscussIsSuccess, error }] =
-    useCreateDiscussMutation();
-  const [updateDiscuss, { isSuccess: updateDiscussIsSuccess }] =
-    useUpdateDiscussMutation();
+  const [
+    createDiscuss,
+    { data: createDiscussData, isSuccess: createDiscussIsSuccess },
+  ] = useCreateDiscussMutation();
+  const [updateDiscuss] = useUpdateDiscussMutation();
+  const [deleteDiscuss, { isSuccess: deleteDiscussIsSuccess }] =
+    useDeleteDiscussMutation();
   const { data: getAllDiscuss } = useGetAllDiscussQuery();
 
   const handleAddQuesInDiscuss = (e) => {
@@ -34,6 +38,10 @@ const Discuss = () => {
     };
     createDiscuss(data);
     e.target.discuss.value = "";
+  };
+
+  const handleDeleteDiscuss = (data) => {
+    deleteDiscuss({ id: data?.id, headers });
   };
 
   const handleLike = (d) => {
@@ -93,13 +101,16 @@ const Discuss = () => {
   };
 
   useEffect(() => {
-    if (createDiscussIsSuccess) {
+    if (createDiscussData && createDiscussIsSuccess) {
       toast.success("Question added in discussion!");
     }
-    if (updateDiscussIsSuccess) {
-      toast.success("Done!");
+  }, [createDiscussData, createDiscussIsSuccess]);
+
+  useEffect(() => {
+    if (deleteDiscussIsSuccess) {
+      toast.success("Question deleted successfully!");
     }
-  }, [createDiscussIsSuccess, updateDiscussIsSuccess]);
+  }, [deleteDiscussIsSuccess]);
 
   return (
     <div>
@@ -201,8 +212,18 @@ const Discuss = () => {
                 >
                   Reply
                 </p>
-                <p className="">.</p>
-                <p className="text-gray-500">3y</p>
+
+                {data?.userEmail === getMyProfile?.data?.email && (
+                  <>
+                    <p className="">.</p>
+                    <p
+                      className="text-blue-500 cursor-pointer"
+                      onClick={() => handleDeleteDiscuss(data)}
+                    >
+                      Delete
+                    </p>
+                  </>
+                )}
               </div>
               {index === replyFormIndex && (
                 <form
