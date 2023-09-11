@@ -16,6 +16,7 @@ const RandomQuestions = () => {
   const [questions, setQuestions] = useState([]);
   const [count, setCount] = useState(0);
   const [eyeShow, setEyeShow] = useState(true);
+  const [showResult, setShowResult] = useState(false);
 
   const accessToken =
     typeof window !== "undefined" ? localStorage.getItem("access-token") : null;
@@ -123,12 +124,17 @@ const RandomQuestions = () => {
             setQues={setQues}
             eyeShow={eyeShow}
             subject={test?.subject}
+            showResult={showResult}
           />
         ))}
       </div>
       {questions && questions?.length > 0 && (
         <div className="text-center mt-4">
-          <label htmlFor="my-modal-4" className="btn btn-primary modal-button">
+          <label
+            onClick={() => setShowResult(true)}
+            htmlFor="my-modal-4"
+            className="btn btn-primary modal-button"
+          >
             Result
           </label>
           <>

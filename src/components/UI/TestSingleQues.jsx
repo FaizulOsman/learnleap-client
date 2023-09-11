@@ -18,9 +18,11 @@ const TestSingleQues = ({
   setQues,
   eyeShow,
   subject,
+  showResult,
 }) => {
   const [disable, setDisable] = useState(false);
   const [accessToken, setAccessToken] = useState("");
+  const [myAnswer, setMyAnswer] = useState("");
 
   const showCorrectAnswer = (correctAnswer) => {
     toast.success(`Correct Answer: ${correctAnswer}`);
@@ -82,6 +84,7 @@ const TestSingleQues = ({
   };
 
   const handleSelectedAnswer = (option) => {
+    setMyAnswer(option);
     if (option === test?.answer) {
       // toast.success("Answer is correct!", { autoClose: 700 });
       setCount(count + 1);
@@ -175,7 +178,7 @@ const TestSingleQues = ({
                 type="radio"
                 name={`radio-${test?.id}`}
                 className="radio radio-sm checked:bg-blue-500 mr-4"
-                disabled={disable && true}
+                disabled={(disable && true) || (showResult && true)}
               />
               <p className="label-text flex-1">{test?.option1}</p>
             </label>
@@ -187,7 +190,7 @@ const TestSingleQues = ({
                 type="radio"
                 name={`radio-${test?.id}`}
                 className="radio radio-sm checked:bg-blue-500 mr-4"
-                disabled={disable && true}
+                disabled={(disable && true) || (showResult && true)}
               />
               <span className="label-text flex-1">{test?.option2}</span>
             </label>
@@ -200,7 +203,7 @@ const TestSingleQues = ({
                   type="radio"
                   name={`radio-${test?.id}`}
                   className="radio radio-sm checked:bg-blue-500 mr-4"
-                  disabled={disable && true}
+                  disabled={(disable && true) || (showResult && true)}
                 />
                 <span className="label-text flex-1">{test?.option3}</span>
               </label>
@@ -214,7 +217,7 @@ const TestSingleQues = ({
                   type="radio"
                   name={`radio-${test?.id}`}
                   className="radio radio-sm checked:bg-blue-500 mr-4"
-                  disabled={disable && true}
+                  disabled={(disable && true) || (showResult && true)}
                 />
                 <span className="label-text flex-1">{test?.option4}</span>
               </label>
@@ -228,13 +231,36 @@ const TestSingleQues = ({
                   type="radio"
                   name={`radio-${test?.id}`}
                   className="radio radio-sm checked:bg-blue-500 mr-4"
-                  disabled={disable && true}
+                  disabled={(disable && true) || (showResult && true)}
                 />
                 <span className="label-text flex-1">{test?.option5}</span>
               </label>
             </div>
           )}
         </div>
+        {showResult && (
+          <div className="mt-2">
+            <h2 className="text-lg font-semibold">
+              {myAnswer === test?.answer ? (
+                <span className="text-green-500">Your answer is correct.</span>
+              ) : (
+                <>
+                  {myAnswer ? (
+                    <span className="text-red-500">Your answer is wrong!</span>
+                  ) : (
+                    <span className="text-yellow-500">
+                      You did not attempted!
+                    </span>
+                  )}
+                  <br />
+                  <span className="text-green-500">
+                    Correct Answer Is: {test?.answer}
+                  </span>
+                </>
+              )}
+            </h2>
+          </div>
+        )}
       </div>
     </div>
   );

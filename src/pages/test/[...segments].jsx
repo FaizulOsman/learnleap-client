@@ -17,6 +17,7 @@ const SingleTest = () => {
   const [timeOver, setTimeOver] = useState(false);
   const [submittedByTimeOver, setSubmittedByTimeOver] = useState(false);
   const submitButtonRef = useRef(null);
+  const [showResult, setShowResult] = useState(false);
 
   if (router && getSingleTest?.data?.timeLimit > 0) {
     if (isRunning === false) {
@@ -68,6 +69,7 @@ const SingleTest = () => {
                     setQues={setQues}
                     eyeShow={eyeShow}
                     subject={getSingleTest?.data?.subject}
+                    showResult={showResult}
                   />
                 ))}
               </div>
@@ -76,6 +78,7 @@ const SingleTest = () => {
                   htmlFor="my-modal-4"
                   className="btn btn-primary modal-button"
                   ref={submitButtonRef}
+                  onClick={() => setShowResult(true)}
                 >
                   Result
                 </label>
