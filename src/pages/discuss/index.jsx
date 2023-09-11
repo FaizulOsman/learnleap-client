@@ -11,6 +11,10 @@ import toast from "react-hot-toast";
 import { AiOutlineDelete } from "react-icons/ai";
 
 const Discuss = () => {
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(5);
+  const [meta, setMeta] = useState({});
+  const [sortOrder, setSortOrder] = useState("desc");
   const [replyFormIndex, setReplyFormIndex] = useState(null);
   const accessToken =
     typeof window !== "undefined" ? localStorage.getItem("access-token") : null;
@@ -27,7 +31,11 @@ const Discuss = () => {
   const [updateDiscuss] = useUpdateDiscussMutation();
   const [deleteDiscuss, { isSuccess: deleteDiscussIsSuccess }] =
     useDeleteDiscussMutation();
-  const { data: getAllDiscuss } = useGetAllDiscussQuery();
+  const { data: getAllDiscuss } = useGetAllDiscussQuery({
+    page,
+    limit,
+    sortOrder,
+  });
 
   const handleAddQuesInDiscuss = (e) => {
     e.preventDefault();
@@ -100,6 +108,14 @@ const Discuss = () => {
     updateDiscuss({ id: d?.id, data });
   };
 
+  const totalPage = Math.ceil(parseInt(meta?.total) / parseInt(meta?.limit));
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPage) {
+      setPage(newPage);
+    }
+  };
+
   useEffect(() => {
     if (createDiscussData && createDiscussIsSuccess) {
       toast.success("Question added in discussion!");
@@ -112,6 +128,10 @@ const Discuss = () => {
     }
   }, [deleteDiscussIsSuccess]);
 
+  useEffect(() => {
+    setMeta(getAllDiscuss?.meta);
+  }, [getAllDiscuss?.meta]);
+
   return (
     <div>
       <h1 className="text-3xl font-bold text-center mb-8 text-green-600">
@@ -119,15 +139,65 @@ const Discuss = () => {
       </h1>
       <div>
         <div className="flex justify-between border-b-2 pb-4">
-          <h2 className="text-xl font-bold">
+          <h2 className="hidden sm:inline-block text-xl font-bold">
             {getAllDiscuss?.meta?.total} Comments
           </h2>
-          <div className="flex items-center gap-4">
-            <span>Sort By</span>
-            <select className="select select-bordered select-sm max-w-xs">
-              <option selected>Newest</option>
-              <option>Oldest</option>
+          <div className="sm:ml-auto mr-5 flex items-center gap-4">
+            <select
+              onChange={(e) => {
+                const selectedValue = e.target.value;
+                setSortOrder(selectedValue);
+              }}
+              className="select select-bordered select-sm max-w-xs"
+            >
+              <option value="desc">Newest</option>
+              <option value="asc">Oldest</option>
             </select>
+          </div>
+          <div className="text-xs items-center inline-flex">
+            <button
+              onClick={() => setLimit(limit - 1)}
+              className={`mr-2 inline-flex items-center h-6 w-6 justify-center rounded-md shadow border ${
+                limit === 1
+                  ? "opacity-50 cursor-not-allowed"
+                  : "border-gray-800"
+              } leading-none`}
+              disabled={limit === 1}
+            >
+              <svg
+                className="w-4"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <span className="mr-2 font-semibold">Limit {limit}</span>
+            <button
+              onClick={() => setLimit(limit + 1)}
+              className={`inline-flex items-center h-6 w-6 justify-center rounded-md shadow border ${
+                page === totalPage
+                  ? "opacity-50 cursor-not-allowed"
+                  : "border-gray-800"
+              } leading-none`}
+              disabled={limit === parseInt(meta?.total)}
+            >
+              <svg
+                className="w-4"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
           </div>
         </div>
         <div className="flex items-center justify-between my-8 gap-4">
@@ -288,6 +358,61 @@ const Discuss = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div className="flex w-full mt-10 space-x-2 justify-center">
+        <button
+          onClick={() => handlePageChange(page - 1)}
+          className={`inline-flex items-center h-6 w-6 justify-center rounded-md shadow border ${
+            page === 1 ? "opacity-50 cursor-not-allowed" : "border-gray-800"
+          } leading-none`}
+          disabled={page === 1}
+        >
+          <svg
+            className="w-4"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="2"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        {Array.from({ length: totalPage }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => handlePageChange(index + 1)}
+            className={`inline-flex items-center h-6 w-6 justify-center rounded-md shadow border ${
+              page === index + 1
+                ? "bg-gray-300 border-gray-800"
+                : "border-gray-800"
+            } leading-none`}
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button
+          onClick={() => handlePageChange(page + 1)}
+          className={`inline-flex items-center h-6 w-6 justify-center rounded-md shadow border ${
+            page === totalPage
+              ? "opacity-50 cursor-not-allowed"
+              : "border-gray-800"
+          } leading-none`}
+          disabled={page === totalPage}
+        >
+          <svg
+            className="w-4"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="2"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
       </div>
     </div>
   );

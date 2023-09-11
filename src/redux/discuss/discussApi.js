@@ -11,7 +11,8 @@ const discussApi = apiSlice.injectEndpoints({
       invalidatesTags: ["test-yourself"],
     }),
     getAllDiscuss: builder.query({
-      query: () => `/discusses`,
+      query: ({ page, limit, sortOrder }) =>
+        `/discusses?page=${page}&limit=${limit}&sortOrder=${sortOrder}`,
       providesTags: ["test-yourself"],
     }),
     getSingleDiscuss: builder.query({
