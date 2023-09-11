@@ -112,10 +112,16 @@ const ExamAnswerSingleQues = ({ index, exam, eyeShow, result }) => {
               <span className="text-green-500">Your answer is correct.</span>
             ) : (
               <>
-                <span className="text-red-500">Your answer is wrong.</span>
+                {sss?.selectedOption ? (
+                  <span className="text-red-500">Your answer is wrong.</span>
+                ) : (
+                  <span className="text-yellow-500">
+                    You did not attempted!
+                  </span>
+                )}
                 <br />
                 <span className="text-green-500">
-                  Correct Answer Is: {sss?.answer}
+                  Correct Answer Is: {exam?.answer}
                 </span>
               </>
             )}
