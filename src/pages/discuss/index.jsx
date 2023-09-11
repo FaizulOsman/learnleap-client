@@ -1,9 +1,77 @@
-import { useGetAllDiscussQuery } from "@/redux/discuss/discussApi";
+import {
+  useCreateDiscussMutation,
+  useGetAllDiscussQuery,
+  useUpdateDiscussMutation,
+} from "@/redux/discuss/discussApi";
+import { useGetMyProfileQuery } from "@/redux/user/userApi";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
+import toast from "react-hot-toast";
 
 const Discuss = () => {
+  const accessToken =
+    typeof window !== "undefined" ? localStorage.getItem("access-token") : null;
+
+  const headers = {
+    authorization: accessToken,
+  };
+
+  const { data: getMyProfile } = useGetMyProfileQuery({ headers });
+  const [createDiscuss, { isSuccess: createDiscussIsSuccess, error }] =
+    useCreateDiscussMutation();
+  const [updateDiscuss, { isSuccess: updateDiscussIsSuccess }] =
+    useUpdateDiscussMutation();
   const { data: getAllDiscuss } = useGetAllDiscussQuery();
+
+  const handleAddQuesInDiscuss = (e) => {
+    e.preventDefault();
+    const data = {
+      userName: getMyProfile?.data?.name,
+      userEmail: getMyProfile?.data?.email,
+      question: e.target.discuss.value,
+    };
+    createDiscuss(data);
+    e.target.discuss.value = "";
+  };
+
+  const handleLike = (d) => {
+    const isAlreadyLiked = d?.likes?.find(
+      (like) =>
+        like.email === getMyProfile?.data?.email && like?.isLiked === true
+    );
+
+    const removeLikeAndFilterOthers = d?.likes?.filter(
+      (data) => data?.email !== isAlreadyLiked?.email
+    );
+
+    if (!isAlreadyLiked) {
+      const data = {
+        likes: [
+          ...d?.likes,
+          {
+            email: getMyProfile?.data?.email,
+            isLiked: true,
+          },
+        ],
+      };
+      updateDiscuss({ id: d?.id, data });
+    } else {
+      const data = {
+        likes: removeLikeAndFilterOthers,
+      };
+      updateDiscuss({ id: d?.id, data });
+    }
+    console.log(d);
+  };
+
+  useEffect(() => {
+    if (createDiscussIsSuccess) {
+      toast.success("Question added in discussion!");
+    }
+    if (updateDiscussIsSuccess) {
+      toast.success("Done!");
+    }
+  }, [createDiscussIsSuccess, updateDiscussIsSuccess]);
 
   return (
     <div>
@@ -34,13 +102,20 @@ const Discuss = () => {
             height={300}
           />
           <div className="flex-1">
-            <div className="flex gap-4">
+            <form
+              onSubmit={(e) => handleAddQuesInDiscuss(e)}
+              className="flex gap-4"
+            >
               <input
                 type="text"
+                name="discuss"
                 placeholder="Type here"
                 className="input input-bordered w-full"
               />
-              <div className="border-2 border-blue-500 rounded-full px-[14px] py-2 bg-blue-500 flex items-center justify-center cursor-pointer">
+              <button
+                type="submit"
+                className="border-2 border-blue-500 rounded-full px-[14px] py-2 bg-blue-500 flex items-center justify-center cursor-pointer"
+              >
                 <svg
                   stroke="currentColor"
                   fill="none"
@@ -56,13 +131,13 @@ const Discuss = () => {
                   <line x1="22" y1="2" x2="11" y2="13"></line>
                   <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                 </svg>
-              </div>
-            </div>
+              </button>
+            </form>
           </div>
         </div>
 
         {getAllDiscuss?.data?.map((data, index) => (
-          <div key={index} className="flex gap-4">
+          <div key={index} className="flex gap-4 mb-4">
             <Image
               alt="Profile Image"
               className="w-12 h-12 rounded-full border-2 p-[2px]"
@@ -76,11 +151,25 @@ const Discuss = () => {
               <h4 className="font-semibold">{data?.userName}</h4>
               <p className="text-gray-600 text-sm">{data?.question}</p>
               <div className="flex items-center gap-2 text-sm">
-                <span className="text-blue-500">5 Like</span>
-                <span className="">.</span>
-                <span className="text-blue-500">Reply</span>
-                <span className="">.</span>
-                <span className="text-gray-500">3y</span>
+                <p className="text-blue-500">
+                  {data?.likes?.length}{" "}
+                  <span
+                    className="cursor-pointer"
+                    onClick={() => handleLike(data)}
+                  >
+                    {data?.likes?.find(
+                      (like) => like?.email === getMyProfile?.data?.email
+                    ) ? (
+                      <span>Unlike</span>
+                    ) : (
+                      <span>Like</span>
+                    )}
+                  </span>
+                </p>
+                <p className="">.</p>
+                <p className="text-blue-500 cursor-pointer">Reply</p>
+                <p className="">.</p>
+                <p className="text-gray-500">3y</p>
               </div>
 
               {data?.replies?.map((reply, index) => (

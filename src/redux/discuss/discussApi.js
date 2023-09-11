@@ -3,11 +3,10 @@ import apiSlice from "../api/apiSlice";
 const discussApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createDiscuss: builder.mutation({
-      query: ({ data, headers }) => ({
+      query: (data) => ({
         url: `/discusses/create-discuss`,
         method: "POST",
         body: data,
-        headers: headers,
       }),
       invalidatesTags: ["test-yourself"],
     }),
@@ -28,11 +27,10 @@ const discussApi = apiSlice.injectEndpoints({
       invalidatesTags: ["test-yourself"],
     }),
     updateDiscuss: builder.mutation({
-      query: ({ id, data, headers }) => ({
+      query: ({ id, data }) => ({
         url: `/discusses/${id}`,
         method: "PATCH",
         body: data,
-        headers: headers,
       }),
       invalidatesTags: ["test-yourself"],
     }),
