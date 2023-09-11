@@ -1,7 +1,10 @@
+import { useGetAllDiscussQuery } from "@/redux/discuss/discussApi";
 import Image from "next/image";
 import React from "react";
 
 const Discuss = () => {
+  const { data: getAllDiscuss } = useGetAllDiscussQuery();
+
   return (
     <div>
       <h1 className="text-3xl font-bold text-center mb-8 text-green-600">
@@ -9,7 +12,9 @@ const Discuss = () => {
       </h1>
       <div>
         <div className="flex justify-between border-b-2 pb-4">
-          <h2 className="text-xl font-bold">165 Comments</h2>
+          <h2 className="text-xl font-bold">
+            {getAllDiscuss?.meta?.total} Comments
+          </h2>
           <div className="flex items-center gap-4">
             <span>Sort By</span>
             <select className="select select-bordered select-sm max-w-xs">
@@ -56,46 +61,50 @@ const Discuss = () => {
           </div>
         </div>
 
-        <div className="flex gap-4">
-          <Image
-            alt="Profile Image"
-            className="w-12 h-12 rounded-full border-2 p-[2px]"
-            src="https://i.ibb.co/nrtwzQd/avatar-boy.webp"
-            decoding="async"
-            loading="lazy"
-            width={300}
-            height={300}
-          />
-          <div className="">
-            <h4 className="font-semibold">Aaliyah Walsh</h4>
-            <p className="text-gray-600 text-sm">অনেক অনেক সুন্দর</p>
-            <div className="flex items-center gap-2 text-sm">
-              <span className="text-blue-500">5 Like</span>
-              <span className="">.</span>
-              <span className="text-blue-500">Reply</span>
-              <span className="">.</span>
-              <span className="text-gray-500">3y</span>
-            </div>
-
-            <div className="mt-4">
-              <div className="flex gap-4 mb-4">
-                <Image
-                  alt="Profile Image"
-                  className="w-12 h-12 rounded-full border-2 p-[2px]"
-                  src="https://i.ibb.co/nrtwzQd/avatar-boy.webp"
-                  decoding="async"
-                  loading="lazy"
-                  width={300}
-                  height={300}
-                />
-                <div className="">
-                  <h4 className="font-semibold">Aaliyah Walsh</h4>
-                  <p className="text-gray-600 text-sm">অনেক অনেক সুন্দর</p>
-                </div>
+        {getAllDiscuss?.data?.map((data, index) => (
+          <div key={index} className="flex gap-4">
+            <Image
+              alt="Profile Image"
+              className="w-12 h-12 rounded-full border-2 p-[2px]"
+              src="https://i.ibb.co/nrtwzQd/avatar-boy.webp"
+              decoding="async"
+              loading="lazy"
+              width={300}
+              height={300}
+            />
+            <div className="">
+              <h4 className="font-semibold">{data?.userName}</h4>
+              <p className="text-gray-600 text-sm">{data?.question}</p>
+              <div className="flex items-center gap-2 text-sm">
+                <span className="text-blue-500">5 Like</span>
+                <span className="">.</span>
+                <span className="text-blue-500">Reply</span>
+                <span className="">.</span>
+                <span className="text-gray-500">3y</span>
               </div>
+
+              {data?.replies?.map((reply, index) => (
+                <div key={index} className="mt-4">
+                  <div className="flex gap-4 mb-4">
+                    <Image
+                      alt="Profile Image"
+                      className="w-12 h-12 rounded-full border-2 p-[2px]"
+                      src="https://i.ibb.co/nrtwzQd/avatar-boy.webp"
+                      decoding="async"
+                      loading="lazy"
+                      width={300}
+                      height={300}
+                    />
+                    <div className="">
+                      <h4 className="font-semibold">{reply?.name}</h4>
+                      <p className="text-gray-600 text-sm">{reply?.reply}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );
