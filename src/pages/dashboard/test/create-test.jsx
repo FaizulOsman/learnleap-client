@@ -1,5 +1,5 @@
 import useProtectedRoute from "@/hooks/useProtectedRoute";
-import AdminLayout from "@/layouts/AdminLayout";
+import DashboardLayout from "@/layouts/DashboardLayout";
 import { useCreateTestMutation } from "@/redux/test/testApi";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -243,5 +243,5 @@ const CreateTest = () => {
 export default CreateTest;
 
 CreateTest.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <DashboardLayout>{page}</DashboardLayout>;
 };

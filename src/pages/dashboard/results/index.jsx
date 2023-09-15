@@ -1,6 +1,7 @@
+import Chart from "@/components/UI/Chart";
 import Loader from "@/components/UI/Loader";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
-import AdminLayout from "@/layouts/AdminLayout";
+import DashboardLayout from "@/layouts/DashboardLayout";
 import { useGetMySubmittedResultsQuery } from "@/redux/examResult/examResultApi";
 import React, { useEffect, useState } from "react";
 
@@ -278,6 +279,7 @@ const MyResults = () => {
           </div>
         </div>
       </div>
+      <Chart getMySubmittedResults={getMySubmittedResults} />
     </div>
   );
 };
@@ -285,5 +287,5 @@ const MyResults = () => {
 export default MyResults;
 
 MyResults.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <DashboardLayout>{page}</DashboardLayout>;
 };

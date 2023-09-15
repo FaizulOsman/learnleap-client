@@ -1,28 +1,15 @@
-// import { NavLink } from "react-router-dom";
-import {
-  FaBars,
-  FaHome,
-  FaLock,
-  FaMoneyBill,
-  FaUser,
-  FaUsers,
-  FaChartLine,
-} from "react-icons/fa";
-import { HiOutlineHome, HiOutlineLogout } from "react-icons/hi";
-import { MdMessage } from "react-icons/md";
-import { BiAnalyse, BiSearch } from "react-icons/bi";
+import { FaHome, FaUser, FaUsers, FaChartLine } from "react-icons/fa";
+import { BiSearch } from "react-icons/bi";
 import { BiCog } from "react-icons/bi";
 import { AiFillHeart, AiTwotoneFileExclamation } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import SidebarMenu from "./SidebarMenu";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import {
-  getFromLocalStorage,
-  removeFromLocalStorage,
-} from "@/utils/localstorage";
+import { removeFromLocalStorage } from "@/utils/localstorage";
+import SidebarMenu from "@/components/Dashboard/SidebarMenu";
+import DashboardHeader from "@/components/Dashboard/DashboardHeader";
 
 const routes = [
   {
@@ -115,7 +102,7 @@ const routes = [
   },
 ];
 
-const SideBar = ({ children }) => {
+const DashboardLayout = ({ children }) => {
   const { router } = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
@@ -160,7 +147,10 @@ const SideBar = ({ children }) => {
 
   const [myProfile, setMyProfile] = useState({});
   const fetchMyProfile = async () => {
-    const accessToken = getFromLocalStorage("access-token");
+    const accessToken =
+      typeof window !== "undefined"
+        ? localStorage.getItem("access-token")
+        : null;
     if (accessToken) {
       try {
         const url =
@@ -184,8 +174,8 @@ const SideBar = ({ children }) => {
   }, []);
 
   return (
-    <>
-      <div className="flex bg-[#080925] text-white">
+    <div className="">
+      <div className="flex bg-[#080925] text-white h-screen overflow-hidden">
         <motion.div
           animate={{
             width: isOpen ? "200px" : "45px",
@@ -195,7 +185,7 @@ const SideBar = ({ children }) => {
               damping: 10,
             },
           }}
-          className={`bg-[#00073d] text-white min-h-[100vh] overflow-y-auto`}
+          className={`h-screen bg-[#00073d] text-white min-h-[100vh] overflow-y-auto`}
         >
           <div className="flex items-center justify-between py-2">
             <AnimatePresence>
@@ -287,40 +277,22 @@ const SideBar = ({ children }) => {
           </section>
         </motion.div>
 
-        <main className="flex-1">
-          <div className="flex items-center justify-between px-6 bg-[#00073d] text-white h-12 border-l">
-            <div className="w-[30px] cursor-pointer">
-              <FaBars onClick={toggle} />
-            </div>
-            <div className="flex items-center justify-end">
-              <Link
-                href="/"
-                className="hover:underline hover:text-blue-500 px-3 flex items-center gap-1"
-              >
-                <HiOutlineHome />
-                <span className="hidden sm:inline-block"> Home</span>
-              </Link>
-
-              <Link
-                onClick={() => handleLogOut()}
-                href="/login"
-                className="hover:underline hover:text-blue-500 flex items-center gap-1 border-l pl-3"
-              >
-                <HiOutlineLogout />
-                <span className="hidden sm:inline-block"> Logout</span>
-              </Link>
-            </div>
+        <div className="w-full flex flex-col">
+          <div className="sticky top-0">
+            <DashboardHeader toggle={toggle} handleLogOut={handleLogOut} />
           </div>
-          <div className="">{children}</div>
-        </main>
-      </div>
-      <footer className="footer footer-center p-4 bg-[#00073d] text-white">
-        <div>
-          <p>Copyright © 2023 - All right reserved by QuizWizPro Ltd.</p>
+          <div className="flex-grow overflow-y-auto">
+            <div style={{ minHeight: "calc(100vh - 100px)" }}>{children}</div>
+            <footer className="footer footer-center p-4 bg-[#00073d] text-white">
+              <div>
+                <p>Copyright © 2023 - All right reserved by QuizWizPro Ltd.</p>
+              </div>
+            </footer>
+          </div>
         </div>
-      </footer>
-    </>
+      </div>
+    </div>
   );
 };
 
-export default SideBar;
+export default DashboardLayout;

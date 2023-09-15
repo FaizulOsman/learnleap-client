@@ -1,5 +1,5 @@
 import useProtectedRoute from "@/hooks/useProtectedRoute";
-import AdminLayout from "@/layouts/AdminLayout";
+import DashboardLayout from "@/layouts/DashboardLayout";
 import Link from "next/link";
 import React from "react";
 
@@ -14,7 +14,7 @@ const Saved = () => {
   useProtectedRoute(decodedToken?.role || "guest");
 
   return (
-    <div className="text-center my-10">
+    <div className="text-center py-10">
       <h1 className="text-2xl font-semibold">See bookmark list</h1>
       <button className="flex items-center  rounded-lg bg-blue-700 px-3 py-[2px] mx-auto mt-5">
         <Link href="/bookmarks">
@@ -28,5 +28,5 @@ const Saved = () => {
 export default Saved;
 
 Saved.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <DashboardLayout>{page}</DashboardLayout>;
 };

@@ -1,4 +1,4 @@
-import AdminLayout from "@/layouts/AdminLayout";
+import DashboardLayout from "@/layouts/DashboardLayout";
 import {
   useGetSingleExamQuery,
   useUpdateExamMutation,
@@ -360,5 +360,5 @@ const UpdateExam = () => {
 export default UpdateExam;
 
 UpdateExam.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <DashboardLayout>{page}</DashboardLayout>;
 };

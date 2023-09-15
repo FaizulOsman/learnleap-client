@@ -1,6 +1,6 @@
 import Loader from "@/components/UI/Loader";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
-import AdminLayout from "@/layouts/AdminLayout";
+import DashboardLayout from "@/layouts/DashboardLayout";
 import {
   useDeleteExamMutation,
   useGetAllExamQuery,
@@ -187,5 +187,5 @@ const AllExam = () => {
 export default AllExam;
 
 AllExam.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <DashboardLayout>{page}</DashboardLayout>;
 };

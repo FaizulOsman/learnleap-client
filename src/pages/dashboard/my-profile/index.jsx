@@ -1,5 +1,5 @@
 import useProtectedRoute from "@/hooks/useProtectedRoute";
-import AdminLayout from "@/layouts/AdminLayout";
+import DashboardLayout from "@/layouts/DashboardLayout";
 import {
   useGetMyProfileQuery,
   useUpdateMyProfileMutation,
@@ -168,5 +168,5 @@ const MyProfile = () => {
 export default MyProfile;
 
 MyProfile.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <DashboardLayout>{page}</DashboardLayout>;
 };

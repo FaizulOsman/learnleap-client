@@ -1,5 +1,5 @@
 import Loader from "@/components/UI/Loader";
-import AdminLayout from "@/layouts/AdminLayout";
+import DashboardLayout from "@/layouts/DashboardLayout";
 import { useGetSingleExamQuery } from "@/redux/exam/examApi";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -97,5 +97,5 @@ const ExamResult = () => {
 export default ExamResult;
 
 ExamResult.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <DashboardLayout>{page}</DashboardLayout>;
 };

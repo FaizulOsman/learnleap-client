@@ -1,4 +1,4 @@
-import AdminLayout from "@/layouts/AdminLayout";
+import DashboardLayout from "@/layouts/DashboardLayout";
 import {
   useGetAllUsersQuery,
   useGetMyProfileQuery,
@@ -448,5 +448,5 @@ const Dashboard = () => {
 export default Dashboard;
 
 Dashboard.getLayout = function getLayout(page) {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <DashboardLayout>{page}</DashboardLayout>;
 };
