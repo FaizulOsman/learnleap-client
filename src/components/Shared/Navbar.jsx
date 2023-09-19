@@ -256,14 +256,16 @@ const Navbar = () => {
                     Test
                   </Link>
                 </li>
-                <li onClick={() => setIsOpen(false)} className="body__menu">
-                  <Link
-                    href="/be-a-premium-user"
-                    className="w-full block hover:bg-gray-200 px-2 p-1 rounded-md"
-                  >
-                    Be a premium user
-                  </Link>
-                </li>
+                {myProfile?.isPremium || (
+                  <li onClick={() => setIsOpen(false)} className="body__menu">
+                    <Link
+                      href="/be-a-premium-user"
+                      className="w-full block hover:bg-gray-200 px-2 p-1 rounded-md"
+                    >
+                      Be a premium user
+                    </Link>
+                  </li>
+                )}
                 <li onClick={() => setIsOpen(false)} className="body__menu">
                   <Link
                     href="/random-question"
