@@ -6,7 +6,7 @@ import Discussion from "./discussion";
 
 const HomePage = () => {
   const router = useRouter();
-  const login = router?.components?.["/login"];
+  const login = router?.components?.[("/login", "/be-a-premium-user")];
 
   if (login) {
     window.location.reload();

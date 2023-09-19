@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "@stripe/react-stripe-js": "^2.3.0",
+    "@stripe/stripe-js": "^2.1.6",
     "autoprefixer": "10.4.14",
     "daisyui": "^3.5.0",
     "eslint": "8.45.0",

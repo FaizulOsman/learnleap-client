@@ -16,22 +16,26 @@ const Chart = ({ getMySubmittedResults }) => {
       percentage: (result?.totalMarks / result?.totalQues) * 100,
     };
   });
-
+  console.log(data);
   return (
-    <div className="my-20">
-      <h2 className="text-lg sm:text-2xl font-semibold text-center mb-8">
-        Recharts of My Results
-      </h2>
-      <ResponsiveContainer width="90%" className="mx-auto" height={300}>
-        <LineChart LineChart data={data}>
-          <Line dataKey="percentage" type="monotone" stroke="red" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <CartesianGrid stroke="lightgray" strokeDasharray="5 5" />
-          <Tooltip />
-        </LineChart>
-      </ResponsiveContainer>
-    </div>
+    <>
+      {data?.length > 0 && (
+        <div className="my-20">
+          <h2 className="text-lg sm:text-2xl font-semibold text-center mb-8">
+            Recharts of My Results
+          </h2>
+          <ResponsiveContainer width="90%" className="mx-auto" height={300}>
+            <LineChart LineChart data={data}>
+              <Line dataKey="percentage" type="monotone" stroke="red" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <CartesianGrid stroke="lightgray" strokeDasharray="5 5" />
+              <Tooltip />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      )}
+    </>
   );
 };
 
