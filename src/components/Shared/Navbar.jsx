@@ -101,35 +101,35 @@ const Navbar = () => {
               </Link>
             </li>
             <li
-              className={`left-menus__menu font-semibold hover:text-blue-600 ${
+              className={`left-menus__menu hidden lg:inline-block font-semibold hover:text-blue-600 ${
                 stickyNav ? "sticky-menu" : ""
               }`}
             >
               <Link href="/exam">Exam</Link>
             </li>
             <li
-              className={`left-menus__menu font-semibold hover:text-blue-600 ${
+              className={`left-menus__menu hidden lg:inline-block font-semibold hover:text-blue-600 ${
                 stickyNav ? "sticky-menu" : ""
               }`}
             >
               <Link href="/test">Test</Link>
             </li>
             <li
-              className={`left-menus__menu font-semibold hover:text-blue-600 ${
+              className={`left-menus__menu inline-block font-semibold hover:text-blue-600 ${
                 stickyNav ? "sticky-menu" : ""
               }`}
             >
               <Link href="/bookmarks">Bookmarks</Link>
             </li>
             <li
-              className={`left-menus__menu font-semibold hover:text-blue-600 ${
+              className={`left-menus__menu inline-block font-semibold hover:text-blue-600 ${
                 stickyNav ? "sticky-menu" : ""
               }`}
             >
               <Link href="/random-question">Random Question</Link>
             </li>
             <li
-              className={`left-menus__menu font-semibold hover:text-blue-600 ${
+              className={`left-menus__menu inline-block font-semibold hover:text-blue-600 ${
                 stickyNav ? "sticky-menu" : ""
               }`}
             >

@@ -39,7 +39,7 @@
   color: white;
 }
 .left-menus__menu {
-  display: inline-block;
+  /* display: inline-block; */
   position: relative;
 }
 
