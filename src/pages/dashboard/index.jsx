@@ -5,16 +5,25 @@ import {
 } from "@/redux/user/userApi";
 import { useGetAllTestQuery } from "@/redux/test/testApi";
 import { useGetAllExamQuery } from "@/redux/exam/examApi";
-import { useGetAllExamResultQuery } from "@/redux/examResult/examResultApi";
+import {
+  useGetAllExamResultQuery,
+  useGetMySubmittedResultsQuery,
+} from "@/redux/examResult/examResultApi";
 import MyResults from "./results";
 import AllTest from "./test/all-test";
 import AllExam from "./exam/all-exam";
 import Users from "./users";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
+import { useState } from "react";
 
 const jwt = require("jsonwebtoken");
 
 const Dashboard = () => {
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(3);
+  const [sortBy, setSortBy] = useState("createdAt");
+  const [sortOrder, setSortOrder] = useState("asc");
+
   const accessToken =
     typeof window !== "undefined" ? localStorage.getItem("access-token") : null;
   const decodedToken = jwt.decode(accessToken);
@@ -31,6 +40,13 @@ const Dashboard = () => {
   const { data: getAllExam } = useGetAllExamQuery({});
   const { data: getAllExamResult } = useGetAllExamResultQuery({});
   const { data: getMyProfile } = useGetMyProfileQuery({ headers });
+  const { data: getMySubmittedResults } = useGetMySubmittedResultsQuery({
+    headers,
+    page,
+    limit,
+    sortBy,
+    sortOrder,
+  });
 
   return (
     <div className="title">
@@ -57,7 +73,9 @@ const Dashboard = () => {
                   </svg>
                 </div>
                 <div className="text-right">
-                  <p className="text-2xl">{getAllUser?.data?.length}</p>
+                  <p className="text-2xl">
+                    {getAllUser?.meta?.total ? getAllUser?.meta?.total : 0}
+                  </p>
                   <p>Users</p>
                 </div>
               </div>
@@ -82,7 +100,11 @@ const Dashboard = () => {
                   </svg>
                 </div>
                 <div className="text-right">
-                  <p className="text-2xl">0</p>
+                  <p className="text-2xl">
+                    {getMySubmittedResults?.meta?.total
+                      ? getMySubmittedResults?.meta?.total
+                      : 0}
+                  </p>
                   <p>My Submitted Exam</p>
                 </div>
               </div>
@@ -106,7 +128,9 @@ const Dashboard = () => {
                 </svg>
               </div>
               <div className="text-right">
-                <p className="text-2xl">{getAllTest?.data?.length}</p>
+                <p className="text-2xl">
+                  {getAllTest?.meta?.total ? getAllTest?.meta?.total : 0}
+                </p>
                 <p>Total Test</p>
               </div>
             </div>
@@ -129,7 +153,9 @@ const Dashboard = () => {
                 </svg>
               </div>
               <div className="text-right">
-                <p className="text-2xl">{getAllExam?.data?.length}</p>
+                <p className="text-2xl">
+                  {getAllExam?.meta?.total ? getAllExam?.meta?.total : 0}
+                </p>
                 <p>Total Exam</p>
               </div>
             </div>
@@ -152,7 +178,11 @@ const Dashboard = () => {
                 </svg>
               </div>
               <div className="text-right">
-                <p className="text-2xl">{getAllExamResult?.data?.length}</p>
+                <p className="text-2xl">
+                  {getAllExamResult?.meta?.total
+                    ? getAllExamResult?.meta?.total
+                    : 0}
+                </p>
                 <p>Exam Participate</p>
               </div>
             </div>
