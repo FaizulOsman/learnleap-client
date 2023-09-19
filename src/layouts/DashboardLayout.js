@@ -277,7 +277,11 @@ const DashboardLayout = ({ children }) => {
           </section>
         </motion.div>
 
-        <div className="w-full flex flex-col">
+        <div
+          className={`${
+            isOpen ? "w-[calc(100vw-200px)]" : "w-full"
+          } flex flex-col`}
+        >
           <div className="sticky top-0">
             <DashboardHeader toggle={toggle} handleLogOut={handleLogOut} />
           </div>
