@@ -40,12 +40,16 @@ const Discussion = () => {
 
   const handleAddQuesInDiscuss = (e) => {
     e.preventDefault();
-    const data = {
-      userName: getMyProfile?.data?.name,
-      userEmail: getMyProfile?.data?.email,
-      question: e.target.discuss.value,
-    };
-    createDiscuss(data);
+    if (accessToken) {
+      const data = {
+        userName: getMyProfile?.data?.name,
+        userEmail: getMyProfile?.data?.email,
+        question: e.target.discuss.value,
+      };
+      createDiscuss(data);
+    } else {
+      toast.error("You must be logged in first!");
+    }
     e.target.discuss.value = "";
   };
 
@@ -54,47 +58,55 @@ const Discussion = () => {
   };
 
   const handleLike = (d) => {
-    const isAlreadyLiked = d?.likes?.find(
-      (like) =>
-        like.email === getMyProfile?.data?.email && like?.isLiked === true
-    );
+    if (accessToken) {
+      const isAlreadyLiked = d?.likes?.find(
+        (like) =>
+          like.email === getMyProfile?.data?.email && like?.isLiked === true
+      );
 
-    const removeLikeAndFilterOthers = d?.likes?.filter(
-      (data) => data?.email !== isAlreadyLiked?.email
-    );
+      const removeLikeAndFilterOthers = d?.likes?.filter(
+        (data) => data?.email !== isAlreadyLiked?.email
+      );
 
-    if (!isAlreadyLiked) {
-      const data = {
-        likes: [
-          ...d?.likes,
-          {
-            email: getMyProfile?.data?.email,
-            isLiked: true,
-          },
-        ],
-      };
-      updateDiscuss({ id: d?.id, data });
+      if (!isAlreadyLiked) {
+        const data = {
+          likes: [
+            ...d?.likes,
+            {
+              email: getMyProfile?.data?.email,
+              isLiked: true,
+            },
+          ],
+        };
+        updateDiscuss({ id: d?.id, data });
+      } else {
+        const data = {
+          likes: removeLikeAndFilterOthers,
+        };
+        updateDiscuss({ id: d?.id, data });
+      }
     } else {
-      const data = {
-        likes: removeLikeAndFilterOthers,
-      };
-      updateDiscuss({ id: d?.id, data });
+      toast.error("You must be logged in first!");
     }
   };
 
   const handleAddReply = ({ e, data: d }) => {
     e.preventDefault();
-    const data = {
-      replies: [
-        ...d?.replies,
-        {
-          email: getMyProfile?.data?.email,
-          name: getMyProfile?.data?.name,
-          reply: e.target.reply.value,
-        },
-      ],
-    };
-    updateDiscuss({ id: d?.id, data });
+    if (accessToken) {
+      const data = {
+        replies: [
+          ...d?.replies,
+          {
+            email: getMyProfile?.data?.email,
+            name: getMyProfile?.data?.name,
+            reply: e.target.reply.value,
+          },
+        ],
+      };
+      updateDiscuss({ id: d?.id, data });
+    } else {
+      toast.error("You must be logged in first!");
+    }
     e.target.reply.value = "";
   };
 
