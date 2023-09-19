@@ -115,8 +115,8 @@ const DashboardLayout = ({ children }) => {
       },
     },
     show: {
-      width: "140px",
-      padding: "0 15px",
+      width: "80%",
+      padding: "0 10px",
       transition: {
         duration: 0.2,
       },
