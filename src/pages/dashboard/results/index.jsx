@@ -11,7 +11,8 @@ const MyResults = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(3);
   const [meta, setMeta] = useState({});
-  const [sortOrder, setSortOrder] = useState("desc");
+  const [sortBy, setSortBy] = useState("createdAt");
+  const [sortOrder, setSortOrder] = useState("asc");
   const [myResults, setMyResults] = useState([]);
 
   const accessToken =
@@ -29,6 +30,7 @@ const MyResults = () => {
     headers,
     page,
     limit,
+    sortBy,
     sortOrder,
   });
 

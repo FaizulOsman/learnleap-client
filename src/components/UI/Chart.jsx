@@ -16,7 +16,7 @@ const Chart = ({ getMySubmittedResults }) => {
       percentage: (result?.totalMarks / result?.totalQues) * 100,
     };
   });
-  console.log(data);
+  console.log(getMySubmittedResults?.data);
   return (
     <>
       {data?.length > 0 && (

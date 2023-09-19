@@ -22,8 +22,8 @@ const examResult = apiSlice.injectEndpoints({
       }),
     }),
     getMySubmittedResults: builder.query({
-      query: ({ headers, page, limit, sortOrder }) => ({
-        url: `/exam-result/my-submitted-results?page=${page}&limit=${limit}&sortOrder=${sortOrder}`,
+      query: ({ headers, page, limit, sortBy, sortOrder }) => ({
+        url: `/exam-result/my-submitted-results?page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`,
         headers: headers,
       }),
     }),
