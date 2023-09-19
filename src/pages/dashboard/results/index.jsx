@@ -56,7 +56,11 @@ const MyResults = () => {
               <div className="z-50 bg-[#080925] sm:px-7 sm:pt-7 px-4 pt-4 flex flex-col w-full border-b border-gray-800  sticky top-0">
                 <div className="flex w-full items-center">
                   <div className="flex items-center text-lg sm:text-2xl  dark:text-white mb-5 border-l-4 pl-3">
-                    My Results
+                    My Results (
+                    {getMySubmittedResults?.meta?.total
+                      ? getMySubmittedResults?.meta?.total
+                      : 0}
+                    )
                   </div>
                 </div>
               </div>
