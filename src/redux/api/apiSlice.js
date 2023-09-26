@@ -4,9 +4,9 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     // baseUrl: "http://localhost:5000/api/v1",
-    baseUrl: "https://test-yourself-server.vercel.app/api/v1",
+    baseUrl: "https://learnleap-server.vercel.app/api/v1",
   }),
-  tagTypes: ["test-yourself"],
+  tagTypes: ["learnleap"],
   endpoints: () => ({}),
 });
 

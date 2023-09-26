@@ -16,7 +16,7 @@ const Footer = () => {
             height={300}
           />
           <p>
-            QuizWizPro Ltd.
+            LearnLeap Ltd.
             <br />
             Providing reliable tech since 2022
           </p>

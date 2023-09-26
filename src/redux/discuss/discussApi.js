@@ -8,16 +8,16 @@ const discussApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["test-yourself"],
+      invalidatesTags: ["learnleap"],
     }),
     getAllDiscuss: builder.query({
       query: ({ page, limit, sortOrder }) =>
         `/discusses?page=${page}&limit=${limit}&sortOrder=${sortOrder}`,
-      providesTags: ["test-yourself"],
+      providesTags: ["learnleap"],
     }),
     getSingleDiscuss: builder.query({
       query: (id) => `/discusses/${id}`,
-      providesTags: ["test-yourself"],
+      providesTags: ["learnleap"],
     }),
     deleteDiscuss: builder.mutation({
       query: ({ id, headers }) => ({
@@ -25,7 +25,7 @@ const discussApi = apiSlice.injectEndpoints({
         method: "DELETE",
         headers: headers,
       }),
-      invalidatesTags: ["test-yourself"],
+      invalidatesTags: ["learnleap"],
     }),
     updateDiscuss: builder.mutation({
       query: ({ id, data }) => ({
@@ -33,7 +33,7 @@ const discussApi = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: ["test-yourself"],
+      invalidatesTags: ["learnleap"],
     }),
   }),
 });

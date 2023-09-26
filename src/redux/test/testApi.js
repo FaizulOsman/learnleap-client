@@ -9,19 +9,19 @@ const testApi = apiSlice.injectEndpoints({
         body: data,
         headers: headers,
       }),
-      invalidatesTags: ["test-yourself"],
+      invalidatesTags: ["learnleap"],
     }),
     getAllTest: builder.query({
       query: () => `/test`,
-      providesTags: ["test-yourself"],
+      providesTags: ["learnleap"],
     }),
     getTestBySubject: builder.query({
       query: (subject) => `/test/get-test-by-subject/${subject}`,
-      providesTags: ["test-yourself"],
+      providesTags: ["learnleap"],
     }),
     getSingleTest: builder.query({
       query: (id) => `/test/${id}`,
-      providesTags: ["test-yourself"],
+      providesTags: ["learnleap"],
     }),
     deleteTest: builder.mutation({
       query: ({ id, headers }) => ({
@@ -29,7 +29,7 @@ const testApi = apiSlice.injectEndpoints({
         method: "DELETE",
         headers: headers,
       }),
-      invalidatesTags: ["test-yourself"],
+      invalidatesTags: ["learnleap"],
     }),
     updateTest: builder.mutation({
       query: ({ id, data, headers }) => ({
@@ -38,7 +38,7 @@ const testApi = apiSlice.injectEndpoints({
         body: data,
         headers: headers,
       }),
-      invalidatesTags: ["test-yourself"],
+      invalidatesTags: ["learnleap"],
     }),
     addResult: builder.mutation({
       query: ({ options, headers }) => ({
@@ -47,7 +47,7 @@ const testApi = apiSlice.injectEndpoints({
         body: options.data,
         headers: headers,
       }),
-      invalidatesTags: ["test-yourself"],
+      invalidatesTags: ["learnleap"],
     }),
   }),
 });

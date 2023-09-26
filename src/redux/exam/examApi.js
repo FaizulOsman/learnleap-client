@@ -9,15 +9,15 @@ const examApi = apiSlice.injectEndpoints({
         body: data,
         headers: headers,
       }),
-      invalidatesTags: ["test-yourself"],
+      invalidatesTags: ["learnleap"],
     }),
     getAllExam: builder.query({
       query: () => `/exam`,
-      providesTags: ["test-yourself"],
+      providesTags: ["learnleap"],
     }),
     getSingleExam: builder.query({
       query: (id) => `/exam/${id}`,
-      providesTags: ["test-yourself"],
+      providesTags: ["learnleap"],
     }),
     deleteExam: builder.mutation({
       query: ({ id, headers }) => ({
@@ -25,7 +25,7 @@ const examApi = apiSlice.injectEndpoints({
         method: "DELETE",
         headers: headers,
       }),
-      invalidatesTags: ["test-yourself"],
+      invalidatesTags: ["learnleap"],
     }),
     updateExam: builder.mutation({
       query: ({ id, data, headers }) => ({
@@ -34,7 +34,7 @@ const examApi = apiSlice.injectEndpoints({
         body: data,
         headers: headers,
       }),
-      invalidatesTags: ["test-yourself"],
+      invalidatesTags: ["learnleap"],
     }),
     addResult: builder.mutation({
       query: ({ options, headers }) => ({
@@ -43,7 +43,7 @@ const examApi = apiSlice.injectEndpoints({
         body: options.data,
         headers: headers,
       }),
-      invalidatesTags: ["test-yourself"],
+      invalidatesTags: ["learnleap"],
     }),
   }),
 });

@@ -154,7 +154,7 @@ const DashboardLayout = ({ children }) => {
     if (accessToken) {
       try {
         const url =
-          "https://test-yourself-server.vercel.app/api/v1/users/my-profile";
+          "https://learnleap-server.vercel.app/api/v1/users/my-profile";
         const options = {
           headers: {
             authorization: accessToken,
@@ -197,7 +197,7 @@ const DashboardLayout = ({ children }) => {
                   exit="hidden"
                   className="text-lg leading-[0px] pl-2"
                 >
-                  QuizWizPro
+                  LearnLeap
                 </motion.h1>
               )}
             </AnimatePresence>
@@ -289,7 +289,7 @@ const DashboardLayout = ({ children }) => {
             <div style={{ minHeight: "calc(100vh - 100px)" }}>{children}</div>
             <footer className="footer footer-center p-4 bg-[#00073d] text-white">
               <div>
-                <p>Copyright © 2023 - All right reserved by QuizWizPro Ltd.</p>
+                <p>Copyright © 2023 - All right reserved by LearnLeap Ltd.</p>
               </div>
             </footer>
           </div>

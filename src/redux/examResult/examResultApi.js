@@ -9,11 +9,11 @@ const examResult = apiSlice.injectEndpoints({
         body: data,
         headers: headers,
       }),
-      invalidatesTags: ["test-yourself"],
+      invalidatesTags: ["learnleap"],
     }),
     getAllExamResult: builder.query({
       query: () => `/exam-result`,
-      providesTags: ["test-yourself"],
+      providesTags: ["learnleap"],
     }),
     getSingleExamResult: builder.query({
       query: ({ id, headers }) => ({

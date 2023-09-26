@@ -9,21 +9,21 @@ const bookmarkApi = apiSlice.injectEndpoints({
         body: data,
         headers: headers,
       }),
-      invalidatesTags: ["test-yourself"],
+      invalidatesTags: ["learnleap"],
     }),
     getAllBookmark: builder.query({
       query: ({ headers }) => ({
         url: `/bookmarks/ `,
         headers: headers,
       }),
-      providesTags: ["test-yourself"],
+      providesTags: ["learnleap"],
     }),
     getSingleBookmark: builder.query({
       query: ({ questionId, headers }) => ({
         url: `/bookmarks/${questionId}`,
         headers: headers,
       }),
-      providesTags: ["test-yourself"],
+      providesTags: ["learnleap"],
     }),
     deleteBookmark: builder.mutation({
       query: ({ data, headers }) => ({
@@ -32,7 +32,7 @@ const bookmarkApi = apiSlice.injectEndpoints({
         body: data,
         headers: headers,
       }),
-      invalidatesTags: ["test-yourself"],
+      invalidatesTags: ["learnleap"],
     }),
     updateBookmark: builder.mutation({
       query: ({ id, data, headers }) => ({
@@ -41,7 +41,7 @@ const bookmarkApi = apiSlice.injectEndpoints({
         body: data,
         headers: headers,
       }),
-      invalidatesTags: ["test-yourself"],
+      invalidatesTags: ["learnleap"],
     }),
   }),
 });
