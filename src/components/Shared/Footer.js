@@ -1,65 +1,128 @@
-import Image from "next/image";
 import React from "react";
+import { SiInstagram } from "react-icons/si";
+import { TfiTwitter } from "react-icons/tfi";
+import { FaFacebookF } from "react-icons/fa";
+import { BiLogoLinkedin } from "react-icons/bi";
+import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="bg-neutral text-base-content">
-      <footer className="footer py-10  text-neutral-content w-11/12 max-w-[1200px] mx-auto">
-        <div>
-          <Image
-            alt="Logo"
-            className="w-14 rounded-lg"
-            src="https://i.ibb.co/5MHLgQW/images-removebg-preview.png"
-            decoding="async"
-            loading="lazy"
-            width={300}
-            height={300}
-          />
-          <p>
-            LearnLeap Ltd.
-            <br />
-            Providing reliable tech since 2022
-          </p>
-        </div>
-        <div>
-          <span className="footer-title">Social</span>
-          <div className="grid grid-flow-col gap-4">
-            <a>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                className="fill-current"
-              >
-                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
-              </svg>
-            </a>
-            <a>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                className="fill-current"
-              >
-                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
-              </svg>
-            </a>
-            <a>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                className="fill-current"
-              >
-                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
-              </svg>
-            </a>
+    <div className="bg-gradient-to-r from-green-500 to-blue-500 text-white">
+      <div className="w-11/12 max-w-[1200px] mx-auto">
+        <footer className="main-container relative pt-8 pb-6">
+          <div className="container mx-auto">
+            <div className="flex flex-wrap text-left lg:text-left">
+              <div className="w-full lg:w-6/12">
+                <h4 className="text-3xl font-bold">Learn Leap</h4>
+                <h5 className="text-lg mt-0 mb-2 ">
+                  Providing reliable tech since 2023.
+                </h5>
+                <div className="mt-6 lg:mb-0 mb-6 flex">
+                  <button
+                    className="border-none bg-white text-[#1d9bf0] text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                    type="button"
+                  >
+                    <BiLogoLinkedin className="w-full h-full p-[6px]" />
+                  </button>
+                  <button
+                    className="border-none bg-white text-blue-700 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                    type="button"
+                  >
+                    <FaFacebookF className="w-full h-full p-2" />
+                  </button>
+                  <button
+                    className="border-none bg-white text-[#1d9bf0] text-lightBlue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                    type="button"
+                  >
+                    <TfiTwitter className="w-full h-full p-2" />
+                  </button>
+                </div>
+              </div>
+              <div className="w-full lg:w-6/12">
+                <div className="flex flex-wrap items-top mb-6">
+                  <div className="w-full lg:w-4/12 px-4 ml-auto">
+                    <span className="block uppercase  text-sm font-bold mb-2">
+                      Useful Links
+                    </span>
+                    <ul className="list-unstyled">
+                      <li>
+                        <Link
+                          className="font-semibold block pb-2 text-sm"
+                          href="/exam"
+                        >
+                          Exam
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className="font-semibold block pb-2 text-sm"
+                          href="/test"
+                        >
+                          Test
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className="font-semibold block pb-2 text-sm"
+                          href="/about-us"
+                        >
+                          About Us
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="w-full lg:w-4/12 px-4 pt-3 lg:pt-0">
+                    <span className="block uppercase  text-sm font-bold mb-2">
+                      Other Resources
+                    </span>
+                    <ul className="list-unstyled">
+                      <li>
+                        <Link
+                          className="font-semibold block pb-2 text-sm"
+                          href="/random-question"
+                        >
+                          Random Questions
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className="font-semibold block pb-2 text-sm"
+                          href="discussion"
+                        >
+                          Discuss
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className="font-semibold block pb-2 text-sm"
+                          href="/be-a-premium-user"
+                        >
+                          Be a premium user
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr className="my-6 border-blueGray-300" />
+            <div className="flex flex-wrap items-center md:justify-between justify-center">
+              <div className="w-full md:w-4/12 px-4 mx-auto text-center">
+                <div className="text-sm font-semibold py-1">
+                  Copyright © <span id="get-current-year">2023 </span>
+                  <Link href="/" className="hover:" target="_blank">
+                    Learn Leap
+                  </Link>{" "}
+                  <Link href="/" className="hover:text-blueGray-800">
+                    Online Service
+                  </Link>
+                  .
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </div>
   );
 };
