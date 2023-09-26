@@ -4,30 +4,47 @@ import React from "react";
 
 const NotFoundPage = () => {
   return (
-    <div>
-      <section className="text-gray-600 body-font container">
-        <div className="container mx-auto flex px-5 py-24 flex-col items-center">
-          <div className="lg:flex-grow md:w-1/2 md:pr-16 flex flex-col md:items-center md:text-left mb-16 md:mb-0 items-center text-center">
-            <Image
-              src="https://i.ibb.co/3YpsG7v/download.jpg"
-              alt=""
-              width={300}
-              height={300}
-            />
-            <h1 className="title-font sm:text-3xl text-3xl mb-4 font-medium  text-red-500">
-              PAGE NOT FOUND
-            </h1>
-
-            <div className="flex justify-center">
-              <Link href="/">
-                <button className="inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">
-                  Back Home
-                </button>
-              </Link>
+    <div className="min-h-[100vh] flex justify-center items-center">
+      <div class="lg:px-24 lg:py-24 md:py-20 md:px-44 px-4 py-24 items-center flex justify-center flex-col-reverse lg:flex-row md:gap-28 gap-16">
+        <div class="xl:pt-24 w-full xl:w-1/2 relative pb-12 lg:pb-0">
+          <div class="relative">
+            <div class="absolute">
+              <div class="">
+                <h1 class="my-2 text-gray-800 font-bold text-2xl">
+                  Looks like you have found the doorway to the great nothing
+                </h1>
+                <p class="my-2 text-gray-800">
+                  Sorry about that! Please visit our hompage to get where you
+                  need to go.
+                </p>
+                <Link href="/">
+                  <button class="sm:w-full lg:w-auto my-2 border rounded md py-4 px-8 text-center bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50">
+                    Take me there!
+                  </button>
+                </Link>
+              </div>
+            </div>
+            <div>
+              <Image
+                src="https://i.ibb.co/G9DC8S0/404-2.png"
+                alt="404"
+                width={1000}
+                height={1000}
+                className="w-full"
+              />
             </div>
           </div>
         </div>
-      </section>
+        <div>
+          <Image
+            src="https://i.ibb.co/ck1SGFJ/Group.png"
+            alt="404"
+            width={1000}
+            height={1000}
+            className="w-full"
+          />
+        </div>
+      </div>
     </div>
   );
 };
