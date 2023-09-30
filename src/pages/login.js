@@ -44,6 +44,40 @@ const Login = () => {
           <h1 className="text-3xl font-semibold text-center text-purple-700 underline">
             Sign in
           </h1>
+          <div className="flex justify-around mt-5">
+            <div className="dropdown dropdown-hover">
+              <label tabIndex={0} className="btn btn-xs m-1 btn-primary">
+                Admin
+              </label>
+              <ul
+                tabIndex={0}
+                className="dropdown-content z-[1] menu p-4 shadow bg-base-100 rounded-box w-52"
+              >
+                <p>
+                  <span className="font-bold">Email:</span> a@gmail.com
+                </p>
+                <p className="mt-2">
+                  <span className="font-bold">Password:</span> 1234564
+                </p>
+              </ul>
+            </div>
+            <div className="dropdown dropdown-hover dropdown-end">
+              <label tabIndex={0} className="btn btn-xs m-1 btn-primary">
+                User
+              </label>
+              <ul
+                tabIndex={0}
+                className="dropdown-content z-[1] menu p-4 shadow bg-base-100 rounded-box w-52"
+              >
+                <p>
+                  <span className="font-bold">Email:</span> b@gmail.com
+                </p>
+                <p className="mt-2">
+                  <span className="font-bold">Password:</span> 123456
+                </p>
+              </ul>
+            </div>
+          </div>
           <form onSubmit={(e) => handleSubmit(e)} className="mt-6">
             <div className="mb-2">
               <label
