@@ -8,25 +8,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-family: sans-serif;
   font-size: 15px;
-}
-
-.hero-container svg {
-  height: 42vh;
-}
-.hero-container {
-  position: relative;
-}
-.hero-container .page {
-  height: 200vh;
-}
-
-.hero-container .content {
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
 }
 
 .hero-container .content-section {
@@ -35,22 +17,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: sans-serif;
-}
-
-.hero-container .content-section:nth-child(1) {
-  background-color: #e2d03e;
-}
-
-.hero-container .content-section:nth-child(2) {
-  background-color: #4dae85;
-}
-
-.hero-container .content-section:nth-child(3) {
-  background-color: #ed5d53;
-}
-
-.hero-container .content-section:nth-child(4) {
 }
 
 .hero-container .content-section > div {

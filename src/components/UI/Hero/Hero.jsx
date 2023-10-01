@@ -229,16 +229,16 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="hero-container">
-      <div className="page"></div>
-      <div className="content">
-        <div className="content-section">
+    <div className="hero-container relative">
+      <div className="h-[100vh]"></div>
+      <div className="fixed top-0 left-0 flex">
+        <div className="content-section bg-[#e2d03e]">
           <div>
             <h1>Dude and Scroll</h1>
             <p className="arrow-animated">↓</p>
           </div>
         </div>
-        <div className="content-section">
+        <div className="content-section bg-[#4dae85]">
           <div>
             <h1>What is this?</h1>
             <p>
@@ -251,7 +251,7 @@ const Hero = () => {
             </p>
           </div>
         </div>
-        <div className="content-section">
+        <div className="content-section bg-[#ed5d53]">
           <div>
             <h1>So what?</h1>
             <p>
@@ -281,7 +281,7 @@ const Hero = () => {
         <div className="content-section"></div>
       </div>
       <div className="animation-container">
-        <svg viewBox="0 -10 315 350">
+        <svg viewBox="0 -10 315 350" className="h-[42vh]">
           <g
             className="dude"
             stroke="black"
