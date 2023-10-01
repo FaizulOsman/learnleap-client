@@ -1,4 +1,4 @@
-.hero-container .animation-container {
+.animation-container {
   position: fixed;
   left: 0;
   bottom: 0;
@@ -8,18 +8,52 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  font-family: sans-serif;
   font-size: 15px;
 }
 
-.hero-container .content-section {
+svg {
+  height: 42vh;
+}
+.hero-container {
+  position: relative;
+}
+.page {
+  height: 200vh;
+}
+
+.content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+}
+
+.content-section {
   width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: sans-serif;
 }
 
-.hero-container .content-section > div {
+.content-section:nth-child(1) {
+  background-color: #e2d03e;
+}
+
+.content-section:nth-child(2) {
+  background-color: #4dae85;
+}
+
+.content-section:nth-child(3) {
+  background-color: #ed5d53;
+}
+
+.content-section:nth-child(4) {
+}
+
+.content-section > div {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,7 +64,21 @@
   text-align: center;
 }
 
-.hero-container .arrow-animated {
+h1 {
+  padding: 0;
+  margin: 0.5em 0;
+}
+
+p {
+  padding: 0;
+  margin: 0.25em 0;
+}
+
+a {
+  color: black;
+}
+
+.arrow-animated {
   font-size: 35px;
   animation: arrow-float 1s infinite;
 }
