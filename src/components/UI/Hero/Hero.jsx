@@ -331,3 +331,52 @@ const Hero = () => {
 };
 
 export default Hero;
+
+//   const [lastId, setLastId] = useState("");
+//   const [menuItems, setMenuItems] = useState([]);
+//   const [scrollItems, setScrollItems] = useState([]);
+//   console.log(lastId);
+//   //   useEffect(() => {
+//   //     const topMenu = document.querySelector("#content");
+//   //     const topMenuHeight = topMenu.offsetHeight + 1;
+//   //     const menuItems = Array.from(topMenu.querySelectorAll("a"));
+//   //     const scrollItems = menuItems.map((menuItem) => {
+//   //       const href = menuItem.getAttribute("href");
+//   //       const item =
+//   //         href === "#" ? document.documentElement : document.querySelector(href);
+//   //       if (item) {
+//   //         return item;
+//   //       }
+//   //     });
+
+//   //     setMenuItems(menuItems);
+//   //     setScrollItems(scrollItems);
+//   //   }, []);
+
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       const topMenu = document.querySelector("#content");
+//       const topMenuHeight = topMenu.offsetHeight + 1;
+//       const fromTop = window.scrollY + topMenuHeight;
+
+//       const cur = scrollItems.filter(
+//         (scrollItem) => scrollItem && scrollItem.offsetTop < fromTop
+//       );
+//       const id = cur.length ? cur[cur.length - 1].id : "";
+//       console.log(fromTop);
+//       if (lastId !== id) {
+//         setLastId(topMenu);
+//         menuItems.forEach((menuItem) => {
+//           menuItem.classList.remove("active");
+//           if (menuItem.getAttribute("href") === `#${id}`) {
+//             menuItem.classList.add("active");
+//           }
+//         });
+//       }
+//     };
+
+//     window.addEventListener("scroll", handleScroll);
+//     return () => {
+//       window.removeEventListener("scroll", handleScroll);
+//     };
+//   }, [lastId, menuItems, scrollItems]);
