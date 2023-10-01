@@ -230,8 +230,8 @@ const Hero = () => {
 
   return (
     <div className="hero-container relative">
-      <div className="h-[100vh]"></div>
-      <div className="fixed top-0 left-0 flex">
+      <div className="page h-[100vh]"></div>
+      <div className="content fixed top-0 left-0 flex">
         <div className="content-section bg-[#e2d03e]">
           <div>
             <h1>Dude and Scroll</h1>
