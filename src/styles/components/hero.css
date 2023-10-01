@@ -20,7 +20,7 @@
   margin-bottom: 80px;
 }
 .hero-container .page {
-  height: 250vh;
+  height: 270vh;
 }
 
 .hero-container .content {
@@ -38,21 +38,6 @@
   align-items: center;
   justify-content: center;
   font-family: sans-serif;
-}
-
-.hero-container .content-section:nth-child(1) {
-  background-color: #e2d03e;
-}
-
-.hero-container .content-section:nth-child(2) {
-  background-color: #4dae85;
-}
-
-.hero-container .content-section:nth-child(3) {
-  background-color: #ed5d53;
-}
-
-.hero-container .content-section:nth-child(4) {
 }
 
 .hero-container .content-section > div {

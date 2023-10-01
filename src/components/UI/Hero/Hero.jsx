@@ -232,7 +232,7 @@ const Hero = () => {
   const [menuItems, setMenuItems] = useState([]);
   const [scrollItems, setScrollItems] = useState([]);
   const [contentPosition, setContentPosition] = useState("fixed");
-
+  const [secLstDisplay, setSecLstDisplay] = useState("block");
   //   useEffect(() => {
   //     const topMenu = document.querySelector("#content");
   //     const topMenuHeight = topMenu.offsetHeight + 1;
@@ -254,13 +254,14 @@ const Hero = () => {
     const handleScroll = () => {
       const topMenu = document.querySelector("#content");
       const topMenuHeight = topMenu.offsetHeight + 1;
-      const topMenuWidth = topMenu.offsetWidth + 1;
       const fromTop = window.scrollY + topMenuHeight;
       //   console.log(topMenuWidth);
-      if (fromTop > topMenuHeight * 2.5) {
+      if (fromTop > topMenuHeight * 2.9) {
         setContentPosition("absolute");
+        setSecLstDisplay("hidden");
       } else {
         setContentPosition("fixed");
+        setSecLstDisplay("hidden");
       }
 
       const cur = scrollItems.filter(
@@ -289,17 +290,19 @@ const Hero = () => {
     <div className="hero-container relative">
       <div class="page"></div>
       <div class={`content ${contentPosition}`} id="content">
-        <div class="content-section">
+        <div class="content-section bg-gradient-to-t from-green-500 to-blue-500">
           <div>
-            <h1>Dude and Scroll</h1>
-            <p class="arrow-animated">↓</p>
+            <h1 className="text-3xl font-bold text-white">Dude and Scroll</h1>
+            <p class="arrow-animated text-white">↓</p>
           </div>
         </div>
-        <div class="content-section">
+        <div
+          class={`content-section ${secLstDisplay} bg-gradient-to-t from-green-500 to-blue-500`}
+        >
           <div>
-            <h1>What is this?</h1>
-            <p>
-              That is{" "}
+            <h1 className="text-3xl font-bold text-white">What is this?</h1>
+            <p className="text-white">
+              That is
               <a href="https://twitter.com/uuuuuulala" target="_blank">
                 me
               </a>{" "}
@@ -308,33 +311,7 @@ const Hero = () => {
             </p>
           </div>
         </div>
-        <div class="content-section">
-          <div>
-            <h1>So what?</h1>
-            <p>
-              You can use this code and design concept for your project. The
-              animation parameters are easy to tweak, graphic elements can be
-              replaced.
-            </p>
-            <p>
-              You can also give a follow on{" "}
-              <a
-                href="https://www.linkedin.com/in/ksenia-kondrashova/"
-                target="_blank"
-              >
-                linkedin
-              </a>
-              ,{" "}
-              <a href="https://codepen.io/ksenia-k" target="_blank">
-                codepen
-              </a>{" "}
-              and{" "}
-              <a href="https://twitter.com/uuuuuulala" target="_blank">
-                twitter
-              </a>{" "}
-            </p>
-          </div>
-        </div>
+        <div class="content-section  bg-gradient-to-t from-green-500 to-blue-500"></div>
         <div class="content-section"></div>
       </div>
       <div class={`animation-container ${contentPosition}`}>
@@ -388,52 +365,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
-//   const [lastId, setLastId] = useState("");
-//   const [menuItems, setMenuItems] = useState([]);
-//   const [scrollItems, setScrollItems] = useState([]);
-//   console.log(lastId);
-//   //   useEffect(() => {
-//   //     const topMenu = document.querySelector("#content");
-//   //     const topMenuHeight = topMenu.offsetHeight + 1;
-//   //     const menuItems = Array.from(topMenu.querySelectorAll("a"));
-//   //     const scrollItems = menuItems.map((menuItem) => {
-//   //       const href = menuItem.getAttribute("href");
-//   //       const item =
-//   //         href === "#" ? document.documentElement : document.querySelector(href);
-//   //       if (item) {
-//   //         return item;
-//   //       }
-//   //     });
-
-//   //     setMenuItems(menuItems);
-//   //     setScrollItems(scrollItems);
-//   //   }, []);
-
-//   useEffect(() => {
-//     const handleScroll = () => {
-//       const topMenu = document.querySelector("#content");
-//       const topMenuHeight = topMenu.offsetHeight + 1;
-//       const fromTop = window.scrollY + topMenuHeight;
-
-//       const cur = scrollItems.filter(
-//         (scrollItem) => scrollItem && scrollItem.offsetTop < fromTop
-//       );
-//       const id = cur.length ? cur[cur.length - 1].id : "";
-//       console.log(fromTop);
-//       if (lastId !== id) {
-//         setLastId(topMenu);
-//         menuItems.forEach((menuItem) => {
-//           menuItem.classList.remove("active");
-//           if (menuItem.getAttribute("href") === `#${id}`) {
-//             menuItem.classList.add("active");
-//           }
-//         });
-//       }
-//     };
-
-//     window.addEventListener("scroll", handleScroll);
-//     return () => {
-//       window.removeEventListener("scroll", handleScroll);
-//     };
-//   }, [lastId, menuItems, scrollItems]);
