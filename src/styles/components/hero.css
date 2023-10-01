@@ -1,5 +1,5 @@
-.animation-container {
-  position: fixed;
+.hero-container .animation-container {
+  /* position: fixed; */
   left: 0;
   bottom: 0;
   width: 30%;
@@ -12,24 +12,26 @@
   font-size: 15px;
 }
 
-svg {
+.hero-container svg {
   height: 42vh;
 }
 .hero-container {
   position: relative;
+  margin-bottom: 80px;
 }
-.page {
-  height: 200vh;
+.hero-container .page {
+  height: 250vh;
 }
 
-.content {
-  position: fixed;
-  top: 0;
+.hero-container .content {
+  /* position: fixed; */
+  /* top: 0; */
   left: 0;
+  bottom: 0;
   display: flex;
 }
 
-.content-section {
+.hero-container .content-section {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -38,22 +40,22 @@ svg {
   font-family: sans-serif;
 }
 
-.content-section:nth-child(1) {
+.hero-container .content-section:nth-child(1) {
   background-color: #e2d03e;
 }
 
-.content-section:nth-child(2) {
+.hero-container .content-section:nth-child(2) {
   background-color: #4dae85;
 }
 
-.content-section:nth-child(3) {
+.hero-container .content-section:nth-child(3) {
   background-color: #ed5d53;
 }
 
-.content-section:nth-child(4) {
+.hero-container .content-section:nth-child(4) {
 }
 
-.content-section > div {
+.hero-container .content-section > div {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,21 +66,7 @@ svg {
   text-align: center;
 }
 
-h1 {
-  padding: 0;
-  margin: 0.5em 0;
-}
-
-p {
-  padding: 0;
-  margin: 0.25em 0;
-}
-
-a {
-  color: black;
-}
-
-.arrow-animated {
+.hero-container .arrow-animated {
   font-size: 35px;
   animation: arrow-float 1s infinite;
 }
