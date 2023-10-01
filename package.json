@@ -17,6 +17,7 @@
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
     "framer-motion": "^10.15.1",
+    "gsap": "^3.12.2",
     "jsonwebtoken": "^9.0.2",
     "next": "13.4.12",
     "next-auth": "^4.22.3",

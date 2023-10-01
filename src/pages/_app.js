@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 // Imported Styles
 import "@/styles/globals.css";
 import "@/styles/components/navbar.css";
+import "@/styles/components/hero.css";
 
 export default function App({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
