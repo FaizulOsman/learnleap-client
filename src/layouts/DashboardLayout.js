@@ -1,7 +1,4 @@
-import { FaHome, FaUser, FaUsers, FaChartLine } from "react-icons/fa";
 import { BiSearch } from "react-icons/bi";
-import { BiCog } from "react-icons/bi";
-import { AiFillHeart, AiTwotoneFileExclamation } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
@@ -10,100 +7,11 @@ import Image from "next/image";
 import { removeFromLocalStorage } from "@/utils/localstorage";
 import SidebarMenu from "@/components/Dashboard/SidebarMenu";
 import DashboardHeader from "@/components/Dashboard/DashboardHeader";
-
-const routes = [
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    icon: <FaHome />,
-    permission1: "user",
-    permission2: "admin",
-  },
-  {
-    path: "/dashboard/users",
-    name: "Users",
-    icon: <FaUsers />,
-    permission1: "",
-    permission2: "admin",
-  },
-  {
-    path: "/dashboard/my-profile",
-    name: "My Profile",
-    icon: <FaUser />,
-    permission1: "user",
-    permission2: "admin",
-  },
-  {
-    path: "/dashboard/results",
-    name: "Results",
-    icon: <FaChartLine />,
-    permission1: "user",
-    permission2: "",
-  },
-  {
-    path: "/dashboard/test",
-    name: "Test",
-    icon: <AiTwotoneFileExclamation />,
-    permission1: "",
-    permission2: "admin",
-    subRoutes: [
-      {
-        path: "/dashboard/test/create-test",
-        name: "Create Test",
-        icon: <FaUser />,
-      },
-      {
-        path: "/dashboard/test/all-test",
-        name: "All Test",
-        icon: <AiTwotoneFileExclamation />,
-      },
-    ],
-  },
-  {
-    path: "/dashboard/exam",
-    name: "Exam",
-    icon: <AiTwotoneFileExclamation />,
-    permission1: "",
-    permission2: "admin",
-    subRoutes: [
-      {
-        path: "/dashboard/exam/create-exam",
-        name: "Create Exam",
-        icon: <FaUser />,
-      },
-      {
-        path: "/dashboard/exam/all-exam",
-        name: "All Exam",
-        icon: <AiTwotoneFileExclamation />,
-      },
-    ],
-  },
-  {
-    path: "/dashboard/settings",
-    name: "Settings",
-    icon: <BiCog />,
-    exact: true,
-    permission1: "",
-    permission2: "admin",
-    subRoutes: [
-      {
-        path: "/dashboard/my-profile",
-        name: "Profile ",
-        icon: <FaUser />,
-      },
-    ],
-  },
-  {
-    path: "/dashboard/saved",
-    name: "Saved",
-    icon: <AiFillHeart />,
-    permission1: "user",
-    permission2: "admin",
-  },
-];
+import { routes } from "@/constants/dashboardConstants";
 
 const DashboardLayout = ({ children }) => {
-  const { router } = useRouter();
+  const { pathname } = useRouter();
+  console.log(pathname);
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const inputAnimation = {
@@ -213,7 +121,7 @@ const DashboardLayout = ({ children }) => {
               />
             </div>
           </div>
-          <div className="flex items-center my-[10px] mx-0 h-4 p-2">
+          {/* <div className="flex items-center my-[10px] mx-0 h-4 p-2">
             <div className="search_icon">
               <BiSearch />
             </div>
@@ -230,8 +138,8 @@ const DashboardLayout = ({ children }) => {
                 />
               )}
             </AnimatePresence>
-          </div>
-          <section className="mt-4 flex flex-col gap-[5px]">
+          </div> */}
+          <section className="mt- flex flex-col gap-[5px]">
             {routes.map((route, index) => (
               <div key={index}>
                 {(route?.permission1 === myProfile?.role ||
@@ -248,7 +156,7 @@ const DashboardLayout = ({ children }) => {
                       <Link href={route.path} passHref>
                         <div
                           className={`flex items-center text-white gap-[10px] p-2 border-r-4 border-transparent border-solid transition duration-200 ease-in-out cubic-bezier(0.6, -0.28, 0.735, 0.045) hover:bg-[#2d3359] hover:border-r-4 hover:border-white hover:transition-[0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045)] ${
-                            route.path === router?.asPath
+                            route.path === pathname
                               ? "border-r-4 border-white bg-[#2d3359]"
                               : ""
                           }`}
