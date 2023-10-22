@@ -38,9 +38,10 @@ const MyProfile = () => {
     e.preventDefault();
     const email = e.target.email.value;
     const phone = e.target.phone.value;
+    const address = e.target.address.value;
+    const image = e.target.image.value;
 
-    const data = { email, phone };
-    console.log(data);
+    const data = { email, phone, address, image };
     updateMyProfile({ data, headers });
   };
 
@@ -95,6 +96,7 @@ const MyProfile = () => {
                     className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500 bg-[#1d1836]"
                     autoComplete="off"
                     defaultValue={MyProfile?.email}
+                    disabled={true}
                   />
                   <label
                     htmlFor="email"
@@ -127,7 +129,6 @@ const MyProfile = () => {
                     className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500 bg-[#1d1836]"
                     autoComplete="off"
                     defaultValue={MyProfile?.image}
-                    disabled={true}
                   />
                   <label
                     htmlFor="image"
@@ -144,7 +145,6 @@ const MyProfile = () => {
                     className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500 bg-[#1d1836]"
                     autoComplete="off"
                     defaultValue={MyProfile?.address}
-                    disabled={true}
                   />
                   <label
                     htmlFor="address"
