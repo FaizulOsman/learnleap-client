@@ -29,6 +29,7 @@ const useProtectedRoute = (role) => {
     "/exam-result/[...resultSegments]",
     "/dashboard",
     "/dashboard/users",
+    "/dashboard/users/update/[userId]",
     "/dashboard/my-profile",
     "/dashboard/test",
     "/dashboard/test/create-test",

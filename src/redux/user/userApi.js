@@ -29,6 +29,12 @@ const userApi = apiSlice.injectEndpoints({
         headers: headers,
       }),
     }),
+    getSingleUser: builder.query({
+      query: ({ id, headers }) => ({
+        url: `/users/${id}`,
+        headers: headers,
+      }),
+    }),
     getAllUsersByQuery: builder.query({
       query: ({ headers, limit, page, sortOrder }) => ({
         url: `/users?limit=${limit}&page=${page}&sortOrder=${sortOrder}`,
@@ -72,6 +78,7 @@ export const {
   useLoginMutation,
   useRefreshTokenMutation,
   useGetAllUsersQuery,
+  useGetSingleUserQuery,
   useGetAllUsersByQueryQuery,
   useUpdateUserMutation,
   useDeleteUserMutation,
