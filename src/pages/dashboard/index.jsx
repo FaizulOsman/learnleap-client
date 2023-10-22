@@ -14,11 +14,11 @@ import AllTest from "./test/all-test";
 import AllExam from "./exam/all-exam";
 import Users from "./users";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
-import { PiExamLight } from "react-icons/pi";
 import DashboardHomepageCard from "@/components/Dashboard/DashboardHomepageCard";
 import { AiOutlineBarChart } from "react-icons/ai";
 import { BsBarChartLine } from "react-icons/bs";
 import { HiOutlineUserGroup } from "react-icons/hi";
+import { BiLineChart } from "react-icons/bi";
 
 const jwt = require("jsonwebtoken");
 
@@ -73,7 +73,7 @@ const Dashboard = () => {
               count={getAllExam?.meta?.total}
             />
             <DashboardHomepageCard
-              icon={<PiExamLight className="w-7 h-7" />}
+              icon={<BiLineChart className="w-7 h-7" />}
               title="Exam Participate"
               count={getAllExamResult?.meta?.total}
             />
