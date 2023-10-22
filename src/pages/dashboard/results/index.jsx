@@ -68,31 +68,27 @@ const MyResults = () => {
         tableHeadData={[
           <th className="sm:px-3 pt-0 pb-3">Subject</th>,
           <th className="sm:px-3 pt-0 pb-3">Total Q.</th>,
-          <th className="sm:px-3 pt-0 pb-3">T. Attempt.</th>,
+          <th className="sm:px-3 pt-0 pb-3 hidden md:table-cell">
+            T. Attempt.
+          </th>,
           <th className="sm:px-3 pt-0 pb-3">C. Ans</th>,
-          <th className="sm:px-3 pt-0 pb-3">W. Ans</th>,
+          <th className="sm:px-3 pt-0 pb-3 hidden sm:table-cell">W. Ans</th>,
           <th className="sm:px-3 pt-0 pb-3"> T. Marks</th>,
         ]}
         tableBodyData={myResults?.map((result, index) => (
           <tr key={index} className="border-b border-gray-800">
-            <td className="sm:p-3 py-2 hidden sm:table-cell">
+            <td className="sm:p-3 py-2">
               {result?.subject} {result?.serial}
             </td>
-            <td className="sm:p-3 py-2 hidden sm:table-cell">
-              {result?.totalQues}
-            </td>
-            <td className="sm:p-3 py-2 hidden sm:table-cell">
+            <td className="sm:p-3 py-2">{result?.totalQues}</td>
+            <td className="sm:p-3 py-2 hidden md:table-cell">
               {result?.totalAttempted}
             </td>
-            <td className="sm:p-3 py-2 hidden sm:table-cell">
-              {result?.correctAnswer}
-            </td>
+            <td className="sm:p-3 py-2">{result?.correctAnswer}</td>
             <td className="sm:p-3 py-2 hidden sm:table-cell">
               {result?.wrongAnswer}
             </td>
-            <td className="sm:p-3 py-2 hidden sm:table-cell">
-              {result?.totalMarks}
-            </td>
+            <td className="sm:p-3 py-2">{result?.totalMarks}</td>
           </tr>
         ))}
       />
