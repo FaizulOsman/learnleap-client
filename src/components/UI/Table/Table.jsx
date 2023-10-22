@@ -87,16 +87,10 @@ const Table = ({
                     {allData?.length > 0 ? (
                       <table className="w-full text-left">
                         <thead>
-                          {tableHeadData?.map((data, index) => (
-                            <th key={index} className="sm:px-3 pt-0 pb-3">
-                              {data}
-                            </th>
-                          ))}
+                          {tableHeadData?.map((data, index) => data)}
                           <tr className="font-normal border-b border-gray-800"></tr>
                         </thead>
-                        <tbody>
-                          {tableBodyData?.map((data, index) => data)}
-                        </tbody>
+                        <tbody>{tableBodyData?.map((data) => data)}</tbody>
                       </table>
                     ) : (
                       <div className="min-h-[30vh] flex items-center justify-center">

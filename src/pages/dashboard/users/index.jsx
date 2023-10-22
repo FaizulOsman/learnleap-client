@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import Table from "@/components/UI/Table/Table";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import DashboardLayout from "@/layouts/DashboardLayout";
@@ -134,17 +135,17 @@ const Users = () => {
         sortOrder={sortOrder}
         setSortOrder={setSortOrder}
         tableHeadData={[
-          "Image",
-          "Name",
-          "Email",
-          "isAdmin",
-          "isPremium",
-          "Delete",
-          "Update",
+          <th className="sm:px-3 pt-0 pb-3 hidden md:table-cell">Image</th>,
+          <th className="sm:px-3 pt-0 pb-3 hidden sm:table-cell">Name</th>,
+          <th className="sm:px-3 pt-0 pb-3">Email</th>,
+          <th className="sm:px-3 pt-0 pb-3">isAdmin</th>,
+          <th className="sm:px-3 pt-0 pb-3">isPremium</th>,
+          <th className="sm:px-3 pt-0 pb-3">Delete</th>,
+          <th className="sm:px-3 pt-0 pb-3">Update</th>,
         ]}
         tableBodyData={allUsers?.map((data, index) => (
           <tr key={index} className="border-b border-gray-800">
-            <td className="sm:p-3 py-2 ">
+            <td className="sm:p-3 py-2 hidden md:table-cell">
               <Image
                 src="https://i.ibb.co/D70zkJV/avatar-girl-full.jpg"
                 alt="profile"
@@ -153,8 +154,8 @@ const Users = () => {
                 height={50}
               />
             </td>
-            <td className="sm:p-3 py-2">{data.name}</td>
-            <td className="sm:p-3 py-2 ">{data.email}</td>
+            <td className="sm:p-3 py-2 hidden sm:table-cell">{data.name}</td>
+            <td className="sm:p-3 py-2">{data.email}</td>
             <td className="sm:p-3 py-2">
               <input
                 type="checkbox"
