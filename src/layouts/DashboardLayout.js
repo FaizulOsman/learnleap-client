@@ -11,7 +11,6 @@ import { routes } from "@/constants/dashboardConstants";
 
 const DashboardLayout = ({ children }) => {
   const { pathname } = useRouter();
-  console.log(pathname);
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const inputAnimation = {
@@ -121,25 +120,7 @@ const DashboardLayout = ({ children }) => {
               />
             </div>
           </div>
-          {/* <div className="flex items-center my-[10px] mx-0 h-4 p-2">
-            <div className="search_icon">
-              <BiSearch />
-            </div>
-            <AnimatePresence>
-              {isOpen && (
-                <motion.input
-                  initial="hidden"
-                  animate="show"
-                  exit="hidden"
-                  variants={inputAnimation}
-                  type="text"
-                  placeholder="Search"
-                  className="border-none ml-2 rounded-md bg-white text-black p-0"
-                />
-              )}
-            </AnimatePresence>
-          </div> */}
-          <section className="mt- flex flex-col gap-[5px]">
+          <section className="flex flex-col gap-[5px]">
             {routes.map((route, index) => (
               <div key={index}>
                 {(route?.permission1 === myProfile?.role ||
