@@ -1,4 +1,10 @@
-import { FaHome, FaUser, FaUsers, FaChartLine } from "react-icons/fa";
+import {
+  FaHome,
+  FaUser,
+  FaUsers,
+  FaChartLine,
+  FaUserPlus,
+} from "react-icons/fa";
 import { BiCog } from "react-icons/bi";
 import { AiFillHeart, AiTwotoneFileExclamation } from "react-icons/ai";
 
@@ -22,6 +28,13 @@ export const routes = [
     name: "My Profile",
     icon: <FaUser />,
     permission1: "user",
+    permission2: "admin",
+  },
+  {
+    path: "/dashboard/add-new-admin",
+    name: "Add New Admin",
+    icon: <FaUserPlus />,
+    permission1: "",
     permission2: "admin",
   },
   {
