@@ -1,6 +1,6 @@
 import React from "react";
 
-const ConfirmModal = ({ Button, data, modalBody }) => {
+const Modal = ({ Button, data, modalBody }) => {
   return (
     <div>
       <button onClick={() => document.getElementById(data?.id).showModal()}>
@@ -16,4 +16,4 @@ const ConfirmModal = ({ Button, data, modalBody }) => {
   );
 };
 
-export default ConfirmModal;
+export default Modal;

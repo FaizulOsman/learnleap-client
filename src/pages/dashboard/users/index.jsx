@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import ConfirmModal from "@/components/UI/Modal/ConfirmModal";
+import Modal from "@/components/UI/Modal/Modal";
 import Table from "@/components/UI/Table/Table";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import DashboardLayout from "@/layouts/DashboardLayout";
@@ -44,6 +44,8 @@ const Users = () => {
     page,
     sortOrder,
   });
+  console.log(getAllUsers?.data);
+
   const [
     updateUser,
     {
@@ -110,7 +112,6 @@ const Users = () => {
     }
   }, [
     getAllUsers,
-    getAllUsers?.data,
     isDeleteSuccess,
     isDeleteError,
     deleteErrMessage,
@@ -189,7 +190,7 @@ const Users = () => {
               )}
             </td>
             <td className="sm:p-3 py-2">
-              <button
+              <div
                 disabled={
                   (data?.email === getMyProfile?.data?.email ? true : false) ||
                   (data?.role === "super_admin" ? true : false)
@@ -201,7 +202,7 @@ const Users = () => {
                     : "cursor-pointer text-red-600"
                 }`}
               >
-                <ConfirmModal
+                <Modal
                   Button={<MdDeleteOutline className={`w-5 h-5`} />}
                   data={data}
                   modalBody={
@@ -237,7 +238,7 @@ const Users = () => {
                     </>
                   }
                 />
-              </button>
+              </div>
             </td>
             <td className="sm:p-3 py-2 ">
               <Link

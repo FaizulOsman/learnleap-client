@@ -87,7 +87,7 @@ const Table = ({
                     {allData?.length > 0 ? (
                       <table className="w-full text-left">
                         <thead>
-                          {tableHeadData?.map((data, index) => data)}
+                          <tr>{tableHeadData?.map((data) => data)}</tr>
                           <tr className="font-normal border-b border-gray-800"></tr>
                         </thead>
                         <tbody>{tableBodyData?.map((data) => data)}</tbody>
