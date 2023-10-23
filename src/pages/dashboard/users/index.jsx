@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-key */
+import ConfirmModal from "@/components/UI/Modal/ConfirmModal";
 import Table from "@/components/UI/Table/Table";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import DashboardLayout from "@/layouts/DashboardLayout";
@@ -60,11 +61,9 @@ const Users = () => {
       error: deleteErrMessage,
     },
   ] = useDeleteUserMutation();
+
   const handleDeleteUser = (user) => {
-    const isConfirmed = window.confirm(`Do you want to delete ${user?.email}`);
-    if (isConfirmed) {
-      deleteUser({ id: user?.id, headers });
-    }
+    deleteUser({ id: user?.id, headers });
   };
 
   const handleSetRole = ({ user, e }) => {
@@ -202,9 +201,41 @@ const Users = () => {
                     : "cursor-pointer text-red-600"
                 }`}
               >
-                <MdDeleteOutline
-                  onClick={() => handleDeleteUser(data)}
-                  className={`w-5 h-5`}
+                <ConfirmModal
+                  Button={<MdDeleteOutline className={`w-5 h-5`} />}
+                  data={data}
+                  modalBody={
+                    <>
+                      <h3 className="font-bold text-md sm:text-lg text-white pb-5">
+                        {`Are you sure you want to delete ${data?.name}?`}
+                      </h3>
+                      <div className="py-4 text-center flex justify-around">
+                        <button
+                          onClick={() => {
+                            handleDeleteUser(data);
+                            const modal = document.getElementById(data?.id);
+                            if (modal) {
+                              modal.close();
+                            }
+                          }}
+                          className="btn btn-error btn-xs sm:btn-sm text-white"
+                        >
+                          Yes
+                        </button>
+                        <button
+                          onClick={() => {
+                            const modal = document.getElementById(data?.id);
+                            if (modal) {
+                              modal.close();
+                            }
+                          }}
+                          className="btn btn-primary btn-xs sm:btn-sm"
+                        >
+                          No
+                        </button>
+                      </div>
+                    </>
+                  }
                 />
               </button>
             </td>
