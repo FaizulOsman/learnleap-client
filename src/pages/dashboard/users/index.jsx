@@ -44,7 +44,6 @@ const Users = () => {
     page,
     sortOrder,
   });
-  console.log(getAllUsers?.data);
 
   const [
     updateUser,
@@ -135,13 +134,27 @@ const Users = () => {
         sortOrder={sortOrder}
         setSortOrder={setSortOrder}
         tableHeadData={[
-          <th className="sm:px-3 pt-0 pb-3 hidden md:table-cell">Image</th>,
-          <th className="sm:px-3 pt-0 pb-3 hidden sm:table-cell">Name</th>,
-          <th className="sm:px-3 pt-0 pb-3">Email</th>,
-          <th className="sm:px-3 pt-0 pb-3">isAdmin</th>,
-          <th className="sm:px-3 pt-0 pb-3">isPremium</th>,
-          <th className="sm:px-3 pt-0 pb-3">Delete</th>,
-          <th className="sm:px-3 pt-0 pb-3">Update</th>,
+          <th key="image" className="sm:px-3 pt-0 pb-3 hidden md:table-cell">
+            Image
+          </th>,
+          <th key="name" className="sm:px-3 pt-0 pb-3 hidden sm:table-cell">
+            Name
+          </th>,
+          <th key="email" className="sm:px-3 pt-0 pb-3">
+            Email
+          </th>,
+          <th key="isAdmin" className="sm:px-3 pt-0 pb-3">
+            isAdmin
+          </th>,
+          <th key="isPremium" className="sm:px-3 pt-0 pb-3">
+            isPremium
+          </th>,
+          <th key="delete" className="sm:px-3 pt-0 pb-3">
+            Delete
+          </th>,
+          <th key="update" className="sm:px-3 pt-0 pb-3">
+            Update
+          </th>,
         ]}
         tableBodyData={allUsers?.map((data, index) => (
           <tr key={index} className="border-b border-gray-800">
@@ -207,8 +220,12 @@ const Users = () => {
                   data={data}
                   modalBody={
                     <>
-                      <h3 className="font-bold text-md sm:text-lg text-white pb-5">
-                        {`Are you sure you want to delete ${data?.name}?`}
+                      <h3 className="font-semibold text-md sm:text-lg text-white pb-5 text-center">
+                        Are you sure you want to delete{" "}
+                        <span className="text-error font-bold">
+                          {data?.email}
+                        </span>
+                        ?
                       </h3>
                       <div className="py-4 text-center flex justify-around">
                         <button
