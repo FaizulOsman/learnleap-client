@@ -15,7 +15,9 @@ const Saved = () => {
 
   return (
     <div className="text-center py-10">
-      <h1 className="text-2xl font-semibold">See bookmark list</h1>
+      <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-center mb-5">
+        See bookmark list
+      </h2>
       <button className="flex items-center  rounded-lg bg-blue-700 px-3 py-[2px] mx-auto mt-5">
         <Link href="/bookmarks">
           <h6 className="btn-text text-white">Bookmarks</h6>

@@ -146,14 +146,23 @@ const Users = () => {
           <th key="isAdmin" className="sm:px-3 pt-0 pb-3">
             Admin
           </th>,
-          <th key="isPremium" className="sm:px-3 pt-0 pb-3">
+          <th
+            key="isPremium"
+            className="sm:px-3 pt-0 pb-3 hidden sm:table-cell"
+          >
             Premium
           </th>,
-          <th key="delete" className="sm:px-3 pt-0 pb-3">
+          <th key="delete" className="sm:px-3 pt-0 pb-3 hidden sm:table-cell">
             Delete
           </th>,
-          <th key="update" className="sm:px-3 pt-0 pb-3">
+          <th key="delete" className="sm:px-3 pt-0 pb-3 sm:hidden table-cell">
+            Del.
+          </th>,
+          <th key="update" className="sm:px-3 pt-0 pb-3 hidden sm:table-cell">
             Update
+          </th>,
+          <th key="update" className="sm:px-3 pt-0 pb-3 sm:hidden table-cell">
+            Up.
           </th>,
         ]}
         tableBodyData={allUsers?.map((data, index) => (
@@ -168,11 +177,14 @@ const Users = () => {
               />
             </td>
             <td className="sm:p-3 py-2 hidden sm:table-cell">{data.name}</td>
-            <td className="sm:p-3 py-2">{data.email}</td>
+            <td className="sm:p-3 py-2 hidden sm:table-cell">{data.email}</td>
+            <td className="sm:p-3 py-2 sm:hidden table-cell">
+              {data.email.slice(0, -7)}...
+            </td>
             <td className="sm:p-3 py-2">
               <input
                 type="checkbox"
-                className="toggle toggle-sm toggle-primary"
+                className="toggle toggle-xs sm:toggle-sm toggle-primary"
                 checked={
                   data?.role === "admin" || data?.role === "super_admin"
                     ? true
@@ -185,7 +197,7 @@ const Users = () => {
                 }
               />
             </td>
-            <td className="sm:p-3 py-2">
+            <td className="sm:p-3 py-2 hidden sm:table-cell">
               {data?.isPremium ? (
                 <span
                   onClick={() => handlePremium(data, false)}
