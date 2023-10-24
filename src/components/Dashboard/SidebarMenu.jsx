@@ -58,7 +58,7 @@ const SidebarMenu = ({ route, showAnimation, isOpen, setIsOpen }) => {
         onClick={toggleMenu}
       >
         <div className="flex items-center gap-[10px]">
-          <div className="icon">{route.icon}</div>
+          <div className="icon text-[22px]">{route.icon}</div>
           <AnimatePresence>
             {isOpen && (
               <motion.div
