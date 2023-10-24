@@ -5,6 +5,7 @@ import {
   FaChartLine,
   FaUserPlus,
 } from "react-icons/fa";
+import { FcAreaChart, FcComboChart } from "react-icons/fc";
 import { BiCog } from "react-icons/bi";
 import { MdOutlineCreate } from "react-icons/md";
 import {
@@ -12,6 +13,7 @@ import {
   AiOutlineAreaChart,
   AiTwotoneFileExclamation,
 } from "react-icons/ai";
+import { BsFillBookmarkCheckFill } from "react-icons/bs";
 
 export const routes = [
   {
@@ -52,7 +54,7 @@ export const routes = [
   {
     path: "/dashboard/test",
     name: "Test",
-    icon: <AiTwotoneFileExclamation />,
+    icon: <FcAreaChart />,
     permission1: "",
     permission2: "admin",
     subRoutes: [
@@ -71,7 +73,7 @@ export const routes = [
   {
     path: "/dashboard/exam",
     name: "Exam",
-    icon: <AiTwotoneFileExclamation />,
+    icon: <FcComboChart />,
     permission1: "",
     permission2: "admin",
     subRoutes: [
@@ -103,9 +105,9 @@ export const routes = [
     ],
   },
   {
-    path: "/dashboard/saved",
-    name: "Saved",
-    icon: <AiFillHeart />,
+    path: "/dashboard/bookmarks",
+    name: "Bookmarks",
+    icon: <BsFillBookmarkCheckFill />,
     permission1: "user",
     permission2: "admin",
   },
