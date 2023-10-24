@@ -96,7 +96,7 @@ const SidebarMenu = ({ route, showAnimation, isOpen, setIsOpen }) => {
             {route.subRoutes.map((subRoute, i) => (
               <motion.div variants={menuItemAnimation} key={i} custom={i}>
                 <Link href={subRoute.path} passHref>
-                  <motion.div className="flex text-white gap-[10px] border-r-4 border-r-transparent no-underline transition-[0.2s] pl-5 py-[5px] px-[10px] border-b-[1px] transition-[0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045)] hover:transition-[0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045)] hover:bg-[#2d3359] hover:border-r-4 hover:border-white">
+                  <motion.div className="flex items-center text-white gap-[10px] border-r-4 border-r-transparent no-underline transition-[0.2s] pl-5 py-[5px] px-[10px] border-b-[1px] border-b-gray-700 transition-[0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045)] hover:transition-[0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045)] hover:bg-[#2d3359] hover:border-r-4 hover:border-white">
                     <div className="icon">{subRoute.icon}</div>
                     <motion.div className="text-[15px] whitespace-nowrap">
                       {subRoute.name}

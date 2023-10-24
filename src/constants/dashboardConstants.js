@@ -6,7 +6,12 @@ import {
   FaUserPlus,
 } from "react-icons/fa";
 import { BiCog } from "react-icons/bi";
-import { AiFillHeart, AiTwotoneFileExclamation } from "react-icons/ai";
+import { MdOutlineCreate } from "react-icons/md";
+import {
+  AiFillHeart,
+  AiOutlineAreaChart,
+  AiTwotoneFileExclamation,
+} from "react-icons/ai";
 
 export const routes = [
   {
@@ -54,12 +59,12 @@ export const routes = [
       {
         path: "/dashboard/test/create-test",
         name: "Create Test",
-        icon: <FaUser />,
+        icon: <MdOutlineCreate />,
       },
       {
         path: "/dashboard/test/all-test",
         name: "All Test",
-        icon: <AiTwotoneFileExclamation />,
+        icon: <AiOutlineAreaChart />,
       },
     ],
   },
@@ -73,12 +78,12 @@ export const routes = [
       {
         path: "/dashboard/exam/create-exam",
         name: "Create Exam",
-        icon: <FaUser />,
+        icon: <MdOutlineCreate />,
       },
       {
         path: "/dashboard/exam/all-exam",
         name: "All Exam",
-        icon: <AiTwotoneFileExclamation />,
+        icon: <AiOutlineAreaChart />,
       },
     ],
   },
