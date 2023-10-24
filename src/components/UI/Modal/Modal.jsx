@@ -2,7 +2,7 @@ import React from "react";
 
 const Modal = ({ Button, data, modalBody }) => {
   return (
-    <div>
+    <div className="flex items-center">
       <button onClick={() => document.getElementById(data?.id).showModal()}>
         {Button}
       </button>

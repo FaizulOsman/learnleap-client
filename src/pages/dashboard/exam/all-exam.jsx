@@ -1,4 +1,5 @@
 import Loader from "@/components/UI/Loader";
+import Modal from "@/components/UI/Modal/Modal";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import {
@@ -52,18 +53,13 @@ const AllExam = () => {
     deleteExam,
     {
       isError: deleteExamIsError,
-      isSuccess: deleteExamIs,
+      isSuccess: deleteExamIsSuccess,
       error: deleteExamError,
     },
   ] = useDeleteExamMutation();
 
   const handleDeleteExam = (exam) => {
-    const isConfirm = window.confirm(
-      `Do you want to delete: ${exam?.subject} ${exam?.serial}`
-    );
-    if (isConfirm) {
-      deleteExam({ id: exam?.id, headers });
-    }
+    deleteExam({ id: exam?.id, headers });
   };
 
   const [
@@ -85,7 +81,7 @@ const AllExam = () => {
 
   useEffect(() => {
     if (updateExamIsError) {
-      toast.error(`${error?.data?.message}` || "Exam Update Failed!");
+      toast.error(error?.data?.message || "Exam Update Failed!");
     }
 
     if (updateExamIsSuccess) {
@@ -97,6 +93,16 @@ const AllExam = () => {
     updateExamError,
     success?.message,
   ]);
+
+  useEffect(() => {
+    if (deleteExamIsSuccess) {
+      toast.success("Exam Deleted Successfully!");
+    }
+
+    if (deleteExamIsError) {
+      toast.error(deleteExamError?.data?.message || "Something Went Wrong!");
+    }
+  }, [deleteExamIsSuccess, deleteExamIsError, deleteExamError]);
 
   return (
     <div>
@@ -139,12 +145,50 @@ const AllExam = () => {
               </div>
               <div className="flex flex-col items-center justify-between gap-4">
                 <div className="flex items-center justify-between gap-4">
-                  <button
-                    onClick={() => handleDeleteExam(exam)}
-                    className="text-2xl border-none  text-red-500 hover:text-red-600"
-                  >
-                    <MdDeleteOutline />
-                  </button>
+                  <Modal
+                    Button={
+                      <MdDeleteOutline
+                        className={`text-2xl border-none  text-red-500 hover:text-red-60`}
+                      />
+                    }
+                    data={exam}
+                    modalBody={
+                      <>
+                        <h3 className="font-semibold text-md sm:text-lg text-white pb-5 text-center">
+                          Do you want to delete:{" "}
+                          <span className="text-error font-bold">
+                            {exam?.subject} - {exam?.serial}
+                          </span>
+                          ?
+                        </h3>
+                        <div className="py-4 text-center flex justify-around">
+                          <button
+                            onClick={() => {
+                              handleDeleteExam(exam);
+                              const modal = document.getElementById(exam?.id);
+                              if (modal) {
+                                modal.close();
+                              }
+                            }}
+                            className="btn btn-error btn-xs sm:btn-sm text-white"
+                          >
+                            Yes
+                          </button>
+                          <button
+                            onClick={() => {
+                              const modal = document.getElementById(exam?.id);
+                              if (modal) {
+                                modal.close();
+                              }
+                            }}
+                            className="btn btn-primary btn-xs sm:btn-sm"
+                          >
+                            No
+                          </button>
+                        </div>
+                      </>
+                    }
+                  />
                   <Link
                     href={`/dashboard/exam/update/${exam?.id}`}
                     className="flex items-center"

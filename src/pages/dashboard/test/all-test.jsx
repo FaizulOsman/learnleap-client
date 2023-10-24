@@ -1,4 +1,5 @@
 import Loader from "@/components/UI/Loader";
+import Modal from "@/components/UI/Modal/Modal";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import {
@@ -7,6 +8,7 @@ import {
 } from "@/redux/test/testApi";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 
@@ -42,21 +44,25 @@ const AllTest = () => {
     }
   });
 
-  const filterByTestSubject = allTest?.data?.filter((exam) => {
-    return exam?.subject === testCategory;
+  const filterByTestSubject = allTest?.data?.filter((test) => {
+    return test?.subject === testCategory;
   });
 
-  const [deleteTest, { isError, isLoading, isSuccess, error }] =
-    useDeleteTestMutation();
+  const [deleteTest, { isError, isSuccess, error }] = useDeleteTestMutation();
 
   const handleDeleteTest = (test) => {
-    const isConfirm = window.confirm(
-      `Do you want to delete: ${test?.subject} ${test?.serial}`
-    );
-    if (isConfirm) {
-      deleteTest({ id: test?.id, headers });
-    }
+    deleteTest({ id: test?.id, headers });
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Test Deleted Successfully!");
+    }
+
+    if (isError) {
+      toast.error(error?.data?.message || "Something Went Wrong!");
+    }
+  }, [isSuccess, isError, error]);
 
   return (
     <div>
@@ -103,12 +109,50 @@ const AllTest = () => {
                     <FaRegEdit />
                   </button>
                 </Link>
-                <button
-                  onClick={() => handleDeleteTest(test)}
-                  className="text-2xl border-none  text-red-500 hover:text-red-600"
-                >
-                  <MdDeleteOutline />
-                </button>
+                <Modal
+                  Button={
+                    <MdDeleteOutline
+                      className={`text-2xl border-none  text-red-500 hover:text-red-60`}
+                    />
+                  }
+                  data={test}
+                  modalBody={
+                    <>
+                      <h3 className="font-semibold text-md sm:text-lg text-white pb-5 text-center">
+                        Do you want to delete:{" "}
+                        <span className="text-error font-bold">
+                          {test?.subject} - {test?.serial}
+                        </span>
+                        ?
+                      </h3>
+                      <div className="py-4 text-center flex justify-around">
+                        <button
+                          onClick={() => {
+                            handleDeleteTest(test);
+                            const modal = document.getElementById(test?.id);
+                            if (modal) {
+                              modal.close();
+                            }
+                          }}
+                          className="btn btn-error btn-xs sm:btn-sm text-white"
+                        >
+                          Yes
+                        </button>
+                        <button
+                          onClick={() => {
+                            const modal = document.getElementById(test?.id);
+                            if (modal) {
+                              modal.close();
+                            }
+                          }}
+                          className="btn btn-primary btn-xs sm:btn-sm"
+                        >
+                          No
+                        </button>
+                      </div>
+                    </>
+                  }
+                />
               </div>
             </div>
           ))}
