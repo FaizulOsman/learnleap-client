@@ -155,13 +155,13 @@ const Users = () => {
           <th key="delete" className="sm:px-3 pt-0 pb-3 hidden sm:table-cell">
             Delete
           </th>,
-          <th key="delete" className="sm:px-3 pt-0 pb-3 sm:hidden table-cell">
+          <th key="del." className="sm:px-3 pt-0 pb-3 sm:hidden table-cell">
             Del.
           </th>,
           <th key="update" className="sm:px-3 pt-0 pb-3 hidden sm:table-cell">
             Update
           </th>,
-          <th key="update" className="sm:px-3 pt-0 pb-3 sm:hidden table-cell">
+          <th key="up." className="sm:px-3 pt-0 pb-3 sm:hidden table-cell">
             Up.
           </th>,
         ]}

@@ -48,10 +48,13 @@ const SidebarMenu = ({ route, showAnimation, isOpen, setIsOpen }) => {
     }
   }, [isOpen]);
 
+  // const isSmallScreen = window.innerWidth < 640;
+
   return (
     <>
       <div
         className="flex text-white flex-row items-center p-2 border-r-4 border-transparent justify-between cursor-pointer transition-[0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045)] hover:bg-[#2d3359]"
+        // onClick={isSmallScreen ? undefined : toggleMenu}
         onClick={toggleMenu}
       >
         <div className="flex items-center gap-[10px]">
