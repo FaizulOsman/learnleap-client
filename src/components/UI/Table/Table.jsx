@@ -45,15 +45,16 @@ const Table = ({
                     Last 30 days
                     <BiChevronDown className="w-4 h-4" />
                   </button>
-                  <button
-                    onClick={() =>
-                      setSortOrder(sortOrder === "asc" ? "desc" : "asc")
-                    }
-                    className="inline-flex gap-2 items-center h-8 pl-2.5 pr-2 rounded-md shadow dark:border-gray-800 border border-gray-200 leading-none py-0"
+                  <select
+                    onChange={(e) => {
+                      const selectedValue = e.target.value;
+                      setSortOrder(selectedValue);
+                    }}
+                    className="select select-bordered border-gray-800 font-normal select-sm max-w-xs bg-[#080925]"
                   >
-                    {sortOrder === "asc" ? "desc" : "asc"}
-                    <BiChevronDown className="w-4 h-4" />
-                  </button>
+                    <option value="desc">Newest</option>
+                    <option value="asc">Oldest</option>
+                  </select>
                   <div className="ml-auto text-xs inline-flex items-center">
                     <span className="mr-3 hidden sm:inline-block">
                       Limit {limit}
