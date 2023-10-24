@@ -110,7 +110,7 @@ const DashboardLayout = ({ children }) => {
             <div className="cursor-pointer">
               <Image
                 alt="Logo"
-                className="w-12"
+                className="w-12 h-9"
                 src="https://i.ibb.co/5MHLgQW/images-removebg-preview.png"
                 decoding="async"
                 loading="lazy"
