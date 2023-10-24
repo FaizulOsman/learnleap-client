@@ -71,11 +71,11 @@ a {
 
 /* ################### Scroll Bar ################### */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #b0c1f5;
+  /* background: #b0c1f5; */
 }
 ::-webkit-scrollbar-thumb {
   background: #367ff3;
