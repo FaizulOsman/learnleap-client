@@ -144,10 +144,10 @@ const Users = () => {
             Email
           </th>,
           <th key="isAdmin" className="sm:px-3 pt-0 pb-3">
-            isAdmin
+            Admin
           </th>,
           <th key="isPremium" className="sm:px-3 pt-0 pb-3">
-            isPremium
+            Premium
           </th>,
           <th key="delete" className="sm:px-3 pt-0 pb-3">
             Delete

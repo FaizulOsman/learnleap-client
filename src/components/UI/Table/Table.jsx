@@ -50,7 +50,7 @@ const Table = ({
                       const selectedValue = e.target.value;
                       setSortOrder(selectedValue);
                     }}
-                    className="select select-bordered border-gray-800 font-normal select-sm max-w-xs bg-[#080925]"
+                    className="select select-bordered border-gray-800 font-normal select-xs sm:select-sm max-w-xs bg-[#080925]"
                   >
                     <option value="desc">Newest</option>
                     <option value="asc">Oldest</option>
@@ -61,7 +61,7 @@ const Table = ({
                     </span>
                     <button
                       onClick={() => setLimit(limit - 1)}
-                      className={`mr-3 inline-flex items-center h-8 w-8 justify-center rounded-md shadow border ${
+                      className={`mr-3 inline-flex items-center h-6 w-6 sm:h-8 sm:w-8 justify-center rounded-md shadow border ${
                         limit === 1
                           ? "opacity-50 cursor-not-allowed"
                           : "border-gray-800"
@@ -72,7 +72,7 @@ const Table = ({
                     </button>
                     <button
                       onClick={() => setLimit(limit + 1)}
-                      className={`inline-flex items-center h-8 w-8 justify-center rounded-md shadow border ${
+                      className={`inline-flex items-center h-6 w-6 sm:h-8 sm:w-8 justify-center rounded-md shadow border ${
                         page === totalPage
                           ? "opacity-50 cursor-not-allowed"
                           : "border-gray-800"
@@ -109,7 +109,7 @@ const Table = ({
                 <div className="flex flex-wrap w-full mt-5 gap-2 justify-end">
                   <button
                     onClick={() => handlePageChange(page - 1)}
-                    className={`inline-flex items-center h-8 w-8 justify-center rounded-md shadow border ${
+                    className={`inline-flex items-center h-6 w-6 sm:h-8 sm:w-8 justify-center rounded-md shadow border ${
                       page === 1
                         ? "opacity-50 cursor-not-allowed"
                         : "border-gray-800"
@@ -122,7 +122,7 @@ const Table = ({
                     <button
                       key={index}
                       onClick={() => handlePageChange(index + 1)}
-                      className={`inline-flex items-center h-8 w-8 justify-center rounded-md shadow border ${
+                      className={`inline-flex items-center h-6 w-6 sm:h-8 sm:w-8 justify-center rounded-md shadow border ${
                         page === index + 1
                           ? "bg-gray-800 border-gray-800"
                           : "border-gray-800"
@@ -133,7 +133,7 @@ const Table = ({
                   ))}
                   <button
                     onClick={() => handlePageChange(page + 1)}
-                    className={`inline-flex items-center h-8 w-8 justify-center rounded-md shadow border ${
+                    className={`inline-flex items-center h-6 w-6 sm:h-8 sm:w-8 justify-center rounded-md shadow border ${
                       page === totalPage
                         ? "opacity-50 cursor-not-allowed"
                         : "border-gray-800"
