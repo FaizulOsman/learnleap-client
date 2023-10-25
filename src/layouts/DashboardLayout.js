@@ -7,6 +7,7 @@ import { removeFromLocalStorage } from "@/utils/localstorage";
 import SidebarMenu from "@/components/Dashboard/SidebarMenu";
 import DashboardHeader from "@/components/Dashboard/DashboardHeader";
 import { routes } from "@/constants/dashboardConstants";
+import { FaBars } from "react-icons/fa";
 
 const DashboardLayout = ({ children }) => {
   const { pathname } = useRouter();
@@ -91,9 +92,9 @@ const DashboardLayout = ({ children }) => {
               damping: 10,
             },
           }}
-          className={`h-screen bg-[#00073d] text-white min-h-[100vh] overflow-y-auto`}
+          className={`h-screen bg-[#00073d] text-white min-h-[100vh] overflow-y-auto absolute sm:static left-0 top-0 z-50`}
         >
-          <div className="flex items-center justify-between py-2">
+          <div className="flex items-center justify-between py-[6px]">
             <AnimatePresence>
               {isOpen && (
                 <motion.h1
@@ -110,13 +111,18 @@ const DashboardLayout = ({ children }) => {
             <div className="cursor-pointer">
               <Image
                 alt="Logo"
-                className="w-12 h-9"
+                className={`w-12 h-9 ${isOpen ? "hidden sm:block" : ""}`}
                 src="https://i.ibb.co/5MHLgQW/images-removebg-preview.png"
                 decoding="async"
                 loading="lazy"
                 width={300}
                 height={300}
               />
+              {isOpen && (
+                <div className="sm:hidden flex justify-center w-[43px] cursor-pointer hover:text-blue-500 py-1">
+                  <FaBars className="w-[22px] h-[28px]" onClick={toggle} />
+                </div>
+              )}
             </div>
           </div>
           <section className="flex flex-col gap-[5px]">
@@ -167,8 +173,9 @@ const DashboardLayout = ({ children }) => {
 
         <div
           className={`${
-            isOpen ? "w-[calc(100vw-200px)]" : "w-full"
-          } flex flex-col`}
+            // isOpen ? "w-[calc(100vw-200px)]" : "w-full"
+            isOpen ? "w-full sm:w-[calc(100vw-200px)]" : "w-full"
+          } flex flex-col ml-[45px] sm:ml-0`}
         >
           <div className="sticky top-0">
             <DashboardHeader toggle={toggle} handleLogOut={handleLogOut} />

@@ -20,7 +20,7 @@ const ExamResult = () => {
         <div className="flex-grow overflow-hidden h-full flex flex-col">
           <div className="flex-grow flex overflow-x-hidden">
             <div className="flex-grow bg-[#080925] overflow-y-auto">
-              <div className="z-50 bg-[#080925] sm:px-7 sm:pt-7 px-4 pt-4 flex flex-col w-full border-b border-gray-800  sticky top-0">
+              <div className="z-40 bg-[#080925] sm:px-7 sm:pt-7 px-4 pt-4 flex flex-col w-full border-b border-gray-800  sticky top-0">
                 <div className="flex w-full items-center">
                   <div className="flex items-center gap-2 text-lg sm:text-2xl  dark:text-white mb-5 border-l-4 pl-3">
                     <span>Result</span>
