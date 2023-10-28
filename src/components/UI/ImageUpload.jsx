@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ImageUpload = () => {
+const ImageUpload = ({ setImageUrl, handleUploadImage }) => {
   const [imageSrc, setImageSrc] = useState();
   const [uploadData, setUploadData] = useState();
 
@@ -41,28 +41,29 @@ const ImageUpload = () => {
 
     setImageSrc(data.secure_url);
     setUploadData(data);
+    setImageUrl(data.secure_url);
+    handleUploadImage(data.secure_url);
   }
-
-  console.log(imageSrc);
 
   return (
     <form
       method="post"
       onChange={handleOnChange}
       onSubmit={handleOnSubmit}
-      className="flex gap-4"
+      className="flex flex-col sm:flex-row gap-4 sm:justify-between"
     >
       <input
         type="file"
         name="file"
-        className="file-input file-input-sm file-input-primary file-input-bordered w-full max-w-xs"
+        className="file-input file-input-sm file-input-primary file-input-bordered w-full bg-transparent"
+        required
       />
 
-      {imageSrc && !uploadData && (
-        <button type="submit" className="btn btn-sm btn-primary">
-          Upload
-        </button>
-      )}
+      {/* {imageSrc && !uploadData && ( */}
+      <button type="submit" className="btn btn-sm btn-primary">
+        Upload
+      </button>
+      {/* )} */}
     </form>
   );
 };

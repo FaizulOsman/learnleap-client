@@ -1,9 +1,12 @@
+import ImageUpload from "@/components/UI/ImageUpload";
+import Modal from "@/components/UI/Modal/Modal";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import {
   useGetMyProfileQuery,
   useUpdateMyProfileMutation,
 } from "@/redux/user/userApi";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
@@ -11,6 +14,7 @@ const jwt = require("jsonwebtoken");
 
 const MyProfile = () => {
   const [MyProfile, setMyProfile] = useState([]);
+  const [profileImageUrl, setProfileImageUrl] = useState("");
 
   const accessToken =
     typeof window !== "undefined" ? localStorage.getItem("access-token") : null;
@@ -39,10 +43,15 @@ const MyProfile = () => {
     const email = e.target.email.value;
     const phone = e.target.phone.value;
     const address = e.target.address.value;
-    const image = e.target.image.value;
+    const imageUrl = e.target.imageUrl.value;
 
-    const data = { email, phone, address, image };
+    const data = { email, phone, address, imageUrl };
     updateMyProfile({ data, headers });
+  };
+
+  const handleUploadImage = async (imageUrl) => {
+    const data = { imageUrl: imageUrl };
+    await updateMyProfile({ data, headers });
   };
 
   useEffect(() => {
@@ -68,6 +77,31 @@ const MyProfile = () => {
           <h3 className="text-xl sm:text-2xl font-bold text-center my-5">
             My Profile
           </h3>
+          <div className="text-center mx-auto">
+            <Modal
+              Button={
+                <Image
+                  src={MyProfile?.imageUrl}
+                  className="w-16 h-16 mx-auto border border-gray-800 rounded-full mb-10"
+                  width="300"
+                  height="300"
+                  alt="Profile Image"
+                />
+              }
+              data={MyProfile}
+              modalBody={
+                <>
+                  <h3 className="font-semibold text-md sm:text-lg text-white pb-5 text-center">
+                    Upload you new profile image.
+                  </h3>
+                  <ImageUpload
+                    handleUploadImage={handleUploadImage}
+                    setImageUrl={setProfileImageUrl}
+                  />
+                </>
+              }
+            />
+          </div>
           <div>
             <form onSubmit={(e) => handleUpdateProfile(e)}>
               <div className="grid grid-cols-1 sm:grid-cols-2 justify-between gap-8 mt-4">
@@ -124,17 +158,17 @@ const MyProfile = () => {
                 <div className="relative">
                   <input
                     type="text"
-                    id="image"
-                    name="image"
+                    id="imageUrl"
+                    name="imageUrl"
                     className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500 bg-[#1d1836]"
                     autoComplete="off"
-                    defaultValue={MyProfile?.image}
+                    defaultValue={MyProfile?.imageUrl}
                   />
                   <label
-                    htmlFor="image"
+                    htmlFor="imageUrl"
                     className="absolute text-sm left-6 -top-3 bg-[#1d1836] rounded-lg px-2 text-primary transition-all duration-300"
                   >
-                    image
+                    imageUrl
                   </label>
                 </div>
                 <div className="relative">
