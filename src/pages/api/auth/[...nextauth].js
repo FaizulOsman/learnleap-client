@@ -15,7 +15,7 @@ export const authOptions = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: "https://build-master-pc-faizulosman.vercel.app/login",
+    signIn: "https://learnleap.vercel.app/login",
   },
 };
 

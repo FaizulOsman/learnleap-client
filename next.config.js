@@ -15,6 +15,7 @@ const nextConfig = {
       "lh3.googleusercontent.com",
       "avatars.githubusercontent.com",
       "i.ibb.co",
+      "res.cloudinary.com",
     ],
   },
 };
