@@ -87,15 +87,17 @@ const MyProfile = () => {
             <Modal
               Button={
                 <div className="relative text-center">
-                  {MyProfile?.imageUrl && (
-                    <Image
-                      src={MyProfile?.imageUrl}
-                      className="w-16 h-16 mx-auto border border-gray-800 rounded-full mb-10"
-                      width="150"
-                      height="150"
-                      alt="Profile Image"
-                    />
-                  )}
+                  <Image
+                    src={
+                      MyProfile?.imageUrl
+                        ? MyProfile?.imageUrl
+                        : "https://i.ibb.co/nrtwzQd/avatar-boy.webp"
+                    }
+                    className="w-16 h-16 mx-auto border border-gray-800 rounded-full mb-10"
+                    width="150"
+                    height="150"
+                    alt="Profile Image"
+                  />
                   <div>
                     <p
                       className="absolute bottom-0 left-0 w-full flex justify-center items-center h-1/2 hover:bg-gray-400 hover:bg-opacity-50 hover:text-blue-700"
