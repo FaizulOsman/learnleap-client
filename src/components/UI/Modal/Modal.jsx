@@ -1,8 +1,8 @@
 import React from "react";
 
-const Modal = ({ Button, data, modalBody }) => {
+const Modal = ({ styles, Button, data, modalBody }) => {
   return (
-    <div className="flex items-center justify-center">
+    <div className={`flex items-center ${styles}`}>
       <button onClick={() => document.getElementById(data?.id).showModal()}>
         {Button}
       </button>

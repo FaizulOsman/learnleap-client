@@ -106,6 +106,7 @@ const MyProfile = () => {
                   </div>
                 </div>
               }
+              styles="justify-center"
               data={MyProfile}
               modalBody={
                 <div className="relative">
