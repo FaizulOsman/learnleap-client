@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import Loader from "./Loader";
 
-const ImageUpload = ({ setImageUrl, handleUploadImage }) => {
+const ImageUpload = ({ handleUploadImage }) => {
   const [imageSrc, setImageSrc] = useState();
   const [uploadData, setUploadData] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleOnChange(changeEvent) {
     const reader = new FileReader();
@@ -18,6 +20,7 @@ const ImageUpload = ({ setImageUrl, handleUploadImage }) => {
   async function handleOnSubmit(event) {
     event.preventDefault();
 
+    setIsLoading(true);
     const form = event.currentTarget;
     const fileInput = Array.from(form.elements).find(
       ({ name }) => name === "file"
@@ -41,30 +44,38 @@ const ImageUpload = ({ setImageUrl, handleUploadImage }) => {
 
     setImageSrc(data.secure_url);
     setUploadData(data);
-    setImageUrl(data.secure_url);
     handleUploadImage(data.secure_url);
+    if (data.secure_url.length > 0) {
+      setIsLoading(false);
+    }
   }
 
   return (
-    <form
-      method="post"
-      onChange={handleOnChange}
-      onSubmit={handleOnSubmit}
-      className="flex flex-col sm:flex-row gap-4 sm:justify-between"
-    >
-      <input
-        type="file"
-        name="file"
-        className="file-input file-input-sm file-input-primary file-input-bordered w-full bg-transparent"
-        required
-      />
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <form
+          method="post"
+          onChange={handleOnChange}
+          onSubmit={handleOnSubmit}
+          className="flex flex-col sm:flex-row gap-4 sm:justify-between"
+        >
+          <input
+            type="file"
+            name="file"
+            className="file-input file-input-sm file-input-primary file-input-bordered w-full bg-transparent"
+            required
+          />
 
-      {/* {imageSrc && !uploadData && ( */}
-      <button type="submit" className="btn btn-sm btn-primary">
-        Upload
-      </button>
-      {/* )} */}
-    </form>
+          {/* {imageSrc && !uploadData && ( */}
+          <button type="submit" className="btn btn-sm btn-primary">
+            Upload
+          </button>
+          {/* )} */}
+        </form>
+      )}
+    </>
   );
 };
 

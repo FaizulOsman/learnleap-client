@@ -9,12 +9,13 @@ import {
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { FaRegEdit } from "react-icons/fa";
+import { RxCross2 } from "react-icons/rx";
 
 const jwt = require("jsonwebtoken");
 
 const MyProfile = () => {
   const [MyProfile, setMyProfile] = useState([]);
-  const [profileImageUrl, setProfileImageUrl] = useState("");
 
   const accessToken =
     typeof window !== "undefined" ? localStorage.getItem("access-token") : null;
@@ -43,15 +44,20 @@ const MyProfile = () => {
     const email = e.target.email.value;
     const phone = e.target.phone.value;
     const address = e.target.address.value;
-    const imageUrl = e.target.imageUrl.value;
 
-    const data = { email, phone, address, imageUrl };
+    const data = { email, phone, address };
     updateMyProfile({ data, headers });
   };
 
   const handleUploadImage = async (imageUrl) => {
     const data = { imageUrl: imageUrl };
     await updateMyProfile({ data, headers });
+
+    const modal = document.getElementById(MyProfile?.id);
+    if (modal) {
+      window.location.reload();
+      modal.close();
+    }
   };
 
   useEffect(() => {
@@ -80,25 +86,43 @@ const MyProfile = () => {
           <div className="text-center mx-auto">
             <Modal
               Button={
-                <Image
-                  src={MyProfile?.imageUrl}
-                  className="w-16 h-16 mx-auto border border-gray-800 rounded-full mb-10"
-                  width="300"
-                  height="300"
-                  alt="Profile Image"
-                />
+                <div className="relative text-center">
+                  {MyProfile?.imageUrl && (
+                    <Image
+                      src={MyProfile?.imageUrl}
+                      className="w-16 h-16 mx-auto border border-gray-800 rounded-full mb-10"
+                      width="150"
+                      height="150"
+                      alt="Profile Image"
+                    />
+                  )}
+                  <div>
+                    <p
+                      className="absolute bottom-0 left-0 w-full flex justify-center items-center h-1/2 hover:bg-gray-400 hover:bg-opacity-50 hover:text-blue-700"
+                      style={{ borderRadius: "0 0 30px 30px" }}
+                    >
+                      <FaRegEdit />
+                    </p>
+                  </div>
+                </div>
               }
               data={MyProfile}
               modalBody={
-                <>
+                <div className="relative">
+                  <RxCross2
+                    onClick={() => {
+                      const modal = document.getElementById(MyProfile?.id);
+                      if (modal) {
+                        modal.close();
+                      }
+                    }}
+                    className="text-lg absolute -top-3 -right-2 cursor-pointer"
+                  />
                   <h3 className="font-semibold text-md sm:text-lg text-white pb-5 text-center">
                     Upload you new profile image.
                   </h3>
-                  <ImageUpload
-                    handleUploadImage={handleUploadImage}
-                    setImageUrl={setProfileImageUrl}
-                  />
-                </>
+                  <ImageUpload handleUploadImage={handleUploadImage} />
+                </div>
               }
             />
           </div>
@@ -153,22 +177,6 @@ const MyProfile = () => {
                     className="absolute text-sm left-6 -top-3 bg-[#1d1836] rounded-lg px-2 text-primary transition-all duration-300"
                   >
                     Phone
-                  </label>
-                </div>
-                <div className="relative">
-                  <input
-                    type="text"
-                    id="imageUrl"
-                    name="imageUrl"
-                    className="input-sm input-primary w-full py-3 px-4 border rounded-lg focus:outline-none focus:border-blue-500 bg-[#1d1836]"
-                    autoComplete="off"
-                    defaultValue={MyProfile?.imageUrl}
-                  />
-                  <label
-                    htmlFor="imageUrl"
-                    className="absolute text-sm left-6 -top-3 bg-[#1d1836] rounded-lg px-2 text-primary transition-all duration-300"
-                  >
-                    imageUrl
                   </label>
                 </div>
                 <div className="relative">
