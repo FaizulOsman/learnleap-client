@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -265,7 +266,17 @@ const Hero = () => {
       <div class={`content ${contentPosition}`} id="content">
         <div class="content-section bg-gradient-to-t from-green-500 to-blue-500">
           <div>
-            <h1 className="text-3xl font-bold text-white">Dude and Scroll</h1>
+            <h1 className="text-3xl font-bold text-white">
+              Take the Challenge
+            </h1>
+            <p className="text-white">
+              Join our exciting{" "}
+              <Link href="/exam" className="text-blue-700 underline">
+                exams
+              </Link>{" "}
+              and put your knowledge to the test. Explore a wide range of topics
+              and see how you measure up!
+            </p>
             <p class="arrow-animated text-white">↓</p>
           </div>
         </div>
@@ -273,18 +284,26 @@ const Hero = () => {
           class={`content-section ${secLstDisplay} bg-gradient-to-t from-green-500 to-blue-500`}
         >
           <div>
-            <h1 className="text-3xl font-bold text-white">What is this?</h1>
+            <h1 className="text-3xl font-bold text-white">
+              Track Your Progress
+            </h1>
             <p className="text-white">
-              That is
-              <a href="https://twitter.com/uuuuuulala" target="_blank">
-                me
-              </a>{" "}
-              learning the basic walk cycle animation and playing with the GSAP
-              implementation&nbsp;of&nbsp;it.
+              We provide instant, detailed feedback on your performance. Watch
+              your skills grow with each exam you conquer.
             </p>
           </div>
         </div>
-        <div class="content-section  bg-gradient-to-t from-green-500 to-blue-500"></div>
+        <div class="content-section  bg-gradient-to-t from-green-500 to-blue-500">
+          <div>
+            <h1 className="text-3xl font-bold text-white">
+              Compete with Others
+            </h1>
+            <p className="text-white">
+              Challenge your friends or make new ones in our competitive exams.
+              See who reigns supreme on the leaderboard!
+            </p>
+          </div>
+        </div>
         <div class="content-section"></div>
       </div>
       <div class={`animation-container ${contentPosition}`}>
