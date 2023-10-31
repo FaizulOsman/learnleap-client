@@ -1,9 +1,8 @@
-import RootLayout from "@/layouts/RootLayout";
 import { useSignUpMutation } from "@/redux/user/userApi";
 import { saveToLocalStorage } from "@/utils/localstorage";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { toast } from "react-hot-toast";
 
 const SignUp = () => {
@@ -56,7 +55,7 @@ const SignUp = () => {
 
   return (
     <div className="py-5 relative flex flex-col justify-center min-h-screen overflow-hidden mt-16">
-      <div className="p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring-2 ring-purple-600 min-w-sm lg:w-[50vw]">
+      <div className="p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring-2 ring-purple-600 max-w-sm lg:w-[50vw]">
         <h1 className="text-3xl font-semibold text-center text-purple-700 underline">
           Sign Up
         </h1>
@@ -110,7 +109,7 @@ const SignUp = () => {
             </button>
           </div>
         </form>
-        <div className="flex justify-center items-center">
+        {/* <div className="flex justify-center items-center">
           <div className="grid grid-cols-1 sm:grid-cols-2 px-4 pt-4 justify-between gap-4">
             <button
               className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-md text-white text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none border border-transparent hover:border-purple-600 h-8 py-1 px-2 flex items-center justify-between gap-2"
@@ -170,7 +169,7 @@ const SignUp = () => {
               </svg>
             </button>
           </div>
-        </div>
+        </div> */}
         <p className="mt-8 text-xs font-light text-center text-gray-700">
           Already have an account?{" "}
           <Link
@@ -186,7 +185,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-
-SignUp.getLayout = function getLayout(page) {
-  return <RootLayout>{page}</RootLayout>;
-};
