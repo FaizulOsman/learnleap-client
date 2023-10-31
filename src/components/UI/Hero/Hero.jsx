@@ -319,7 +319,7 @@ const Hero = () => {
         {/* <div className="content-section"></div> */}
       </div>
       <div className={`animation-container ${contentPosition}`}>
-        <svg viewBox="0 -40 315 340">
+        <svg viewBox="0 -40 315 360">
           <g
             className="dude"
             stroke="black"
