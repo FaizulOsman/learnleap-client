@@ -195,7 +195,7 @@ const Hero = () => {
       .fromTo(
         backCycle,
         {
-          time: 0.7,
+          time: 0.6,
         },
         {
           time: 0.75 + numberOfCycles,
@@ -288,7 +288,7 @@ const Hero = () => {
         <div class="content-section"></div>
       </div>
       <div class={`animation-container ${contentPosition}`}>
-        <svg viewBox="0 -10 315 350">
+        <svg viewBox="0 -40 315 340">
           <g
             class="dude"
             stroke="black"
