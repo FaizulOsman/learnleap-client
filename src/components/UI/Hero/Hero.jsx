@@ -278,7 +278,7 @@ const Hero = () => {
             <h1 className="text-3xl font-bold text-white">
               Take the Challenge
             </h1>
-            <p className="text-white">
+            <p className="text-gray-200">
               Join our exciting{" "}
               <Link href="/exam" className="text-blue-700 underline">
                 exams
@@ -289,7 +289,7 @@ const Hero = () => {
             <p className="arrow-animated text-white">↓</p>
           </div>
         </div>
-        {/* <div
+        <div
           className={`content-section ${secLstDisplay} bg-gradient-to-t from-green-500 to-blue-500`}
           style={contentPosition === "absolute" ? { display: "none" } : {}}
         >
@@ -297,26 +297,32 @@ const Hero = () => {
             <h1 className="text-3xl font-bold text-white">
               Track Your Progress
             </h1>
-            <p className="text-white">
-              We provide instant, detailed feedback on your performance. Watch
-              your skills grow with each exam you conquer.
-            </p>
-          </div>
-        </div> */}
-        <div
-          className={`content-section  bg-gradient-to-t from-green-500 to-blue-500`}
-        >
-          <div>
-            <h1 className="text-3xl font-bold text-white">
-              Track Your Progress
-            </h1>
-            <p className="text-white">
+            <p className="text-gray-200">
               We provide instant, detailed feedback on your performance. Watch
               your skills grow with each exam you conquer.
             </p>
           </div>
         </div>
-        {/* <div className="content-section"></div> */}
+        <div
+          className={`content-section  bg-gradient-to-t from-green-500 to-blue-500`}
+        >
+          <div>
+            <h1 className="text-3xl font-bold text-white">
+              Compete with Others
+            </h1>
+            <p className="text-gray-200">
+              Challenge your friends or make new ones in our competitive{" "}
+              <Link href="/exam" className="text-blue-700 underline">
+                exams
+              </Link>{" "}
+              . See who reigns supreme on the leaderboard!
+            </p>
+          </div>
+        </div>
+        <div
+          className="content-section"
+          style={contentPosition === "absolute" ? { display: "none" } : {}}
+        ></div>
       </div>
       <div className={`animation-container ${contentPosition}`}>
         <svg viewBox="0 -40 315 360">
