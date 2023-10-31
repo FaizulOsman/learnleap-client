@@ -289,7 +289,7 @@ const Hero = () => {
             <p className="arrow-animated text-white">↓</p>
           </div>
         </div>
-        <div
+        {/* <div
           className={`content-section ${secLstDisplay} bg-gradient-to-t from-green-500 to-blue-500`}
           style={contentPosition === "absolute" ? { display: "none" } : {}}
         >
@@ -302,17 +302,17 @@ const Hero = () => {
               your skills grow with each exam you conquer.
             </p>
           </div>
-        </div>
+        </div> */}
         <div
           className={`content-section  bg-gradient-to-t from-green-500 to-blue-500`}
         >
           <div>
             <h1 className="text-3xl font-bold text-white">
-              Compete with Others
+              Track Your Progress
             </h1>
             <p className="text-white">
-              Challenge your friends or make new ones in our competitive exams.
-              See who reigns supreme on the leaderboard!
+              We provide instant, detailed feedback on your performance. Watch
+              your skills grow with each exam you conquer.
             </p>
           </div>
         </div>
