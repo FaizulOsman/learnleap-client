@@ -1,5 +1,4 @@
 .hero-container .animation-container {
-  /* position: fixed; */
   left: 0;
   bottom: 0;
   width: 30%;
@@ -24,9 +23,7 @@
 }
 
 .hero-container .content {
-  /* position: fixed; */
-  /* top: 0; */
-  left: 0;
+  /* left: 0; */
   bottom: 0;
   display: flex;
 }
