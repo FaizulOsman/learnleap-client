@@ -233,29 +233,12 @@ const Hero = () => {
   const [scrollItems, setScrollItems] = useState([]);
   const [contentPosition, setContentPosition] = useState("fixed");
   const [secLstDisplay, setSecLstDisplay] = useState("block");
-  //   useEffect(() => {
-  //     const topMenu = document.querySelector("#content");
-  //     const topMenuHeight = topMenu.offsetHeight + 1;
-  //     const menuItems = Array.from(topMenu.querySelectorAll("a"));
-  //     const scrollItems = menuItems.map((menuItem) => {
-  //       const href = menuItem.getAttribute("href");
-  //       const item =
-  //         href === "#" ? document.documentElement : document.querySelector(href);
-  //       if (item) {
-  //         return item;
-  //       }
-  //     });
-
-  //     setMenuItems(menuItems);
-  //     setScrollItems(scrollItems);
-  //   }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       const topMenu = document.querySelector("#content");
       const topMenuHeight = topMenu.offsetHeight + 1;
       const fromTop = window.scrollY + topMenuHeight;
-      //   console.log(topMenuWidth);
       if (fromTop > topMenuHeight * 2.9) {
         setContentPosition("absolute");
         setSecLstDisplay("hidden");

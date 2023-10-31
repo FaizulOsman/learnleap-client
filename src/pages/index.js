@@ -3,6 +3,7 @@ import AllExams from "./exam";
 import AllTests from "./test";
 import { useRouter } from "next/router";
 import Discussion from "./discussion";
+import Hero from "@/components/UI/Hero/Hero";
 
 const HomePage = () => {
   const router = useRouter();
@@ -16,7 +17,7 @@ const HomePage = () => {
 
   return (
     <>
-      {/* <Hero /> */}
+      <Hero />
       <AllExams />
       <AllTests />
       <Discussion />
