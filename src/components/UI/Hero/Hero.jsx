@@ -216,16 +216,6 @@ const Hero = () => {
     window.addEventListener("resize", () => {
       ScrollTrigger.refresh();
     });
-
-    // ---------------------------------------------
-    // ONLY FOR CODEPEN PREVIEW
-
-    const scrollToOptions = {
-      top: 0.32 * window.innerHeight,
-      behavior: "smooth", // This adds smooth scrolling
-    };
-
-    window.scrollTo(scrollToOptions);
   }, []);
 
   const [lastId, setLastId] = useState("");
