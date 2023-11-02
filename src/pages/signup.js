@@ -54,7 +54,7 @@ const SignUp = () => {
   }, [isLoading, router, state, isSuccess, error, isError, data]);
 
   return (
-    <div className="py-5 relative flex flex-col justify-center min-h-screen overflow-hidden mt-16">
+    <div className="py-5 relative flex flex-col justify-center min-h-screen overflow-hidden">
       <div className="p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring-2 ring-purple-600 max-w-sm lg:w-[50vw]">
         <h1 className="text-3xl font-semibold text-center text-purple-700 underline">
           Sign Up
