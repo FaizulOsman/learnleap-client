@@ -5,7 +5,7 @@ import {
   FaChartLine,
   FaUserPlus,
 } from "react-icons/fa";
-import { FcAreaChart, FcComboChart } from "react-icons/fc";
+import { FcAreaChart, FcComboChart, FcFeedback } from "react-icons/fc";
 import { BiCog } from "react-icons/bi";
 import { MdOutlineCreate } from "react-icons/md";
 import {
@@ -109,6 +109,13 @@ export const routes = [
     name: "Bookmarks",
     icon: <BsFillBookmarkCheckFill className="text-[22px]" />,
     permission1: "user",
+    permission2: "admin",
+  },
+  {
+    path: "/dashboard/feedbacks",
+    name: "Feedbacks",
+    icon: <FcFeedback className="text-[22px]" />,
+    permission1: "",
     permission2: "admin",
   },
 ];
