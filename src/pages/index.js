@@ -4,6 +4,7 @@ import AllTests from "./test";
 import { useRouter } from "next/router";
 import Discussion from "./discussion";
 import Hero from "@/components/UI/Hero/Hero";
+import FeedbackPage from "./feedback";
 
 const HomePage = () => {
   const router = useRouter();
@@ -21,6 +22,7 @@ const HomePage = () => {
       <AllExams />
       <AllTests />
       <Discussion />
+      <FeedbackPage />
     </>
   );
 };
