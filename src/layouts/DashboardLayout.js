@@ -119,8 +119,8 @@ const DashboardLayout = ({ children }) => {
                 height={300}
               />
               {isOpen && (
-                <div className="sm:hidden flex justify-center w-[43px] cursor-pointer hover:text-blue-500 py-1">
-                  <FaBars className="w-[22px] h-[28px]" onClick={toggle} />
+                <div className="sm:hidden flex justify-center w-[43px] cursor-pointer hover:text-blue-500 py-[10px]">
+                  <FaBars className="w-4 h-4" onClick={toggle} />
                 </div>
               )}
             </div>
