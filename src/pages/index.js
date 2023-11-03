@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Discussion from "./discussion";
 import Hero from "@/components/UI/Hero/Hero";
 import FeedbackPage from "./feedback";
+import FAQPage from "./faq";
 
 const HomePage = () => {
   const router = useRouter();
@@ -22,6 +23,7 @@ const HomePage = () => {
       <AllExams />
       <AllTests />
       <Discussion />
+      <FAQPage />
       <FeedbackPage />
     </>
   );

@@ -41,6 +41,8 @@ const useProtectedRoute = (role) => {
     "/dashboard/results",
     "/dashboard/bookmarks",
     "/dashboard/feedbacks",
+    "/dashboard/faq",
+    "/dashboard/faq/create",
   ];
   const superAdminPages = [
     "/bookmarks",
@@ -62,6 +64,8 @@ const useProtectedRoute = (role) => {
     "/dashboard/results",
     "/dashboard/bookmarks",
     "/dashboard/feedbacks",
+    "/dashboard/faq",
+    "/dashboard/faq/create",
   ];
   const guestPages = ["/"];
 

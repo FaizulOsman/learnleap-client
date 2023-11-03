@@ -4,10 +4,11 @@ import {
   FaUsers,
   FaChartLine,
   FaUserPlus,
+  FaQuestionCircle,
 } from "react-icons/fa";
-import { FcAreaChart, FcComboChart, FcFeedback } from "react-icons/fc";
+import { FcAreaChart, FcComboChart, FcFaq, FcFeedback } from "react-icons/fc";
 import { BiCog } from "react-icons/bi";
-import { MdOutlineCreate } from "react-icons/md";
+import { MdCreateNewFolder, MdOutlineCreate } from "react-icons/md";
 import {
   AiFillHeart,
   AiOutlineAreaChart,
@@ -86,6 +87,26 @@ export const routes = [
         path: "/dashboard/exam/all-exam",
         name: "All Exam",
         icon: <AiOutlineAreaChart className="text-[22px]" />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard/faq",
+    name: "FAQ",
+    icon: <FcFaq />,
+    permission1: "",
+    permission2: "admin",
+    permission3: "super_admin",
+    subRoutes: [
+      {
+        path: "/dashboard/faq/create",
+        name: "Create FAQ",
+        icon: <MdCreateNewFolder />,
+      },
+      {
+        path: "/dashboard/faq",
+        name: "All FAQ",
+        icon: <FaQuestionCircle />,
       },
     ],
   },
