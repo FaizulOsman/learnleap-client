@@ -19,6 +19,7 @@ import { AiOutlineBarChart } from "react-icons/ai";
 import { BsBarChartLine } from "react-icons/bs";
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { BiLineChart } from "react-icons/bi";
+import DashboardFeedbackPage from "./feedbacks";
 
 const jwt = require("jsonwebtoken");
 
@@ -100,6 +101,11 @@ const Dashboard = () => {
               </div>
             )}
           </div>
+          {getMyProfile?.data && getMyProfile?.data?.role === "admin" && (
+            <div className="m-4 border-2 border-blue-900 rounded-sm">
+              <DashboardFeedbackPage />
+            </div>
+          )}
         </div>
       </div>
     </div>
