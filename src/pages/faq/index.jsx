@@ -4,7 +4,12 @@ import { useGetAllFaqQuery } from "../../redux/faq/faqApi";
 import Loader from "../../components/UI/Loader";
 
 const FAQPage = () => {
-  const { data: allFaq } = useGetAllFaqQuery();
+  // Data Query
+  const { data: allFaq } = useGetAllFaqQuery({
+    limit: 10,
+    page: 1,
+    sortOrder: "asc",
+  });
 
   return (
     <div className="mt-20">

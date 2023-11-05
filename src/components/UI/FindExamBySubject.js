@@ -53,9 +53,7 @@ const FindExamBySubject = ({ exam }) => {
         {isSuccess && getSingleExamResult?.data ? (
           <div className="flex flex-col gap-2">
             <Link href={`/exam/${exam?.subject}/${exam?.id}`}>
-              <button className="btn btn-sm btn-primary">
-                Start Exam Again
-              </button>
+              <button className="btn btn-sm btn-primary">Start Again</button>
             </Link>
             <Link
               href={`/exam-result/${exam?.subject}/${exam?.id}`}
