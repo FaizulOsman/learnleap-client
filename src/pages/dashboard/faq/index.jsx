@@ -39,7 +39,7 @@ const AllFaq = () => {
         <h1 className="text-2xl md:text-3xl font-semibold text-center my-8">
           Frequently Asked Questions
         </h1>
-        {allFaq?.data?.length > 0 ? (
+        {allFaq?.data ? (
           <>
             {allFaq?.data?.length > 0 ? (
               <div className="mt-10 flex flex-col gap-5">
