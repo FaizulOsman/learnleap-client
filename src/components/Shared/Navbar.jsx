@@ -5,12 +5,10 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
 import { useRouter } from "next/router";
 import { toast } from "react-hot-toast";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [stickyNav, setStickyNav] = useState(false);
   const [myProfile, setMyProfile] = useState({});
   const router = useRouter();
@@ -136,189 +134,182 @@ const Navbar = () => {
               <Link href="/discussion">Discuss</Link>
             </li>
           </div>
+
           {/* right side menu for large devices  */}
-          <div className="body__right-menus hidden md:flex md:items-center gap-4">
-            {myProfile?.email ? (
-              <>
-                {myProfile?.isPremium || (
+          <div className="flex items-center gap-4">
+            <div className="body__right-menus hidden md:flex md:items-center gap-4">
+              {myProfile?.email ? (
+                <>
+                  {myProfile?.isPremium || (
+                    <li
+                      className={`px-2 flex items-center border-2 rounded-lg bg-green-500 hover:bg-green-600 text-white duration-300  `}
+                    >
+                      <Link
+                        className="btn-link hover:no-underline"
+                        href="/be-a-premium-user"
+                      >
+                        <h6 className={`btn-text text-white`}>
+                          Be a premium user
+                        </h6>
+                      </Link>
+                    </li>
+                  )}
                   <li
-                    className={`px-2 flex items-center border-2 rounded-lg bg-green-500 hover:bg-green-600 text-white duration-300  `}
+                    className={`px-2 flex items-center border-2 rounded-lg hover:bg-green-500 duration-300  `}
                   >
                     <Link
                       className="btn-link hover:no-underline"
-                      href="/be-a-premium-user"
+                      href="/dashboard"
                     >
-                      <h6 className={`btn-text text-white`}>
-                        Be a premium user
+                      <h6
+                        className={`btn-text ${
+                          stickyNav
+                            ? "text-black hover:text-white"
+                            : "text-white"
+                        }`}
+                      >
+                        Dashboard
                       </h6>
                     </Link>
                   </li>
-                )}
-                <li
-                  className={`px-2 flex items-center border-2 rounded-lg hover:bg-green-500 duration-300  `}
-                >
-                  <Link
-                    className="btn-link hover:no-underline"
-                    href="/dashboard"
-                  >
-                    <h6
-                      className={`btn-text ${
-                        stickyNav ? "text-black hover:text-white" : "text-white"
-                      }`}
-                    >
-                      Dashboard
-                    </h6>
+                </>
+              ) : (
+                <li className="download flex items-center  rounded-lg bg-blue-700">
+                  <Link href="/login">
+                    <h6 className="btn-text text-white px-2">Login/SignUp</h6>
                   </Link>
                 </li>
-              </>
-            ) : (
-              <li className="download flex items-center  rounded-lg bg-blue-700">
-                <Link href="/login">
-                  <h6 className="btn-text text-white px-2">Login/SignUp</h6>
-                </Link>
-              </li>
-            )}
-            <svg
-              onClick={() => setIsOpen(true)}
-              className="small-device__sidebar-toggle w-52 h-52 cursor-pointer"
-              focusable="false"
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              data-testid="MenuIcon"
-            >
-              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
-            </svg>
-          </div>
-          {/* left side menu for large devices  */}
-          <div className="md:hidden flex items-center gap-4">
-            {myProfile?.email ? (
-              <li className="flex items-center  rounded-lg bg-blue-700 hover:bg-green-500 duration-300 px-3 py-[2px]">
-                <Link href="/dashboard">
-                  <h6 className="btn-text text-white">Dashboard</h6>
-                </Link>
-              </li>
-            ) : (
-              <li className="flex items-center  rounded-lg bg-blue-700 px-3 py-[2px]">
-                <Link href="/login">
-                  <h6 className="btn-text text-white">Login/SignUp</h6>
-                </Link>
-              </li>
-            )}
-            <svg
-              onClick={() => setIsOpen(true)}
-              className="small-device__sidebar-toggle cursor-pointer"
-              focusable="false"
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              data-testid="MenuIcon"
-            >
-              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
-            </svg>
-          </div>
+              )}
+            </div>
 
-          {/* Sidebar  */}
-          <div className={`sidebar-wrapper ${isOpen ? "open" : ""}`}>
-            <div className={`sidebar ${isOpen ? "" : "closeAnimation"}`}>
-              <div className="sidebar__header">
-                <div className="header__logoArea">
-                  <Link href="/">
-                    <Image
-                      alt="Logo"
-                      className="w-10 h-8"
-                      src="https://i.ibb.co/S33Tq0K/logo-nobg-n.png"
-                      decoding="async"
-                      loading="lazy"
-                      width={300}
-                      height={300}
-                    />
+            {/* left side menu for large devices  */}
+            <div className="md:hidden flex items-center gap-4">
+              {myProfile?.email ? (
+                <li className="flex items-center  rounded-lg bg-blue-700 hover:bg-green-500 duration-300 px-3 py-[2px]">
+                  <Link href="/dashboard">
+                    <h6 className="btn-text text-white">Dashboard</h6>
                   </Link>
+                </li>
+              ) : (
+                <li className="flex items-center  rounded-lg bg-blue-700 px-3 py-[2px]">
+                  <Link href="/login">
+                    <h6 className="btn-text text-white">Login/SignUp</h6>
+                  </Link>
+                </li>
+              )}
+            </div>
+            <div className="flex items-center gap-4">
+              <div class="flex items-center justify-center">
+                <div class="relative inline-block text-left dropdown">
+                  <span class="rounded-md shadow-sm">
+                    <button
+                      class="transition duration-150 ease-in-out"
+                      type="button"
+                      aria-haspopup="true"
+                      aria-expanded="true"
+                      aria-controls="headlessui-menu-items-117"
+                    >
+                      <svg
+                        className="small-device__sidebar-toggle w-52 h-52 cursor-pointer"
+                        focusable="false"
+                        aria-hidden="true"
+                        viewBox="0 0 24 24"
+                        data-testid="MenuIcon"
+                      >
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+                      </svg>
+                    </button>
+                  </span>
+                  <div class="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95">
+                    <div
+                      class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none text-gray-700 text-sm"
+                      aria-labelledby="headlessui-menu-button-1"
+                      id="headlessui-menu-items-117"
+                      role="menu"
+                    >
+                      <div class="px-4 py-3">
+                        {myProfile?.email ? (
+                          <>
+                            <p class="text-sm leading-5 text-gray-700">
+                              Signed in as
+                            </p>
+                            <p class="text-sm font-medium leading-5 text-gray-900 truncate">
+                              {myProfile?.email}
+                            </p>
+                          </>
+                        ) : (
+                          <p class="text-sm leading-5 text-gray-700">
+                            Not signed in
+                          </p>
+                        )}
+                      </div>
+                      <div class="py-1">
+                        <Link
+                          href="/exam"
+                          className="px-4 py-2 hover:bg-gray-200 flex justify-between w-full"
+                        >
+                          Exam
+                        </Link>
+                        <Link
+                          href="/test"
+                          className="px-4 py-2 hover:bg-gray-200 flex justify-between w-full"
+                        >
+                          Test
+                        </Link>
+                        {myProfile?.email && (
+                          <>
+                            {myProfile?.isPremium || (
+                              <Link
+                                href="/be-a-premium-user"
+                                className="px-4 py-2 hover:bg-gray-200 flex justify-between w-full"
+                              >
+                                Be a premium user
+                              </Link>
+                            )}
+                          </>
+                        )}
+                        <Link
+                          href="/random-question"
+                          className="px-4 py-2 hover:bg-gray-200 flex justify-between w-full"
+                        >
+                          Random Question
+                        </Link>
+                        <Link
+                          href="/discussion"
+                          className="px-4 py-2 hover:bg-gray-200 flex justify-between w-full"
+                        >
+                          Discuss
+                        </Link>
+                        <Link
+                          href="/bookmarks"
+                          className="px-4 py-2 hover:bg-gray-200 flex justify-between w-full"
+                        >
+                          Bookmarks
+                        </Link>
+                      </div>
+                      <div class="py-1">
+                        {myProfile?.email ? (
+                          <Link
+                            href="#"
+                            onClick={() => handleSignOut()}
+                            className="px-4 py-2 hover:bg-gray-200 flex justify-between w-full"
+                          >
+                            Logout
+                          </Link>
+                        ) : (
+                          <Link
+                            href="/login"
+                            className="px-4 py-2 hover:bg-gray-200 flex justify-between w-full"
+                          >
+                            Login
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="header__closeButton">
-                  <button onClick={() => setIsOpen(false)} className="button">
-                    <AiOutlineClose className="button-icon" />
-                  </button>
-                </div>
-              </div>
-              <div className="sidebar__body">
-                <li onClick={() => setIsOpen(false)} className="body__menu">
-                  <Link
-                    href="/exam"
-                    className="w-full block hover:bg-gray-200 px-2 p-1 rounded-md"
-                  >
-                    Exam
-                  </Link>
-                </li>
-                <li onClick={() => setIsOpen(false)} className="body__menu">
-                  <Link
-                    href="/test"
-                    className="w-full block hover:bg-gray-200 px-2 p-1 rounded-md"
-                  >
-                    Test
-                  </Link>
-                </li>
-                {myProfile?.isPremium || (
-                  <li onClick={() => setIsOpen(false)} className="body__menu">
-                    <Link
-                      href="/be-a-premium-user"
-                      className="w-full block hover:bg-gray-200 px-2 p-1 rounded-md"
-                    >
-                      Be a premium user
-                    </Link>
-                  </li>
-                )}
-                <li onClick={() => setIsOpen(false)} className="body__menu">
-                  <Link
-                    href="/random-question"
-                    className="w-full block hover:bg-gray-200 px-2 p-1 rounded-md"
-                  >
-                    Random Question
-                  </Link>
-                </li>
-                <li onClick={() => setIsOpen(false)} className="body__menu">
-                  <Link
-                    href="/discussion"
-                    className="w-full block hover:bg-gray-200 px-2 p-1 rounded-md"
-                  >
-                    Discuss
-                  </Link>
-                </li>
-                <li onClick={() => setIsOpen(false)} className="body__menu">
-                  <Link
-                    href="/about-us"
-                    className="w-full block hover:bg-gray-200 px-2 p-1 rounded-md"
-                  >
-                    About us
-                  </Link>
-                </li>
-                {myProfile?.email ? (
-                  <li onClick={() => setIsOpen(false)} className="body__menu">
-                    <Link
-                      href="#"
-                      onClick={() => handleSignOut()}
-                      className="w-full block hover:bg-gray-200 px-2 p-1 rounded-md"
-                    >
-                      Logout
-                    </Link>
-                  </li>
-                ) : (
-                  <li
-                    onClick={() => setIsOpen(false)}
-                    className="mx-4 text-white text-center"
-                  >
-                    <Link
-                      href="/login"
-                      className="w-full block bg-green-500 hover:bg-green-600 text-white px-2 p-1 rounded-md"
-                    >
-                      Login
-                    </Link>
-                  </li>
-                )}
               </div>
             </div>
-            <div
-              className="sidebar__backdrop"
-              onClick={() => setIsOpen(false)}
-            ></div>
           </div>
         </div>
       </div>
