@@ -12,7 +12,10 @@ const faqApi = apiSlice.injectEndpoints({
       invalidatesTags: ["learnleap"],
     }),
     getAllFaq: builder.query({
-      query: () => `/faq`,
+      query: ({ limit, page, sortOrder }) => ({
+        url: `/faq?limit=${limit}&page=${page}&sortOrder=${sortOrder}`,
+        method: "GET",
+      }),
       providesTags: ["learnleap"],
     }),
     getSingleFaq: builder.query({
