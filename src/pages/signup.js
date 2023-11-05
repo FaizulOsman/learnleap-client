@@ -49,7 +49,7 @@ const SignUp = () => {
     }
 
     if (isSuccess) {
-      toast.success("Successfully Registered!");
+      toast.success("Successfully registered, Please login now!");
     }
   }, [isLoading, router, state, isSuccess, error, isError, data]);
 

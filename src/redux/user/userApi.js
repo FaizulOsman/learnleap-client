@@ -8,6 +8,7 @@ const userApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["learnleap"],
     }),
     login: builder.mutation({
       query: (data) => ({
@@ -15,6 +16,7 @@ const userApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["learnleap"],
     }),
     refreshToken: builder.mutation({
       query: (data) => ({
@@ -22,24 +24,28 @@ const userApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["learnleap"],
     }),
     getAllUsers: builder.query({
       query: ({ headers }) => ({
         url: `/users`,
         headers: headers,
       }),
+      providesTags: ["learnleap"],
     }),
     getSingleUser: builder.query({
       query: ({ id, headers }) => ({
         url: `/users/${id}`,
         headers: headers,
       }),
+      providesTags: ["learnleap"],
     }),
     getAllUsersByQuery: builder.query({
       query: ({ headers, limit, page, sortOrder }) => ({
         url: `/users?limit=${limit}&page=${page}&sortOrder=${sortOrder}`,
         headers: headers,
       }),
+      providesTags: ["learnleap"],
     }),
     updateUser: builder.mutation({
       query: ({ id, data, headers }) => ({
@@ -48,6 +54,7 @@ const userApi = apiSlice.injectEndpoints({
         body: data,
         headers: headers,
       }),
+      invalidatesTags: ["learnleap"],
     }),
     deleteUser: builder.mutation({
       query: ({ id, headers }) => ({
@@ -55,12 +62,14 @@ const userApi = apiSlice.injectEndpoints({
         method: "DELETE",
         headers: headers,
       }),
+      invalidatesTags: ["learnleap"],
     }),
     getMyProfile: builder.query({
       query: ({ headers }) => ({
         url: `/users/my-profile`,
         headers: headers,
       }),
+      providesTags: ["learnleap"],
     }),
     updateMyProfile: builder.mutation({
       query: ({ data, headers }) => ({
@@ -69,6 +78,7 @@ const userApi = apiSlice.injectEndpoints({
         body: data,
         headers: headers,
       }),
+      invalidatesTags: ["learnleap"],
     }),
   }),
 });

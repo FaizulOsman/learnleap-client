@@ -75,28 +75,21 @@ const Users = () => {
       const data = { role: "user" };
       updateUser({ id: user?.id, data, headers });
     }
-
-    setTimeout(() => {
-      window.location.reload();
-    }, [3000]);
   };
 
   const handlePremium = (user, value) => {
     const data = { isPremium: value };
     updateUser({ id: user?.id, data, headers });
-
-    setTimeout(() => {
-      window.location.reload();
-    }, [3000]);
   };
 
   useEffect(() => {
     setAllUsers(getAllUsers?.data);
     setMeta(getAllUsers?.meta);
+  }, [getAllUsers?.data, getAllUsers?.meta]);
 
+  useEffect(() => {
     if (isDeleteSuccess) {
       toast.success("Successfully deleted user.");
-      setAllUsers(getAllUsers?.data);
     }
     if (isDeleteError) {
       toast.error(deleteErrMessage?.message || "Something went wrong");
@@ -104,13 +97,11 @@ const Users = () => {
 
     if (isUpdateUserSuccess) {
       toast.success("Successfully Updated User.");
-      setAllUsers(getAllUsers?.data);
     }
     if (isUpdateUserError) {
       toast.error(updateUserError?.message || "Something went wrong");
     }
   }, [
-    getAllUsers,
     isDeleteSuccess,
     isDeleteError,
     deleteErrMessage,
