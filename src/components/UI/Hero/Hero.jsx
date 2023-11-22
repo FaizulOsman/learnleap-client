@@ -329,7 +329,7 @@ const Hero = () => {
           <g
             className="dude"
             stroke="black"
-            stroke-width="7"
+            strokeWidth="7"
             stroke-linecap="round"
             stroke-linejoin="round"
             fill="none"
