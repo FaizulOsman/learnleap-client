@@ -331,7 +331,7 @@ const Hero = () => {
             stroke="black"
             strokeWidth="7"
             strokeLinecap="round"
-            stroke-linejoin="round"
+            strokeLinejoin="round"
             fill="none"
           >
             <g className="leg">
