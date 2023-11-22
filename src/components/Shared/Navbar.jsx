@@ -25,7 +25,11 @@ const Navbar = () => {
   };
 
   const fetchMyProfile = async () => {
-    const accessToken = getFromLocalStorage("access-token");
+    const accessToken =
+      typeof window !== "undefined"
+        ? localStorage.getItem("access-token")
+        : null;
+
     if (accessToken) {
       try {
         const url =
