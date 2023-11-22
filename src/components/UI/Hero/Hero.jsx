@@ -330,7 +330,7 @@ const Hero = () => {
             className="dude"
             stroke="black"
             strokeWidth="7"
-            stroke-linecap="round"
+            strokeLinecap="round"
             stroke-linejoin="round"
             fill="none"
           >
