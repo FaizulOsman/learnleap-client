@@ -199,11 +199,11 @@ const Navbar = () => {
               )}
             </div>
             <div className="flex items-center gap-4">
-              <div class="flex items-center justify-center">
-                <div class="relative inline-block text-left dropdown">
-                  <span class="rounded-md shadow-sm">
+              <div className="flex items-center justify-center">
+                <div className="relative inline-block text-left dropdown">
+                  <span className="rounded-md shadow-sm">
                     <button
-                      class="transition duration-150 ease-in-out"
+                      className="transition duration-150 ease-in-out"
                       type="button"
                       aria-haspopup="true"
                       aria-expanded="true"
@@ -220,30 +220,30 @@ const Navbar = () => {
                       </svg>
                     </button>
                   </span>
-                  <div class="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95">
+                  <div className="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95">
                     <div
-                      class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none text-gray-700 text-sm"
+                      className="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none text-gray-700 text-sm"
                       aria-labelledby="headlessui-menu-button-1"
                       id="headlessui-menu-items-117"
                       role="menu"
                     >
-                      <div class="px-4 py-3">
+                      <div className="px-4 py-3">
                         {myProfile?.email ? (
                           <>
-                            <p class="text-sm leading-5 text-gray-700">
+                            <p className="text-sm leading-5 text-gray-700">
                               Signed in as
                             </p>
-                            <p class="text-sm font-medium leading-5 text-gray-900 truncate">
+                            <p className="text-sm font-medium leading-5 text-gray-900 truncate">
                               {myProfile?.email}
                             </p>
                           </>
                         ) : (
-                          <p class="text-sm leading-5 text-gray-700">
+                          <p className="text-sm leading-5 text-gray-700">
                             Not signed in
                           </p>
                         )}
                       </div>
-                      <div class="py-1">
+                      <div className="py-1">
                         <Link
                           href="/exam"
                           className="px-4 py-2 hover:bg-gray-200 flex justify-between w-full"
@@ -287,7 +287,7 @@ const Navbar = () => {
                           Bookmarks
                         </Link>
                       </div>
-                      <div class="py-1">
+                      <div className="py-1">
                         {myProfile?.email ? (
                           <Link
                             href="#"
