@@ -270,7 +270,11 @@ const Discussion = () => {
               height={300}
             />
             <div className="">
-              <h4 className="font-semibold">{data?.userName}</h4>
+              <h4 className="font-semibold">
+                {data?.userName === getMyProfile?.data.name
+                  ? `${data?.userName} (You)`
+                  : data?.userName}
+              </h4>
               <p className="text-gray-600 text-sm">{data?.question}</p>
               <div className="flex items-center gap-2 text-sm">
                 <p className="text-blue-500">
@@ -355,7 +359,9 @@ const Discussion = () => {
                     />
                     <div className="">
                       <h4 className="font-semibold flex gap-4">
-                        {reply?.name}
+                        {reply?.name === getMyProfile?.data?.name
+                          ? `${reply?.name} (You)`
+                          : reply?.name}
                         {reply?.email === getMyProfile?.data?.email && (
                           <AiOutlineDelete
                             onClick={() => handleRemoveReply({ data, reply })}
