@@ -64,9 +64,9 @@ const Footer = () => {
                       <li>
                         <Link
                           className="font-semibold block pb-2 text-sm"
-                          href="/about-us"
+                          href="/bookmarks"
                         >
-                          About Us
+                          Bookmarks
                         </Link>
                       </li>
                     </ul>
