@@ -6,6 +6,7 @@ import Discussion from "./discussion";
 import Hero from "@/components/UI/Hero/Hero";
 import FeedbackPage from "./feedback";
 import FAQPage from "./faq";
+import MetaData from "@/components/SEO/MetaData";
 
 const HomePage = () => {
   const router = useRouter();
@@ -19,6 +20,7 @@ const HomePage = () => {
 
   return (
     <>
+      <MetaData title="Learn Leap - Home" />
       <Hero />
       <AllExams />
       <AllTests />

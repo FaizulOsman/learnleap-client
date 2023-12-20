@@ -1,3 +1,4 @@
+import MetaData from "@/components/SEO/MetaData";
 import Heading from "@/components/UI/Heading";
 import RootLayout from "@/layouts/RootLayout";
 import {
@@ -148,6 +149,7 @@ const Discussion = () => {
 
   return (
     <div>
+      <MetaData title="Learn Leap - Discussion" />
       <Heading text="Discussion" styles="text-green-600 text-center" />
       <div>
         <div className="flex justify-between border-b-2 pb-4">

@@ -1,3 +1,4 @@
+import MetaData from "@/components/SEO/MetaData";
 import FindTestBySubject from "@/components/UI/FindTestBySubject";
 import Heading from "@/components/UI/Heading";
 import Loader from "@/components/UI/Loader";
@@ -30,6 +31,7 @@ const AllTests = () => {
 
   return (
     <div className="my-20">
+      <MetaData title="Learn Leap - Tests" />
       <Heading text="Tests" styles="text-blue-600 text-center" />
       {testUniqueSubjects && testUniqueSubjects.length > 0 ? (
         <div className="w-10/12 md:w-8/12 mx-auto flex flex-wrap justify-around gap-3">

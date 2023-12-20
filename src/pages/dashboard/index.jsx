@@ -20,6 +20,7 @@ import { BsBarChartLine } from "react-icons/bs";
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { BiLineChart } from "react-icons/bi";
 import DashboardFeedbackPage from "./feedbacks";
+import MetaData from "@/components/SEO/MetaData";
 
 const jwt = require("jsonwebtoken");
 
@@ -46,6 +47,7 @@ const Dashboard = () => {
 
   return (
     <div className="title">
+      <MetaData title="Learn Leap - Dashboard" />
       <div x-data="setup()">
         <div className="min-h-screen  flex flex-col flex-auto flex-shrink-0 antialiased">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">

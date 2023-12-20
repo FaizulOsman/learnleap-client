@@ -40,11 +40,11 @@ const Table = ({
               </div>
               <div className="sm:p-7 p-4">
                 <div className="flex w-full items-center mb-7">
-                  <button className="hidden sm:inline-flex gap-2 mr-3 items-center h-8 pl-2.5 pr-2 rounded-md shadow dark:border-gray-800 border border-gray-200 leading-none py-0">
+                  {/* <button className="hidden sm:inline-flex gap-2 mr-3 items-center h-8 pl-2.5 pr-2 rounded-md shadow dark:border-gray-800 border border-gray-200 leading-none py-0">
                     <AiOutlineCalendar className="w-4 h-4" />
                     Last 30 days
                     <BiChevronDown className="w-4 h-4" />
-                  </button>
+                  </button> */}
                   <select
                     onChange={(e) => {
                       const selectedValue = e.target.value;

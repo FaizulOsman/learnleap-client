@@ -1,3 +1,4 @@
+import MetaData from "@/components/SEO/MetaData";
 import BookmarkSingleQues from "@/components/UI/BookmarkSingleQues";
 import Heading from "@/components/UI/Heading";
 import Loader from "@/components/UI/Loader";
@@ -45,6 +46,7 @@ const Bookmarks = () => {
 
   return (
     <div className="w-11/12 md:w-8/12 mx-auto my-20">
+      <MetaData title="Learn Leap - Bookmarks" />
       <Heading text="Bookmarks" styles="text-blue-600 text-center" />
 
       {uniqueSubjects && uniqueSubjects?.length > 0 ? (

@@ -14,17 +14,13 @@ const MetaData = ({
 }) => {
   return (
     <Head>
-      <title>
-        {title?.length > 0
-          ? title
-          : "Apple iPhone 15 Pro Max - Full phone specifications"}
-      </title>
+      <title>{title?.length > 0 ? title : "Learn Leap"}</title>
       <meta
         name="description"
         content={
           descriptionContent?.length > 0
             ? descriptionContent
-            : "Apple iPhone 15 Pro Max smartphone. Announced Sep 2023. Features 6.7″  display, Apple A17 Pro chipset, 4441 mAh battery, 1024 GB storage, 8 GB RAM, Ceramic Shield glass."
+            : "Learn Leap, Exam, MCQ, Test, Discussion, Discuss, Bookmark"
         }
       />
       <meta
@@ -32,7 +28,7 @@ const MetaData = ({
         content={
           keywordContent?.length > 0
             ? keywordContent
-            : "Apple iPhone 15 Pro Max,Apple,iPhone 15 Pro Max,GSM,mobile,phone,cellphone,information,info,specs,specification,opinion,review"
+            : "learn leap,learnleap,learn-leap,test,exam,discussion,random-question,bookmark"
         }
       />
       <meta
@@ -40,7 +36,7 @@ const MetaData = ({
         content={
           imageContent?.length > 0
             ? imageContent
-            : "https://www.apple.com/v/iphone-15-pro/b/images/meta/iphone-15-pro_specs__e2210nw0aniq_og.png?202310231416"
+            : "https://i.ibb.co/S33Tq0K/logo-nobg-n.png"
         }
       />
       <meta
@@ -48,15 +44,13 @@ const MetaData = ({
         content={
           urlContent?.length > 0
             ? urlContent
-            : "https://www.apple.com/iphone-15-pro/specs/"
+            : "https://i.ibb.co/S33Tq0K/logo-nobg-n.png"
         }
       />
       <meta
         property="og:title"
         content={
-          titleContent?.title > 0
-            ? titleContent
-            : "iPhone 15 Pro and 15 Pro Max - Technical Specifications"
+          titleContent?.title > 0 ? titleContent : "Learn Leap - Test Yourself"
         }
       />
       <meta
@@ -64,12 +58,12 @@ const MetaData = ({
         content={
           descriptionContent?.length > 0
             ? descriptionContent
-            : "View all technical specifications for iPhone 15 Pro and iPhone 15 Pro Max."
+            : "Challenge your friends or make new ones in our competitive exams . See who reigns supreme on the leaderboard!"
         }
       />
       <meta
         property="og:site_name"
-        content={siteNameContent?.length > 0 ? siteNameContent : "Apple"}
+        content={siteNameContent?.length > 0 ? siteNameContent : "Learn Leap"}
       />
       <meta
         property="og:type"
@@ -77,7 +71,7 @@ const MetaData = ({
       />
       <meta
         property="og:locale"
-        content={localeContent.length > 0 ? localeContent : "en_US"}
+        content={localeContent?.length > 0 ? localeContent : "en_US"}
       />
     </Head>
   );

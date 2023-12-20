@@ -1,3 +1,4 @@
+import MetaData from "@/components/SEO/MetaData";
 import Heading from "@/components/UI/Heading";
 import TestSingleQues from "@/components/UI/TestSingleQues";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
@@ -69,6 +70,7 @@ const RandomQuestions = () => {
 
   return (
     <div className="w-11/12 md:w-8/12 mx-auto">
+      <MetaData title="Learn Leap - Random Question" />
       <Heading text="Random Question" styles="text-green-600 text-center" />
       <div>
         <form
