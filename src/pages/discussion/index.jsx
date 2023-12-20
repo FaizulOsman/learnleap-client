@@ -149,7 +149,7 @@ const Discussion = () => {
 
   return (
     <div>
-      <MetaData title="Learn Leap - Discussion" />
+      <MetaData title="Learn Leap" />
       <Heading text="Discussion" styles="text-green-600 text-center" />
       <div>
         <div className="flex justify-between border-b-2 pb-4">

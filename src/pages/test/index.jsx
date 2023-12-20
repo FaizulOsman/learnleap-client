@@ -31,7 +31,7 @@ const AllTests = () => {
 
   return (
     <div className="my-20">
-      <MetaData title="Learn Leap - Tests" />
+      <MetaData title="Learn Leap" />
       <Heading text="Tests" styles="text-blue-600 text-center" />
       {testUniqueSubjects && testUniqueSubjects.length > 0 ? (
         <div className="w-10/12 md:w-8/12 mx-auto flex flex-wrap justify-around gap-3">
