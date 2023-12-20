@@ -1,3 +1,4 @@
+import Heading from "@/components/UI/Heading";
 import RootLayout from "@/layouts/RootLayout";
 import {
   useCreateDiscussMutation,
@@ -147,9 +148,7 @@ const Discussion = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-center mb-8 text-green-600">
-        Discussion
-      </h1>
+      <Heading text="Discussion" styles="text-green-600 text-center" />
       <div>
         <div className="flex justify-between border-b-2 pb-4">
           <h2 className="hidden sm:inline-block text-xl text-blue-500 font-bold">

@@ -1,3 +1,4 @@
+import Heading from "@/components/UI/Heading";
 import Loader from "@/components/UI/Loader";
 import Modal from "@/components/UI/Modal/Modal";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
@@ -107,7 +108,7 @@ const AllExam = () => {
   return (
     <div>
       <div className="my-20 w-11/12 md:w-10/12 mx-auto">
-        <h1 className="text-3xl font-semibold text-center my-8">Exams</h1>
+        <Heading text="Exams" styles="text-white text-center" />
         {examUniqueSubjects && examUniqueSubjects.length > 0 ? (
           <div className="w-10/12 md:w-8/12 mx-auto flex flex-wrap justify-around gap-3">
             {examUniqueSubjects?.map((exam, index) => (

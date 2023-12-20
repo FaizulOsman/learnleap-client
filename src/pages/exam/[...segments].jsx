@@ -1,4 +1,5 @@
 import ExamSingleQues from "@/components/UI/ExamSingleQues";
+import Heading from "@/components/UI/Heading";
 import Loader from "@/components/UI/Loader";
 import Stopwatch from "@/components/UI/Stopwatch";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
@@ -128,9 +129,10 @@ const SingleExam = () => {
     <div>
       <>
         <div className="w-11/12 md:w-8/12 mx-auto mb-14">
-          <h2 className="text-3xl font-semibold text-center">
-            {segments?.[0]} Exam {getSingleExam?.data?.serial}
-          </h2>
+          <Heading
+            text={`${segments?.[0]} Exam ${getSingleExam?.data?.serial}`}
+            styles="text-center pb-0"
+          />
           {getSingleExam?.data?.questions &&
           getSingleExam?.data?.questions.length > 0 ? (
             <>

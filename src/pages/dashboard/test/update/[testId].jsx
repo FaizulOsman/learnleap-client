@@ -1,3 +1,4 @@
+import Heading from "@/components/UI/Heading";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import {
   useGetSingleTestQuery,
@@ -144,9 +145,10 @@ const UpdateTest = () => {
   return (
     <div>
       <div className="w-11/12 md:w-8/12 mx-auto my-14">
-        <h2 className="text-3xl font-semibold text-center">
-          Update Test {getSingleTest?.data?.serial}
-        </h2>
+        <Heading
+          text={`Update Test ${getSingleTest?.data?.serial}`}
+          styles="text-white text-center pb-0"
+        />
       </div>
       <div className="my-5">
         <div className="w-11/12 md:w-10/12 lg:w-8/12 mx-auto border rounded-lg p-5">

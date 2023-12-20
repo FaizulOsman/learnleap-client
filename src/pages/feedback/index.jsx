@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import RootLayout from "@/layouts/RootLayout";
 import { useCreateFeedbackMutation } from "@/redux/feedback/feedbackApi";
+import Heading from "@/components/UI/Heading";
 
 const jwt = require("jsonwebtoken");
 
@@ -42,9 +43,7 @@ const FeedbackPage = () => {
 
   return (
     <div className="max-w-xl mx-auto mt-20 flex w-full flex-col border rounded-lg bg-white p-8 hover:shadow-md">
-      <h2 className="title-font mb-1 text-lg font-medium text-gray-900">
-        Feedback
-      </h2>
+      <Heading text="Feedback" styles="text-green-600" />
       <p className="mb-5 leading-relaxed text-gray-600">
         Share Your Thoughts and Help Us Improve!
       </p>
@@ -73,7 +72,7 @@ const FeedbackPage = () => {
         </div>
         <button
           type="submit"
-          className="rounded border-0 bg-indigo-500 py-2 px-6 text-lg text-white hover:bg-indigo-600 focus:outline-none"
+          className="rounded border-0 bg-green-500 py-2 px-6 text-lg text-white hover:bg-green-600 focus:outline-none"
         >
           Send
         </button>

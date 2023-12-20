@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import DashboardLayout from "../../../../layouts/DashboardLayout";
 import { useCreateFaqMutation } from "../../../../redux/faq/faqApi";
 import toast from "react-hot-toast";
+import Heading from "@/components/UI/Heading";
 
 const CreateFaq = () => {
   const accessToken =
@@ -40,9 +41,7 @@ const CreateFaq = () => {
   return (
     <div>
       <div className="w-11/12 md:w-10/12 lg:w-8/12 mx-auto mt-5 border rounded-lg border-blue-500 p-5">
-        <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-center mb-5">
-          Create FAQ
-        </h3>
+        <Heading text="Create FAQ" styles="text-white text-center pb-5" />
 
         <form
           onSubmit={(e) => handleCreateFaq(e)}

@@ -2,6 +2,7 @@ import React from "react";
 import RootLayout from "../../layouts/RootLayout";
 import { useGetAllFaqQuery } from "../../redux/faq/faqApi";
 import Loader from "../../components/UI/Loader";
+import Heading from "@/components/UI/Heading";
 
 const FAQPage = () => {
   // Data Query
@@ -13,9 +14,10 @@ const FAQPage = () => {
 
   return (
     <div className="mt-20">
-      <h2 className="text-2xl md:text-3xl font-semibold text-center pb-10">
-        Frequently Asked Questions
-      </h2>
+      <Heading
+        text="Frequently Asked Questions"
+        styles="text-blue-600 text-center"
+      />
       {allFaq?.data?.length > 0 ? (
         <>
           {allFaq?.data?.length > 0 ? (
@@ -36,9 +38,9 @@ const FAQPage = () => {
               ))}
             </div>
           ) : (
-            <h1 className="text-xl sm:text-2xl py-20 text-center text-red-500">
+            <h2 className="text-xl sm:text-2xl py-20 text-center text-red-500">
               No data found
-            </h1>
+            </h2>
           )}
         </>
       ) : (

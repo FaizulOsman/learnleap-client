@@ -1,4 +1,5 @@
 import BookmarkSingleQues from "@/components/UI/BookmarkSingleQues";
+import Heading from "@/components/UI/Heading";
 import Loader from "@/components/UI/Loader";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import RootLayout from "@/layouts/RootLayout";
@@ -44,9 +45,8 @@ const Bookmarks = () => {
 
   return (
     <div className="w-11/12 md:w-8/12 mx-auto my-20">
-      <h1 className="text-3xl font-bold text-center my-8 text-blue-600">
-        Bookmarks
-      </h1>
+      <Heading text="Bookmarks" styles="text-blue-600 text-center" />
+
       {uniqueSubjects && uniqueSubjects?.length > 0 ? (
         <>
           {uniqueSubjects?.length > 0 ? (

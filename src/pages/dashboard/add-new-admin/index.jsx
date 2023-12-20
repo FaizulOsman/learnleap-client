@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useSignUpMutation } from "../../../redux/user/userApi";
 import DashboardLayout from "../../../layouts/DashboardLayout";
 import useProtectedRoute from "../../../hooks/useProtectedRoute";
+import Heading from "@/components/UI/Heading";
 
 const jwt = require("jsonwebtoken");
 
@@ -54,9 +55,7 @@ const AddNewAdmin = () => {
   return (
     <div>
       <div className="w-11/12 md:w-10/12 lg:w-8/12 mx-auto mt-5 border rounded-lg border-blue-500 p-5">
-        <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-center mb-5">
-          Create An Admin
-        </h3>
+        <Heading text="Create An Admin" styles="text-white text-center pb-5" />
 
         <form
           onSubmit={(e) => handleCreateAdmin(e)}

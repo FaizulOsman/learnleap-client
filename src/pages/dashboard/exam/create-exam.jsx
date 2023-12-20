@@ -1,3 +1,4 @@
+import Heading from "@/components/UI/Heading";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import { useCreateExamMutation } from "@/redux/exam/examApi";
@@ -100,6 +101,7 @@ const CreateExam = () => {
 
   return (
     <div className="my-5">
+      <Heading text="Create Exam" styles="text-white text-center" />
       <div className="w-11/12 md:w-10/12 lg:w-8/12 mx-auto border rounded-lg border-blue-500 p-5">
         <div>
           {ques?.map((q, i) => (

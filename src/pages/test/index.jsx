@@ -1,4 +1,5 @@
 import FindTestBySubject from "@/components/UI/FindTestBySubject";
+import Heading from "@/components/UI/Heading";
 import Loader from "@/components/UI/Loader";
 import RootLayout from "@/layouts/RootLayout";
 import { useGetAllTestQuery } from "@/redux/test/testApi";
@@ -29,9 +30,7 @@ const AllTests = () => {
 
   return (
     <div className="my-20">
-      <h1 className="text-3xl font-bold text-center my-8 text-blue-600">
-        Tests
-      </h1>
+      <Heading text="Tests" styles="text-blue-600 text-center" />
       {testUniqueSubjects && testUniqueSubjects.length > 0 ? (
         <div className="w-10/12 md:w-8/12 mx-auto flex flex-wrap justify-around gap-3">
           {testUniqueSubjects?.map((test, index) => (

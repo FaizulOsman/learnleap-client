@@ -1,4 +1,5 @@
 import ExamAnswerSingleQues from "@/components/UI/ExamAnswerSingleQues";
+import Heading from "@/components/UI/Heading";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import RootLayout from "@/layouts/RootLayout";
 import { useGetSingleExamQuery } from "@/redux/exam/examApi";
@@ -59,9 +60,11 @@ const SingleExam = () => {
     <div>
       <>
         <div className="w-11/12 md:w-8/12 mx-auto my-14">
-          <h2 className="text-3xl font-semibold text-center mb-5">
-            {resultSegments?.[0]} Exam {getSingleExam?.data?.serial}
-          </h2>
+          <Heading
+            text={`${resultSegments?.[0]} Exam ${getSingleExam?.data?.serial}`}
+            styles="text-center"
+          />
+
           <div className="grid grid-cols-1 sm:grid-cols-2 mb-5 font-semibold">
             <div className="text-center sm:text-start">
               <p>Total Question: {getSingleExam?.data?.questions?.length}</p>

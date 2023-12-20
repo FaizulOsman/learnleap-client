@@ -1,3 +1,4 @@
+import Heading from "@/components/UI/Heading";
 import ImageUpload from "@/components/UI/ImageUpload";
 import Modal from "@/components/UI/Modal/Modal";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
@@ -80,9 +81,7 @@ const MyProfile = () => {
     <div className="py-7">
       <div>
         <div className="w-11/12 md:w-10/12 lg:w-8/12 mx-auto border rounded-lg border-blue-500 p-5">
-          <h3 className="text-xl sm:text-2xl font-bold text-center my-5">
-            My Profile
-          </h3>
+          <Heading text="My Profile" styles="text-white text-center" />
           <div className="text-center mx-auto">
             <Modal
               Button={

@@ -7,6 +7,7 @@ import {
   useUpdateUserMutation,
 } from "../../../../redux/user/userApi";
 import { useRouter } from "next/router";
+import Heading from "@/components/UI/Heading";
 
 const jwt = require("jsonwebtoken");
 
@@ -70,9 +71,7 @@ const UpdateUser = () => {
     <div className="py-7">
       <div>
         <div className="w-11/12 md:w-10/12 lg:w-8/12 mx-auto border rounded-lg border-blue-500 p-5">
-          <h3 className="text-xl sm:text-2xl font-bold text-center my-5">
-            Update User
-          </h3>
+          <Heading text="Update User" styles="text-white text-center py-5" />
           <div>
             <form onSubmit={(e) => handleUpdateProfile(e)}>
               <div className="grid grid-cols-1 sm:grid-cols-2 justify-between gap-8 mt-4">

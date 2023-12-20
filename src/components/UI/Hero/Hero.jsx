@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import Link from "next/link";
+import Heading from "../Heading";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -275,9 +276,7 @@ const Hero = () => {
           style={contentPosition === "absolute" ? { display: "none" } : {}}
         >
           <div>
-            <h1 className="text-3xl font-bold text-white">
-              Take the Challenge
-            </h1>
+            <Heading text="Take the Challenge" styles="text-white pb-2" />
             <p className="text-gray-200">
               Join our exciting{" "}
               <Link href="/exam" className="text-blue-700 underline">
@@ -294,9 +293,7 @@ const Hero = () => {
           style={contentPosition === "absolute" ? { display: "none" } : {}}
         >
           <div>
-            <h1 className="text-3xl font-bold text-white">
-              Track Your Progress
-            </h1>
+            <Heading text="Track Your Progress" styles="text-white pb-2" />
             <p className="text-gray-200">
               We provide instant, detailed feedback on your performance. Watch
               your skills grow with each exam you conquer.
@@ -307,9 +304,7 @@ const Hero = () => {
           className={`content-section  bg-gradient-to-t from-green-500 to-blue-500`}
         >
           <div>
-            <h1 className="text-3xl font-bold text-white">
-              Compete with Others
-            </h1>
+            <Heading text="Compete with Others" styles="text-white pb-2" />
             <p className="text-gray-200">
               Challenge your friends or make new ones in our competitive{" "}
               <Link href="/exam" className="text-blue-700 underline">

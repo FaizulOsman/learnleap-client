@@ -1,3 +1,4 @@
+import Heading from "@/components/UI/Heading";
 import Loader from "@/components/UI/Loader";
 import Stopwatch from "@/components/UI/Stopwatch";
 import TestSingleQues from "@/components/UI/TestSingleQues";
@@ -43,9 +44,11 @@ const SingleTest = () => {
     <div>
       <>
         <div className="w-11/12 md:w-8/12 mx-auto mb-14">
-          <h2 className="text-3xl font-semibold text-center">
-            {segments?.[0]} Test {getSingleTest?.data?.serial}
-          </h2>
+          <Heading
+            text={`${segments?.[0]} Test ${getSingleTest?.data?.serial}`}
+            styles="text-center pb-0"
+          />
+
           {getSingleTest?.data.questions &&
           getSingleTest?.data.questions.length > 0 ? (
             <>

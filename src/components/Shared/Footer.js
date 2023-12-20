@@ -1,9 +1,9 @@
 import React from "react";
-import { SiInstagram } from "react-icons/si";
 import { TfiTwitter } from "react-icons/tfi";
 import { FaFacebookF } from "react-icons/fa";
 import { BiLogoLinkedin } from "react-icons/bi";
 import Link from "next/link";
+import Heading from "../UI/Heading";
 
 const Footer = () => {
   return (
@@ -13,7 +13,7 @@ const Footer = () => {
           <div className="container mx-auto">
             <div className="flex flex-wrap text-left lg:text-left">
               <div className="w-full lg:w-6/12">
-                <h4 className="text-3xl font-bold">Learn Leap</h4>
+                <Heading text="Learn Leap" styles="text-white pb-2" />
                 <h5 className="text-lg mt-0 mb-2 ">
                   Providing reliable tech since 2023.
                 </h5>

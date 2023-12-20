@@ -1,4 +1,5 @@
 import FindExamBySubject from "@/components/UI/FindExamBySubject";
+import Heading from "@/components/UI/Heading";
 import Loader from "@/components/UI/Loader";
 import RootLayout from "@/layouts/RootLayout";
 import { useGetAllExamQuery } from "@/redux/exam/examApi";
@@ -29,9 +30,7 @@ const AllExams = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-center mb-8 text-green-600">
-        Exams
-      </h1>
+      <Heading text="Exams" styles="text-green-600 text-center" />
       {examUniqueSubjects && examUniqueSubjects.length > 0 ? (
         <div className="w-10/12 md:w-8/12 mx-auto flex flex-wrap justify-around gap-3">
           {examUniqueSubjects?.map((exam, index) => (

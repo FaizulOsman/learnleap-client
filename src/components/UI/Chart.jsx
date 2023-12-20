@@ -8,6 +8,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import Heading from "./Heading";
 
 const Chart = ({ getMySubmittedResults }) => {
   const data = getMySubmittedResults?.data?.map((result) => {
@@ -21,9 +22,11 @@ const Chart = ({ getMySubmittedResults }) => {
     <>
       {data?.length > 0 && (
         <div className="my-20">
-          <h2 className="text-lg sm:text-2xl font-semibold text-center mb-8">
-            Recharts of My Results
-          </h2>
+          <Heading
+            text="Recharts of My Results"
+            styles="text-white text-center"
+          />
+
           <ResponsiveContainer width="90%" className="mx-auto" height={300}>
             <LineChart LineChart data={data}>
               <Line dataKey="percentage" type="monotone" stroke="red" />
