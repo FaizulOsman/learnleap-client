@@ -381,7 +381,7 @@ const Discussion = () => {
         <button
           onClick={() => handlePageChange(page - 1)}
           className={`inline-flex items-center h-6 w-6 justify-center rounded-md shadow border ${
-            page === 1 ? "opacity-50 cursor-not-allowed" : "border-blue-800"
+            page === 1 ? "opacity-50 cursor-not-allowed" : "border-gray-500"
           } leading-none`}
           disabled={page === 1}
         >
@@ -403,8 +403,8 @@ const Discussion = () => {
             onClick={() => handlePageChange(index + 1)}
             className={`inline-flex items-center h-6 w-6 justify-center rounded-md shadow border ${
               page === index + 1
-                ? "bg-blue-500 border-blue-800 text-white"
-                : "border-blue-800"
+                ? "bg-blue-500 border-blue-600 text-white"
+                : "border-gray-500"
             } leading-none`}
           >
             {index + 1}
@@ -415,7 +415,7 @@ const Discussion = () => {
           className={`inline-flex items-center h-6 w-6 justify-center rounded-md shadow border ${
             page === totalPage
               ? "opacity-50 cursor-not-allowed"
-              : "border-blue-800"
+              : "border-gray-500"
           } leading-none`}
           disabled={page === totalPage}
         >
