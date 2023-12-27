@@ -118,7 +118,7 @@ const Footer = () => {
             <div class="gird-cols-1 grid items-center justify-center gap-4 md:grid-cols-3">
               <div class="md:mb-6 md:ml-auto">
                 <p class="">
-                  <strong>Sign up for our newsletter</strong>
+                  <strong>Please Subscribe</strong>
                 </p>
               </div>
 
