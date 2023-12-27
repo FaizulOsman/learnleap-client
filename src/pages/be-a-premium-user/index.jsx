@@ -3,7 +3,6 @@ import useProtectedRoute from "@/hooks/useProtectedRoute";
 import RootLayout from "@/layouts/RootLayout";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import Image from "next/image";
 import React from "react";
 
 const jwt = require("jsonwebtoken");
