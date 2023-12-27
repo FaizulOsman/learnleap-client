@@ -54,8 +54,17 @@ const SignUp = () => {
   }, [isLoading, router, state, isSuccess, error, isError, data]);
 
   return (
-    <div className="py-5 relative flex flex-col justify-center min-h-screen overflow-hidden">
-      <div className="mx-auto border rounded-md shadow-lg p-8 flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+    <div
+      className="py-20 min-h-screen flex items-center overflow-hidden"
+      style={{
+        backgroundImage: "url(https://i.ibb.co/ZHS7kPm/login-bg.png)",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "100% 100%",
+        backgroundColor: "rgba(0, 0, 0, 0.6)",
+        backgroundBlendMode: "overlay",
+      }}
+    >
+      <div className="mx-auto bg-white border rounded-md shadow-lg p-8 flex w-full flex-col justify-center space-y-6 max-w-[350px]">
         <h1 className="text-3xl font-semibold text-center text-blue-500">
           Sign Up
         </h1>
@@ -65,7 +74,7 @@ const SignUp = () => {
               type="name"
               name="name"
               placeholder="Name"
-              className="block w-full px-4 py-2 mt-2 text-blue-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+              className="block w-full px-4 py-2 mt-2 text-blue-700 bg-white border border-gray-400 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             />
           </div>
           <div className="mb-2">
@@ -73,7 +82,7 @@ const SignUp = () => {
               type="email"
               name="email"
               placeholder="Email"
-              className="block w-full px-4 py-2 mt-2 text-blue-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+              className="block w-full px-4 py-2 mt-2 text-blue-700 bg-white border border-gray-400 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             />
           </div>
           <div className="mb-2">
@@ -81,7 +90,7 @@ const SignUp = () => {
               type="phone"
               name="phone"
               placeholder="Phone"
-              className="block w-full px-4 py-2 mt-2 text-blue-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+              className="block w-full px-4 py-2 mt-2 text-blue-700 bg-white border border-gray-400 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             />
           </div>
           <div className="mb-2">
@@ -89,7 +98,7 @@ const SignUp = () => {
               type="password"
               name="password"
               placeholder="Password"
-              className="block w-full px-4 py-2 mt-2 text-blue-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+              className="block w-full px-4 py-2 mt-2 text-blue-700 bg-white border border-gray-400 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             />
           </div>
           <div className="mb-2">
@@ -97,7 +106,7 @@ const SignUp = () => {
               type="confirmPassword"
               name="confirmPassword"
               placeholder="Confirm Password"
-              className="block w-full px-4 py-2 mt-2 text-blue-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+              className="block w-full px-4 py-2 mt-2 text-blue-700 bg-white border border-gray-400 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             />
           </div>
           <div className="mt-6">
