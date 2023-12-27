@@ -1,12 +1,21 @@
+import Navbar from "@/components/Shared/Navbar";
+import CopyToClipboard from "@/components/UI/CopyToClipboard";
 import { useLoginMutation } from "@/redux/user/userApi";
 import { saveToLocalStorage } from "@/utils/localstorage";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 const Login = () => {
   const router = useRouter();
+  const [isDropdownOpen, setDropdownOpen] = useState(true);
+
+  const toggleDropdown = () => {
+    setDropdownOpen((prev) => !prev);
+  };
+
   const [login, { data, isError, isLoading, isSuccess, error }] =
     useLoginMutation();
 
@@ -34,47 +43,115 @@ const Login = () => {
     }
   }, [isLoading, router, state, isSuccess, error, isError, data]);
 
+  const copyToClipboard = (e) => {
+    const email = "a@gmail.com";
+    const password = "123456";
+    var textField = document.createElement("textarea");
+    textField.innerText = email + " " + password;
+    document.body.appendChild(textField);
+    textField.select();
+    document.execCommand("copy");
+    textField.remove();
+  };
+
   return (
     <>
-      <div className="py-5 relative flex flex-col justify-center min-h-screen overflow-hidden">
-        <div className="mx-auto border rounded-md shadow-lg p-8 flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+      <div
+        className="py-20 min-h-screen flex items-center overflow-hidden"
+        style={{
+          backgroundImage: "url(https://i.ibb.co/ZHS7kPm/login-bg.png)",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "100% 100%",
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
+          backgroundBlendMode: "overlay",
+        }}
+      >
+        <div className="relative bg-white mx-auto border rounded-md shadow-lg p-8 flex w-11/12 flex-col justify-center space-y-6 max-w-[350px]">
+          <div className="absolute -top-16 right-[44%] md:-right-16">
+            <div className="relative inline-block text-left">
+              <button
+                type="button"
+                className="border-gray-800 rounded-full flex items-center justify-center"
+                id="menu-button"
+                aria-expanded={isDropdownOpen}
+                aria-haspopup="true"
+                onClick={toggleDropdown}
+              >
+                <Image
+                  alt="avatar"
+                  className={`w-10 h-10 rounded-full p-[2px] bg-white cursor-pointer`}
+                  src="https://i.ibb.co/nrtwzQd/avatar-boy.webp"
+                  decoding="async"
+                  loading="lazy"
+                  width={300}
+                  height={300}
+                />
+              </button>
+            </div>
+            {isDropdownOpen && (
+              <div
+                className="absolute -left-[65px] md:left-0 z-50 mt-2 w-44 origin-top-right rounded-md bg-gray-200 shadow-lg ring-1 ring-green-500 ring-opacity-5 focus:outline-none"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="menu-button"
+                tabIndex="-1"
+              >
+                <div className="">
+                  <div className="relative bg-white border border-gray-400 rounded-lg">
+                    <div className="text-gray-800 text-sm">
+                      <div className="text-sm text-gray-600 hover:bg-[#f3f4f9] block px-4 py-2 duration-300">
+                        <h4>Admin</h4>
+                        <p className="relative">
+                          Email: a@gmail.com
+                          <span className="absolute right-0 top-[6px]">
+                            <CopyToClipboard
+                              text="a@gmail.com"
+                              styles="w-[10px] h-[10px] hover:text-blue-500"
+                            />
+                          </span>
+                        </p>
+                        <p className="relative">
+                          Password: 1234564
+                          <span className="absolute right-0 top-[6px]">
+                            <CopyToClipboard
+                              text="1234564"
+                              styles="w-[10px] h-[10px] hover:text-blue-500"
+                            />
+                          </span>
+                        </p>
+                      </div>
+                      <div className="text-gray-600 hover:bg-[#f3f4f9] block px-4 py-2 duration-300">
+                        <h4>User</h4>
+                        <p className="relative">
+                          Email: b@gmail.com
+                          <span className="absolute right-0 top-[6px]">
+                            <CopyToClipboard
+                              text="b@gmail.com"
+                              styles="w-[10px] h-[10px] hover:text-blue-500"
+                            />
+                          </span>
+                        </p>
+                        <p className="relative">
+                          Password: 123456
+                          <span className="absolute right-0 top-[6px]">
+                            <CopyToClipboard
+                              text="123456"
+                              styles="w-[10px] h-[10px] hover:text-blue-500"
+                            />
+                          </span>
+                        </p>
+                      </div>
+                      <div className="absolute top-0 left-[48%] md:left-[20px] transform -translate-x-1/2 -translate-y-1/2 rotate-45 w-3 h-3 bg-white border-l border-t border-gray-400"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
           <h1 className="text-3xl font-semibold text-center text-blue-500">
             Sign in
           </h1>
-          <div className="flex justify-around mt-5">
-            <div className="dropdown dropdown-hover">
-              <label tabIndex={0} className="border-b-2 border-blue-600">
-                Admin
-              </label>
-              <ul
-                tabIndex={0}
-                className="dropdown-content z-[1] menu p-4 shadow bg-base-100 rounded-box w-52"
-              >
-                <p>
-                  <span className="font-bold">Email:</span> a@gmail.com
-                </p>
-                <p className="mt-2">
-                  <span className="font-bold">Password:</span> 1234564
-                </p>
-              </ul>
-            </div>
-            <div className="dropdown dropdown-hover dropdown-end">
-              <label tabIndex={0} className="border-b-2 border-blue-600">
-                User
-              </label>
-              <ul
-                tabIndex={0}
-                className="dropdown-content z-[1] menu p-4 shadow bg-base-100 rounded-box w-52"
-              >
-                <p>
-                  <span className="font-bold">Email:</span> b@gmail.com
-                </p>
-                <p className="mt-2">
-                  <span className="font-bold">Password:</span> 123456
-                </p>
-              </ul>
-            </div>
-          </div>
           <form onSubmit={(e) => handleSubmit(e)} className="mt-6">
             <div className="mb-2">
               <label
@@ -86,7 +163,7 @@ const Login = () => {
               <input
                 type="email"
                 name="email"
-                className="block w-full px-4 py-2 mt-2 text-blue-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                className="block w-full px-4 py-2 mt-2 text-blue-700 bg-white border border-gray-400 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
               />
             </div>
             <div className="mb-2">
@@ -99,7 +176,7 @@ const Login = () => {
               <input
                 type="password"
                 name="password"
-                className="block w-full px-4 py-2 mt-2 text-blue-700 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                className="block w-full px-4 py-2 mt-2 text-blue-700 bg-white border border-gray-400 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
               />
             </div>
             {/* <a href="#" className="text-xs text-blue-600 hover:underline">
