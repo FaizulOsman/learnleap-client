@@ -28,6 +28,7 @@ const AllExams = () => {
   const filterByExamSubject = allExam?.data?.filter((exam) => {
     return exam?.subject === examCategory;
   });
+  console.log(filterByExamSubject);
 
   return (
     <div>

@@ -153,21 +153,17 @@ const Discussion = () => {
       <Heading text="Discussion" styles="text-green-600 text-center" />
       <div>
         <div className="flex justify-between border-b-2 pb-4">
-          <h2 className="hidden sm:inline-block text-xl text-blue-500 font-bold">
-            {getAllDiscuss?.meta?.total} Comments
-          </h2>
-          <div className="sm:ml-auto mr-5 flex items-center gap-4">
-            <select
-              onChange={(e) => {
-                const selectedValue = e.target.value;
-                setSortOrder(selectedValue);
-              }}
-              className="select select-bordered select-sm max-w-xs"
-            >
-              <option value="desc">Newest</option>
-              <option value="asc">Oldest</option>
-            </select>
-          </div>
+          <select
+            onChange={(e) => {
+              const selectedValue = e.target.value;
+              setSortOrder(selectedValue);
+            }}
+            className="select select-bordered select-sm max-w-xs"
+          >
+            <option value="desc">Newest</option>
+            <option value="asc">Oldest</option>
+          </select>
+          <div className="sm:ml-auto mr-5 flex items-center gap-4"></div>
           <div className="text-xs items-center inline-flex">
             <button
               onClick={() => setLimit(limit - 1)}
