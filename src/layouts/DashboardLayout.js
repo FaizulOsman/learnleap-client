@@ -8,6 +8,7 @@ import SidebarMenu from "@/components/Dashboard/SidebarMenu";
 import DashboardHeader from "@/components/Dashboard/DashboardHeader";
 import { routes } from "@/constants/dashboardConstants";
 import { FaBars } from "react-icons/fa";
+import LOGO from "../../public/logo.png";
 
 const DashboardLayout = ({ children }) => {
   const { pathname } = useRouter();
@@ -111,8 +112,8 @@ const DashboardLayout = ({ children }) => {
             <div className="cursor-pointer">
               <Image
                 alt="Logo"
-                className={`w-12 h-9 ${isOpen ? "hidden sm:block" : ""}`}
-                src="https://i.ibb.co/5MHLgQW/images-removebg-preview.png"
+                className={`w-9 h-9 ${isOpen ? "hidden sm:block" : ""}`}
+                src={LOGO}
                 decoding="async"
                 loading="lazy"
                 width={300}

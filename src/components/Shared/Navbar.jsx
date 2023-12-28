@@ -7,7 +7,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-hot-toast";
-import LOGO from "../../../public/favicon.png";
+import LOGO from "../../../public/logo.png";
 
 const Navbar = () => {
   const [stickyNav, setStickyNav] = useState(false);
@@ -80,7 +80,7 @@ const Navbar = () => {
             <Link href="/">
               <Image
                 alt="Logo"
-                className="w-10 h-8"
+                className="w-9 h-8"
                 src={LOGO}
                 decoding="async"
                 loading="lazy"
@@ -94,7 +94,7 @@ const Navbar = () => {
               <Link href="/">
                 <Image
                   alt="Logo"
-                  className="w-12 h-10"
+                  className="w-11 h-10"
                   src={LOGO}
                   decoding="async"
                   loading="lazy"
