@@ -7,6 +7,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-hot-toast";
+import LOGO from "../../../public/favicon.png";
 
 const Navbar = () => {
   const [stickyNav, setStickyNav] = useState(false);
@@ -80,7 +81,7 @@ const Navbar = () => {
               <Image
                 alt="Logo"
                 className="w-10 h-8"
-                src="https://i.ibb.co/S33Tq0K/logo-nobg-n.png"
+                src={LOGO}
                 decoding="async"
                 loading="lazy"
                 width={300}
@@ -94,7 +95,7 @@ const Navbar = () => {
                 <Image
                   alt="Logo"
                   className="w-12 h-10"
-                  src="https://i.ibb.co/S33Tq0K/logo-nobg-n.png"
+                  src={LOGO}
                   decoding="async"
                   loading="lazy"
                   width={300}
